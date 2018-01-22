@@ -21,7 +21,7 @@ En todo momento el usuario estará al tanto de información nueva sobre cada jue
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
     -   E-mail: a.lopezarri@alumnos.urjc.es
-    -   Github: frustum
+    -   Github: Agustwin
         
 -  **Zhong Hao Lin Chen**:
     -   E-mail: z.linc@alumnos.urjc.es
