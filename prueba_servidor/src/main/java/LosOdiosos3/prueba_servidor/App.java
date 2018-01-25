@@ -8,6 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
+        // comentario de prueba
     	SpringApplication.run(App.class, args);
     }
 }
