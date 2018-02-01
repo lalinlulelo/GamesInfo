@@ -9,18 +9,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
-//@Entity
+@Entity
 public class Game {
-	/*
+	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	*/
+	
 	private String name;
-	/*
+	
 	@ManyToOne
 	private Company company;
-	*/
+	
 	private String companyName;
 	private String genre;
 	private int year;
@@ -35,7 +35,7 @@ public class Game {
 			Image image, String url) {		
 		
 		this.name = name;
-		//this.company = company;
+		this.company = company;
 		this.companyName= companyName;
 		this.genre = genre;
 		this.year = year;

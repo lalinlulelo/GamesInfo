@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -22,7 +23,7 @@ public class Company {
     private String description;
     
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
-    private List<Game> games = new ArrayList<>();
+    private List<Game> games = new ArrayList<Game>();
     
     protected Company (){};
 
