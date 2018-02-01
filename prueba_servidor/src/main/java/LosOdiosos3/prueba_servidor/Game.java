@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Game {
 	@Id	
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
 	private String name;
