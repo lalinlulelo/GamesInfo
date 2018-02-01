@@ -11,8 +11,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Game {
-	@Id
-	
+	@Id	
 	private long id;
 	
 	private String name;
