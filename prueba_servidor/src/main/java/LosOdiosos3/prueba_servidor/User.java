@@ -26,6 +26,11 @@ public class User {
 	private String date;
 	private boolean registered = false;
 	
+	// lista de juegos
+	// suscripcion juego
+	// suscripcion compañia
+	// suscripcion evento
+	
 	// setters
 	public void setName (String name) {
 		this.name = name;
