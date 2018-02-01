@@ -12,7 +12,7 @@ public class InitController {
 	boolean registrado = false;
 	boolean sin_registrar = false;
 	@Autowired
-	private Usuario usuario;
+	private User usuario;
 	
 	// pagina principal
 	@RequestMapping("/")
@@ -25,12 +25,12 @@ public class InitController {
 	
 	// pagina de registro	
 	@PostMapping(value = "/registrar")
-	public String registrar(Model model, Inicio usur) {
+	public String registrar(Model model, User_Aux usur) {
 		sin_registrar = false;
 		registrado = true;
-		usuario.setNombre(usur.getNombre());
+		usuario.setName(usur.getName());
 		usuario.setPassword(usur.getPassword());
-		usuario.setFecha(usur.getFecha());
+		usuario.setDate(usur.getDate());
 		model.addAttribute("sin_registrar", sin_registrar);
 		model.addAttribute("registrado", registrado);
 		return "index";
@@ -39,9 +39,9 @@ public class InitController {
 	// recopila la informacion del usuario y se la pasa a la pagina perfil
 	@RequestMapping("/perfil")
 	public String init (Model model) {
-		String nombre = usuario.getNombre();
+		String nombre = usuario.getName();
 		String password = usuario.getPassword();
-		String fecha = usuario.getFecha();
+		String fecha = usuario.getDate();
 		model.addAttribute("nombre", nombre);
 		model.addAttribute("password", password);
 		model.addAttribute("fecha", fecha);		

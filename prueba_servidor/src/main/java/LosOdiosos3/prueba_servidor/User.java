@@ -9,32 +9,32 @@ import org.springframework.web.context.annotation.SessionScope;
 @Component
 @SessionScope
 @Entity
-public class Usuario {
-	private String nombre;
+public class User {
+	private String name;
 	private String password;
-	private String fecha;
+	private String date;
 	
-	public void setNombre (String name) {
-		nombre = name;
+	public void setName (String name) {
+		this.name = name;
 	}
 	
-	public void setPassword (String pass) {
-		password = pass;
+	public void setPassword (String password) {
+		this.password = password;
 	}
 	
-	public void setFecha (String date) {
-		fecha = date;
+	public void setDate (String date) {
+		this.date = date;
 	}
 	
-	public String getNombre () {
-		return nombre;
+	public String getName () {
+		return name;
 	}
 	
 	public String getPassword () {
 		return password;
 	}
 	
-	public String getFecha () {
-		return fecha;
+	public String getDate () {
+		return date;
 	}
 }
