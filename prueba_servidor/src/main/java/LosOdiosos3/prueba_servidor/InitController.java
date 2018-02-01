@@ -18,8 +18,10 @@ public class InitController {
 	@RequestMapping("/")
 	public String inicio (Model model) {
 		sin_registrar = true;
-		model.addAttribute("sin_registrar", sin_registrar);
-		model.addAttribute("registrado", registrado);
+		model.addAttribute("Titulo", "Agus guapo");
+		model.addAttribute("Cuerpo", "Susa idiota");
+		//model.addAttribute("sin_registrar", sin_registrar);
+		//model.addAttribute("registrado", registrado);
 		return "index";
 	}
 	

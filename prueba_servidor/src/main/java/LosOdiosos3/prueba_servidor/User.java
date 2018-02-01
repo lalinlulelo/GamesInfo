@@ -12,13 +12,14 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @SessionScope
-@Entity
+//@Entity
 public class User {
 	// id de la entidad user
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	*/
 	// atributos del usuario
 	private String name;
 	private String password;
