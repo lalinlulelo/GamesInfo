@@ -1,11 +1,14 @@
 package LosOdiosos3.prueba_servidor;
 
+import javax.persistence.Entity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 // se indica que es un componente
+
 @Component
 @SessionScope
+@Entity
 public class Usuario {
 	private String nombre;
 	private String password;

@@ -10,3 +10,10 @@ public class App
     	SpringApplication.run(App.class, args);
     }
 }
+/*
+-----------ENTIDADES
+Usuario
+Juego
+Compañia
+Evento
+*/

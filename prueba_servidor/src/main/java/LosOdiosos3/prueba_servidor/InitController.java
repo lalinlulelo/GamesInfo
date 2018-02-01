@@ -26,7 +26,7 @@ public class InitController {
 	// pagina de registro
 	
 	@PostMapping(value = "/registrar")
-	public String registrar(Model model, Persona usur) {
+	public String registrar(Model model, Inicio usur) {
 		sin_registrar = false;
 		registrado = true;
 		usuario.setNombre(usur.getNombre());
