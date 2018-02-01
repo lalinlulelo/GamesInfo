@@ -24,6 +24,7 @@ public class User {
 	private String name;
 	private String password;
 	private String date;
+	private boolean registered = false;
 	
 	// setters
 	public void setName (String name) {
@@ -38,6 +39,10 @@ public class User {
 		this.date = date;
 	}
 	
+	public void setRegistered (boolean valor) {
+		registered = valor;
+	}
+	
 	// getters
 	public String getName () {
 		return name;
@@ -49,5 +54,9 @@ public class User {
 	
 	public String getDate () {
 		return date;
+	}
+	
+	public boolean getRegistered() {
+		return registered;
 	}
 }

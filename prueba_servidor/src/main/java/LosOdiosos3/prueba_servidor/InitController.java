@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class InitController {
-	boolean registrado = false;
-	boolean sin_registrar = false;
+	// identifica la sesion de un usuario
 	@Autowired
 	private User usuario;
+	
+	// repositorio de la tabla usuarios
+	@Autowired
+	private UserRepository repository;
 	
 	// pagina principal
 	@RequestMapping("/")
 	public String inicio (Model model) {
-		sin_registrar = true;
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
+		model.addAttribute("registered", usuario.getRegistered());
 		//model.addAttribute("sin_registrar", sin_registrar);
 		//model.addAttribute("registrado", registrado);
 		return "index";
@@ -28,13 +31,12 @@ public class InitController {
 	// pagina de registro	
 	@PostMapping(value = "/registrar")
 	public String registrar(Model model, User_Aux usur) {
-		sin_registrar = false;
-		registrado = true;
 		usuario.setName(usur.getName());
 		usuario.setPassword(usur.getPassword());
 		usuario.setDate(usur.getDate());
-		model.addAttribute("sin_registrar", sin_registrar);
-		model.addAttribute("registrado", registrado);
+		usuario.setRegistered(true);
+		repository.save(usuario);
+		model.addAttribute("registered", usuario.getRegistered());
 		return "index";
 	}
 	
