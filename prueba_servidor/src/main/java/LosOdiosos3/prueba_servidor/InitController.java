@@ -23,8 +23,7 @@ public class InitController {
 		return "index";
 	}
 	
-	// pagina de registro
-	
+	// pagina de registro	
 	@PostMapping(value = "/registrar")
 	public String registrar(Model model, Inicio usur) {
 		sin_registrar = false;
@@ -37,9 +36,6 @@ public class InitController {
 		return "index";
 	}
 	
-	
-	
-	
 	// recopila la informacion del usuario y se la pasa a la pagina perfil
 	@RequestMapping("/perfil")
 	public String init (Model model) {
@@ -51,4 +47,24 @@ public class InitController {
 		model.addAttribute("fecha", fecha);		
 		return "perfil";
 	}
+	
+	// juego
+	@RequestMapping("/game")
+	public String juego (Model model) {
+		return "juego";
+	}
+	
+	// compañia
+	@RequestMapping("/comany")
+	public String company (Model model){
+		return "comapny";
+	}
+	
+	// event
+	@RequestMapping("/event")
+	public String event (Model model) {
+		return "event";
+	}
+	
+	
 }
