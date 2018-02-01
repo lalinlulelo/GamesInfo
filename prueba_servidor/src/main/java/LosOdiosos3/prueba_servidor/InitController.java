@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class InitController {
+	
+	// ----------------------------- INYECCIONES -------------------------------------
 	// identifica la sesion de un usuario
 	@Autowired
 	private User usuario;
@@ -18,8 +20,9 @@ public class InitController {
 	// repositorio de la tabla usuarios
 	@Autowired
 	private UserRepository repository;
+	// ------------------------------ FIN INYECCIONES --------------------------------
 	
-	// pagina principal
+	// ----------------------------- PAGINA INICIO -----------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model) {
 		model.addAttribute("Titulo", "Agus guapo");
@@ -30,8 +33,9 @@ public class InitController {
 		//model.addAttribute("registrado", registrado);
 		return "index";
 	}
+	// ----------------------------- FIN PAGINA INICIO -------------------------------
 	
-	// pagina de registro	
+	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
 	@PostMapping(value = "/registrar")
 	public String registrar(Model model, User_Aux user) {
 		usuario.setName(user.getName());
@@ -54,16 +58,18 @@ public class InitController {
 		model.addAttribute("registered", usuario.getRegistered());
 		return "index";
 	}
+	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ---------------------
 	
-	// pagina de iniciar sesion
+	// ----------------------------- INICIO DE SESION --------------------------------
 	@RequestMapping("/start_session")
 	public String iniciar_sesion (Model model, User_Aux user) {
-		// GESTION DE INICIO DE SESION
+		
 		// recopilamos la lista de usuarios que contienen el nombre
 		// --- en teoria no puede haber varios con el mismo nombre ---
 		List<User> usur = repository.findByName(user.getName());
 		// usuario auxiliar que recogera el usuario correspondiente a iniciar sesion
 		User aux;
+		
 		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
 		// con las disponibles
 		if(usur.size() > 0) {
@@ -78,39 +84,49 @@ public class InitController {
 			// --- procesar cual seria el correcto ---
 			System.out.println("user or password wrong");
 		}
+		
+		// se dirige a la pagina como iniciado
 		return "loged";
 	}
+	// ----------------------------- FIN INICIO DE SESION ----------------------------
 	
-	// recopila la informacion del usuario y se la pasa a la pagina perfil
+	// ----------------------------- PERFIL DE USUARIO -------------------------------
 	@RequestMapping("/profile")
 	public String init (Model model) {
+		
 		// se cogen del usuario los atributos
 		String name = usuario.getName();
 		String password = usuario.getPassword();
 		String date = usuario.getDate();
+		
 		// se mandan los datos al modelo
 		model.addAttribute("name", name);
 		model.addAttribute("password", password);
-		model.addAttribute("date", date);		
+		model.addAttribute("date", date);	
+		
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
 	}
+	// ----------------------------- FIN PERFIL DE USUARIO ---------------------------
 	
-	// juego
+	// ----------------------------- JUEGO -------------------------------------------
 	@RequestMapping("/game")
 	public String Game (Model model) {
 		return "game";
 	}
+	// ----------------------------- FIN JUEGO ---------------------------------------
 	
-	// compañia
+	// ----------------------------- COMPAÑIA ----------------------------------------
 	@RequestMapping("/comany")
 	public String company (Model model){
 		return "comapny";
 	}
+	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
-	// event
+	// ----------------------------- EVENTO -------------------------------------------
 	@RequestMapping("/event")
 	public String event (Model model) {
 		return "event";
 	}	
+	// ---------------------------------- FIN EVENTO ----------------------------------
 }
