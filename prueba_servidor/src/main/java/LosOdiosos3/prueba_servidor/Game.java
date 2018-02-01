@@ -37,7 +37,7 @@ public class Game {
 		this.genre = genre;
 		this.year = year;
 		this.addGame = addGame;
-		this.imagen = imagen;
+		this.image = image;
 		this.url = url;
 	}
 
