@@ -22,15 +22,22 @@ public class InitController {
 	// ----------------------------- PAGINA INICIO -----------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) {
-		repository.save(new User("Juan", "123", "rojo"));
-		repository.save(new User("francisco", "aupa", "amarillo"));
+		// usuarios registrado previamente
+		repository.save(new User("Juan", "123", "20/11/85"));
+		repository.save(new User("Pedro", "456", "15/6/92"));
+		
+		// deshabilitacion del comando alert
+		usuario.setAttribute("alert", "  ");
+		
 		// comentarios de prueba de la pagina html
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
+		model.addAttribute("alert", usuario.getAttribute("alert"));
 		
+		// se accede a la pagina principal
 		return "index";
 	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
@@ -46,17 +53,13 @@ public class InitController {
 		// se comprueba la existencia del nombre
 		List<User> usur = repository.findByName(user.getName());
 		if(usur.size() > 0) {
-			System.out.println("error, usuario existente");
-			// --- buscar forma de notificar el error
-			return "index";
+			
+			return "register";
 		}
 		
 		// se da por registrado al usuario
-		usuario.setAttribute("registered", true);
 		repository.save(new User(user.getName(), user.getPassword(), user.getDate()));
 		
-		// se muestra MOSTRAR PERFIL si es true
-		model.addAttribute("registered", usuario.getAttribute("registered"));
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		return "index";
@@ -79,25 +82,27 @@ public class InitController {
 			for(int i = 0; i < usur.size(); i++) {
 				System.out.println(usur.get(i).toString());
 				if(user.getPassword().equals(usur.get(i).getPassword())) {
-					aux = usur.get(i);
-					usuario.setAttribute("registered", true);
-					break;
+					// se deshabilita el alert
+					model.addAttribute("alert", "  ");	
+					
+					// se marca como registrado
+					return "loged";
 				}
 			}
-			usuario.setAttribute("registered", false);
-		}else {
-			// en caso de no existir el usuario, se ha de notificar de algun modo
-			// --- procesar cual seria el correcto ---
-			System.out.println("user or password wrong");
-			usuario.setAttribute("registered", false);
 		}
-		model.addAttribute("loged", usuario.getAttribute("registered"));
+		
+		// se guardan los atributos en el modelo
+		model.addAttribute("Titulo", "Agus guapo");
+		model.addAttribute("Cuerpo", "Susa idiota");
+		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
+		
 		// se dirige a la pagina como iniciado
-		return "loged";
+		return "index";
 	}
 	// ----------------------------- FIN INICIO DE SESION ----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO -------------------------------
+	// no disponible por ahora
 	@RequestMapping("/profile")
 	public String init (Model model, HttpSession usuario) {
 		
