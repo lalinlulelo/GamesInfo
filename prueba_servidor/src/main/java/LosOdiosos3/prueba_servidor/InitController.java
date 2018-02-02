@@ -17,7 +17,7 @@ public class InitController {
 	@Autowired
 	private UserRepository repository;	
 	// ------------------------------ FIN INYECCIONES --------------------------------
-	
+
 	// ----------------------------- PAGINA INICIO -----------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) {
@@ -27,13 +27,22 @@ public class InitController {
 		
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
-		
+		usuario.setAttribute("registered", false);
 		// comentarios de prueba de la pagina html
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");	
+		if(aux == false) {
+			model.addAttribute("name", usuario.getAttribute("name"));
+		}else {
+			model.addAttribute("name", " ");
+		}
+		model.addAttribute("unregistered", aux);
+		
+		// valor inicial de alert
 		model.addAttribute("alert", usuario.getAttribute("alert"));
 		
 		// se accede a la pagina principal
@@ -68,6 +77,17 @@ public class InitController {
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		model.addAttribute("alert", " ");
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		if(aux == false) {
+			model.addAttribute("name", usuario.getAttribute("name"));
+		}else {
+			model.addAttribute("name", " ");
+		}
+		model.addAttribute("unregistered", aux);
+		
 		return "index";
 	}
 	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ---------------------
@@ -80,7 +100,6 @@ public class InitController {
 		// --- en teoria no puede haber varios con el mismo nombre ---
 		List<User> usur = repository.findByName(user.getName());
 		// usuario auxiliar que recogera el usuario correspondiente a iniciar sesion
-		User aux;
 		
 		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
 		// con las disponibles
@@ -88,11 +107,25 @@ public class InitController {
 			for(int i = 0; i < usur.size(); i++) {
 				System.out.println(usur.get(i).toString());
 				if(user.getPassword().equals(usur.get(i).getPassword())) {
+					// se registra el usuario
+					usuario.setAttribute("registered", true);
+					usuario.setAttribute("name", usur.get(i).getName());
+					usuario.setAttribute("password", usur.get(i).getPassword());
+					usuario.setAttribute("date", usur.get(i).getDate());
+					
 					// se deshabilita el alert
 					model.addAttribute("alert", "  ");	
+					model.addAttribute("Titulo", "Agus guapo");
+					model.addAttribute("Cuerpo", "Susa idiota");
 					
+					// se muestra el link de iniciar/registrar usuario si es false
+					model.addAttribute("registered", usuario.getAttribute("registered"));
+					boolean aux = !(Boolean) usuario.getAttribute("registered");
+					model.addAttribute("unregistered", aux);
+					model.addAttribute("name", usuario.getAttribute("name"));
+					model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
 					// se marca como registrado
-					return "loged";
+					return "index";
 				}
 			}
 		}
@@ -101,7 +134,7 @@ public class InitController {
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
-		
+		model.addAttribute("name", " ");
 		// se dirige a la pagina como iniciado
 		return "index";
 	}
@@ -147,4 +180,13 @@ public class InitController {
 		return "event";
 	}	
 	// ---------------------------------- FIN EVENTO ----------------------------------
+	
+	// ---------------------------------- MY LISTS ------------------------------------
+	@RequestMapping("/my_lists")
+	public String my_lists (Model model) {
+		
+		return "my_lists";
+	}
+	// ---------------------------------- FIN MY LISTS --------------------------------
+
 }

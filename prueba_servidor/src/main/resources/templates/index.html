@@ -5,8 +5,7 @@
 .Title{
    font-size: 70px;
    padding-left:35%;
-   color: Red;
- 
+   color: Red; 
  }
 .body{
   background-color: black;
@@ -52,6 +51,7 @@ li{
           <li></li><li></li><li></li><li></li>
           <li></li><li></li><li></li><li></li>
           <li></li><li></li>
+          {{#unregistered}}
           <li>User:</li><input type="text" name="name">
           <li></li>
           <li>Password:</li><input type="text" name="password">
@@ -59,6 +59,11 @@ li{
           <input type="submit" value="Login">
           <li></li><li></li><li></li><li></li>
           <li><a href="/new_user">Register</a></li>
+          {{/unregistered}}
+          {{#registered}}
+          {{{hello}}}
+          <li>Hello, {{name}}</li>
+          {{/registered}}
         </ul>		
       </form>      
     </div>
