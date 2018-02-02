@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class InitController {
-	
+public class InitController {	
 	// ----------------------------- INYECCIONES -------------------------------------	
 	// repositorio de la tabla usuarios
 	@Autowired
@@ -43,6 +42,12 @@ public class InitController {
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
 	
 	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
+	@RequestMapping("/new_user")
+	public String new_user (Model model) {
+		model.addAttribute("alert", " ");
+		return "new_user";
+	}
+	
 	@PostMapping(value = "/register")
 	public String registrar(Model model, User user, HttpSession usuario) {
 		// se inicializa el usuario con los datos del formulario
@@ -53,15 +58,16 @@ public class InitController {
 		// se comprueba la existencia del nombre
 		List<User> usur = repository.findByName(user.getName());
 		if(usur.size() > 0) {
-			
-			return "register";
+			System.out.println(usur.get(0).toString());
+			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('nombre ya existente');" + "window.location = 'new_user.html'; " + "</script>");		
+			return "new_user";
 		}
 		
 		// se da por registrado al usuario
 		repository.save(new User(user.getName(), user.getPassword(), user.getDate()));
-		
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
+		model.addAttribute("alert", " ");
 		return "index";
 	}
 	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ---------------------
