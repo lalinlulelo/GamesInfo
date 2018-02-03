@@ -1,5 +1,7 @@
 package LosOdiosos3.prueba_servidor;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -95,12 +97,12 @@ public class Game {
 		this.year = year;
 	}
 
-	public Date getAddYear() {
-		return addYear;
+	public Date getAddGame() {
+		return addGame;
 	}
 
-	public void setAddYear(Date addYear) {
-		this.addYear = addYear;
+	public void setAddGame(Date addGame) {
+		this.addGame = addGame;
 	}
 
 	public Image getImage() {

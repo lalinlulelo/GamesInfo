@@ -1,5 +1,8 @@
 package LosOdiosos3.prueba_servidor;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,10 +11,11 @@ import javax.persistence.Id;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 // se indica que es un componente
 @Entity
-public class User {
-	
+public class User {	
 	// id de la entidad user	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +25,9 @@ public class User {
 	private String name = "...";
 	private String password = "...";
 	private String date = "...";
+	private String icon = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png";
+	// iconos usuario
+	
 	
 	// lista de juegos
 	// suscripcion juego
@@ -50,6 +57,10 @@ public class User {
 		this.date = date;
 	}
 	
+	public void setIcon (String url) {
+		icon = url;
+	}
+	
 	// getters
 	public String getName () {
 		return name;
@@ -61,6 +72,10 @@ public class User {
 	
 	public String getDate () {
 		return date;
+	}
+	
+	public String getIcon () {
+		return icon;
 	}
 	
 	public String toString () {

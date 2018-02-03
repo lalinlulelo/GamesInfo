@@ -1,5 +1,6 @@
 package LosOdiosos3.prueba_servidor;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class InitController {	
+	// ----------------------------- VARIABLES DEL SERVIDOR --------------------------
+	// iconos de usuario
+	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
+	// ----------------------------- FIN VARIABLES DEL SERVIDOR ----------------------
+	
 	// ----------------------------- INYECCIONES -------------------------------------	
 	// repositorio de la tabla usuarios
 	@Autowired
@@ -27,7 +33,10 @@ public class InitController {
 		
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
+		
+		// variable del usuario que indica no ha iniciado sesion aún
 		usuario.setAttribute("registered", false);
+		
 		// comentarios de prueba de la pagina html
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
@@ -63,6 +72,7 @@ public class InitController {
 		usuario.setAttribute("name", user.getName());
 		usuario.setAttribute("password", user.getPassword());
 		usuario.setAttribute("date", user.getDate());
+		usuario.setAttribute("icon",  icons.get((int)Math.random()*6));
 		
 		// se comprueba la existencia del nombre
 		List<User> usur = repository.findByName(user.getName());
@@ -124,7 +134,7 @@ public class InitController {
 					model.addAttribute("unregistered", aux);
 					model.addAttribute("name", usuario.getAttribute("name"));
 					model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
-					// se marca como registrado
+
 					return "index";
 				}
 			}
@@ -143,17 +153,18 @@ public class InitController {
 	// ----------------------------- PERFIL DE USUARIO -------------------------------
 	// no disponible por ahora
 	@RequestMapping("/profile")
-	public String init (Model model, HttpSession usuario) {
-		
+	public String init (Model model, HttpSession usuario) {		
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
 		String password = (String) usuario.getAttribute("password");
 		String date = (String) usuario.getAttribute("date");
+		String icon = (String) usuario.getAttribute("icon");
 		
 		// se mandan los datos al modelo
 		model.addAttribute("name", name);
 		model.addAttribute("password", password);
 		model.addAttribute("date", date);	
+		model.addAttribute("icon", icon);
 		
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
@@ -183,8 +194,7 @@ public class InitController {
 	
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model) {
-		
+	public String my_lists (Model model) {		
 		return "my_lists";
 	}
 	// ---------------------------------- FIN MY LISTS --------------------------------
