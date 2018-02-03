@@ -25,6 +25,12 @@ public class Event {
 
 	@OneToOne(cascade=CascadeType.REMOVE)
 	private Image image;
+	
+	@ManyToMany(mappedBy="events")
+	private List<Game> games;
+	
+	@ManyToMany(mappedBy="events")
+	private List<Company> companies;
 
 	protected Event() {
 	}
