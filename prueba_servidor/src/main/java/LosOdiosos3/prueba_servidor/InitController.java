@@ -58,6 +58,32 @@ public class InitController {
 		// se accede a la pagina principal
 		return "index";
 	}
+	
+	// si se retorna a inicio
+	@RequestMapping("/index")
+	public String index (Model model, HttpSession usuario) {						
+		// comentarios de prueba de la pagina html
+		model.addAttribute("Titulo", "Agus guapo");
+		model.addAttribute("Cuerpo", "Susa idiota");
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");	
+		if(aux == false) {
+			model.addAttribute("name", usuario.getAttribute("name"));
+		}else {
+			model.addAttribute("name", " ");
+		}
+		model.addAttribute("unregistered", aux);
+		
+		model.addAttribute("hello", " ");
+		
+		// valor inicial de alert
+		model.addAttribute("alert", usuario.getAttribute("alert"));
+		
+		// se accede a la pagina principal
+		return "index";
+	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
 	
 	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
@@ -203,7 +229,19 @@ public class InitController {
 	
 	// ----------------------------- JUEGO -------------------------------------------
 	@RequestMapping("/game")
-	public String Game (Model model) {
+	public String Game (Model model, HttpSession usuario) {
+		
+		model.addAttribute("TituloP", "FarCry 5");
+		model.addAttribute("paragraph", "Juego Yankee");
+		model.addAttribute("Title", "abscdef");
+		model.addAttribute("image", "https://www.instant-gaming.com/images/products/1842/271x377/1842.jpg");
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		
 		return "game";
 	}
 	// ----------------------------- FIN JUEGO ---------------------------------------
