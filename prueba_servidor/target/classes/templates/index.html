@@ -25,6 +25,10 @@ p{
 li{
   color: white;
 }
+#navegador a{
+  color:white;
+}
+
 #navegador ul{
    list-style-type: none;
    text-align: left;
@@ -48,6 +52,9 @@ li{
           <li><a href="#">Events</a></li>
           <li><a href="#">Games</a></li>
           <li><a href="#">My Lists</a></li>
+          {{#registered}}
+          <li><a href="/profile">Perfil</a></li>
+          {{/registered}}
           <li></li><li></li><li></li><li></li>
           <li></li><li></li><li></li><li></li>
           <li></li><li></li>
@@ -107,17 +114,5 @@ li{
     <div>
       <h1 class="TitleLit">{{Titulo}}</h1>
       <h3 class="Article">{{Cuerpo}}</h3>
-      <!-- parte de inicio de sesion y demas cosas referentes a el -->	
-      <a href="/new_user">Registrar Usuario</a>
-      <form action="login" method="post">
-      	<p>Usuario</p>
-		<input type="text" name="name">
-		<br>
-		<p>Contraseña</p>
-		<input type="text" name="password">
-		<br>
-		<input type="submit" value="Login">
-      </form>
     </div>
-
-<script>// Write JavaScript here </script><script>// Write JavaScript here </script></body>
+</body>

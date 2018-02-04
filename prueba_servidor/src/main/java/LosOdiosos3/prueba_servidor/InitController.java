@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -166,9 +167,38 @@ public class InitController {
 		model.addAttribute("date", date);	
 		model.addAttribute("icon", icon);
 		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("lists", " ");
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
 	}
+	
+	// reestablecer nombre
+	/*
+	@RequestMapping("/profile/edit-name/{name}")
+	public String edit_name (Model model, @PathVariable String new_name, HttpSession usuario){
+		usuario.setAttribute("name", new_name);
+		
+		// se cogen del usuario los atributos
+		String name = (String) usuario.getAttribute("name");
+		String password = (String) usuario.getAttribute("password");
+		String date = (String) usuario.getAttribute("date");
+		String icon = (String) usuario.getAttribute("icon");
+		
+		// se mandan los datos al modelo
+		model.addAttribute("name", name);
+		model.addAttribute("password", password);
+		model.addAttribute("date", date);	
+		model.addAttribute("icon", icon);
+		return "profile";
+	}*/
+	// reestablecer contraseña
+	
+	// reestablecer fecha
 	// ----------------------------- FIN PERFIL DE USUARIO ---------------------------
 	
 	// ----------------------------- JUEGO -------------------------------------------
