@@ -23,8 +23,8 @@ public class Game {
 	@ManyToOne 
 	private Company company;
 	
-	private String companyName;
 	private String genre;
+	private String description;
 	private int year;
 	private Date addGame;
 	
@@ -36,13 +36,13 @@ public class Game {
 	@ManyToMany
 	private List<Event> events;
 	
-	public Game(String name, Company company,String companyName, String genre, int year, 
+	public Game(String name, Company company, String genre, String description, int year, 
 			Date addGame, Image image, String url) {		
 		
 		this.name = name;
 		this.company = company;
-		this.companyName= companyName;
 		this.genre = genre;
+		this.description = description;
 		this.year = year;
 		this.addGame = addGame;
 		this.image = image;
@@ -72,14 +72,6 @@ public class Game {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
 	
 	public String getGenre() {
 		return genre;
@@ -87,6 +79,14 @@ public class Game {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getYear() {
@@ -119,5 +119,20 @@ public class Game {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public List<Event> getEvents() {
+		return events;
+	}
+	
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
+	@Override
+	public String toString() {
+		return "Game [id: " + id + ", name: " + name + ", company: " + company +
+				", genre: " + genre + ", description: " + description + ", year: " + year + ", addGame: " + addGame + 
+				", image: " + image + ", url: " + url + ", events: " + events + "]";
 	}
 }

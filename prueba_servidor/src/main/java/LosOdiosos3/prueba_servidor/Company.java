@@ -112,10 +112,18 @@ public class Company {
 		this.games = games;
 	}
 	
+	public List<Event> getEvents() {
+		return events;
+	}
+	
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
 	@Override
 	public String toString() {
 		return "Company [id: " + id + ", name: " + name + ", country: " + country +
 				", description: " + description + ", year: " + year + ", image: " + image + 
-				", url: " + url + ", games: " + games + "]";
+				", url: " + url + ", games: " + games + ", events: " + events + "]";
 	}
 }
