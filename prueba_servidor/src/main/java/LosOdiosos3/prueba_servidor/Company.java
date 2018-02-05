@@ -29,8 +29,7 @@ public class Company {
     private List<Game> games = new ArrayList<Game>();
     
     @OneToOne(cascade=CascadeType.REMOVE)
-	private Image image;
-    
+	private Image image;    
     private String url;
     
     @ManyToMany
