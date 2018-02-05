@@ -199,6 +199,7 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("lists", " ");
+		
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
 	}

@@ -7,12 +7,12 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-<parent>
+  <parent>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-parent</artifactId>
 	<version>1.4.1.RELEASE</version>
 	<relativePath/>
-</parent>
+   </parent>
 
 
   <name>prueba_servidor</name>
@@ -54,6 +54,7 @@
  		<groupId>mysql</groupId>
  		<artifactId>mysql-connector-java</artifactId>
  	</dependency>
+ 	
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-devtools</artifactId>
