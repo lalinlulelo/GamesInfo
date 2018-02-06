@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -26,12 +23,15 @@ public class User {
 	// atributos del usuario
 	private String name = "...";
 	private String password = "...";
+	private String email;
 	private String date = "...";
 	private String icon = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png";
 	private ArrayList my_lists = new ArrayList ();
 	// iconos usuario
 	
-	
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
+	private List<Comment> comments = new ArrayList<Comment>();
+
 	// lista de juegos
 	// suscripcion juego
 	// suscripcion compañia
@@ -41,10 +41,11 @@ public class User {
 	protected User () {}
 	
 	// contructor
-	public User (String name, String password, String date) {
+	public User (String name, String password, String date, String email) {
 		this.name = name;
 		this.password = password;
 		this.date = date;
+		this.email = email;
 	}
 	
 	// setters
@@ -58,6 +59,10 @@ public class User {
 	
 	public void setDate (String date) {
 		this.date = date;
+	}
+	
+	public void setEmail (String email) {
+		this.email = email;
 	}
 	
 	public void setIcon (String url) {
@@ -77,11 +82,15 @@ public class User {
 		return date;
 	}
 	
+	public String getEmail () {
+		return email;
+	}
+	
 	public String getIcon () {
 		return icon;
 	}
 	
 	public String toString () {
-		return "name: " + name + "/npassword: " + password + "/nbirthday: " + date;
+		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";
 	}
 }
