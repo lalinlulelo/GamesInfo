@@ -4,6 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EventRepository extends JpaRepository<Event, Long> {
+public interface ImageRepository extends JpaRepository<Image, Long> {
 
 }

@@ -1,15 +1,8 @@
-package LosOdiosos3.prueba_servidor;
+package LosOdiosos3.prueba_servidor.Entities;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Game {
@@ -27,6 +20,7 @@ public class Game {
 	private String description;
 	private int year;
 	private Date addGame;
+	private double score;
 	
 	@OneToOne(cascade=CascadeType.REMOVE)
 	private Image image;
@@ -37,7 +31,7 @@ public class Game {
 	private List<Event> events;
 	
 	public Game(String name, Company company, String genre, String description, int year, 
-			Date addGame, Image image, String url) {		
+			Date addGame, double score, Image image, String url) {		
 		
 		this.name = name;
 		this.company = company;
@@ -45,10 +39,12 @@ public class Game {
 		this.description = description;
 		this.year = year;
 		this.addGame = addGame;
+		this.score = score;
 		this.image = image;
 		this.url = url;
 	}
 	
+	//Getters y Setters
 	public long getId() {
 		return id;
 	}

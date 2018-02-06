@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import LosOdiosos3.prueba_servidor.Entities.User;
+import LosOdiosos3.prueba_servidor.Entities.UserRepository;
+
 @Controller
 public class webController {	
 	// ----------------------------- VARIABLES DEL SERVIDOR --------------------------
@@ -251,7 +254,7 @@ public class webController {
 	@RequestMapping("/company")
 	public String company (Model model, HttpSession usuario){
 		
-		model.addAttribute("Nombre", "Bugisoft");
+		model.addAttribute("TituloP", "Bugisoft");
 		model.addAttribute("paragraph", "Juego frances");
 		model.addAttribute("Title", "abscdef");
 		model.addAttribute("image", "https://www.instant-gaming.com/images/products/1842/271x377/1842.jpg");
