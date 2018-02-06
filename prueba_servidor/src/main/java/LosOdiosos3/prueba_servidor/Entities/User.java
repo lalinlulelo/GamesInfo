@@ -29,7 +29,6 @@ public class User {
 	private String date = "...";
 	private String icon = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png";
 	private ArrayList my_lists = new ArrayList ();
-	// iconos usuario
 	
 	
 	// lista de juegos
@@ -81,7 +80,14 @@ public class User {
 		return icon;
 	}
 	
+	// toString
 	public String toString () {
 		return "name: " + name + "/npassword: " + password + "/nbirthday: " + date;
 	}
+	
+	// metodos auxiliares
+	public void addList (ArrayList list) {
+		my_lists.add(list);
+	}
+	
 }
