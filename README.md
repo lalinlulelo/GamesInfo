@@ -19,7 +19,11 @@ En todo momento el usuario estará al tanto de información nueva sobre cada jue
 
 ## Fase 2 ##
 # Diagrama de Navegación
+En el siguiente diagrama se puede visualizar desde qué paginas se puede navegar hasta cierta página:
+
 ![Diagrama de Navegacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/diagrama%20de%20flujos.png)
+
+En esta fase no se han diferenciado las partes privada y pública. Sin embargo, el funcionamiento de la parte privada, será la posibilidad de visualizar las listas propias, creadas por el usuario, así como el acceso a su propio perfil para configurarlo o visualizar cierto detalles de él.
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
