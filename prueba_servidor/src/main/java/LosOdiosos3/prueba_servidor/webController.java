@@ -1,4 +1,5 @@
 package LosOdiosos3.prueba_servidor;
+import LosOdiosos3.prueba_servidor.Entities.*;
 
 import java.util.Arrays;
 import java.util.List;
