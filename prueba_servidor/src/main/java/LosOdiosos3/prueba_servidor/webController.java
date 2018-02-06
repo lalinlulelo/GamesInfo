@@ -256,8 +256,15 @@ public class webController {
 	
 	// ----------------------------- EVENTO -------------------------------------------
 	@RequestMapping("/event")
-	public String event (Model model) {
-		return "event";
+	public String event (Model model, HttpSession usuario) {
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		
+		return "event_calendar";
 	}	
 	// ---------------------------------- FIN EVENTO ----------------------------------
 	

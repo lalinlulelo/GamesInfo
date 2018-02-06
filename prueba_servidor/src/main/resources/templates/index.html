@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><style type="text/css">.lw { font-size: 60px;}
+<head>
+<style type="text/css">
+.lw { font-size: 60px;}
   
 .Title{
    font-size: 70px;
@@ -49,11 +51,11 @@ li{
       <form action="login" method="post">
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">Events</a></li>
+          <li><a href="/event">Events</a></li>
           <li><a href="/game">Games</a></li>
           <li><a href="#">My Lists</a></li>
           {{#registered}}
-          <li><a href="/profile">Perfil</a></li>
+          <li><a href="/profile">Profile</a></li>
           {{/registered}}
           <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>    
           {{#unregistered}}
