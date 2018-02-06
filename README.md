@@ -19,6 +19,7 @@ En todo momento el usuario estará al tanto de información nueva sobre cada jue
 
 # Fase 2
 # Diagrama de Navegación
+https://ibb.co/evOjvc
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
