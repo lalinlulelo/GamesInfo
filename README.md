@@ -19,7 +19,7 @@ En todo momento el usuario estará al tanto de información nueva sobre cada jue
 
 ## Fase 2 ##
 # Diagrama de Navegación
-![Diagrama de Navegacion](https://preview.ibb.co/cbUPvc/diagrama_de_flujos.png)
+![Diagrama de Navegacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/diagrama%20de%20flujos.png)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
