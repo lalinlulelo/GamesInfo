@@ -17,9 +17,9 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 # Servicio Interno
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
 
-# Fase 2
+## Fase 2 ##
 # Diagrama de Navegación
-https://ibb.co/evOjvc
+![NAV](https://ibb.co/evOjvc)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
