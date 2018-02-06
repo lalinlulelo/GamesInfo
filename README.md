@@ -20,7 +20,7 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
 
 # Fase 2 #
-# Diagrama de Navegación
+## Diagrama de Navegación ##
 En el siguiente diagrama se puede visualizar desde qué paginas se puede navegar hasta cierta página:
 
 ![Diagrama de Navegacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/diagrama%20de%20flujos.png)
