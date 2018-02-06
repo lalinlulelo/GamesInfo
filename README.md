@@ -8,12 +8,11 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 - **Parte privada**: el usuario deberá iniciar sesión para poder puntuar, comentar los juegos u ojear sus listas. Gracias al servicio de correo electrónico estará al tanto de su juego, evento o compañía favorita.
 
 ## Entidades principales ##
--   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, una Contraseña y otros datos menos relevantes.
--   **Juego**: Portará un Id, el Nombre, la Fecha de Salida, Descripción, Id compañía, Puntuación, Comentarios
--   **Compañía**: Información de la compañía encargada de desarrollar el juego ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación, Historia, …
--   **Comentario**: cada usuario podrá aportar su opinión sobre dicho juego. Este portará un Id, Cuerpo, IdUsuario, IdJuego
--   **Puntuación**: contendrá la puntuación del juego, tanto de los usuarios, como del sector profesional. Contendrá un Id, IdJuego, PuntuacionUsuarios, PuntuacionProfesional
--   **Evento**: Relación N:M con juego y persona. Contendrá un Id, Fecha, Lugar, Precio, Descripción…
+-   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña y otros datos menos relevantes.
+-   **Juego**: Portará un Id, el Nombre, Género, Fecha de Salida, Descripción, Id compañía, Puntuación, lista de Comentarios y otra de eventos a los que participa.
+-   **Compañía**: Información de la compañía encargada de desarrollar el juego ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos.
+-   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego. Este portará un Id, Usuario, el texto y el juego.
+-   **Evento**: Relación N:M con juego y compañía. Contendrá un Id, Fecha, Lugar, Precio, Descripcion y las listas de juegos y compañías que están presentes.
 
 ## Servicio Interno ##
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
