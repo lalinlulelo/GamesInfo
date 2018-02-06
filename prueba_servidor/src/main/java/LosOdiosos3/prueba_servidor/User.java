@@ -1,5 +1,6 @@
 package LosOdiosos3.prueba_servidor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class User {
 	private String password = "...";
 	private String date = "...";
 	private String icon = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png";
+	private ArrayList my_lists = new ArrayList ();
 	// iconos usuario
 	
 	

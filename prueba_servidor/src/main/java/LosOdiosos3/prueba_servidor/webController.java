@@ -248,9 +248,21 @@ public class webController {
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
 	// ----------------------------- COMPAÑIA ----------------------------------------
-	@RequestMapping("/comany")
-	public String company (Model model){
-		return "comapny";
+	@RequestMapping("/company")
+	public String company (Model model, HttpSession usuario){
+		
+		model.addAttribute("TituloP", "Bugisoft");
+		model.addAttribute("paragraph", "Juego frances");
+		model.addAttribute("Title", "abscdef");
+		model.addAttribute("image", "https://www.instant-gaming.com/images/products/1842/271x377/1842.jpg");
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+				
+		return "company";
 	}
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
