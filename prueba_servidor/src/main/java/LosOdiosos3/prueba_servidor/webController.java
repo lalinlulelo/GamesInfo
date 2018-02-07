@@ -62,17 +62,20 @@ public class webController {
 		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"http://www.naughtydog.com","https://www.naughtydog.com");
 		companyRepository.save(Naughty_Dog);
 		
+
 		//Repositorio para juegos
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-		String dateInString = "31-08-1982 10:20:56";
-		Date date = sdf.parse(dateInString);
-		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, date, 9.5,
+		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, new Date(2018, 2, 1), 9.5,
 				"https://en.wikipedia.org/wiki/The_Last_of_Us","http://www.thelastofus.playstation.com/");
 		gameRepository.save(TLOU);
 		
-		Event E32018 = new Event("E3", "Los Angeles", new Date(2018, 6, 10), 28.6, "muy chachi","");
-		eventRepository.save(E32018);
 
+		eventRepository.save(new Event("E3", "Los Angeles", new Date(2018, 6, 10), 286, "muy chachi", "..." ));
+		eventRepository.save(new Event("GameGen", "Madrid", new Date(2018, 2, 21), 0, "a jugar", "..." ));
+		eventRepository.save(new Event("GDC", "Berlin", new Date(2018, 4, 26), 100, "ja!", "..." ));
+		eventRepository.save(new Event("Fun&Serious", "Bilbao", new Date(2018, 11, 21), 30, "txangurro", "..." ));
+		eventRepository.save(new Event("PGW", "Paris", new Date(2018, 1, 30), 18, "croisant", "..." ));
+		
+		
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
 		

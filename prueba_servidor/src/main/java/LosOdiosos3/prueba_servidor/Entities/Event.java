@@ -26,6 +26,7 @@ public class Event {
 	private double fee;
 	private String description;
 
+
 	private String image;
 	
 	@ManyToMany(mappedBy="events")
@@ -36,6 +37,7 @@ public class Event {
 
 	protected Event() {
 	}
+
 
 	public Event(String name, String place, Date date, double fee, String description, String image) {
 		this.name = name;
