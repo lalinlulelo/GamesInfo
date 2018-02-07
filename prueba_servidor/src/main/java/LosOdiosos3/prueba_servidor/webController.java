@@ -1,7 +1,10 @@
 package LosOdiosos3.prueba_servidor;
 import LosOdiosos3.prueba_servidor.Entities.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -44,14 +47,29 @@ public class webController {
 
 	// ----------------------------- PAGINA INICIO -----------------------------------
 	@RequestMapping("/")
-	public String inicio (Model model, HttpSession usuario) {
+	public String inicio (Model model, HttpSession usuario) throws ParseException {
 		
-		// datos cargados inicialmente
+		//Datos cargados inicialmente
+		//Repositorio para usuarios
 		userRepository.save(new User("Juan", "123", "20/11/85", "Juan@gmail.com"));
 		userRepository.save(new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com"));
 		userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
 		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
 		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
+		
+		
+		//Repositorio para compnias
+		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"http://www.naughtydog.com","https://www.naughtydog.com");
+		companyRepository.save(Naughty_Dog);
+		
+		//Repositorio para juegos
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+		String dateInString = "31-08-1982 10:20:56";
+		Date date = sdf.parse(dateInString);
+		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, date, 9.5,
+				"https://en.wikipedia.org/wiki/The_Last_of_Us","http://www.thelastofus.playstation.com/");
+		gameRepository.save(TLOU);
+		
 		
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");

@@ -30,8 +30,7 @@ public class Game {
 	private Date addGame;
 	private double score;
 	
-	@OneToOne(cascade=CascadeType.REMOVE)
-	private Image image;
+	private String image;
 	
 	private String url;
 	
@@ -39,7 +38,7 @@ public class Game {
 	private List<Event> events;
 	
 	public Game(String name, Company company, String genre, String description, int year, 
-			Date addGame, double score, Image image, String url) {		
+			Date addGame, double score, String image, String url) {		
 		
 		this.name = name;
 		this.company = company;
@@ -116,11 +115,11 @@ public class Game {
 		this.score = score;
 	}
 	
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
