@@ -2,6 +2,7 @@ package LosOdiosos3.prueba_servidor;
 import LosOdiosos3.prueba_servidor.Entities.*;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -53,6 +54,7 @@ public class webController {
 		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
 		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
 		
+		eventRepository.save(new Event("E3", "Los Angeles", new Date(2018, 6, 10), 28.6, "muy chachi" ));
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
 		
