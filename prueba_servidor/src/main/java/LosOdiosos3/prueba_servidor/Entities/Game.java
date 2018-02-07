@@ -28,6 +28,7 @@ public class Game {
 	private String description;
 	private int year;
 	private Date addGame;
+	private double score;
 	
 	@OneToOne(cascade=CascadeType.REMOVE)
 	private Image image;
@@ -38,7 +39,7 @@ public class Game {
 	private List<Event> events;
 	
 	public Game(String name, Company company, String genre, String description, int year, 
-			Date addGame, Image image, String url) {		
+			Date addGame, double score, Image image, String url) {		
 		
 		this.name = name;
 		this.company = company;
@@ -46,6 +47,7 @@ public class Game {
 		this.description = description;
 		this.year = year;
 		this.addGame = addGame;
+		this.score = score;
 		this.image = image;
 		this.url = url;
 	}
@@ -106,6 +108,14 @@ public class Game {
 		this.addGame = addGame;
 	}
 
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+	
 	public Image getImage() {
 		return image;
 	}
@@ -134,6 +144,6 @@ public class Game {
 	public String toString() {
 		return "Game [id: " + id + ", name: " + name + ", company: " + company +
 				", genre: " + genre + ", description: " + description + ", year: " + year + ", addGame: " + addGame + 
-				", image: " + image + ", url: " + url + ", events: " + events + "]";
+				", score: " + score + ", image: " + image + ", url: " + url + ", events: " + events + "]";
 	}
 }

@@ -30,8 +30,8 @@ public class webController {
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) {
 		// usuarios registrado previamente
-		repository.save(new User("Juan", "123", "20/11/85"));
-		repository.save(new User("Pedro", "456", "15/6/92"));
+		repository.save(new User("Juan", "123", "20/11/85", "juan@gmail.com"));
+		repository.save(new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com"));
 		
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
@@ -111,7 +111,7 @@ public class webController {
 		}
 		
 		// se da por registrado al usuario
-		repository.save(new User(user.getName(), user.getPassword(), user.getDate()));
+		repository.save(new User(user.getName(), user.getPassword(), user.getDate(), user.getEmail()));
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		model.addAttribute("alert", " ");

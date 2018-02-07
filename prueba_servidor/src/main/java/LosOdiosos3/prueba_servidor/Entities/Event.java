@@ -23,6 +23,7 @@ public class Event {
 	private String name;	
 	private String place;	
 	private Date date;
+	private double fee;
 	private String description;
 
 	@OneToOne(cascade=CascadeType.REMOVE)
@@ -37,10 +38,11 @@ public class Event {
 	protected Event() {
 	}
 
-	public Event(String name, String place, Date date, String description, Image image) {
+	public Event(String name, String place, Date date, double fee, String description, Image image) {
 		this.name = name;
 		this.place = place;
 		this.date = date;
+		this.fee = fee;
 		this.description = description;
 		this.image = image;	
 	}
@@ -77,6 +79,14 @@ public class Event {
 		this.date = date;
 	}
 	
+	public double getFee() {
+		return fee;
+	}
+
+	public void setFee(double fee) {
+		this.fee = fee;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -96,7 +106,7 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [id: " + id + ", name: " + name + ", place: " + place +
-				", date: " + date + ", description: " + description + 
+				", date: " + date + ", fee: " + fee + ", description: " + description + 
 				", image: " + image + ", games: " + games + ", companies: " + companies + "]";
 	}
 }
