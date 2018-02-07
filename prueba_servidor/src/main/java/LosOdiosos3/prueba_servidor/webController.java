@@ -296,6 +296,17 @@ public class webController {
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
 	// ----------------------------- EVENTO -------------------------------------------
+	@RequestMapping("/event_calendar")
+	public String event_calendar (Model model, HttpSession usuario) {
+		// se muestra el link de iniciar/registrar usuario si es false
+				model.addAttribute("registered", usuario.getAttribute("registered"));
+				boolean aux = !(Boolean) usuario.getAttribute("registered");
+				model.addAttribute("unregistered", aux);
+				model.addAttribute("name", usuario.getAttribute("name"));
+				
+				return "event_calendar";
+	}
+	
 	@RequestMapping("/event")
 	public String event (Model model, HttpSession usuario) {
 		
@@ -305,7 +316,7 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		
-		return "event_calendar";
+		return "event";
 	}	
 	// ---------------------------------- FIN EVENTO ----------------------------------
 	

@@ -26,7 +26,7 @@ public class Event {
 	private double fee;
 	private String description;
 
-	@OneToOne(cascade=CascadeType.REMOVE)
+
 	private String image;
 	
 	@ManyToMany(mappedBy="events")
