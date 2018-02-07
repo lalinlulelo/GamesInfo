@@ -21,8 +21,7 @@ public class Company {
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
     private List<Game> games = new ArrayList<Game>();
     
-    @OneToOne(cascade=CascadeType.REMOVE)
-	private Image image;    
+	private String image;    
     private String url;
     
     @ManyToMany
@@ -31,7 +30,7 @@ public class Company {
     protected Company (){};
 
     public Company(String name, String country, String description, 
-    				int year, Image image, String url) {
+    				int year, String image, String url) {
     	this.name = name;
 		this.country = country;
 		this.description = description;
@@ -80,11 +79,11 @@ public class Company {
 		this.year = year;
 	}
 	
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	

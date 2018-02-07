@@ -38,13 +38,14 @@ public class Event {
 	protected Event() {
 	}
 
-	public Event(String name, String place, Date date, double fee, String description, String string) {
+
+	public Event(String name, String place, Date date, double fee, String description, String image) {
 		this.name = name;
 		this.place = place;
 		this.date = date;
 		this.fee = fee;
 		this.description = description;
-		this.image = string;	
+		this.image = image;	
 	}
 	
 	public long getId() {
