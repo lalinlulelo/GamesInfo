@@ -23,15 +23,35 @@ public class webController {
 	// ----------------------------- INYECCIONES -------------------------------------	
 	// repositorio de la tabla usuarios
 	@Autowired
-	private UserRepository repository;	
+	private UserRepository userRepository;	
+	
+	// repositorio de la tabla compañias
+	@Autowired
+	private CompanyRepository companyRepository;
+	
+	// repositorio de la tabla eventos
+	@Autowired
+	private EventRepository eventRepository;
+	
+	// repositorio de la tabla juegos
+	@Autowired
+	private GameRepository gameRepository;
+	
+	// repositorio de la tabla comentarios
+	@Autowired
+	private CommentRepository commentRepository;
 	// ------------------------------ FIN INYECCIONES --------------------------------
 
 	// ----------------------------- PAGINA INICIO -----------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) {
-		// usuarios registrado previamente
-		repository.save(new User("Juan", "123", "20/11/85", "juan@gmail.com"));
-		repository.save(new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com"));
+		
+		// datos cargados inicialmente
+		userRepository.save(new User("Juan", "123", "20/11/85", "Juan@gmail.com"));
+		userRepository.save(new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com"));
+		userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
+		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
+		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
 		
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
@@ -103,7 +123,7 @@ public class webController {
 		usuario.setAttribute("icon",  icons.get((int)Math.random()*6));
 		
 		// se comprueba la existencia del nombre
-		List<User> usur = repository.findByName(user.getName());
+		List<User> usur = userRepository.findByName(user.getName());
 		if(usur.size() > 0) {
 			System.out.println(usur.get(0).toString());
 			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('nombre ya existente');" + "window.location = 'new_user.html'; " + "</script>");		
@@ -111,7 +131,7 @@ public class webController {
 		}
 		
 		// se da por registrado al usuario
-		repository.save(new User(user.getName(), user.getPassword(), user.getDate(), user.getEmail()));
+		userRepository.save(new User(user.getName(), user.getPassword(), user.getDate(), user.getEmail()));
 		model.addAttribute("Titulo", "Agus guapo");
 		model.addAttribute("Cuerpo", "Susa idiota");
 		model.addAttribute("alert", " ");
@@ -136,7 +156,7 @@ public class webController {
 		System.out.println(user.getName());
 		// recopilamos la lista de usuarios que contienen el nombre
 		// --- en teoria no puede haber varios con el mismo nombre ---
-		List<User> usur = repository.findByName(user.getName());
+		List<User> usur = userRepository.findByName(user.getName());
 		// usuario auxiliar que recogera el usuario correspondiente a iniciar sesion
 		
 		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
