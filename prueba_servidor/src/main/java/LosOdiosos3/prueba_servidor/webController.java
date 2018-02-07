@@ -231,12 +231,12 @@ public class webController {
 	
 	// ----------------------------- JUEGO -------------------------------------------
 	@RequestMapping("/game")
-	public String Game (Model model, HttpSession usuario) {
-		
-		model.addAttribute("TituloP", "FarCry 5");
-		model.addAttribute("paragraph", "Juego Yankee");
-		model.addAttribute("Title", "abscdef");
-		model.addAttribute("image", "https://www.instant-gaming.com/images/products/1842/271x377/1842.jpg");
+	public String Game (Model model, HttpSession usuario) {		
+		model.addAttribute("name_g", "Shadow of Colossus");
+		model.addAttribute("company", "Bluepoint Games");
+		model.addAttribute("year", "February 6th 2018");
+		model.addAttribute("image", "https://static-ie.gamestop.ie/images/products/260931/3max.jpg");
+		model.addAttribute("description", "Shadow of the Colossus, like its predecessor Ico and successor The Last Guardian, is an artist's game. Its creative lead, Fumito Ueda, is an artist and animator with an instantly recognisable style: cracked stone, bleached sunlight, smoky shadows, frail limbs and pale, unfocused, unreadable faces. The three games are notable for their minimalist design, and they are no small feats of engineering, but it is the art that makes their worlds of innocence and ruin so indelible.");
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
