@@ -56,7 +56,7 @@ public class webController {
 		userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
 		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
 		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
-		
+
 		
 		//Repositorio para compnias
 		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"http://www.naughtydog.com","https://www.naughtydog.com");
@@ -70,7 +70,9 @@ public class webController {
 				"https://en.wikipedia.org/wiki/The_Last_of_Us","http://www.thelastofus.playstation.com/");
 		gameRepository.save(TLOU);
 		
-		
+		Event E32018 = new Event("E3", "Los Angeles", new Date(2018, 6, 10), 28.6, "muy chachi","");
+		eventRepository.save(E32018);
+
 		// deshabilitacion del comando alert
 		usuario.setAttribute("alert", "  ");
 		
