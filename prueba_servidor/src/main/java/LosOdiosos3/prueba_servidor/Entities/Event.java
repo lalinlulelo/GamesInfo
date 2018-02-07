@@ -27,7 +27,7 @@ public class Event {
 	private String description;
 
 	@OneToOne(cascade=CascadeType.REMOVE)
-	private Image image;
+	private String image;
 	
 	@ManyToMany(mappedBy="events")
 	private List<Game> games;
@@ -38,13 +38,13 @@ public class Event {
 	protected Event() {
 	}
 
-	public Event(String name, String place, Date date, double fee, String description, Image image) {
+	public Event(String name, String place, Date date, double fee, String description, String string) {
 		this.name = name;
 		this.place = place;
 		this.date = date;
 		this.fee = fee;
 		this.description = description;
-		this.image = image;	
+		this.image = string;	
 	}
 	
 	public long getId() {
@@ -95,11 +95,11 @@ public class Event {
 		this.description = description;
 	}
 
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
