@@ -141,4 +141,7 @@ public class Game {
 	public void setComment(Comment comment){
 		comments.add(comment);
 	}
+	public List<Comment> getComment(){
+		return this.comments;
+	}
 }

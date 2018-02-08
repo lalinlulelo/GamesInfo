@@ -323,10 +323,43 @@ public class webController {
 				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>";
 				break;
 			case 5:
-				System.out.println("etro");
+				
 				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>";
 				break;
 		}
+		
+		
+List<String> list=new ArrayList<String>();
+		
+		String div="<div>%s</div>\r\n" + 
+				"     <div>%s</div>";
+		
+		if(games.get(0).getComment().size()>0) {
+			List<Comment> list_comments=games.get(0).getComment();
+			
+			//variable auxiliar
+			for(int i=0;i<list_comments.size();i++) {
+				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+				String User=list_comments.get(i).getUser().getName();
+				String Text=list_comments.get(i).getText();		
+				
+				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+				
+				//Le damos formato a la variable auxiliar y la añadimos a la lista
+				String aux=String.format(div, User, Text);
+				
+				list.add(aux);
+				
+			}
+			model.addAttribute("comments", list);
+		}else {
+			model.addAttribute("comments"," ");
+		}
+		
+		
+		
+		
+		
 		
 		model.addAttribute("name_g", name);
 		model.addAttribute("company", company.getName());
