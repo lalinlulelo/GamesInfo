@@ -132,6 +132,31 @@ public class webController {
 	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
 	
+	@RequestMapping("/game_list")
+	public String game_list (Model model) {
+		
+		
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJJntY7udCcBWAmdFEsFzOmV7TlsrsoiKlqqDl0Bk-XTf5Zrns\" class=\"imagen\">\r\n" + 
+				"      <p>{{titulo}}</p>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		model.addAttribute("titulo", "Subnautica");
+		
+		
+		return "game_list";
+	}
+	
+	
+	
+	
+	
+	
 	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
 	@RequestMapping("/new_user")
 	public String new_user (Model model) {
