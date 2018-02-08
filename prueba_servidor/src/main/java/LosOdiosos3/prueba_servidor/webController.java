@@ -391,9 +391,54 @@ public class webController {
 		
 		//Accedo a la lista de lista de juego
 		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
+		//Accedo a la sublista de juegos
+		ArrayList<Game> ninList = lists.get(0);
 		
+		String name = ninList.get(0).getName();
+		Company company = ninList.get(0).getCompany();
+		String genre = ninList.get(0).getGenre();
+		String description = ninList.get(0).getDescription();
+		int year = ninList.get(0).getYear();
+		Date addGame = ninList.get(0).getAddGame();
+		int pts = (int)ninList.get(0).getScore();
+		String image = ninList.get(0).getImage();
+		String url = ninList.get(0).getUrl();
+		
+		
+		String score = "";
+		switch(pts/2) {
+			case 0:
+				score = "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 1:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 2:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 3:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 4:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 5:
+				System.out.println("etro");
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>";
+				break;
+		}
 		
 		model.addAttribute("lists", lists);
+		
+		model.addAttribute("name_g", name);
+		model.addAttribute("company", company.getName());
+		model.addAttribute("genre", genre);
+		model.addAttribute("description", description);
+		model.addAttribute("year", year);
+		model.addAttribute("addGame", addGame.toString());
+		model.addAttribute("score", score);
+		model.addAttribute("image", image);
+		model.addAttribute("url", url);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
