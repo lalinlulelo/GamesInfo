@@ -73,23 +73,70 @@
  height: 100px;
  display:block;
  margin:0 auto 0 auto;
-}</style>
+}
+
+    
+            #navegador a{
+                font-family: "Andale Mono", monospace;
+                color:  #F9FF35;
+                text-decoration:none;
+            }
+            #navegador{
+                background-color: rgb(33, 73, 138);
+                padding-top: 2px;
+                font-size: 90%;
+                color:  #F9FF35;
+                height: 45px;
+                line-height: 30px; 
+            }
+            #navegador ul{
+                list-style-type: none;
+                text-align: left;
+                color: #010201;
+
+            }
+            #navegador li{
+                font-family: "Andale Mono", monospace;
+                color:  #F9FF35;
+                display: inline;
+                text-align: center;
+                margin: 0 10px 0 0;
+                                font-size: 100%;
+            }
+            #navegador p{
+                font-family: "Andale Mono", monospace;
+                color:  #F9FF35;
+
+            }
+            input[type=submit] {
+                color: rgb(33, 73, 138);
+                padding:5px 15px; 
+                background:rgb(251, 255, 140); 
+                border:0 none;
+                cursor:pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px; 
+            }
+
+</style>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
 <title>Lista de Juegos</title>
 </head>
- <body style=" background-color:#406db5;"><div id="navegador">      
+ <body style=" background-color:#406db5;">
+<div id="navegador">      
         <form action="login" method="post">
           <ul>
-            <li></li>
+            <li></li><li>
             <li><a href="/index">Home</a></li>
-            <li><a href="/event">Events</a></li>
+            <li><a href="/event_calendar">Events</a></li>
             <li><a href="/game">Games</a></li>
+            <li><a href="/company_list">Companies</a></li>
             {{#registered}}
             <li><a href="#">My Lists</a></li>            
-            <li><a href="/perfil">Perfil</a></li>
+            <li><a href="/profile">Perfil</a></li>
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
@@ -107,7 +154,7 @@
           </ul>		
         </form>      
       </div>
- 
+ 	<br><br>
      
 <!-- Start your code here -->
    

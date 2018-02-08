@@ -161,44 +161,6 @@ public class webController {
 	
 	
 	
-	@RequestMapping("/company_list")
-	public String company_list (Model model) {
-		
-		List<String> list=new ArrayList<String>();
-		
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-		
-		
-		List<Company> list_company=companyRepository.findAll();
-		
-		//variable auxiliar
-		for(int i=0;i<list_company.size();i++) {
-			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=list_company.get(i).getImage();
-			String Titulo=list_company.get(i).getName();		
-			
-			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			
-			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url,Titulo);
-			
-			list.add(aux);
-			
-		}
-		
-		
-		model.addAttribute("company", list);
-		
-		
-		
-		return "company_list";
-	}
 	
 	
 	
@@ -379,14 +341,14 @@ public class webController {
 	}
 	
 	@RequestMapping("/game_list")
-	public String game_list (Model model) {
+	public String game_list (Model model, HttpSession usuario) {
 		
 		List<String> list=new ArrayList<String>();
 		
 		String div="<div class=\"col-md-3\">\r\n" + 
 				"    <div class=\"Game\">\r\n" + 
 				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
+				"      <p style=\"text-align:center; color:  rgb(33, 73, 138);\">%s</p>\r\n" + 
 				"     \r\n" + 
 				"    </div>\r\n" + 
 				"  </div>";
@@ -412,7 +374,11 @@ public class webController {
 		
 		model.addAttribute("games", list);
 		
-		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
 		
 		return "game_list";
 	}
@@ -444,6 +410,51 @@ public class webController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 				
 		return "company";
+	}
+	
+
+	@RequestMapping("/company_list")
+	public String company_list (Model model, HttpSession usuario) {
+		
+		List<String> list=new ArrayList<String>();
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		List<Company> list_company=companyRepository.findAll();
+		
+		//variable auxiliar
+		for(int i=0;i<list_company.size();i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=list_company.get(i).getImage();
+			String Titulo=list_company.get(i).getName();		
+			
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url,Titulo);
+			
+			list.add(aux);
+			
+		}
+		
+		
+		model.addAttribute("company", list);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+				model.addAttribute("registered", usuario.getAttribute("registered"));
+				boolean aux = !(Boolean) usuario.getAttribute("registered");
+				model.addAttribute("unregistered", aux);
+				model.addAttribute("name", usuario.getAttribute("name"));
+				
+		
+		return "company_list";
 	}
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
