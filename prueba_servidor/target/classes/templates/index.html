@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style type="text/css">
-.lw { font-size: 60px;}
-  
-.Title{
+<head><style type="text/css">.Title{
    font-size: 70px;
-   padding-left:35%;
+   text-align: center;
    color: Red; 
  }
 .body{
-  background-color: black;
+  background-color: #dcebfd;
 }
 .TitleLit{
   font: 100%;
@@ -19,13 +15,14 @@
 }
 .Article{
   font: 100%;
-  color: white;
+  color: #010201;
 }
+
 p{
   color:  white;
 }
 li{
-  color: white;
+  color: #010201;
 }
 #navegador a{
   color:white;
@@ -34,12 +31,15 @@ li{
 #navegador ul{
    list-style-type: none;
    text-align: left;
+   color: #010201;
 }
 #navegador li{
-   display: inline;
-   text-align: center;
-   margin: 0 10px 0 0;
-}</style><title>GamesInfo</title>
+    color: #010201;
+    display: inline;
+    text-align: center;
+    margin: 0 10px 0 0;
+}
+  </style><title>GamesInfo</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -47,10 +47,9 @@ li{
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
   <body class="body">
-    <div id="navegador">      
-      <form action="login" method="post">
-        <ul>
-          <li><a href="#">Home</a></li>
+    <div id="navegador">            
+        <ul style="display:inline;">
+          <li><a href="/index">Home</a></li>
           <li><a href="/event_calendar">Events</a></li>
           <li><a href="/game">Games</a></li>
           <li><a href="/company">Companies</a></li>
@@ -58,18 +57,19 @@ li{
           <!-- Si se está registrado -->
           {{#registered}}
           <li><a href="#">My Lists</a></li>          
-          <li><a href="/profile">Profile</a></li>
-          {{/registered}}
+          <li><a href="/profile">Profile</a></li>         
+           {{/registered}}    
           
-          <li style="padding-left: 30px"></li>  
-          <!-- Si no se está registrado -->  
+           </ul>	
+        
+      
+          
+        <form action="login" method="post" style="padding-left:15%; display:inline;">
+       	  <!-- Si no se está registrado -->  
           {{#unregistered}}
-          <li>User:</li><input type="text" name="name">
-          <li></li>
-          <li>Password:</li><input type="text" name="password">
-          <li></li>
-          <input type="submit" value="Login">
-          <li></li><li></li><li></li><li></li>
+          <li>User:</li><input type="text" name="name">          
+          <li>Password:</li><input type="text" name="password">          
+          <input type="submit" value="Login">          
           <li><a href="/new_user">Register</a></li>
           {{/unregistered}}
           
@@ -78,18 +78,21 @@ li{
           <!-- notificacion de inicio de sesion -->
           {{{hello}}}
           <li>Hello, {{name}}</li>
-          {{/registered}}
-        </ul>		
+          {{/registered}}       	
       </form>      
+        
     </div>
+    
+    
+    
   <div class="container" style="width:100%; padding:0;">
     <h2 class="Title">GamesInfo</h2>  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
     </ol>
       {{{alert}}}
     <!-- Wrapper for slides -->
@@ -98,11 +101,11 @@ li{
         <img src="https://cdn.wccftech.com/wp-content/uploads/2016/07/zelda-breath-of-the-wild.jpg" alt="Zelda" style="width:100%;">
       </div>
 
-      <div class="item">
+      <div class="item active">
         <img src="https://i.ytimg.com/vi/SL2IPq9ZwJY/maxresdefault.jpg" alt="Uncharted" style="width:100%;">
       </div>
     
-      <div class="item active">
+      <div class="item">
         <img src="http://sm.ign.com/ign_es/screenshot/default/the-witcher-3_czbd.jpg" alt="The witcher" style="width:100%;">
       </div>
     </div>
@@ -122,5 +125,4 @@ li{
     <div>
       <h1 class="TitleLit">{{Titulo}}</h1>
       <h3 class="Article">{{Cuerpo}}</h3>
-    </div>
-</body>
+    </div><script>// Write JavaScript here </script></body>
