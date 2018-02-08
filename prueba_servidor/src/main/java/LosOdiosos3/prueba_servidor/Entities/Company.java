@@ -26,6 +26,9 @@ public class Company {
     
     @ManyToMany
 	private List<Event> events;
+    
+    @OneToMany(mappedBy="event", cascade=CascadeType.REMOVE)
+	private List<Comment> comments = new ArrayList<Comment>();
 
     protected Company (){};
 

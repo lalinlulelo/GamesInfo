@@ -1,5 +1,7 @@
 package LosOdiosos3.prueba_servidor.Entities;
 import LosOdiosos3.prueba_servidor.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToMany;
 
@@ -36,6 +39,9 @@ public class Game {
 	
 	@ManyToMany
 	private List<Event> events;
+	
+	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
+	private List<Comment> comments = new ArrayList<Comment>();
 	
 	public Game () {}
 	

@@ -19,14 +19,11 @@ public class Comment {
 	private String text;
 	
 	@ManyToOne
-	private Game game;
-	
-	/*
+	private Game game;	
 	@ManyToOne
 	private Company company;	
 	@ManyToOne
-	private Event event;
-	*/
+	private Event event;	
 
 	protected Comment() {
 	};
@@ -66,7 +63,24 @@ public class Comment {
 
 	public void setGame(Game game) {
 		this.game = game;
+	}	
+
+	public Company getCompany() {
+		return company;
 	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
 
 	@Override
 	public String toString() {
