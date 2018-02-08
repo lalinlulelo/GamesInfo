@@ -3,6 +3,7 @@ import LosOdiosos3.prueba_servidor.Entities.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -51,13 +52,15 @@ public class webController {
 		
 		// Datos cargados inicialmente
 		// Repositorio para usuarios
-		userRepository.save(new User("Juan", "123", "20/11/85", "Juan@gmail.com"));
+		User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
+		userRepository.save(Juan);
+		
 		userRepository.save(new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com"));
 		userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
 		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
 		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
 		
-		// Repositorio para compnias
+		// Repositorio para companias
 		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
 		companyRepository.save(Naughty_Dog);		
 		Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
@@ -93,12 +96,17 @@ public class webController {
 		eventRepository.save(new Event("Fun&Serious", "Bilbao", new Date(2018, 11, 21), 30, "txangurro", "..." ));
 		eventRepository.save(new Event("PGW", "Paris", new Date(2018, 1, 30), 18, "croisant", "..." ));
 		
+		//Guardar juegos para un usuario
+		ArrayList<Game> ninGameList = new ArrayList<Game>();
+		ninGameList.add(SMO);
+		ninGameList.add(LOZBTW);
+		Juan.addList(ninGameList);
+		
+		
 		// Variables iniciales del usuario
 		usuario.setAttribute("alert", "  ");
 		usuario.setAttribute("registered", false);
-		
-		
-		
+			
 		// comentarios de prueba de la pagina html
 		model.addAttribute("Titulo", "Juegos Nuevos");
 		model.addAttribute("Cuerpo", "Proximamente");
@@ -146,6 +154,31 @@ public class webController {
 		return "index";
 	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
+	
+	@RequestMapping("/game_list")
+	public String game_list (Model model) {
+		
+		
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJJntY7udCcBWAmdFEsFzOmV7TlsrsoiKlqqDl0Bk-XTf5Zrns\" class=\"imagen\">\r\n" + 
+				"      <p>{{titulo}}</p>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		model.addAttribute("titulo", "Subnautica");
+		
+		
+		return "game_list";
+	}
+	
+	
+	
+	
+	
 	
 	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
 	@RequestMapping("/new_user")
@@ -377,7 +410,67 @@ public class webController {
 	
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model) {		
+	public String my_lists (Model model, HttpSession usuario) {
+		
+		List <User> users = userRepository.findByName("Juan");
+		
+		//Accedo a la lista de lista de juego
+		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
+		//Accedo a la sublista de juegos
+		ArrayList<Game> ninList = lists.get(0);
+		
+		String name = ninList.get(0).getName();
+		Company company = ninList.get(0).getCompany();
+		String genre = ninList.get(0).getGenre();
+		String description = ninList.get(0).getDescription();
+		int year = ninList.get(0).getYear();
+		Date addGame = ninList.get(0).getAddGame();
+		int pts = (int)ninList.get(0).getScore();
+		String image = ninList.get(0).getImage();
+		String url = ninList.get(0).getUrl();
+		
+		
+		String score = "";
+		switch(pts/2) {
+			case 0:
+				score = "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 1:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 2:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 3:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 4:
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>";
+				break;
+			case 5:
+				System.out.println("etro");
+				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>";
+				break;
+		}
+		
+		model.addAttribute("lists", lists);
+		
+		model.addAttribute("name_g", name);
+		model.addAttribute("company", company.getName());
+		model.addAttribute("genre", genre);
+		model.addAttribute("description", description);
+		model.addAttribute("year", year);
+		model.addAttribute("addGame", addGame.toString());
+		model.addAttribute("score", score);
+		model.addAttribute("image", image);
+		model.addAttribute("url", url);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		
 		return "my_lists";
 	}
 	// ---------------------------------- FIN MY LISTS --------------------------------

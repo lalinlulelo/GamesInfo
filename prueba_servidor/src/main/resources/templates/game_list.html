@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head><style type="text/css">          
+                #navegador{
+                font-size: 130%;
+                color:  #F9FF35;
+                }
+            #navegador a{
+                font-family: "Andale Mono", monospace;
+                color:  #F9FF35;
+                font-size: 130%;
+                text-decoration:none;
+            }
+            #navegador{
+                background-color: rgb(33, 73, 138);
+                padding-top: 2px;
+            }
+            #navegador ul{
+                list-style-type: none;
+                text-align: left;
+                color: #010201;
+            }
+            #navegador li{
+                color: #010201;
+                display: inline;
+                text-align: center;
+                margin: 0 10px 0 0;
+            }
+            #navegador p{
+                font-family: "Andale Mono", monospace;
+                color:  #F9FF35;
+                font-size: 130%;
+            }
+            input[type=submit] {
+                color: rgb(33, 73, 138);
+                padding:5px 15px; 
+                background:rgb(251,255,140); 
+                border:0 none;
+                cursor:pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px; 
+            }
+.TitleLit{
+  font-size: 20px;
+  text-align: center;
+  font-family: "Andale Mono",monospace;
+  text-decoration: underline;
+}
+#Recomendaciones{
+
+  background-color: #fbff8a;
+  height: 80%;
+  margin-left: 3%;
+ 
+ 
+  
+}
+.contenedorLista{
+  background-color: #fbff8a;
+  height: 100%;
+  width: 100%;
+  padding-left: 5%;
+  
+}
+
+.Game{
+  padding-top: 1%;
+  padding-left: 5%;
+}
+.imagen{
+  
+ max-width: 100px;
+ height: 100px;
+}</style>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+<title>Lista de Juegos</title>
+</head>
+ <body style=" background-color:#406db5;"><div id="navegador">      
+        <form action="login" method="post">
+          <ul>
+            <li></li>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/event">Events</a></li>
+            <li><a href="/game">Games</a></li>
+            {{#registered}}
+            <li><a href="#">My Lists</a></li>            
+            <li><a href="/perfil">Perfil</a></li>
+            {{/registered}}
+            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
+            {{#unregistered}}
+            <li>User:</li><input type="text" name="name">
+            <li></li>
+            <li>Password:</li><input type="text" name="password">
+            <li></li>
+            <input type="submit" value="Login">
+            <li></li><li></li><li></li><li></li>
+            <li><a href="/new_user">Register</a></li>
+            {{/unregistered}}
+            {{#registered}}
+            <li>Hello, {{name}}</li>
+            {{/registered}}
+          </ul>		
+        </form>      
+      </div>
+ 
+     
+<!-- Start your code here -->
+   
+   <div class="row">
+     <div class="col-md-9" style="padding-left:5%">
+   <div class="contenedorLista">
+    <div class="row">
+      
+     
+<ul>
+{{#games}}
+{{{.}}}
+{{/games}}
+</ul>
+    
+     
+     
+      
+</div>
+    
+    </div> 
+  
+     </div>
+     <div class="col-md-2" id="Recomendaciones">
+      <div class="TitleLit">Recomendaciones</div>
+     </div>
+     
+   </div>
+  
+  
+  
+  <script>// Write JavaScript here </script></body>

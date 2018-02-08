@@ -26,7 +26,8 @@ public class User {
 	private String email;
 	private String date = "...";
 	private String icon = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png";
-	private ArrayList my_lists = new ArrayList ();
+	
+	private ArrayList<ArrayList<Game>> my_lists = new ArrayList<ArrayList<Game>>();
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
@@ -95,8 +96,15 @@ public class User {
 	}
 	
 	// metodos auxiliares
-	public void addList (ArrayList list) {
+	public void addList (ArrayList<Game> list) {
 		my_lists.add(list);
 	}
 	
+	public void removeList(ArrayList<Game> list) {
+		my_lists.remove(list);
+	}
+	
+	public ArrayList<ArrayList<Game>> getMyLists(){
+		return my_lists;
+	}
 }
