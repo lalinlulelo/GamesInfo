@@ -103,4 +103,8 @@ public class User {
 	public void removeList(ArrayList<Game> list) {
 		my_lists.remove(list);
 	}
+	
+	public ArrayList<ArrayList<Game>> getMyLists(){
+		return my_lists;
+	}
 }

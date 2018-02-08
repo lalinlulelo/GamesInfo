@@ -385,8 +385,21 @@ public class webController {
 	
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model) {
+	public String my_lists (Model model, HttpSession usuario) {
 		
+		List <User> users = userRepository.findByName("Juan");
+		
+		//Accedo a la lista de lista de juego
+		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
+		
+		
+		model.addAttribute("lists", lists);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
 		
 		return "my_lists";
 	}
