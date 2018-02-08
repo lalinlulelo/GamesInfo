@@ -26,6 +26,8 @@
           overflow: hidden;
         }
         .cld-datetime .today{
+        font-family: "Andale Mono", monospace;
+     color:  #F9FF35;
           position: relative;
           float: left;
           width: calc(100% - 40px);
@@ -36,7 +38,7 @@
           position: relative;
           width: 20px;
           height: 20px;
-          margin-top: 10px;
+          margin-top: 0px;
         }
         .cld-nav:hover{
           cursor: pointer;
@@ -78,10 +80,12 @@
           padding: 5px;
         }
         .cld-title{
+        font-family: "Andale Mono", monospace;
+    		color:  #F9FF35;
           position: absolute;
           z-index: 5;
           display: none;
-          top: 30px;
+          top: 20px;
           left: 0;
           padding: 5px 10px;
           background: #fff;
@@ -183,10 +187,11 @@ li{
             <li></li>
             <li><a href="/index">Home</a></li>
             <li><a href="/event_calendar">Events</a></li>
-            <li><a href="/game">Games</a></li>
+            <li><a href="/game_list">Games</a></li>
+            <li><a href="/company_list">Companies</a></li>
             {{#registered}}
-            <li><a href="#">My Lists</a></li>            
-            <li><a href="/profile">Perfil</a></li>
+            <li><a href="/my_lists">My Lists</a></li>            
+            <li><a href="/profile">Profile</a></li>
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
@@ -199,7 +204,6 @@ li{
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
             {{#registered}}
-            {{{hello}}}
             <li>Hello, {{name}}</li>
             {{/registered}}
           </ul>		

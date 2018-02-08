@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,8 +60,8 @@ public class webController {
 		// Repositorio para usuarios
 		User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
 		userRepository.save(Juan);
-		
-		userRepository.save(new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com"));
+		User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
+		userRepository.save(Pedro);
 		userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
 		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
 		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
@@ -103,11 +104,16 @@ public class webController {
 		
 		//Guardar juegos para un usuario
 		ArrayList<Game> ninGameList = new ArrayList<Game>();
+		ArrayList<Game> sonyGameList = new ArrayList<Game>();
 		ninGameList.add(SMO);
 		ninGameList.add(LOZBTW);
+		sonyGameList.add(TLOU);
+		sonyGameList.add(CB);
 		Juan.addList(ninGameList);
+		Juan.addList(sonyGameList);
+		Pedro.addList(sonyGameList);
 		
-		
+	
 		// Variables iniciales del usuario
 		usuario.setAttribute("alert", "  ");
 		usuario.setAttribute("registered", false);
@@ -159,89 +165,7 @@ public class webController {
 		return "index";
 	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
-	
-	@RequestMapping("/game_list")
-	public String game_list (Model model) {
-		
-		List<String> list=new ArrayList<String>();
-		
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-		
-		
-		List<Game> list_games=gameRepository.findAll();
-		
-		//variable auxiliar
-		for(int i=0;i<list_games.size();i++) {
-			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=list_games.get(i).getImage();
-			String Titulo=list_games.get(i).getName();		
 			
-			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			
-			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url,Titulo);
-			
-			list.add(aux);
-			
-		}
-		
-		
-		model.addAttribute("games", list);
-		
-		
-		
-		return "game_list";
-	}
-	
-	@RequestMapping("/company_list")
-	public String company_list (Model model) {
-		
-		List<String> list=new ArrayList<String>();
-		
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-		
-		
-		List<Company> list_company=companyRepository.findAll();
-		
-		//variable auxiliar
-		for(int i=0;i<list_company.size();i++) {
-			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=list_company.get(i).getImage();
-			String Titulo=list_company.get(i).getName();		
-			
-			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			
-			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url,Titulo);
-			
-			list.add(aux);
-			
-		}
-		
-		
-		model.addAttribute("company", list);
-		
-		
-		
-		return "company_list";
-	}
-	
-	
-	
-	
-	
 	
 	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
 	@RequestMapping("/new_user")
@@ -367,9 +291,9 @@ public class webController {
 	// ----------------------------- FIN PERFIL DE USUARIO ---------------------------
 	
 	// ----------------------------- JUEGO -------------------------------------------
-	@RequestMapping("/game")
-	public String Game (Model model, HttpSession usuario) {		
-		List <Game> games = gameRepository.findByName("Legend of Zelda Breath of Wild");
+	@RequestMapping("/game/{game_name}")
+	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {		
+		List <Game> games = gameRepository.findByName(game_name);
 		
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
@@ -424,10 +348,56 @@ public class webController {
 	}
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
+	// ----------------------------- LISTA DE JUEGOS ---------------------------------------
+	@RequestMapping("/game_list")
+	public String game_list (Model model, HttpSession usuario) {
+		
+		List<String> list=new ArrayList<String>();
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		List<Game> list_games=gameRepository.findAll();
+		
+		//variable auxiliar
+		for(int i=0;i<list_games.size();i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=list_games.get(i).getImage();
+			String Titulo=list_games.get(i).getName();		
+			String link="/game/" + Titulo;
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url, link, Titulo);
+			
+			list.add(aux);
+			
+		}
+		
+		
+		model.addAttribute("games", list);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		
+		return "game_list";
+	}
+	// ----------------------------- FIN LISTA DE JUEGOS ---------------------------------------
+	
 	// ----------------------------- COMPAÑIA ----------------------------------------
-	@RequestMapping("/company")
-	public String company (Model model, HttpSession usuario){
-		List <Company> companies = companyRepository.findByName("Nintendo");
+	@GetMapping("/company/{company_name}")
+	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
+		System.out.println(company_name);
+		List <Company> companies = companyRepository.findByName(company_name);
 		
 		String name = companies.get(0).getName();
 		String country = companies.get(0).getCountry();
@@ -452,6 +422,53 @@ public class webController {
 		return "company";
 	}
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
+	
+	// ----------------------------- LISTA DE COMPAÑIAS ----------------------------------------
+	@RequestMapping("/company_list")
+	public String company_list (Model model, HttpSession usuario) {
+		
+		List<String> list=new ArrayList<String>();
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		List<Company> list_company=companyRepository.findAll();
+		
+		//variable auxiliar
+		for(int i=0;i<list_company.size();i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=list_company.get(i).getImage();
+			String Titulo=list_company.get(i).getName();
+			String link="/company/" + Titulo;
+			
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url, link, Titulo);
+			
+			list.add(aux);
+			
+		}
+		
+		
+		model.addAttribute("company", list);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+				
+		
+		return "company_list";
+	}	
+	// ----------------------------- FIN LISTA DE COMPAÑIAS -------------------------------------
 	
 	// ----------------------------- EVENTO -------------------------------------------
 	@RequestMapping("/event_calendar")
@@ -482,58 +499,38 @@ public class webController {
 	@RequestMapping("/my_lists")
 	public String my_lists (Model model, HttpSession usuario) {
 		
-		List <User> users = userRepository.findByName("Juan");
-		
-		//Accedo a la lista de lista de juego
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <p style=\"text-align:center; color:  rgb(33, 73, 138);\">%s</p>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		String name = (String) usuario.getAttribute("name");
+		//Accedo al repositorio de usuarios
+		//List <User> users = userRepository.findByName(name);
+		List <User> users = userRepository.findAll();
 		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
+
+		List<String> listString = new ArrayList<String>();
 		//Accedo a la sublista de juegos
-		ArrayList<Game> ninList = lists.get(0);
-		
-		String name = ninList.get(0).getName();
-		Company company = ninList.get(0).getCompany();
-		String genre = ninList.get(0).getGenre();
-		String description = ninList.get(0).getDescription();
-		int year = ninList.get(0).getYear();
-		Date addGame = ninList.get(0).getAddGame();
-		int pts = (int)ninList.get(0).getScore();
-		String image = ninList.get(0).getImage();
-		String url = ninList.get(0).getUrl();
-		
-		
-		String score = "";
-		switch(pts/2) {
-			case 0:
-				score = "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 1:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 2:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 3:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 4:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 5:
-				System.out.println("etro");
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>";
-				break;
+		ArrayList<Game> subList = lists.get(0);
+		//variable auxiliar
+		for(int i=0;i<subList.size();i++) {
+				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+				String Url=subList.get(i).getImage();
+				String Titulo=subList.get(i).getName();		
+					
+				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+					
+				//Le damos formato a la variable auxiliar y la añadimos a la lista
+				String aux=String.format(div, Url,Titulo);
+					
+				listString.add(aux);
+					
 		}
-		
-		model.addAttribute("lists", lists);
-		
-		model.addAttribute("name_g", name);
-		model.addAttribute("company", company.getName());
-		model.addAttribute("genre", genre);
-		model.addAttribute("description", description);
-		model.addAttribute("year", year);
-		model.addAttribute("addGame", addGame.toString());
-		model.addAttribute("score", score);
-		model.addAttribute("image", image);
-		model.addAttribute("url", url);
+
+		model.addAttribute("games", listString);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
