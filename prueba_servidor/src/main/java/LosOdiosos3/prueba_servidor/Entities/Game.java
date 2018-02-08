@@ -138,4 +138,7 @@ public class Game {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
+	public void setComment(Comment comment){
+		comments.add(comment);
+	}
 }

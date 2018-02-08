@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class webController {	
@@ -297,11 +298,18 @@ public class webController {
 		if(usur.size() > 0) {
 			for(int i = 0; i < usur.size(); i++) {
 				if(user.getPassword().equals(usur.get(i).getPassword())) {
+					
+					
+					
+					
 					// se registra el usuario
 					usuario.setAttribute("registered", true);
 					usuario.setAttribute("name", usur.get(i).getName());
 					usuario.setAttribute("password", usur.get(i).getPassword());
 					usuario.setAttribute("date", usur.get(i).getDate());
+					
+					User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
+					usuario.setAttribute("Usuario", newUser);
 					
 					// se deshabilita el alert
 					model.addAttribute("alert", "  ");	
@@ -535,6 +543,32 @@ public class webController {
 		
 		return "my_lists";
 	}
+
 	// ---------------------------------- FIN MY LISTS --------------------------------
 
+	@RequestMapping("/comment")
+	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String game_name) {						
+		System.out.println("1");
+		Comment c=new Comment((User)usuario.getAttribute("Usuario"),text);
+		System.out.println("2");
+		Game game= gameRepository.findByName(game_name).get(0);
+		System.out.println("3");
+		game.setComment(c);
+		//gameRepository.save(game);
+		commentRepository.save(c);
+		System.out.println("4");
+				//fallo al guardar usuario
+		System.out.println("5");
+    
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("alert"," ");
+		model.addAttribute("hello", " ");
+		model.addAttribute("Titulo", " ");
+		model.addAttribute("Cuerpo", " ");
+		return "index";
+	}
+	
 }

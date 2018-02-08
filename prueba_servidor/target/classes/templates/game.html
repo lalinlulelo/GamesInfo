@@ -55,6 +55,27 @@
 		  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 		  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 		}
+		.comment{
+		display: block;
+		  width: 100%;
+		  background: rgb(251, 255, 140);
+		  padding: 10px 20px;
+		  padding-bottom: 35px;
+		  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+		  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+		  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+	 	 margin-top:30px;
+	 	 text-align:center;
+          
+		 
+		}
+		
+		.commentBox{
+		width: 400px;
+		height:100px;
+		
+		text-align:justify;
+		}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -111,6 +132,19 @@
             <input type="submit" name="submit" value="Add to List">
         </div>
     </div>
+     <div id="comentarios" class="comment">
+     <h1>Comments</h1>
+     <form action="/comment" method="post">
+     <input type="text" name="text" class="commentBox">
+     <input type="hidden" name="game_name" value="{{name_g}}">
+     <br><br>
+     <input type="submit" value="comment">
+     
+     </form>
+     
+     </div>
     </div>
+    
+   
     </body>
 </html>
