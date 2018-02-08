@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 	
+	// busqueda por nombre
 	List<Company> findByName(String name);
 
 	// Enabling static ORDER BY for a query

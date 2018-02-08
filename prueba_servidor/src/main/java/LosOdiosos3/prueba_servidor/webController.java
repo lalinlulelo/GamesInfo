@@ -58,15 +58,15 @@ public class webController {
 		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
 		
 		// Repositorio para compnias
-		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"http://www.naughtydog.com","https://www.naughtydog.com");
+		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
 		companyRepository.save(Naughty_Dog);		
-		Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.es/", "https://www.nintendo.es/");
+		Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
 		companyRepository.save(Nintendo);
-		Company Activision = new Company("Activision", "EEUU", "AAA Company", 1979, "https://www.activision.com/es/home", "https://www.activision.com/es/home");
+		Company Activision = new Company("Activision", "EEUU", "AAA Company", 1979, "https://static.blog.playstation.com/wp-content/uploads/avatars//tvj-D5G4_400x400.jpg?m=1475608799", "https://www.activision.com/es/home");
 		companyRepository.save(Activision);
-		Company Platinum_Games = new Company("Platinum Games", "Japan", "Witches Company", 2007, "https://www.platinumgames.com/", "https://www.platinumgames.com/");
+		Company Platinum_Games = new Company("Platinum Games", "Japan", "Witches Company", 2007, "https://pbs.twimg.com/profile_images/474105828337676288/IhP1K1eG_400x400.png", "https://www.platinumgames.com/");
 		companyRepository.save(Platinum_Games);
-		Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "http://www.square-enix.com/", "http://www.square-enix.com/");
+		Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "https://na.square-enix.com/sites/default/files/imagecache/post-image/image_gallery/587/6477ee99579631b75080a480f63952e8.jpg", "http://www.square-enix.com/");
 		companyRepository.save(Square_Enix);
 		
 		// Repositorio para juegos
@@ -267,7 +267,6 @@ public class webController {
 	@RequestMapping("/game")
 	public String Game (Model model, HttpSession usuario) {		
 		List <Game> games = gameRepository.findByName("Legend of Zelda Breath of Wild");
-		System.out.println(games.get(0).toString());
 		
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
@@ -311,16 +310,7 @@ public class webController {
 		model.addAttribute("score", score);
 		model.addAttribute("image", image);
 		model.addAttribute("url", url);
-		/*
-		model.addAttribute("name_g", " ");
-		model.addAttribute("company", " ");
-		model.addAttribute("genre", " ");
-		model.addAttribute("description", " ");
-		model.addAttribute("year", " ");
-		model.addAttribute("addGame", " ");
-		model.addAttribute("score", " ");
-		model.addAttribute("image", " ");
-		model.addAttribute("url", " ");*/
+
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
@@ -334,11 +324,21 @@ public class webController {
 	// ----------------------------- COMPAÑIA ----------------------------------------
 	@RequestMapping("/company")
 	public String company (Model model, HttpSession usuario){
+		List <Company> companies = companyRepository.findByName("Nintendo");
 		
-		model.addAttribute("TituloP", "Bugisoft");
-		model.addAttribute("paragraph", "Juego frances");
-		model.addAttribute("Title", "abscdef");
-		model.addAttribute("image", "https://www.instant-gaming.com/images/products/1842/271x377/1842.jpg");
+		String name = companies.get(0).getName();
+		String country = companies.get(0).getCountry();
+		String description = companies.get(0).getDescription();
+		int year = companies.get(0).getYear();
+		String image = companies.get(0).getImage();
+		String url = companies.get(0).getUrl();
+		
+		model.addAttribute("name_g", name);
+		model.addAttribute("country", country);
+		model.addAttribute("description", description);
+		model.addAttribute("year", year);
+		model.addAttribute("image", image);
+		model.addAttribute("url", url);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
