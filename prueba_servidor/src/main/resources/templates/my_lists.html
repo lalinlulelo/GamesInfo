@@ -63,12 +63,14 @@
             <div id="navegador">      
                     <form action="login" method="post">
                       <ul>
-                        <li><a href="/index">Home</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">Games</a></li>
-                        <li><a href="#">My Lists</a></li>
-                        {{#registered}}
-                        <li><a href="/perfil">Perfil</a></li>
+                        <li></li>
+            			<li><a href="/index">Home</a></li>
+           			 	<li><a href="/event_calendar">Events</a></li>
+            			<li><a href="/game_list">Games</a></li>
+            			<li><a href="/company_list">Companies</a></li>
+            			{{#registered}}
+            			<li><a href="/my_lists">My Lists</a></li>            
+            			<li><a href="/profile">Perfil</a></li>
                         {{/registered}}
                         <li></li><li></li><li></li><li></li>
                         <li></li><li></li><li></li><li></li>

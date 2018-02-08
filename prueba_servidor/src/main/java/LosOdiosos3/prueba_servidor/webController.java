@@ -481,9 +481,9 @@ public class webController {
 	
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model, HttpSession usuario) {
+	public String my_lists (Model model, User user, HttpSession usuario) {
 		
-		List <User> users = userRepository.findByName("Juan");
+		List <User> users = userRepository.findByName(user.getName());
 		
 		//Accedo a la lista de lista de juego
 		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
