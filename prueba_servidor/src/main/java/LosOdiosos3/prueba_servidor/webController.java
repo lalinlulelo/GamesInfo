@@ -78,7 +78,7 @@ public class webController {
 		
 		// Repositorio para juegos
 		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, new Date(2018, 2, 1), 9.5,
-				"https://en.wikipedia.org/wiki/The_Last_of_Us","http://www.thelastofus.playstation.com/");
+				"https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
 		gameRepository.save(TLOU);		
 		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, new Date(2018, 2, 1), 10,
 				"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
@@ -173,12 +173,13 @@ public class webController {
 				"  </div>";
 		
 		
-		//variable auxiliar
+		List<Game> list_games=gameRepository.findAll();
 		
-		for(int i=0;i<500;i++) {
+		//variable auxiliar
+		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url="http://animal-crossing.com/_oldassets/img/es/pocket-camp-pack-shot-lg.png";
-			String Titulo="Animal Crossing";		
+			String Url=list_games.get(i).getImage();
+			String Titulo=list_games.get(i).getName();		
 			
 			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 			
@@ -195,6 +196,45 @@ public class webController {
 		
 		
 		return "game_list";
+	}
+	
+	@RequestMapping("/company_list")
+	public String company_list (Model model) {
+		
+		List<String> list=new ArrayList<String>();
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		List<Company> list_company=companyRepository.findAll();
+		
+		//variable auxiliar
+		for(int i=0;i<list_company.size();i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=list_company.get(i).getImage();
+			String Titulo=list_company.get(i).getName();		
+			
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url,Titulo);
+			
+			list.add(aux);
+			
+		}
+		
+		
+		model.addAttribute("company", list);
+		
+		
+		
+		return "company_list";
 	}
 	
 	
