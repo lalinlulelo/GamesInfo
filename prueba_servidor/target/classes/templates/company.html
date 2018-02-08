@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,3 +111,113 @@
     </div>
     </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+img {
+	height: 70%;
+	width: 30%;
+	padding-left: 35.5%;
+	padding-top: 5px;
+}
+
+header {
+	font-size: 70px;
+	text-align: center;
+	color: Red;
+}
+
+body {
+	background-color: #D3D3D3;
+}
+
+.TitleLit {
+	font: 100%;
+	color: Red;
+	text-decoration: underline;
+	text-align: center;
+	padding-top: 10px;
+}
+
+.Article {
+	font: 100%;
+	color: white;
+}
+
+#navegador {
+	font-size: 130%;
+	color: white;
+}
+
+#navegador ul {
+	list-style-type: none;
+	text-align: left;
+}
+
+#navegador a {
+	color: white;
+}
+
+#navegador li {
+	font-size: 130%;
+	color: white;
+	display: inline;
+	text-align: center;
+	margin: 0 10px 0 0;
+}
+</style>
+
+
+<title>Company</title>
+</head>
+<body>
+	<div id="navegador">
+		<form action="login" method="post">
+			<ul>
+				<li><a href="/index">Home</a></li>
+				<li><a href="#">Events</a></li>
+				<li><a href="/game">Games</a></li>
+				<li><a href="/company">Companies</a></li>
+				<li><a href="#">My Lists</a></li> {{#registered}}
+				<li><a href="/profile">Perfil</a></li> {{/registered}}
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li> {{#unregistered}}
+				<li>User:</li>
+				<input type="text" name="name">
+				<li></li>
+				<li>Password:</li>
+				<input type="text" name="password">
+				<li></li>
+				<input type="submit" value="Login">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li><a href="/new_user">Register</a></li> {{/unregistered}}
+				{{#registered}}
+				<li>Hello, {{name}}</li> {{/registered}}
+			</ul>
+		</form>
+	</div>
+	<header> {{Title}} </header>
+
+
+	<img src="{{image}}">
+
+	<div class="TitleLit">{{TituloP}}</div>
+	<p>{{paragraph}}</p>
+
+
+	<script>// Write JavaScript here </script>
+</body>
+>>>>>>> 26a5f55a06fa300ae397b683dccd81528018e8ce
