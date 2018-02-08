@@ -36,7 +36,7 @@ li{
      background-color: rgb(33, 73, 138);
      padding-top: 2px;
      color:  #F9FF35;
-     height: 40px;
+     height: 45px;
      line-height: 30px; 
  }
  #navegador ul{
@@ -79,11 +79,11 @@ li{
           <ul>
             <li></li>
             <li><a href="/index">Home</a></li>
-            <li><a href="/event">Events</a></li>
+            <li><a href="/event_calendar">Events</a></li>
             <li><a href="/game">Games</a></li>
             {{#registered}}
             <li><a href="#">My Lists</a></li>            
-            <li><a href="/perfil">Perfil</a></li>
+            <li><a href="/profile">Perfil</a></li>
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
@@ -96,7 +96,7 @@ li{
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
             {{#registered}}
-            {{hello}}
+            {{{hello}}}
             <li>Hello, {{name}}</li>
             {{/registered}}
           </ul>		
