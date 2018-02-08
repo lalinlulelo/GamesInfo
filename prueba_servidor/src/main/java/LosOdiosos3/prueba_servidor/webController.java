@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class webController {	
+	//Plantilla para añadir html de las listas
+	 
+	
+	
 	// ----------------------------- VARIABLES DEL SERVIDOR --------------------------
 	// iconos de usuario
 	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
@@ -158,18 +162,36 @@ public class webController {
 	@RequestMapping("/game_list")
 	public String game_list (Model model) {
 		
-		
+		List<String> list=new ArrayList<String>();
 		
 		String div="<div class=\"col-md-3\">\r\n" + 
 				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJJntY7udCcBWAmdFEsFzOmV7TlsrsoiKlqqDl0Bk-XTf5Zrns\" class=\"imagen\">\r\n" + 
-				"      <p>{{titulo}}</p>\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
 				"     \r\n" + 
 				"    </div>\r\n" + 
 				"  </div>";
 		
 		
-		model.addAttribute("titulo", "Subnautica");
+		//variable auxiliar
+		
+		for(int i=0;i<500;i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url="http://animal-crossing.com/_oldassets/img/es/pocket-camp-pack-shot-lg.png";
+			String Titulo="Animal Crossing";		
+			
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url,Titulo);
+			
+			list.add(aux);
+			
+		}
+		
+		
+		model.addAttribute("games", list);
+		
 		
 		
 		return "game_list";
