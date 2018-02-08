@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -282,9 +283,9 @@ public class webController {
 	// ----------------------------- FIN PERFIL DE USUARIO ---------------------------
 	
 	// ----------------------------- JUEGO -------------------------------------------
-	@RequestMapping("/game")
-	public String Game (Model model, HttpSession usuario) {		
-		List <Game> games = gameRepository.findByName("Legend of Zelda Breath of Wild");
+	@RequestMapping("/game/{game_name}")
+	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {		
+		List <Game> games = gameRepository.findByName(game_name);
 		
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
@@ -348,7 +349,7 @@ public class webController {
 		String div="<div class=\"col-md-3\">\r\n" + 
 				"    <div class=\"Game\">\r\n" + 
 				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center; color:  rgb(33, 73, 138);\">%s</p>\r\n" + 
+				"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
 				"     \r\n" + 
 				"    </div>\r\n" + 
 				"  </div>";
@@ -361,11 +362,11 @@ public class webController {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 			String Url=list_games.get(i).getImage();
 			String Titulo=list_games.get(i).getName();		
-			
+			String link="/game/" + Titulo;
 			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 			
 			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url,Titulo);
+			String aux=String.format(div, Url, link, Titulo);
 			
 			list.add(aux);
 			
@@ -385,9 +386,10 @@ public class webController {
 	// ----------------------------- FIN LISTA DE JUEGOS ---------------------------------------
 	
 	// ----------------------------- COMPAÑIA ----------------------------------------
-	@RequestMapping("/company")
-	public String company (Model model, HttpSession usuario){
-		List <Company> companies = companyRepository.findByName("Nintendo");
+	@GetMapping("/company/{company_name}")
+	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
+		System.out.println(company_name);
+		List <Company> companies = companyRepository.findByName(company_name);
 		
 		String name = companies.get(0).getName();
 		String country = companies.get(0).getCountry();
@@ -422,7 +424,7 @@ public class webController {
 		String div="<div class=\"col-md-3\">\r\n" + 
 				"    <div class=\"Game\">\r\n" + 
 				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
+				"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
 				"     \r\n" + 
 				"    </div>\r\n" + 
 				"  </div>";
@@ -434,12 +436,13 @@ public class webController {
 		for(int i=0;i<list_company.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 			String Url=list_company.get(i).getImage();
-			String Titulo=list_company.get(i).getName();		
+			String Titulo=list_company.get(i).getName();
+			String link="/company/" + Titulo;
 			
 			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 			
 			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url,Titulo);
+			String aux=String.format(div, Url, link, Titulo);
 			
 			list.add(aux);
 			
