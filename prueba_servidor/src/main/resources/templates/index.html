@@ -83,8 +83,8 @@ li{
             <li><a href="/game_list">Games</a></li>
             <li><a href="/company_list">Companies</a></li>
             {{#registered}}
-            <li><a href="#">My Lists</a></li>            
-            <li><a href="/profile">Perfil</a></li>
+            <li><a href="/my_lists">My Lists</a></li>            
+            <li><a href="/profile">Profile</a></li>
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
@@ -94,10 +94,10 @@ li{
             <li></li>
             <input type="submit" value="Login">
             <li></li><li></li><li></li><li></li>
+            <li></li><li></li><li></li><li></li>
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
             {{#registered}}
-            {{{hello}}}
             <li>Hello, {{name}}</li>
             {{/registered}}
           </ul>		

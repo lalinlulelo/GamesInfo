@@ -159,14 +159,7 @@ public class webController {
 		return "index";
 	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
-	
-	
-	
-	
-	
-	
-	
-	
+			
 	
 	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
 	@RequestMapping("/new_user")
@@ -340,7 +333,9 @@ public class webController {
 		
 		return "game";
 	}
+	// ----------------------------- FIN JUEGO ---------------------------------------
 	
+	// ----------------------------- LISTA DE JUEGOS ---------------------------------------
 	@RequestMapping("/game_list")
 	public String game_list (Model model, HttpSession usuario) {
 		
@@ -383,7 +378,7 @@ public class webController {
 		
 		return "game_list";
 	}
-	// ----------------------------- FIN JUEGO ---------------------------------------
+	// ----------------------------- FIN LISTA DE JUEGOS ---------------------------------------
 	
 	// ----------------------------- COMPAÑIA ----------------------------------------
 	@GetMapping("/company/{company_name}")
@@ -413,8 +408,9 @@ public class webController {
 				
 		return "company";
 	}
+	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
-
+	// ----------------------------- LISTA DE COMPAÑIAS ----------------------------------------
 	@RequestMapping("/company_list")
 	public String company_list (Model model, HttpSession usuario) {
 		
@@ -451,15 +447,15 @@ public class webController {
 		model.addAttribute("company", list);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
-				model.addAttribute("registered", usuario.getAttribute("registered"));
-				boolean aux = !(Boolean) usuario.getAttribute("registered");
-				model.addAttribute("unregistered", aux);
-				model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
 				
 		
 		return "company_list";
-	}
-	// ----------------------------- FIN COMPAÑIA -------------------------------------
+	}	
+	// ----------------------------- FIN LISTA DE COMPAÑIAS -------------------------------------
 	
 	// ----------------------------- EVENTO -------------------------------------------
 	@RequestMapping("/event_calendar")
@@ -488,9 +484,9 @@ public class webController {
 	
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model, HttpSession usuario) {
+	public String my_lists (Model model, User user, HttpSession usuario) {
 		
-		List <User> users = userRepository.findByName("Juan");
+		List <User> users = userRepository.findByName(user.getName());
 		
 		//Accedo a la lista de lista de juego
 		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
