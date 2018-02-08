@@ -285,9 +285,9 @@ public class webController {
 	// ----------------------------- FIN PERFIL DE USUARIO ---------------------------
 	
 	// ----------------------------- JUEGO -------------------------------------------
-	@RequestMapping("/game")
-	public String Game (Model model, HttpSession usuario) {		
-		List <Game> games = gameRepository.findByName("Legend of Zelda Breath of Wild");
+	@RequestMapping("/game/{game_name}")
+	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {		
+		List <Game> games = gameRepository.findByName(game_name);
 		
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
