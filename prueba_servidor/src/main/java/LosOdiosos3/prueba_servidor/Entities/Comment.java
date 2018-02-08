@@ -25,8 +25,7 @@ public class Comment {
 	@ManyToOne
 	private Event event;	
 
-	protected Comment() {
-	};
+	protected Comment() {};
 
 	public Comment(User user, String text) {		
 		this.user = user;
