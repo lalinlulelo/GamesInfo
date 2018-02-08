@@ -159,44 +159,7 @@ public class webController {
 	}
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
 	
-	@RequestMapping("/game_list")
-	public String game_list (Model model) {
-		
-		List<String> list=new ArrayList<String>();
-		
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-		
-		
-		List<Game> list_games=gameRepository.findAll();
-		
-		//variable auxiliar
-		for(int i=0;i<list_games.size();i++) {
-			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=list_games.get(i).getImage();
-			String Titulo=list_games.get(i).getName();		
-			
-			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			
-			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url,Titulo);
-			
-			list.add(aux);
-			
-		}
-		
-		
-		model.addAttribute("games", list);
-		
-		
-		
-		return "game_list";
-	}
+	
 	
 	@RequestMapping("/company_list")
 	public String company_list (Model model) {
@@ -413,6 +376,45 @@ public class webController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		
 		return "game";
+	}
+	
+	@RequestMapping("/game_list")
+	public String game_list (Model model) {
+		
+		List<String> list=new ArrayList<String>();
+		
+		String div="<div class=\"col-md-3\">\r\n" + 
+				"    <div class=\"Game\">\r\n" + 
+				"<img src=\"%s\" class=\"imagen\">\r\n" + 
+				"      <p style=\"text-align:center;\">%s</p>\r\n" + 
+				"     \r\n" + 
+				"    </div>\r\n" + 
+				"  </div>";
+		
+		
+		List<Game> list_games=gameRepository.findAll();
+		
+		//variable auxiliar
+		for(int i=0;i<list_games.size();i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=list_games.get(i).getImage();
+			String Titulo=list_games.get(i).getName();		
+			
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url,Titulo);
+			
+			list.add(aux);
+			
+		}
+		
+		
+		model.addAttribute("games", list);
+		
+		
+		
+		return "game_list";
 	}
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
