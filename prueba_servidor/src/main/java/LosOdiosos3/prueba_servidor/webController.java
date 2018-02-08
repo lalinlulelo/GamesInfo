@@ -566,6 +566,5 @@ public class webController {
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");
 		return "index";
-	}
-	
+	}	
 }
