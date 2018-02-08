@@ -62,14 +62,29 @@ public class webController {
 		companyRepository.save(Naughty_Dog);		
 		Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.es/", "https://www.nintendo.es/");
 		companyRepository.save(Nintendo);
-
+		Company Activision = new Company("Activision", "EEUU", "AAA Company", 1979, "https://www.activision.com/es/home", "https://www.activision.com/es/home");
+		companyRepository.save(Activision);
+		Company Platinum_Games = new Company("Platinum Games", "Japan", "Witches Company", 2007, "https://www.platinumgames.com/", "https://www.platinumgames.com/");
+		companyRepository.save(Platinum_Games);
+		Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "http://www.square-enix.com/", "http://www.square-enix.com/");
+		companyRepository.save(Square_Enix);
+		
 		// Repositorio para juegos
 		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, new Date(2018, 2, 1), 9.5,
 				"https://en.wikipedia.org/wiki/The_Last_of_Us","http://www.thelastofus.playstation.com/");
 		gameRepository.save(TLOU);		
 		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, new Date(2018, 2, 1), 10,
 				"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
-		gameRepository.save(LOZBTW);		
+		gameRepository.save(LOZBTW);
+		Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, new Date(2018, 2, 4), 9.5,
+				"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
+		gameRepository.save(SMO);
+		Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, new Date(2018, 2, 3), 8, 
+				"http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
+		gameRepository.save(CB);
+		Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, new Date(2018, 2, 5), 8.5, 
+				"https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
+		gameRepository.save(BYNT);
 		
 		// Repositorio para eventos
 		eventRepository.save(new Event("E3", "Los Angeles", new Date(2018, 6, 10), 286, "muy chachi", "..." ));
