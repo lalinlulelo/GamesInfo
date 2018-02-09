@@ -96,11 +96,11 @@ public class webController {
 		gameRepository.save(BYNT);
 		
 		// Repositorio para eventos
-		eventRepository.save(new Event("E3", "Los Angeles", new Date(2018, 6, 10), 286, "muy chachi", "..." ));
-		eventRepository.save(new Event("GameGen", "Madrid", new Date(2018, 2, 21), 0, "a jugar", "..." ));
-		eventRepository.save(new Event("GDC", "Berlin", new Date(2018, 4, 26), 100, "ja!", "..." ));
-		eventRepository.save(new Event("Fun&Serious", "Bilbao", new Date(2018, 11, 21), 30, "txangurro", "..." ));
-		eventRepository.save(new Event("PGW", "Paris", new Date(2018, 1, 30), 18, "croisant", "..." ));
+		eventRepository.save(new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" ));
+		eventRepository.save(new Event("GameGen", "Madrid", 2018, 2, 22, 0, "a jugar", "https://upload.ticketing.events/event-logo/event-logo-2373.png" ));
+		eventRepository.save(new Event("GDC", "Berlin", 2018, 4, 15, 100, "ja!", "http://www.gdconf.com/img/fb.png" ));
+		eventRepository.save(new Event("Fun&Serious", "Bilbao", 2018, 11, 21, 30, "txangurro", "https://www.republica.com/deportes-electronicos/wp-content/uploads/sites/48/2016/11/logo-funserious-fondo-transparente.png" ));
+		eventRepository.save(new Event("PGW", "Paris", 2018, 1, 30, 18, "croisant", "http://www.nintenderos.com/wp-content/uploads/2016/09/Paris-Games-Week.jpg" ));
 		
 		//Guardar juegos para un usuario
 		ArrayList<Game> ninGameList = new ArrayList<Game>();
@@ -506,17 +506,58 @@ List<String> list=new ArrayList<String>();
 	// ----------------------------- EVENTO -------------------------------------------
 	@RequestMapping("/event_calendar")
 	public String event_calendar (Model model, HttpSession usuario) {
+		List<Event> event_list = eventRepository.findAll();
+		String events = "var events = [ ";
+		String parcial = "";
+		for(int i = 0; i < event_list.size(); i++) {			
+			if(i != event_list.size() -1 ) {
+				parcial += "{'Date': new Date(" + event_list.get(i).getYear() + "," + (event_list.get(i).getMonth() -1) + "," + event_list.get(i).getDay() + "), 'Title': '" + event_list.get(i).getName() + "', 'Link': '" + "/event/" + event_list.get(i).getName() + "'}, ";
+			}else {
+				parcial += "{'Date': new Date(" +  event_list.get(i).getYear() + "," + (event_list.get(i).getMonth() -1) + "," + event_list.get(i).getDay() + "), 'Title': '" + event_list.get(i).getName() + "', 'Link': '" + "/event/" + event_list.get(i).getName() + "'}];";
+			}
+		}
+		events += parcial;
+		String script = "<script>" + events + "var settings = {};\r\n" + 
+				"      var element = document.getElementById('caleandar');\r\n" + 
+				"      caleandar(element, events, settings);\r\n" + 
+				"    </script>";
+		model.addAttribute("eventos", script);
+		/*
+		 *     
+	<script>
+      var events = [
+        {'Date': new Date(2018, 1, 7), 'Title': 'Doctor appointment at 3:25pm.', 'Link': '/event'},
+        {'Date': new Date(2018, 0, 18), 'Title': 'New Garfield movie comes out!', 'Link': 'https://garfield.com'},
+        {'Date': new Date(2016, 6, 27), 'Title': '25 year anniversary', 'Link': 'https://www.google.com.au/#q=anniversary+gifts'},
+      ];
+      var settings = {};
+      var element = document.getElementById('caleandar');
+      caleandar(element, events, settings);
+    </script>
+		 */
+		
+		
+		
 		// se muestra el link de iniciar/registrar usuario si es false
-				model.addAttribute("registered", usuario.getAttribute("registered"));
-				boolean aux = !(Boolean) usuario.getAttribute("registered");
-				model.addAttribute("unregistered", aux);
-				model.addAttribute("name", usuario.getAttribute("name"));
-				
-				return "event_calendar";
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		
+		return "event_calendar";
 	}
 	
-	@RequestMapping("/event")
-	public String event (Model model, HttpSession usuario) {
+	@RequestMapping("/event/{event_name}")
+	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
+
+		List<Event> events = eventRepository.findByName(event_name);
+		
+		model.addAttribute("name_g", events.get(0).getName());
+		model.addAttribute("place", events.get(0).getPlace());
+		model.addAttribute("image", events.get(0).getImage());
+		model.addAttribute("fee", events.get(0).getFee());
+		model.addAttribute("date", events.get(0).getDay() + ", " + events.get(0).getMonth() + ", " + events.get(0).getYear());
+		model.addAttribute("description", events.get(0).getDescription());
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
