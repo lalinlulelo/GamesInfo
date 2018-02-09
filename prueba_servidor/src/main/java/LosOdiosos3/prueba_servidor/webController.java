@@ -142,31 +142,6 @@ public class webController {
 		// se accede a la pagina principal
 		return "index";
 	}
-	/*
-	// si se retorna a inicio
-	@RequestMapping("/index")
-	public String index (Model model, HttpSession usuario) {						
-		// comentarios de prueba de la pagina html
-		model.addAttribute("Titulo", "Juegos Nuevos");
-		model.addAttribute("Cuerpo", "Proximamente");
-		
-		// se muestra el link de iniciar/registrar usuario si es false
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		boolean aux = !(Boolean) usuario.getAttribute("registered");	
-		if(aux == false) {
-			model.addAttribute("name", usuario.getAttribute("name"));
-		}else {
-			model.addAttribute("name", " ");
-		}
-		model.addAttribute("unregistered", aux);		
-		
-		// valor 
-		model.addAttribute("alert", usuario.getAttribute("alert"));
-		model.addAttribute("hello", " ");
-		
-		// se accede a la pagina principal
-		return "index";
-	}*/
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
 			
 	
