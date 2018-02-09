@@ -79,19 +79,19 @@ public class webController {
 		companyRepository.save(Square_Enix);
 		
 		// Repositorio para juegos
-		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, new Date(2018, 2, 1), 9.5,
+		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5,
 				"https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
 		gameRepository.save(TLOU);		
-		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, new Date(2018, 2, 1), 10,
+		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, 10,
 				"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
 		gameRepository.save(LOZBTW);
-		Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, new Date(2018, 2, 4), 9.5,
+		Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, 9.5,
 				"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
 		gameRepository.save(SMO);
-		Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, new Date(2018, 2, 3), 8, 
+		Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, 
 				"http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
 		gameRepository.save(CB);
-		Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, new Date(2018, 2, 5), 8.5, 
+		Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, 
 				"https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
 		gameRepository.save(BYNT);
 		
@@ -300,7 +300,6 @@ public class webController {
 		String genre = games.get(0).getGenre();
 		String description = games.get(0).getDescription();
 		int year = games.get(0).getYear();
-		Date addGame = games.get(0).getAddGame();
 		int pts = (int)games.get(0).getScore();
 		String image = games.get(0).getImage();
 		String url = games.get(0).getUrl();
@@ -366,7 +365,6 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("genre", genre);
 		model.addAttribute("description", description);
 		model.addAttribute("year", year);
-		model.addAttribute("addGame", addGame.toString());
 		model.addAttribute("score", score);
 		model.addAttribute("image", image);
 		model.addAttribute("url", url);
