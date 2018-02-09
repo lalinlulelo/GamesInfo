@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class webController {	
-	boolean comienzo = false;
-	
 	// ----------------------------- VARIABLES DEL SERVIDOR --------------------------
 	// iconos de usuario
 	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
+	// variable de inicio de controlador
+	boolean comienzo = false;
 	// ----------------------------- FIN VARIABLES DEL SERVIDOR ----------------------
 	
 	// ----------------------------- INYECCIONES -------------------------------------	
@@ -54,18 +54,20 @@ public class webController {
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) throws ParseException {
 		if(comienzo == false) {
-			// Datos cargados inicialmente
-			// Repositorio para usuarios
-			
+			// Datos de la Base de Datos cargados inicialmente
+			// usuarios
 			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
 			userRepository.save(Juan);
 			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
 			userRepository.save(Pedro);
-			userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
-			userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
-			userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
+			User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com");
+			userRepository.save(Guille);
+			User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com");
+			userRepository.save(Sergio);
+			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com");
+			userRepository.save(Agus);
 			
-			// Repositorio para companias
+			// compañias
 			Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
 			companyRepository.save(Naughty_Dog);		
 			Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
@@ -77,31 +79,31 @@ public class webController {
 			Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "https://na.square-enix.com/sites/default/files/imagecache/post-image/image_gallery/587/6477ee99579631b75080a480f63952e8.jpg", "http://www.square-enix.com/");
 			companyRepository.save(Square_Enix);
 			
-			// Repositorio para juegos
-			Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5,
-					"https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
+			// juegos
+			Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5, "https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
 			gameRepository.save(TLOU);		
-			Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, 10,
-					"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
+			Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, 10, "http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
 			gameRepository.save(LOZBTW);
-			Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, 9.5,
-					"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
+			Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, 9.5,	"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
 			gameRepository.save(SMO);
-			Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, 
-					"http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
+			Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, "http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
 			gameRepository.save(CB);
-			Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, 
-					"https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
+			Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, "https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
 			gameRepository.save(BYNT);
 			
-			// Repositorio para eventos
-			eventRepository.save(new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" ));
-			eventRepository.save(new Event("GameGen", "Madrid", 2018, 2, 22, 0, "a jugar", "https://upload.ticketing.events/event-logo/event-logo-2373.png" ));
-			eventRepository.save(new Event("GDC", "Berlin", 2018, 4, 15, 100, "ja!", "http://www.gdconf.com/img/fb.png" ));
-			eventRepository.save(new Event("Fun&Serious", "Bilbao", 2018, 11, 21, 30, "txangurro", "https://www.republica.com/deportes-electronicos/wp-content/uploads/sites/48/2016/11/logo-funserious-fondo-transparente.png" ));
-			eventRepository.save(new Event("PGW", "Paris", 2018, 1, 30, 18, "croisant", "http://www.nintenderos.com/wp-content/uploads/2016/09/Paris-Games-Week.jpg" ));
+			// eventos
+			Event E3 = new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" );
+			eventRepository.save(E3);
+			Event GameGen = new Event("GameGen", "Madrid", 2018, 2, 22, 0, "a jugar", "https://upload.ticketing.events/event-logo/event-logo-2373.png");
+			eventRepository.save(GameGen);
+			Event GDC = new Event("GDC", "Berlin", 2018, 4, 15, 100, "ja!", "http://www.gdconf.com/img/fb.png");
+			eventRepository.save(GDC);
+			Event FS = new Event("Fun&Serious", "Bilbao", 2018, 11, 21, 30, "txangurro", "https://www.republica.com/deportes-electronicos/wp-content/uploads/sites/48/2016/11/logo-funserious-fondo-transparente.png");
+			eventRepository.save(FS);
+			Event PGW = new Event("PGW", "Paris", 2018, 1, 30, 18, "croisant", "http://www.nintenderos.com/wp-content/uploads/2016/09/Paris-Games-Week.jpg");
+			eventRepository.save(PGW);
 			
-			//Guardar juegos para un usuario
+			// listas de juegos
 			ArrayList<Game> ninGameList = new ArrayList<Game>();
 			ArrayList<Game> sonyGameList = new ArrayList<Game>();
 			ninGameList.add(SMO);
@@ -116,16 +118,15 @@ public class webController {
 			usuario.setAttribute("alert", "  ");
 			usuario.setAttribute("registered", false);
 			
+			// se fija el no retorno por esta fase
 			comienzo = true;
-		}
-		
-		
+		}		
 			
-		// comentarios de prueba de la pagina html
+		// comentarios de abajo del html
 		model.addAttribute("Titulo", "Juegos Nuevos");
 		model.addAttribute("Cuerpo", "Proximamente");
 		
-		// condicionales para mostrar o ocultar contenido		
+		// condicionales para mostrar u ocultar contenido		
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");	
 		if(aux == false) {
@@ -164,7 +165,6 @@ public class webController {
 		// se comprueba la existencia del nombre
 		List<User> usur = userRepository.findByName(user.getName());
 		if(usur.size() > 0) {
-			System.out.println(usur.get(0).toString());
 			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('nombre ya existente');" + "window.location = 'new_user.html'; " + "</script>");		
 			return "new_user";
 		}
@@ -200,16 +200,13 @@ public class webController {
 		if(usur.size() > 0) {
 			for(int i = 0; i < usur.size(); i++) {
 				if(user.getPassword().equals(usur.get(i).getPassword())) {
-					
-					
-					
-					
 					// se registra el usuario
 					usuario.setAttribute("registered", true);
 					usuario.setAttribute("name", usur.get(i).getName());
 					usuario.setAttribute("password", usur.get(i).getPassword());
 					usuario.setAttribute("date", usur.get(i).getDate());
 					
+					// se guarda un objeto User
 					User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 					usuario.setAttribute("Usuario", newUser);
 					
@@ -235,15 +232,16 @@ public class webController {
 		model.addAttribute("Cuerpo", "Proximamente");
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");
+		
 		// se dirige a la pagina como iniciado
 		return "index";
 	}
 	// ----------------------------- FIN INICIO DE SESION ----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO -------------------------------
-	// no disponible por ahora
 	@RequestMapping("/profile")
 	public String init (Model model, HttpSession usuario) {		
+		
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
 		String password = (String) usuario.getAttribute("password");
@@ -270,10 +268,11 @@ public class webController {
 	
 	// ----------------------------- JUEGO -------------------------------------------
 	@RequestMapping("/game/{game_name}")
-	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {		
-		List <Game> games = gameRepository.findByName(game_name);
+	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {
+		// se coge de la BBDD la lista de juegos con dicho nombre recibido por url
+		List <Game> games = gameRepository.findByName(game_name);		
 		
-		
+		// se adquieren los atributos del juego
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
 		String genre = games.get(0).getGenre();
@@ -283,64 +282,41 @@ public class webController {
 		String image = games.get(0).getImage();
 		String url = games.get(0).getUrl();
 		
+		// se carga la puntuacion
 		String score = "";
 		switch(pts/2) {
-			case 0:
-				score = "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 1:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 2:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 3:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 4:
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>";
-				break;
-			case 5:
-				
-				score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>";
-				break;
+			case 0: score = "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>"; break;
+			case 1:	score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>"; break;
+			case 2: score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>"; break;
+			case 3:	score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>" + "<span class=\"fa fa-star\"></span>"; break;
+			case 4:	score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>"; break;
+			case 5:	score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>"; break;
 		}
 		
+		// gestion de commentarios del juego
+		List<String> list=new ArrayList<String>();
+		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
 		
-List<String> list=new ArrayList<String>();
-		
-		String div="<div class=\"commentsUser \">%s</div>\r\n" + 
-				"     <div class=\"comments \">%s</div>"
-				+ "<br>";
-		
+		// si hay comentarios en el juego
 		if(games.get(0).getComment().size()>0) {
-			List<Comment> list_comments=games.get(0).getComment();
-			
-			//variable auxiliar
+			List<Comment> list_comments=games.get(0).getComment();			
+
 			for(int i=0;i<list_comments.size();i++) {
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String User=list_comments.get(i).getUser().getName();
-				String Text=list_comments.get(i).getText();		
-				
+				String Text=list_comments.get(i).getText();						
 				
 				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-				
 				//Le damos formato a la variable auxiliar y la añadimos a la lista
-				String aux=String.format(div, User, Text);
-				
-				list.add(aux);
-				
+				String aux=String.format(div, User, Text);				
+				list.add(aux);				
 			}
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments"," ");
 		}
 		
-		
-		
-		
-		
-		
+		// se pasan los datos a la plantilla
 		model.addAttribute("name_g", name);
 		model.addAttribute("company", company.getName());
 		model.addAttribute("genre", genre);
@@ -350,7 +326,7 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("image", image);
 		model.addAttribute("url", url);
 
-		// se muestra el link de iniciar/registrar usuario si es false
+		// datos referentes a la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
@@ -360,39 +336,28 @@ List<String> list=new ArrayList<String>();
 	}
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
-	// ----------------------------- LISTA DE JUEGOS ---------------------------------------
+	// ----------------------------- LISTA DE JUEGOS ---------------------------------
 	@RequestMapping("/game_list")
 	public String game_list (Model model, HttpSession usuario) {
 		
-		List<String> list=new ArrayList<String>();
+		List<String> list=new ArrayList<String>();		
+		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-		
-		
+		// lista con todos los juegos presentes
 		List<Game> list_games=gameRepository.findAll();
 		
-		//variable auxiliar
 		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 			String Url=list_games.get(i).getImage();
 			String Titulo=list_games.get(i).getName();		
 			String link="/game/" + Titulo;
 			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			
 			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url, link, Titulo);
-			
-			list.add(aux);
-			
-		}
+			String aux=String.format(div, Url, link, Titulo);			
+			list.add(aux);			
+		}		
 		
-		
+		// se pasa la lista de juegos a la plantilla
 		model.addAttribute("games", list);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
@@ -403,14 +368,15 @@ List<String> list=new ArrayList<String>();
 		
 		return "game_list";
 	}
-	// ----------------------------- FIN LISTA DE JUEGOS ---------------------------------------
+	// ----------------------------- FIN LISTA DE JUEGOS -----------------------------
 	
 	// ----------------------------- COMPAÑIA ----------------------------------------
 	@GetMapping("/company/{company_name}")
 	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
-		System.out.println(company_name);
+		// se adquiere la lista de juegos que contiene el nombre
 		List <Company> companies = companyRepository.findByName(company_name);
 		
+		// se adquieren sus atributos
 		String name = companies.get(0).getName();
 		String country = companies.get(0).getCountry();
 		String description = companies.get(0).getDescription();
@@ -418,6 +384,7 @@ List<String> list=new ArrayList<String>();
 		String image = companies.get(0).getImage();
 		String url = companies.get(0).getUrl();
 		
+		// se transmiten los atributos a la plantilla
 		model.addAttribute("name_g", name);
 		model.addAttribute("country", country);
 		model.addAttribute("description", description);
@@ -425,50 +392,38 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("image", image);
 		model.addAttribute("url", url);
 		
-		// se muestra el link de iniciar/registrar usuario si es false
+		// variables referentes a la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
-				
+		
+		// se accede a compañia
 		return "company";
 	}
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
-	// ----------------------------- LISTA DE COMPAÑIAS ----------------------------------------
+	// ----------------------------- LISTA DE COMPAÑIAS -------------------------------
 	@RequestMapping("/company_list")
 	public String company_list (Model model, HttpSession usuario) {
+		List<String> list=new ArrayList<String>();		
+		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + 	"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
-		List<String> list=new ArrayList<String>();
-		
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-		
-		
+		// lista de todas las compañias disponibles
 		List<Company> list_company=companyRepository.findAll();
 		
-		//variable auxiliar
 		for(int i=0;i<list_company.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 			String Url=list_company.get(i).getImage();
 			String Titulo=list_company.get(i).getName();
-			String link="/company/" + Titulo;
-			
+			String link="/company/" + Titulo;			
 			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			
 			//Le damos formato a la variable auxiliar y la añadimos a la lista
 			String aux=String.format(div, Url, link, Titulo);
-			
-			list.add(aux);
-			
+			list.add(aux);			
 		}
 		
-		
+		// se transmite la lista a la plantilla
 		model.addAttribute("company", list);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
@@ -477,15 +432,19 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 				
-		
+		// se accede a la pagina que expone todas las comapañias
 		return "company_list";
 	}	
 	// ----------------------------- FIN LISTA DE COMPAÑIAS -------------------------------------
 	
-	// ----------------------------- EVENTO -------------------------------------------
+	// ----------------------------- CALENDARIO DE EVENTOS  -------------------------------------
 	@RequestMapping("/event_calendar")
 	public String event_calendar (Model model, HttpSession usuario) {
+		// lista con todos los eventos disponibles
 		List<Event> event_list = eventRepository.findAll();
+		
+		// se crea una cadena cuya funcion será de script
+		// para ello mediante JSON disponemos de las fechas a colocar en el calendario
 		String events = "var events = [ ";
 		String parcial = "";
 		for(int i = 0; i < event_list.size(); i++) {			
@@ -496,28 +455,14 @@ List<String> list=new ArrayList<String>();
 			}
 		}
 		events += parcial;
+		// finalmente creamos la cadena que contendrá el script
 		String script = "<script>" + events + "var settings = {};\r\n" + 
 				"      var element = document.getElementById('caleandar');\r\n" + 
 				"      caleandar(element, events, settings);\r\n" + 
 				"    </script>";
-		model.addAttribute("eventos", script);
-		/*
-		 *     
-	<script>
-      var events = [
-        {'Date': new Date(2018, 1, 7), 'Title': 'Doctor appointment at 3:25pm.', 'Link': '/event'},
-        {'Date': new Date(2018, 0, 18), 'Title': 'New Garfield movie comes out!', 'Link': 'https://garfield.com'},
-        {'Date': new Date(2016, 6, 27), 'Title': '25 year anniversary', 'Link': 'https://www.google.com.au/#q=anniversary+gifts'},
-      ];
-      var settings = {};
-      var element = document.getElementById('caleandar');
-      caleandar(element, events, settings);
-    </script>
-		 */
+		model.addAttribute("eventos", script);	
 		
-		
-		
-		// se muestra el link de iniciar/registrar usuario si es false
+		// variables referentes a la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
@@ -525,12 +470,15 @@ List<String> list=new ArrayList<String>();
 		
 		return "event_calendar";
 	}
+	// ----------------------------- FIN CALENDARIO DE EVENTOS  ----------------------------------
 	
+	// ----------------------------- EVENTO  -----------------------------------------------------
 	@RequestMapping("/event/{event_name}")
 	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
-
+		// lista que contiene los eventos con el nombre introudcido por url
 		List<Event> events = eventRepository.findByName(event_name);
 		
+		// se pasan a plantilla los atributos del evento
 		model.addAttribute("name_g", events.get(0).getName());
 		model.addAttribute("place", events.get(0).getPlace());
 		model.addAttribute("image", events.get(0).getImage());
@@ -538,12 +486,13 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("date", events.get(0).getDay() + ", " + events.get(0).getMonth() + ", " + events.get(0).getYear());
 		model.addAttribute("description", events.get(0).getDescription());
 		
-		// se muestra el link de iniciar/registrar usuario si es false
+		// variables referentes a la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		
+		// se accede al html
 		return "event";
 	}	
 	// ---------------------------------- FIN EVENTO ----------------------------------
@@ -560,6 +509,7 @@ List<String> list=new ArrayList<String>();
 				"    </div>\r\n" + 
 				"  </div>";
 		
+		// nombre del usuario
 		String name = (String) usuario.getAttribute("name");
 		//Accedo al repositorio de usuarios
 		//List <User> users = userRepository.findByName(name);
@@ -594,23 +544,23 @@ List<String> list=new ArrayList<String>();
 		
 		return "my_lists";
 	}
-
 	// ---------------------------------- FIN MY LISTS --------------------------------
 
+	// ----------------------------- COMENTARIOS  -------------------------------------
 	@RequestMapping("/comment")
 	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String game_name) {						
-		
-		Comment c=new Comment((User)usuario.getAttribute("Usuario"),text);
-		
-		Game game= gameRepository.findByName(game_name).get(0);
-		
-		
+		// se crea un comentario con el usuario y el texto introducido
+		Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+		// se coge el juego donde se ha realizado el comentario
+		Game game= gameRepository.findByName(game_name).get(0);		
+		// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
 		c.setGame(game);
 		commentRepository.save(c);
+		// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
 		game.setComment(c);
 		gameRepository.save(game);
 		
-    
+		// se pasan los atributos de la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
@@ -620,8 +570,8 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");
 		
+		// se retorna al juego
 		return "/game/"+game.getName();
-		
-			
 	}
+	// ----------------------------- FIN COMENTARIOS  --------------------------------------------------
 }
