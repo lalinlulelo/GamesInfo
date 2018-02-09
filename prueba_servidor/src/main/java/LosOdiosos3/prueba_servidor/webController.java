@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class webController {	
-	//Plantilla para añadir html de las listas
-	 
-	
+	boolean comienzo = false;
 	
 	// ----------------------------- VARIABLES DEL SERVIDOR --------------------------
 	// iconos de usuario
@@ -55,68 +53,73 @@ public class webController {
 	// ----------------------------- PAGINA INICIO -----------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) throws ParseException {
+		if(comienzo == false) {
+			// Datos cargados inicialmente
+			// Repositorio para usuarios
+			
+			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
+			userRepository.save(Juan);
+			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
+			userRepository.save(Pedro);
+			userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
+			userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
+			userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
+			
+			// Repositorio para companias
+			Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
+			companyRepository.save(Naughty_Dog);		
+			Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
+			companyRepository.save(Nintendo);
+			Company Activision = new Company("Activision", "EEUU", "AAA Company", 1979, "https://static.blog.playstation.com/wp-content/uploads/avatars//tvj-D5G4_400x400.jpg?m=1475608799", "https://www.activision.com/es/home");
+			companyRepository.save(Activision);
+			Company Platinum_Games = new Company("Platinum Games", "Japan", "Witches Company", 2007, "https://pbs.twimg.com/profile_images/474105828337676288/IhP1K1eG_400x400.png", "https://www.platinumgames.com/");
+			companyRepository.save(Platinum_Games);
+			Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "https://na.square-enix.com/sites/default/files/imagecache/post-image/image_gallery/587/6477ee99579631b75080a480f63952e8.jpg", "http://www.square-enix.com/");
+			companyRepository.save(Square_Enix);
+			
+			// Repositorio para juegos
+			Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5,
+					"https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
+			gameRepository.save(TLOU);		
+			Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, 10,
+					"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
+			gameRepository.save(LOZBTW);
+			Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, 9.5,
+					"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
+			gameRepository.save(SMO);
+			Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, 
+					"http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
+			gameRepository.save(CB);
+			Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, 
+					"https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
+			gameRepository.save(BYNT);
+			
+			// Repositorio para eventos
+			eventRepository.save(new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" ));
+			eventRepository.save(new Event("GameGen", "Madrid", 2018, 2, 22, 0, "a jugar", "https://upload.ticketing.events/event-logo/event-logo-2373.png" ));
+			eventRepository.save(new Event("GDC", "Berlin", 2018, 4, 15, 100, "ja!", "http://www.gdconf.com/img/fb.png" ));
+			eventRepository.save(new Event("Fun&Serious", "Bilbao", 2018, 11, 21, 30, "txangurro", "https://www.republica.com/deportes-electronicos/wp-content/uploads/sites/48/2016/11/logo-funserious-fondo-transparente.png" ));
+			eventRepository.save(new Event("PGW", "Paris", 2018, 1, 30, 18, "croisant", "http://www.nintenderos.com/wp-content/uploads/2016/09/Paris-Games-Week.jpg" ));
+			
+			//Guardar juegos para un usuario
+			ArrayList<Game> ninGameList = new ArrayList<Game>();
+			ArrayList<Game> sonyGameList = new ArrayList<Game>();
+			ninGameList.add(SMO);
+			ninGameList.add(LOZBTW);
+			sonyGameList.add(TLOU);
+			sonyGameList.add(CB);
+			Juan.addList(ninGameList);
+			Juan.addList(sonyGameList);
+			Pedro.addList(sonyGameList);
+			
+			// Variables iniciales del usuario
+			usuario.setAttribute("alert", "  ");
+			usuario.setAttribute("registered", false);
+			
+			comienzo = true;
+		}
 		
-		// Datos cargados inicialmente
-		// Repositorio para usuarios
-		User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
-		userRepository.save(Juan);
-		User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
-		userRepository.save(Pedro);
-		userRepository.save(new User("Guille", "789", "25/2/96", "Guille@hotmail.com"));
-		userRepository.save(new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com"));
-		userRepository.save(new User("Agus", "1213", "14/10/96", "Agus@hotmail.com"));
 		
-		// Repositorio para companias
-		Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
-		companyRepository.save(Naughty_Dog);		
-		Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
-		companyRepository.save(Nintendo);
-		Company Activision = new Company("Activision", "EEUU", "AAA Company", 1979, "https://static.blog.playstation.com/wp-content/uploads/avatars//tvj-D5G4_400x400.jpg?m=1475608799", "https://www.activision.com/es/home");
-		companyRepository.save(Activision);
-		Company Platinum_Games = new Company("Platinum Games", "Japan", "Witches Company", 2007, "https://pbs.twimg.com/profile_images/474105828337676288/IhP1K1eG_400x400.png", "https://www.platinumgames.com/");
-		companyRepository.save(Platinum_Games);
-		Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "https://na.square-enix.com/sites/default/files/imagecache/post-image/image_gallery/587/6477ee99579631b75080a480f63952e8.jpg", "http://www.square-enix.com/");
-		companyRepository.save(Square_Enix);
-		
-		// Repositorio para juegos
-		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5,
-				"https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
-		gameRepository.save(TLOU);		
-		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, 10,
-				"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
-		gameRepository.save(LOZBTW);
-		Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, 9.5,
-				"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
-		gameRepository.save(SMO);
-		Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, 
-				"http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
-		gameRepository.save(CB);
-		Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, 
-				"https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
-		gameRepository.save(BYNT);
-		
-		// Repositorio para eventos
-		eventRepository.save(new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" ));
-		eventRepository.save(new Event("GameGen", "Madrid", 2018, 2, 22, 0, "a jugar", "https://upload.ticketing.events/event-logo/event-logo-2373.png" ));
-		eventRepository.save(new Event("GDC", "Berlin", 2018, 4, 15, 100, "ja!", "http://www.gdconf.com/img/fb.png" ));
-		eventRepository.save(new Event("Fun&Serious", "Bilbao", 2018, 11, 21, 30, "txangurro", "https://www.republica.com/deportes-electronicos/wp-content/uploads/sites/48/2016/11/logo-funserious-fondo-transparente.png" ));
-		eventRepository.save(new Event("PGW", "Paris", 2018, 1, 30, 18, "croisant", "http://www.nintenderos.com/wp-content/uploads/2016/09/Paris-Games-Week.jpg" ));
-		
-		//Guardar juegos para un usuario
-		ArrayList<Game> ninGameList = new ArrayList<Game>();
-		ArrayList<Game> sonyGameList = new ArrayList<Game>();
-		ninGameList.add(SMO);
-		ninGameList.add(LOZBTW);
-		sonyGameList.add(TLOU);
-		sonyGameList.add(CB);
-		Juan.addList(ninGameList);
-		Juan.addList(sonyGameList);
-		Pedro.addList(sonyGameList);
-		
-	
-		// Variables iniciales del usuario
-		usuario.setAttribute("alert", "  ");
-		usuario.setAttribute("registered", false);
 			
 		// comentarios de prueba de la pagina html
 		model.addAttribute("Titulo", "Juegos Nuevos");
@@ -139,7 +142,7 @@ public class webController {
 		// se accede a la pagina principal
 		return "index";
 	}
-	
+	/*
 	// si se retorna a inicio
 	@RequestMapping("/index")
 	public String index (Model model, HttpSession usuario) {						
@@ -163,7 +166,7 @@ public class webController {
 		
 		// se accede a la pagina principal
 		return "index";
-	}
+	}*/
 	// ----------------------------- FIN PAGINA INICIO -------------------------------
 			
 	
@@ -641,15 +644,9 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");
-<<<<<<< HEAD
 		
 		return "/game/"+game.getName();
 		
 			
 	}
-	
-=======
-		return "index";
-	}	
->>>>>>> branch 'master' of https://github.com/lalinlulelo/GamesInfo.git
 }
