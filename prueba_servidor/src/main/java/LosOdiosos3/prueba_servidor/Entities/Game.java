@@ -30,7 +30,6 @@ public class Game {
 	private String genre;
 	private String description;
 	private int year;
-	private Date addGame;
 	private double score;
 	
 	private String image;
@@ -45,15 +44,14 @@ public class Game {
 	
 	public Game () {}
 	
-	public Game(String name, Company company, String genre, String description, int year, 
-			Date addGame, double score, String image, String url) {		
+	public Game(String name, Company company, String genre, String description, 
+			int year, double score, String image, String url) {		
 		
 		this.name = name;
 		this.company = company;
 		this.genre = genre;
 		this.description = description;
 		this.year = year;
-		this.addGame = addGame;
 		this.score = score;
 		this.image = image;
 		this.url = url;
@@ -99,14 +97,6 @@ public class Game {
 		this.year = year;
 	}
 
-	public Date getAddGame() {
-		return addGame;
-	}
-
-	public void setAddGame(Date addGame) {
-		this.addGame = addGame;
-	}
-
 	public double getScore() {
 		return score;
 	}
@@ -144,5 +134,12 @@ public class Game {
 	public List<Comment> getComment(){
 		System.err.println("Comentario añadido");
 		return this.comments;
+	}
+	
+	@Override
+	public String toString() {
+		return "Game [id=" + id + ", name=" + name + ", company=" + company + ", genre=" + genre + ", description="
+				+ description + ", year=" + year + ", score=" + score + ", image=" + image + ", url=" + url
+				+ ", events=" + events + ", comments=" + comments + "]";
 	}
 }

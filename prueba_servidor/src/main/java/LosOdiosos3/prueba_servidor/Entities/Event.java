@@ -22,7 +22,9 @@ public class Event {
 	
 	private String name;	
 	private String place;	
-	private Date date;
+	private int year;
+	private int month;
+	private int day;
 	private double fee;
 	private String description;
 
@@ -39,10 +41,12 @@ public class Event {
 	}
 
 
-	public Event(String name, String place, Date date, double fee, String description, String image) {
+	public Event(String name, String place, int year, int month, int day, double fee, String description, String image) {
 		this.name = name;
 		this.place = place;
-		this.date = date;
+		this.year = year;
+		this.month = month;
+		this.day = day;
 		this.fee = fee;
 		this.description = description;
 		this.image = image;	
@@ -72,12 +76,28 @@ public class Event {
 		this.place = place;
 	}
 	
-	public Date getDate() {
-		return date;
+	public void setYear (int year) {
+		this.year = year;
 	}
-
-	public void setDate(Date date) {
-		this.date = date;
+	
+	public void setMonth (int month) {
+		this.month = month;
+	}
+	
+	public void setDay (int day) {
+		this.day = day;
+	}
+	
+	public int getYear () {
+		return year;
+	}
+	
+	public int getMonth () {
+		return month;
+	}
+	
+	public int getDay () {
+		return day;
 	}
 	
 	public double getFee() {
@@ -107,7 +127,7 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [id: " + id + ", name: " + name + ", place: " + place +
-				", date: " + date + ", fee: " + fee + ", description: " + description + 
+				", date: " + day + ", " + month + ", " + year + ", fee: " + fee + ", description: " + description + 
 				", image: " + image + ", games: " + games + ", companies: " + companies + "]";
 	}
 }

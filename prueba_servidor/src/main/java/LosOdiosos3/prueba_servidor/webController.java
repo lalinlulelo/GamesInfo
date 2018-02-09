@@ -31,7 +31,7 @@ public class webController {
 	// ----------------------------- FIN VARIABLES DEL SERVIDOR ----------------------
 	
 	// ----------------------------- INYECCIONES -------------------------------------	
-	// repositorio de la tabla usuarios
+	// repositorio de la tabla usuarios 
 	@Autowired
 	private UserRepository userRepository;	
 	
@@ -79,28 +79,28 @@ public class webController {
 		companyRepository.save(Square_Enix);
 		
 		// Repositorio para juegos
-		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, new Date(2018, 2, 1), 9.5,
+		Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5,
 				"https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
 		gameRepository.save(TLOU);		
-		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, new Date(2018, 2, 1), 10,
+		Game LOZBTW = new Game("Legend of Zelda Breath of Wild", Nintendo, "adventure", "Game of the Year 2017", 2017, 10,
 				"http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg", "https://es.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild");
 		gameRepository.save(LOZBTW);
-		Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, new Date(2018, 2, 4), 9.5,
+		Game SMO = new Game("Super Mario Odyssey", Nintendo, "platform", "Great Mario Game", 2017, 9.5,
 				"https://www.virginmegastore.ae/medias/sys_master/root/h9f/h76/9104301326366/Super-Mario-Odyssey-375469-Detail.png", "https://www.nintendo.com/games/detail/super-mario-odyssey-switch");
 		gameRepository.save(SMO);
-		Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, new Date(2018, 2, 3), 8, 
+		Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, 
 				"http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
 		gameRepository.save(CB);
-		Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, new Date(2018, 2, 5), 8.5, 
+		Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, 
 				"https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
 		gameRepository.save(BYNT);
 		
 		// Repositorio para eventos
-		eventRepository.save(new Event("E3", "Los Angeles", new Date(2018, 6, 10), 286, "muy chachi", "..." ));
-		eventRepository.save(new Event("GameGen", "Madrid", new Date(2018, 2, 21), 0, "a jugar", "..." ));
-		eventRepository.save(new Event("GDC", "Berlin", new Date(2018, 4, 26), 100, "ja!", "..." ));
-		eventRepository.save(new Event("Fun&Serious", "Bilbao", new Date(2018, 11, 21), 30, "txangurro", "..." ));
-		eventRepository.save(new Event("PGW", "Paris", new Date(2018, 1, 30), 18, "croisant", "..." ));
+		eventRepository.save(new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" ));
+		eventRepository.save(new Event("GameGen", "Madrid", 2018, 2, 22, 0, "a jugar", "https://upload.ticketing.events/event-logo/event-logo-2373.png" ));
+		eventRepository.save(new Event("GDC", "Berlin", 2018, 4, 15, 100, "ja!", "http://www.gdconf.com/img/fb.png" ));
+		eventRepository.save(new Event("Fun&Serious", "Bilbao", 2018, 11, 21, 30, "txangurro", "https://www.republica.com/deportes-electronicos/wp-content/uploads/sites/48/2016/11/logo-funserious-fondo-transparente.png" ));
+		eventRepository.save(new Event("PGW", "Paris", 2018, 1, 30, 18, "croisant", "http://www.nintenderos.com/wp-content/uploads/2016/09/Paris-Games-Week.jpg" ));
 		
 		//Guardar juegos para un usuario
 		ArrayList<Game> ninGameList = new ArrayList<Game>();
@@ -301,7 +301,6 @@ public class webController {
 		String genre = games.get(0).getGenre();
 		String description = games.get(0).getDescription();
 		int year = games.get(0).getYear();
-		Date addGame = games.get(0).getAddGame();
 		int pts = (int)games.get(0).getScore();
 		String image = games.get(0).getImage();
 		String url = games.get(0).getUrl();
@@ -369,7 +368,6 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("genre", genre);
 		model.addAttribute("description", description);
 		model.addAttribute("year", year);
-		model.addAttribute("addGame", addGame.toString());
 		model.addAttribute("score", score);
 		model.addAttribute("image", image);
 		model.addAttribute("url", url);
@@ -509,17 +507,58 @@ List<String> list=new ArrayList<String>();
 	// ----------------------------- EVENTO -------------------------------------------
 	@RequestMapping("/event_calendar")
 	public String event_calendar (Model model, HttpSession usuario) {
+		List<Event> event_list = eventRepository.findAll();
+		String events = "var events = [ ";
+		String parcial = "";
+		for(int i = 0; i < event_list.size(); i++) {			
+			if(i != event_list.size() -1 ) {
+				parcial += "{'Date': new Date(" + event_list.get(i).getYear() + "," + (event_list.get(i).getMonth() -1) + "," + event_list.get(i).getDay() + "), 'Title': '" + event_list.get(i).getName() + "', 'Link': '" + "/event/" + event_list.get(i).getName() + "'}, ";
+			}else {
+				parcial += "{'Date': new Date(" +  event_list.get(i).getYear() + "," + (event_list.get(i).getMonth() -1) + "," + event_list.get(i).getDay() + "), 'Title': '" + event_list.get(i).getName() + "', 'Link': '" + "/event/" + event_list.get(i).getName() + "'}];";
+			}
+		}
+		events += parcial;
+		String script = "<script>" + events + "var settings = {};\r\n" + 
+				"      var element = document.getElementById('caleandar');\r\n" + 
+				"      caleandar(element, events, settings);\r\n" + 
+				"    </script>";
+		model.addAttribute("eventos", script);
+		/*
+		 *     
+	<script>
+      var events = [
+        {'Date': new Date(2018, 1, 7), 'Title': 'Doctor appointment at 3:25pm.', 'Link': '/event'},
+        {'Date': new Date(2018, 0, 18), 'Title': 'New Garfield movie comes out!', 'Link': 'https://garfield.com'},
+        {'Date': new Date(2016, 6, 27), 'Title': '25 year anniversary', 'Link': 'https://www.google.com.au/#q=anniversary+gifts'},
+      ];
+      var settings = {};
+      var element = document.getElementById('caleandar');
+      caleandar(element, events, settings);
+    </script>
+		 */
+		
+		
+		
 		// se muestra el link de iniciar/registrar usuario si es false
-				model.addAttribute("registered", usuario.getAttribute("registered"));
-				boolean aux = !(Boolean) usuario.getAttribute("registered");
-				model.addAttribute("unregistered", aux);
-				model.addAttribute("name", usuario.getAttribute("name"));
-				
-				return "event_calendar";
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		
+		return "event_calendar";
 	}
 	
-	@RequestMapping("/event")
-	public String event (Model model, HttpSession usuario) {
+	@RequestMapping("/event/{event_name}")
+	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
+
+		List<Event> events = eventRepository.findByName(event_name);
+		
+		model.addAttribute("name_g", events.get(0).getName());
+		model.addAttribute("place", events.get(0).getPlace());
+		model.addAttribute("image", events.get(0).getImage());
+		model.addAttribute("fee", events.get(0).getFee());
+		model.addAttribute("date", events.get(0).getDay() + ", " + events.get(0).getMonth() + ", " + events.get(0).getYear());
+		model.addAttribute("description", events.get(0).getDescription());
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -602,10 +641,15 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");
+<<<<<<< HEAD
 		
 		return "/game/"+game.getName();
 		
 			
 	}
 	
+=======
+		return "index";
+	}	
+>>>>>>> branch 'master' of https://github.com/lalinlulelo/GamesInfo.git
 }
