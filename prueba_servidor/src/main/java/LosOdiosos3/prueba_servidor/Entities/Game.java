@@ -142,6 +142,7 @@ public class Game {
 		comments.add(comment);
 	}
 	public List<Comment> getComment(){
+		System.err.println("Comentario añadido");
 		return this.comments;
 	}
 }

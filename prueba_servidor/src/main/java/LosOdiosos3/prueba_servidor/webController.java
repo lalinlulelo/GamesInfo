@@ -295,6 +295,7 @@ public class webController {
 	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {		
 		List <Game> games = gameRepository.findByName(game_name);
 		
+		
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
 		String genre = games.get(0).getGenre();
@@ -331,8 +332,9 @@ public class webController {
 		
 List<String> list=new ArrayList<String>();
 		
-		String div="<div>%s</div>\r\n" + 
-				"     <div>%s</div>";
+		String div="<div class=\"commentsUser \">%s</div>\r\n" + 
+				"     <div class=\"comments \">%s</div>"
+				+ "<br>";
 		
 		if(games.get(0).getComment().size()>0) {
 			List<Comment> list_comments=games.get(0).getComment();
@@ -342,6 +344,7 @@ List<String> list=new ArrayList<String>();
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String User=list_comments.get(i).getUser().getName();
 				String Text=list_comments.get(i).getText();		
+				
 				
 				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 				
@@ -539,6 +542,7 @@ List<String> list=new ArrayList<String>();
 				"     \r\n" + 
 				"    </div>\r\n" + 
 				"  </div>";
+		
 		String name = (String) usuario.getAttribute("name");
 		//Accedo al repositorio de usuarios
 		//List <User> users = userRepository.findByName(name);
@@ -578,17 +582,17 @@ List<String> list=new ArrayList<String>();
 
 	@RequestMapping("/comment")
 	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String game_name) {						
-		System.out.println("1");
+		
 		Comment c=new Comment((User)usuario.getAttribute("Usuario"),text);
-		System.out.println("2");
+		
 		Game game= gameRepository.findByName(game_name).get(0);
-		System.out.println("3");
-		game.setComment(c);
-		//gameRepository.save(game);
+		
+		
+		c.setGame(game);
 		commentRepository.save(c);
-		System.out.println("4");
-				//fallo al guardar usuario
-		System.out.println("5");
+		game.setComment(c);
+		gameRepository.save(game);
+		
     
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
@@ -598,7 +602,10 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");
-		return "index";
+		
+		return "/game/"+game.getName();
+		
+			
 	}
 	
 }

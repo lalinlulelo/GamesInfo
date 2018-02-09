@@ -76,6 +76,20 @@
 		
 		text-align:justify;
 		}
+		
+		.comments{
+		
+		background-color:white;
+		text-align:left;
+		font-size:20px;
+		}
+		.commentsUser{
+		
+		background-color: #D0D0D0;
+		text-align:center;
+		font-size:30px;
+		}
+		
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -137,19 +151,20 @@
      <div id="comentarios" class="comment">
      <h1>Comments</h1>
      <form action="/comment" method="post">
-     <input type="text" name="text" class="commentBox">
+     <textarea name="text" class="commentBox"></textarea>
      <input type="hidden" name="game_name" value="{{name_g}}">
      <br><br>
      <input type="submit" value="comment">
      
      </form>
-     
-     
-     
+     <br>
+<div>
 {{#comments}}
 {{{.}}}
 {{/comments}}
      
+</div>
+
      </div>
     </div>
     

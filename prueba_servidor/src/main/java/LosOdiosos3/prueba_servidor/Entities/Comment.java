@@ -18,11 +18,11 @@ public class Comment {
 
 	private String text;
 	
-	@ManyToOne
+	@OneToOne
 	private Game game;	
-	@ManyToOne
+	@OneToOne
 	private Company company;	
-	@ManyToOne
+	@OneToOne
 	private Event event;	
 
 	protected Comment() {};
