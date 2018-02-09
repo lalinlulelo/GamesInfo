@@ -75,7 +75,7 @@ li{
 </head>
   <body class="body">
     <div id="navegador">      
-        <form action="login" method="post">
+     <form action="login" method="post">
           <ul>
             <li></li>
             <li><a href="/">Home</a></li>
@@ -88,11 +88,13 @@ li{
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
+            
             <li>User:</li><input type="text" name="name">
             <li></li>
             <li>Password:</li><input type="text" name="password">
             <li></li>
             <input type="submit" value="Login">
+            
             <li></li><li></li><li></li><li></li>
             <li></li><li></li><li></li><li></li>
             <li><a href="/new_user">Register</a></li>
@@ -100,8 +102,14 @@ li{
             {{#registered}}
             <li>Hello, {{name}}</li>
             {{/registered}}
+            
           </ul>		
-        </form>      
+     </form>  
+     <li></li><li></li><li></li><li></li>
+            <form action="search" method="post">
+            	<input type="text" name="text">
+            	<input type="submit" value="Search">
+      </form>
       </div>
     
     
