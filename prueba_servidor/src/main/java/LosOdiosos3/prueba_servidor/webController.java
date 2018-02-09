@@ -641,15 +641,13 @@ List<String> list=new ArrayList<String>();
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");
-<<<<<<< HEAD
-		
+
 		return "/game/"+game.getName();
 		
 			
 	}
 	
-=======
-		return "index";
+
 	}	
->>>>>>> branch 'master' of https://github.com/lalinlulelo/GamesInfo.git
-}
+
+
