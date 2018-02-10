@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> d0c9cd6e28a7efda37cfd96f914ca8cb2ac01ba6
+=======
+>>>>>>> parent of 2a9b987... Arreglado
 	<head>
 	    <style type="text/css">
 	    	.body{
@@ -214,9 +217,6 @@
 			.container{
 				background-color: #406DB5;
 			}
-			#drop{
-				background-color: #406DB5;
-			}
 		</style>
 		  
 	    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
@@ -257,13 +257,11 @@
 			            <div  class="col-md-2">
 				        	<li class="dropdown">
 							  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
-							  	<ul class="dropdown-menu" id="drop">
-								  	
-								  		<li><a href="/profile">Profile</a></li>
-										<li><a href="/my_lists">My Lists</a></li>
-										<div class="dropdown-divider"></div>            
-						            	<li><a href="#">Log out</a></li>
-						             
+							  	<ul class="dropdown-menu">
+							  		<li><a href="/profile">Profile</a></li>
+									<li><a href="/my_lists">My Lists</a></li>
+									<div class="dropdown-divider"></div>            
+					            	<li><a href="#">Log out</a></li>
 							  	</ul>
 							</li>            
 			            </div>
@@ -292,7 +290,232 @@
 	    	<div id="triangulo"></div>
 	    </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<head>
+    <style type="text/css">
+        body{
+          color: #F9FF35;
+          background-color: #406DB5;
+        }
+        #caleandar{
+          padding-left: 20px;
+          font-size: 30px;
+        }
+        .cld-main{
+          width: 100%;
+        }
+        .cld-main a{
+          color: #406DB5;
+          font-weight: bold;
+        }
+        .cld-datetime{
+          position: relative;
+          width: 66%;
+          min-width: 100px;
+          max-width: 300px;
+          margin: auto;
+          overflow: hidden;
+        }
+        .cld-datetime .today{
+       	  font-family: "Andale Mono", monospace;
+   		  color:  #F9FF35;
+          position: relative;
+          float: left;
+          width: calc(100% - 40px);
+          margin: auto;
+          text-align: center;
+        }
+        .cld-nav{
+          position: relative;
+          width: 20px;
+          height: 20px;
+          margin-top: 0px;
+        }
+        .cld-nav:hover{
+          cursor: pointer;
+        }
+        .cld-nav:hover svg{
+          fill: #666;
+        }
+        .cld-rwd{
+          float: left;
+        }
+        .cld-fwd{
+          float: right;
+        }
+        .cld-labels, .cld-days{
+          padding-left: 0;
+        }
+        .cld-label, .cld-day{
+          display: inline-block;
+          width: 14.28%;
+          text-align: center;
+        }
+        .cld-day.today .cld-number{
+          display: inline-block;
+          height: 35px;
+          width: 50px;
+          border-radius: 50px;
+          background: rgb(212, 223, 62);
+          color: #406DB5;
+        }
+        .cld-day.disableDay{
+          opacity: 0.5;
+        }
+        .cld-day.nextMonth, .cld-day.prevMonth{
+          opacity: 0.33;
+        }
+        .cld-number{
+          position: relative;
+          margin: 5px;
+          padding: 5px;
+        }
+        .cld-title{
+        font-family: "Andale Mono", monospace;
+    		color:  #F9FF35;
+          position: absolute;
+          z-index: 5;
+          display: none;
+          top: 20px;
+          left: 0;
+          padding: 5px 10px;
+          background: #fff;
+          white-space: nowrap;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 18px;
+        }
+        .cld-number:hover .cld-title{
+          display: block;
+        }
+        .cld-title::before{
+          content: '';
+          position: absolute;
+          top: -7.5px; left: 7.5px;
+          width: 0;
+          height: 0;
+          border-left: 7.5px solid transparent;
+          border-right: 7.5px solid transparent;
+          border-bottom: 7.5px solid #ccc;
+        }
+        .cld-number.eventday{
+          display: inline-block;
+          height: 35px;
+          width: 50px;
+          border-radius: 50px;
+          border: 3px solid rgb(249, 255, 77)
+        }
+        .cld-number.eventday:hover{
+          cursor: pointer;
+          background: rgba(153, 139, 16, 0.678);
+        }
+        .today .cld-number.eventday:hover{
+          background: #888;
+        }
 
+p{
+  font-family: "Andale Mono", monospace;
+     color:  #F9FF35;
+}
+li{
+ font-family: "Andale Mono", monospace;
+     color:  #F9FF35;
+}
+ #navegador a{
+     font-family: "Andale Mono", monospace;
+     color:  #F9FF35;
+     text-decoration:none;
+ }
+ #navegador{
+     background-color: rgb(33, 73, 138);
+     padding-top: 2px;
+     color:  #F9FF35;
+     height: 40px;
+     line-height: 20px; 
+     padding-bottom: 10px;
+     position:relative;
+     top: -15px;
+     -ms-transform: scale(2, 3); /* IE 9 */
+    -webkit-transform: scale(2, 3); /* Safari */
+    transform: scale(1.01, 1);
+    font-size: 86.5%;
+>>>>>>> parent of 2a9b987... Arreglado
+
+ }
+ #navegador ul{
+     list-style-type: none;
+     text-align: left;
+     color: #010201;
+ }
+ #navegador li{
+     font-family: "Andale Mono", monospace;
+     color:  #F9FF35;
+     font-size: 130%;
+     display: inline;
+     text-align: center;
+     margin: 0 10px 0 0;
+ }
+ #navegador p{
+     font-family: "Andale Mono", monospace;
+     color:  #F9FF35;
+     font-size: 130%;
+ }
+ input[type=submit] {
+     color: rgb(33, 73, 138);
+     padding:5px 15px; 
+     background:rgb(251, 255, 140); 
+     border:0 none;
+     cursor:pointer;
+     -webkit-border-radius: 5px;
+     border-radius: 5px; 
+ }
+    </style>  
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  	<title>Event Calendar</title>
+</head>
+  <body>
+   <div id="navegador">      
+        <form action="login" method="post">
+          <ul>
+          <div  class="row">
+            <div  class="col-md-4">
+	            <li><a href="/">Home</a></li>
+	            <li><a href="/event_calendar">Events</a></li>
+	            <li><a href="/game_list">Games</a></li>
+	            <li><a href="/company_list">Companies</a></li>
+            </div>
+            
+            {{#registered}}
+            <div  class="col-md-5"> </div>
+            <div  class="col-md-2">
+	            <li><a href="/my_lists">My Lists</a></li>            
+	            <li><a href="/profile">Profile</a></li>
+            </div>
+            {{/registered}}
+                           
+            {{#unregistered}}  
+            <div  class="col-md-1"> </div>         
+	        <input type="text" placeholder="Username" name="name" required />
+	        <li></li>
+	        <input type="password" placeholder="Password" name="password"	required />
+	        <li></li>
+	        <input type="submit" value="Login">            
+	        <li></li>    
+            <li><a href="/new_user">Register</a></li>
+            {{/unregistered}}
+            
+            {{#registered}}
+            <li>Hello, {{name}}</li>
+            {{/registered}}
+                    
+          </div>             
+          </ul>		
+     </form>      
+  </div>
+>>>>>>> 47abe5c884ad72a09124fdf7b0df7322d906e726
+  
   		<br><br>
   		<div id="caleandar" class=" NavShow-true DateTimeShow-true DateTimeFormat-mmm, yyyy"></div>
 
