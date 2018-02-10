@@ -80,16 +80,19 @@
 			 	padding-bottom: 5px;
 			 	padding-top: 5px;
 			 	position:relative;
-			 	top: -5px;   
+			 	top: -10px;   
 			 }
 			 #triangulo{
 			  	border-left: 35px solid transparent;
-			    border-top: 45px solid  rgb(33, 73, 138);
+			    border-top: 50px solid rgb(33, 73, 138);
 			    float:right;
-			    padding-right: 20px;
+			    padding-right: 30px;
 				position: relative;
 				right: -10px;
-				z-index: -3;
+				top: -10px;
+			 }
+			 #drop{
+			 	background-color: rgb(131, 172, 239);
 			 }
 		</style>
 		<title>GamesInfo</title>
@@ -118,10 +121,10 @@
 			            <div  class="col-md-2">
 				        	<li class="dropdown">
 							  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
-							  	<ul class="dropdown-menu">
-							  		<li><a href="/profile">Profile</a></li>
-									<li><a href="/my_lists">My Lists</a></li>            
-					            	<li><a href="#">Log out</a></li>
+							  	<ul id="drop" class="dropdown-menu">
+							  		<li><a id="drop" href="/profile">Profile</a></li>
+									<li><a id="drop" href="/my_lists">My Lists</a></li>            
+					            	<li><a id="drop" href="#">Log out</a></li>
 							  	</ul>
 							</li>            
 			            </div>
