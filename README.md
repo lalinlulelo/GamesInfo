@@ -25,6 +25,11 @@ En el siguiente diagrama se puede visualizar desde qué paginas se puede navegar
 
 En esta fase no se han diferenciado las partes privada y pública. Sin embargo, el funcionamiento de la parte privada, será la posibilidad de visualizar las listas propias, creadas por el usuario, así como el acceso a su propio perfil para configurarlo o visualizar cierto detalles de él.
 
+## Diagrama de Entidad-Relación ##
+En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
+
+![Diagrama de Entidad-Relación](https://github.com/lalinlulelo/GamesInfo/blob/master/images/ERDia.png)
+
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
