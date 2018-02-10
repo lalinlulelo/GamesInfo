@@ -179,42 +179,50 @@ li{
  }
     </style>  
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-  
-  </head>
+  	<title>Event Calendar</title>
+</head>
   <body>
    <div id="navegador">      
         <form action="login" method="post">
           <ul>
-            <li></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/event_calendar">Events</a></li>
-            <li><a href="/game_list">Games</a></li>
-            <li><a href="/company_list">Companies</a></li>
+          <div  class="row">
+            <div  class="col-md-4">
+	            <li><a href="/">Home</a></li>
+	            <li><a href="/event_calendar">Events</a></li>
+	            <li><a href="/game_list">Games</a></li>
+	            <li><a href="/company_list">Companies</a></li>
+            </div>
+            
             {{#registered}}
-            <li><a href="/my_lists">My Lists</a></li>            
-            <li><a href="/profile">Profile</a></li>
+            <div  class="col-md-5"> </div>
+            <div  class="col-md-2">
+	            <li><a href="/my_lists">My Lists</a></li>            
+	            <li><a href="/profile">Profile</a></li>
+            </div>
             {{/registered}}
-            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
-            {{#unregistered}}
-            <li>User:</li><input type="text" name="name">
-            <li></li>
-            <li>Password:</li><input type="text" name="password">
-            <li></li>
-            <input type="submit" value="Login">
-            <li></li><li></li><li></li><li></li>
+                           
+            {{#unregistered}}  
+            <div  class="col-md-2"> </div>         
+	        <input type="text" placeholder="Username" name="name" required />
+	        <li></li>
+	        <input type="password" placeholder="Password" name="password"	required />
+	        <li></li>
+	        <input type="submit" value="Login">            
+	        <li></li>    
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
+            
             {{#registered}}
             <li>Hello, {{name}}</li>
             {{/registered}}
+                    
+          </div>             
           </ul>		
-        </form>      
-      </div>
-      <br><br>
-    <div id="caleandar" class=" NavShow-true DateTimeShow-true DateTimeFormat-mmm, yyyy">
-     
-    </div>
-
+     </form>      
+  </div>
+  
+  <br><br>
+  <div id="caleandar" class=" NavShow-true DateTimeShow-true DateTimeFormat-mmm, yyyy"></div>
 
     <script>
       var Calendar = function(model, options, date){

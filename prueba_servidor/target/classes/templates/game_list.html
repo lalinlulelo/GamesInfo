@@ -115,45 +115,52 @@ input[type=text] {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
-<title>Lista de Juegos</title>
+<title>Game List</title>
 </head>
  <body style=" background-color:#406db5;"><div id="navegador">      
-       <div id="navegador">      
-     <form action="login" method="post">
-          <ul>
-            <li></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/event_calendar">Events</a></li>
-            <li><a href="/game_list">Games</a></li>
-            <li><a href="/company_list">Companies</a></li>
-            {{#registered}}
-            <li><a href="/my_lists">My Lists</a></li>            
-            <li><a href="/profile">Profile</a></li>
-            {{/registered}}
-            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
-            {{#unregistered}}
-            
-            <li>User:</li><input type="text" name="name">
-            <li></li>
-            <li>Password:</li><input type="text" name="password">
-            <li></li>
-            <input type="submit" value="Login">            
-            <li></li><li></li><li></li><li></li>
-            <li></li><li></li><li></li><li></li>
-            <li><a href="/new_user">Register</a></li>
-            {{/unregistered}}
-            {{#registered}}
-            <li>Hello, {{name}}</li>
-            {{/registered}}
-                        
-          </ul>		
-     </form>  
-     <div id="search">
-     	<form action="search" method="post">
-           	<input type="text" name="text">
-           	<input type="submit" value="Search">
-     	 </form>
-      </div>
+     <div id="navegador">      
+	     <form action="login" method="post">
+	          <ul>
+	          <div  class="row">
+	            <div  class="col-md-4">
+		            <li><a href="/">Home</a></li>
+		            <li><a href="/event_calendar">Events</a></li>
+		            <li><a href="/game_list">Games</a></li>
+		            <li><a href="/company_list">Companies</a></li>
+	            </div>
+	            
+	            {{#registered}}
+	            <div  class="col-md-5"> </div>
+	            <div  class="col-md-2">
+		            <li><a href="/my_lists">My Lists</a></li>            
+		            <li><a href="/profile">Profile</a></li>
+	            </div>
+	            {{/registered}}
+	                           
+	            {{#unregistered}}  
+	            <div  class="col-md-2"> </div>         
+		        <input type="text" placeholder="Username" name="name" required />
+		        <li></li>
+		        <input type="password" placeholder="Password" name="password"	required />
+		        <li></li>
+		        <input type="submit" value="Login">            
+		        <li></li>    
+	            <li><a href="/new_user">Register</a></li>
+	            {{/unregistered}}
+	            
+	            {{#registered}}
+	            <li>Hello, {{name}}</li>
+	            {{/registered}}
+	                    
+	          </div>             
+	          </ul>		
+	     </form>      
+	     <div id="search">
+	     	<form action="search" method="post">
+	           	<input type="text" name="text">
+	           	<input type="submit" value="Search">
+	     	 </form>
+	     </div>
       <div id="triangulo">
       
       </div>
