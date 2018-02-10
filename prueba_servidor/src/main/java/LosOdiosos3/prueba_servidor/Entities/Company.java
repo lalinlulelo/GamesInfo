@@ -27,7 +27,7 @@ public class Company {
     @ManyToMany
 	private List<Event> events;
     
-    @OneToMany(mappedBy="event", cascade=CascadeType.REMOVE)
+    @OneToMany(mappedBy="company", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
 
     protected Company (){};
@@ -119,5 +119,15 @@ public class Company {
 		return "Company [id: " + id + ", name: " + name + ", country: " + country +
 				", description: " + description + ", year: " + year + ", image: " + image + 
 				", url: " + url + ", games: " + games + ", events: " + events + "]";
+	}
+
+	public void setComment(Comment c) {
+		comments.add(c);
+		
+	}
+
+	public List<Comment> getComment() {
+		// TODO Auto-generated method stub
+		return this.comments;
 	}
 }

@@ -386,8 +386,10 @@ public class webController {
 	// ----------------------------- FIN LISTA DE JUEGOS -----------------------------
 	
 	// ----------------------------- COMPAÑIA ----------------------------------------
-	@GetMapping("/company/{company_name}")
+	@RequestMapping("/company/{company_name}")
 	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
+		
+		System.err.println("Hola");
 		// se adquiere la lista de juegos que contiene el nombre
 		List <Company> companies = companyRepository.findByName(company_name);
 		
@@ -398,6 +400,32 @@ public class webController {
 		int year = companies.get(0).getYear();
 		String image = companies.get(0).getImage();
 		String url = companies.get(0).getUrl();
+		
+		
+		
+		// gestion de commentarios del juego
+				List<String> list=new ArrayList<String>();
+				String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+				
+				// si hay comentarios en el juego
+				if(companies.get(0).getComment().size()>0) {
+					List<Comment> list_comments=companies.get(0).getComment();			
+						System.err.println("prueba");
+					for(int i=0;i<list_comments.size();i++) {
+						//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+						String User=list_comments.get(i).getUser().getName();
+						String Text=list_comments.get(i).getText();						
+						
+						//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+						//Le damos formato a la variable auxiliar y la añadimos a la lista
+						String aux=String.format(div, User, Text);				
+						list.add(aux);				
+					}
+					model.addAttribute("comments", list);
+				}else {
+					model.addAttribute("comments"," ");
+				}
+		
 		
 		// se transmiten los atributos a la plantilla
 		model.addAttribute("name_g", name);
@@ -413,7 +441,7 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		
-		// se accede a compañia
+		//se accede a compañia
 		return "company";
 	}
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
@@ -561,31 +589,62 @@ public class webController {
 	// ---------------------------------- FIN MY LISTS --------------------------------
 
 	// ----------------------------- COMENTARIOS  -------------------------------------
-	@RequestMapping("/comment")
-	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String game_name) {						
+	@RequestMapping("/comment/{page}")
+	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name,@PathVariable String page) {	
+		String ret = null;
+		
+		if(page.equals("game")) {
+			
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+			// se coge el juego donde se ha realizado el comentario
+			Game game= gameRepository.findByName(name).get(0);		
+			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+			c.setGame(game);
+			commentRepository.save(c);
+			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			game.setComment(c);
+			gameRepository.save(game);
+			
+			// se pasan los atributos de la barra de navegacion
+				
+			
+			// se retorna al juego
+			ret= "/game/"+game.getName();
+		}
+			
+			if(page.equals("company")) {
+				System.err.println(name+text);
+				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+				System.err.println("2");
+				// se coge el juego donde se ha realizado el comentario
+				Company company= companyRepository.findByName(name).get(0);		
+				// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+				c.setCompany(company);
+				commentRepository.save(c);
+				// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+				company.setComment(c);
+				companyRepository.save(company);
+				
+				// se pasan los atributos de la barra de navegacion
+						
+				System.err.println(company.getName());
+				// se retorna al juego
+				ret="/company/"+company.getName();
+				
+			}
+			
+			model.addAttribute("registered", usuario.getAttribute("registered"));
+			boolean aux = !(Boolean) usuario.getAttribute("registered");
+			model.addAttribute("unregistered", aux);
+			model.addAttribute("name", usuario.getAttribute("name"));
+			model.addAttribute("alert"," ");
+			model.addAttribute("hello", " ");
+			model.addAttribute("Titulo", " ");
+			model.addAttribute("Cuerpo", " ");		
+		
+		return ret;
 		// se crea un comentario con el usuario y el texto introducido
-		Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
-		// se coge el juego donde se ha realizado el comentario
-		Game game= gameRepository.findByName(game_name).get(0);		
-		// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
-		c.setGame(game);
-		commentRepository.save(c);
-		// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
-		game.setComment(c);
-		gameRepository.save(game);
 		
-		// se pasan los atributos de la barra de navegacion
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		boolean aux = !(Boolean) usuario.getAttribute("registered");
-		model.addAttribute("unregistered", aux);
-		model.addAttribute("name", usuario.getAttribute("name"));
-		model.addAttribute("alert"," ");
-		model.addAttribute("hello", " ");
-		model.addAttribute("Titulo", " ");
-		model.addAttribute("Cuerpo", " ");			
-		
-		// se retorna al juego
-		return "/game/"+game.getName();
 	}
 	// ----------------------------- FIN COMENTARIOS  --------------------------------------------------
 	
