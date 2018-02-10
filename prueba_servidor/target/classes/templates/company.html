@@ -1,186 +1,192 @@
 <!DOCTYPE html>
 <html>
-<head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style type="text/css">
-        .images {width:310px;float:left;}
-        #product-img {border: 1px solid #ccc; padding: 0px; float: left; margin-top: 5px;}
-        #product-img img {  max-width:300px!important;height:auto;}
-        #product-img-zoom {text-align: center; margin-top: 3px;}
-        #product-img-zoom a {color: #333; text-decoration: none; padding-left: 20px; background: url(../images/zoom-in.png) no-repeat left center; font-size: 90%;}
-        #product-img-zoom a:hover {text-decoration: underline;}
-        #product-details {margin-left: 325px; margin-top: 20px;}
-        #product-details h1 {margin-top: 0;}
-        #product-details #quantity {width: 20px;}
-        .checked {
-            color: orange;
-        }
-        
-       p{
-  font-family: "Andale Mono", monospace;
-     color:  #406DB5;
-}
-li{
- font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
-}
- #navegador a{
-     font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
-     text-decoration:none;
- }
- #navegador{
-     background-color: rgb(33, 73, 138);
-     padding-top: 2px;
-     color:  #F9FF35;
-     height: 45px;
-     line-height: 30px; 
-     padding-bottom: 5px;
-     position:relative;
-     top: -15px;
-     -ms-transform: scale(2, 3); /* IE 9 */
-    -webkit-transform: scale(2, 3); /* Safari */
-    transform: scale(1.01, 1);
-	font-size: 85%
- }
- #navegador ul{
-     list-style-type: none;
-     text-align: left;
-     color: #010201;
- }
- #navegador li{
-     font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
-     font-size: 130%;
-     display: inline;
-     text-align: center;
-     margin: 0 10px 0 0;
- }
- #navegador p{
-     font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
-     font-size: 130%;
- }
- input[type=submit] {
-     color: rgb(33, 73, 138);
-     padding:5px 15px; 
-     background:rgb(251, 255, 140); 
-     border:0 none;
-     cursor:pointer;
-     -webkit-border-radius: 5px;
-     border-radius: 5px; 
- }
- input[type=text] {
- 	color: rgb(33, 73, 138)
- }
- #search{
- 	background-color: rgb(33, 73, 138);
- 	text-align:right;
- 	width: auto;
- 	float: right;
- 	padding-right: 20px;
- 	padding-left: 0px;
- 	padding-bottom: 5px;
- 	padding-top: 5px;
- 	position:relative;
- 	top: -10px;   
- }
- #triangulo{
-  	border-left: 35px solid transparent;
-    border-top: 40px solid  rgb(33, 73, 138);
-    float:right;
-    padding-right: 20px;
-	position: relative;
-	right: -10px;
-	top: -10px;
-	z-index: -3;
- }
- 
-        #w {
-            display: block;
-            width: 1200px;
-            margin: 0 auto;
-            padding-top: 30px;
-            padding-bottom: 45px;
-        }
-        body { 
-            background: #406DB5; 
-        }
-        #content {
-		  display: block;
-		  width: 100%;
-		  background: rgb(251, 255, 140);
-		  padding: 25px 20px;
-		  padding-bottom: 35px;
-		  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-		  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-		  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-		}
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+	<head>
+	        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <style type="text/css">
+	        .images {width:310px;float:left;}
+	        #product-img {border: 1px solid #ccc; padding: 0px; float: left; margin-top: 5px;}
+	        #product-img img {  max-width:300px!important;height:auto;}
+	        #product-img-zoom {text-align: center; margin-top: 3px;}
+	        #product-img-zoom a {color: #333; text-decoration: none; padding-left: 20px; background: url(../images/zoom-in.png) no-repeat left center; font-size: 90%;}
+	        #product-img-zoom a:hover {text-decoration: underline;}
+	        #product-details {margin-left: 325px; margin-top: 20px;}
+	        #product-details h1 {margin-top: 0;}
+	        #product-details #quantity {width: 20px;}
+	        .checked {
+	            color: orange;
+	        }
+	        
+	       p{
+	  font-family: "Andale Mono", monospace;
+	     color:  #406DB5;
+	}
+	li{
+	 font-family: "Andale Mono", monospace;
+	     color:  #F9FF35;
+	}
+	 #navegador a{
+	     font-family: "Andale Mono", monospace;
+	     color:  #F9FF35;
+	     text-decoration:none;
+	 }
+	 #navegador{
+	     background-color: rgb(33, 73, 138);
+	     padding-top: 2px;
+	     color:  #F9FF35;
+	     height: 45px;
+	     line-height: 30px; 
+	     padding-bottom: 5px;
+	     position:relative;
+	     top: -15px;
+	     -ms-transform: scale(2, 3); /* IE 9 */
+	    -webkit-transform: scale(2, 3); /* Safari */
+	    transform: scale(1.01, 1);
+		font-size: 85%
+	 }
+	 #navegador ul{
+	     list-style-type: none;
+	     text-align: left;
+	     color: #010201;
+	 }
+	 #navegador li{
+	     font-family: "Andale Mono", monospace;
+	     color:  #F9FF35;
+	     font-size: 130%;
+	     display: inline;
+	     text-align: center;
+	     margin: 0 10px 0 0;
+	 }
+	 #navegador p{
+	     font-family: "Andale Mono", monospace;
+	     color:  #F9FF35;
+	     font-size: 130%;
+	 }
+	 input[type=submit] {
+	     color: rgb(33, 73, 138);
+	     padding:5px 15px; 
+	     background:rgb(251, 255, 140); 
+	     border:0 none;
+	     cursor:pointer;
+	     -webkit-border-radius: 5px;
+	     border-radius: 5px; 
+	 }
+	 input[type=text] {
+	 	color: rgb(33, 73, 138)
+	 }
+	 #search{
+	 	background-color: rgb(33, 73, 138);
+	 	text-align:right;
+	 	width: auto;
+	 	float: right;
+	 	padding-right: 20px;
+	 	padding-left: 0px;
+	 	padding-bottom: 5px;
+	 	padding-top: 5px;
+	 	position:relative;
+	 	top: -10px;   
+	 }
+	 #triangulo{
+	  	border-left: 35px solid transparent;
+	    border-top: 40px solid  rgb(33, 73, 138);
+	    float:right;
+	    padding-right: 20px;
+		position: relative;
+		right: -10px;
+		top: -10px;
+		z-index: -3;
+	 }
+	 
+	        #w {
+	            display: block;
+	            width: 1200px;
+	            margin: 0 auto;
+	            padding-top: 30px;
+	            padding-bottom: 45px;
+	        }
+	        body { 
+	            background: #406DB5; 
+	        }
+	        #content {
+			  display: block;
+			  width: 100%;
+			  background: rgb(251, 255, 140);
+			  padding: 25px 20px;
+			  padding-bottom: 35px;
+			  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+			  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+			  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+			}
+	    </style>
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    
     <body>
-           <div id="navegador">      
-     <form action="login" method="post">
-          <ul>
-            <li></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/event_calendar">Events</a></li>
-            <li><a href="/game_list">Games</a></li>
-            <li><a href="/company_list">Companies</a></li>
-            {{#registered}}
-            <li><a href="/my_lists">My Lists</a></li>            
-            <li><a href="/profile">Profile</a></li>
-            {{/registered}}
-            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
-            {{#unregistered}}
-            
-            <li>User:</li><input type="text" name="name">
-            <li></li>
-            <li>Password:</li><input type="text" name="password">
-            <li></li>
-            <input type="submit" value="Login">            
-            <li></li><li></li><li></li><li></li>
-            <li></li><li></li><li></li><li></li>
-            <li><a href="/new_user">Register</a></li>
-            {{/unregistered}}
-            {{#registered}}
-            <li>Hello, {{name}}</li>
-            {{/registered}}
-                        
-          </ul>		
-     </form>  
-     <div id="search">
-     	<form action="search" method="post">
-           	<input type="text" name="text">
-           	<input type="submit" value="Search">
-     	 </form>
-      </div>
-      <div id="triangulo">
-      
-      </div>
-      </div>
-      <br>
-    <div id="w">
-    <div id="content" class="clearfix">
-        <div class="images">
-            <div id="product-img">
-                <img src="{{image}}">
-            </div>
-        </div>
-        <div id="product-details">
-            <h1>{{name_g}}</h1>
-            <h2>Details:</h2>
-            <h3>Country:</h3> <p> {{country}}</p>      
-            <h3>Description:</h3> <p>{{description}}</p>
-            <h3>Fundation date:</h3> <p> {{year}}</p>
-            <h3>More Info:</h3><a href="{{url}}">here</a>
+    	<div id="navegador">      
+			<form action="login" method="post">
+		    	<ul>
+		        	<div  class="row">
+			            <div  class="col-md-4">
+				            <li><a href="/">Home</a></li>
+				            <li><a href="/event_calendar">Events</a></li>
+				            <li><a href="/game_list">Games</a></li>
+				            <li><a href="/company_list">Companies</a></li>
+			            </div>
+			            
+			            {{#registered}}
+			            <div  class="col-md-5"> </div>
+			            <div  class="col-md-2">
+				            <li><a href="/my_lists">My Lists</a></li>            
+				            <li><a href="/profile">Profile</a></li>
+			            </div>
+			            {{/registered}}
+			                           
+			            {{#unregistered}}  
+			            <div  class="col-md-2"> </div>         
+				        <input type="text" placeholder="Username" name="name" required />
+				        <li></li>
+				        <input type="password" placeholder="Password" name="password"	required />
+				        <li></li>
+				        <input type="submit" value="Login">            
+				        <li></li>    
+			            <li><a href="/new_user">Register</a></li>
+			            {{/unregistered}}
+			            
+			            {{#registered}}
+			            <li>Hello, {{name}}</li>
+			            {{/registered}}	                    
+		          	</div>             
+		    	</ul>		
+		    </form>  
+		    <div id="search">
+		     	<form action="search" method="post">
+		           	<input type="text" name="text">
+		           	<input type="submit" value="Search">
+		     	</form>
+		     </div>
+	    	<div id="triangulo"></div>
+	  	</div>
 
-            <br><br>
-            <input type="submit" name="submit" value="Add to List">
-        </div>
-    </div>
-    </div>
+	    <div id="w">
+	    <div id="content" class="clearfix">
+	        <div class="images">
+	            <div id="product-img">
+	                <img src="{{image}}">
+	            </div>
+	        </div>
+	        <div id="product-details">
+	            <h1>{{name_g}}</h1>
+	            <h2>Details:</h2>
+	            <h3>Country:</h3> <p> {{country}}</p>      
+	            <h3>Description:</h3> <p>{{description}}</p>
+	            <h3>Fundation date:</h3> <p> {{year}}</p>
+	            <h3>More Info:</h3><a href="{{url}}">here</a>
+	
+	            <br><br>
+	            <input type="submit" name="submit" value="Add to List">
+	        </div>
+	    </div>
+	    </div>
     </body>
 </html>

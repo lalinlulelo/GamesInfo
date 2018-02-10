@@ -92,36 +92,48 @@ li{
 		}
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Event</title>
 </head>
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
     <body>
-           <div id="navegador">      
-        <form action="login" method="post">
-          <ul>
-            <li></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/event_calendar">Events</a></li>
-            <li><a href="/game_list">Games</a></li>
-            <li><a href="/company_list">Companies</a></li>
-            {{#registered}}
-            <li><a href="/my_lists">My Lists</a></li>            
-            <li><a href="/profile">Profile</a></li>
-            {{/registered}}
-            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
-            {{#unregistered}}
-            <li>User:</li><input type="text" name="name">
-            <li></li>
-            <li>Password:</li><input type="text" name="password">
-            <li></li>
-            <input type="submit" value="Login">
-            <li></li><li></li><li></li><li></li>
-            <li><a href="/new_user">Register</a></li>
-            {{/unregistered}}
-            {{#registered}}
-            <li>Hello, {{name}}</li>
-            {{/registered}}
-          </ul>		
-        </form>      
+        <div id="navegador">      
+	        <form action="login" method="post">
+	          <ul>
+	          <div  class="row">
+	            <div  class="col-md-4">
+		            <li><a href="/">Home</a></li>
+		            <li><a href="/event_calendar">Events</a></li>
+		            <li><a href="/game_list">Games</a></li>
+		            <li><a href="/company_list">Companies</a></li>
+	            </div>
+	            
+	            {{#registered}}
+	            <div  class="col-md-5"> </div>
+	            <div  class="col-md-2">
+		            <li><a href="/my_lists">My Lists</a></li>            
+		            <li><a href="/profile">Profile</a></li>
+	            </div>
+	            {{/registered}}
+	                           
+	            {{#unregistered}}  
+	            <div  class="col-md-2"> </div>         
+		        <input type="text" placeholder="Username" name="name" required />
+		        <li></li>
+		        <input type="password" placeholder="Password" name="password"	required />
+		        <li></li>
+		        <input type="submit" value="Login">            
+		        <li></li>    
+	            <li><a href="/new_user">Register</a></li>
+	            {{/unregistered}}
+	            
+	            {{#registered}}
+	            <li>Hello, {{name}}</li>
+	            {{/registered}}
+	                    
+	          </div>             
+	          </ul>		
+	     </form>     
       </div>
     <div id="w">
     <div id="content" class="clearfix">
