@@ -14,4 +14,6 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 	
 	// busqueda con nombre parcial
 	List<Game> findByNameContaining(String name);
+	
+	// busqueda en orden ascendente
 }

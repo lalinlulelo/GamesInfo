@@ -349,17 +349,6 @@ public class webController {
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		List<Game> list_games = gameRepository.findAll();
-		/*
-		// lista con todos los juegos presentes
-		switch(modo) {
-			case "":
-				list_games = gameRepository.findAll();
-				break;
-			case "year_up":
-				;
-				break;
-		}*/
-		
 		
 		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
