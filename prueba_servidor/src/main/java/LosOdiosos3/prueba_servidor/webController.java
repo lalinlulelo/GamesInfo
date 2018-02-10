@@ -10,7 +10,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -337,14 +339,27 @@ public class webController {
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
 	// ----------------------------- LISTA DE JUEGOS ---------------------------------
+	/*
+	@RequestMapping("/game_list/{modo}")
+	public String game_list (Model model, HttpSession usuario, @PathVariable String modo) {
+	*/
 	@RequestMapping("/game_list")
-	public String game_list (Model model, HttpSession usuario) {
-		
+	public String game_list (Model model, HttpSession usuario){	
+		String modo = "year_up";
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
-		
+		List<Game> list_games = gameRepository.findAll();
+		/*
 		// lista con todos los juegos presentes
-		List<Game> list_games=gameRepository.findAll();
+		switch(modo) {
+			case "":
+				list_games = gameRepository.findAll();
+				break;
+			case "year_up":
+				;
+				break;
+		}*/
+		
 		
 		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
