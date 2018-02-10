@@ -508,12 +508,14 @@ public class webController {
 				"     \r\n" + 
 				"    </div>\r\n" + 
 				"  </div>";
+
 		
 		// nombre del usuario
 		String name = (String) usuario.getAttribute("name");
 		//Accedo al repositorio de usuarios
-		//List <User> users = userRepository.findByName(name);
-		List <User> users = userRepository.findAll();
+		List <User> users = userRepository.findByName(name);									
+					
+		//List <User> users = userRepository.findAll();
 		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
 
 		List<String> listString = new ArrayList<String>();
@@ -521,17 +523,14 @@ public class webController {
 		ArrayList<Game> subList = lists.get(0);
 		//variable auxiliar
 		for(int i=0;i<subList.size();i++) {
-				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-				String Url=subList.get(i).getImage();
-				String Titulo=subList.get(i).getName();		
-					
-				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-					
-				//Le damos formato a la variable auxiliar y la añadimos a la lista
-				String aux=String.format(div, Url,Titulo);
-					
-				listString.add(aux);
-					
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=subList.get(i).getImage();
+			String Titulo=subList.get(i).getName();		
+			String link="/game/" + Titulo;
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url, link, Titulo);			
+			listString.add(aux);	
 		}
 
 		model.addAttribute("games", listString);
