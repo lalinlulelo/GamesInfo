@@ -307,6 +307,31 @@
                 -webkit-border-radius: 5px;
                 border-radius: 5px; 
             }
+            input[type=text] {
+			 	color: rgb(33, 73, 138)
+			 }
+			 #search{
+			 	background-color: rgb(33, 73, 138);
+			 	text-align:right;
+			 	width: auto;
+			 	float: right;
+			 	padding-right: 20px;
+			 	padding-left: 0px;
+			 	padding-bottom: 5px;
+			 	padding-top: 5px;
+			 	position:relative;
+			 	top: -5px;   
+			 }
+			 #triangulo{
+			  	border-left: 35px solid transparent;
+			    border-top: 50px solid  rgb(33, 73, 138);
+			    float:right;
+			    padding-right: 20px;
+				position: relative;
+				right: -10px;
+				top: -15px;
+				z-index: -3;
+			 }
 
 </style>
 
@@ -316,12 +341,12 @@
   </head>
 
 <body>  
-    <div id="navegador">      
-        <form action="login" method="post">
+   <div id="navegador">      
+     <form action="login" method="post">
           <ul>
-            <li></li><li></li><li></li><li></li><li></li>
+            <li></li>
             <li><a href="/">Home</a></li>
-           	<li><a href="/event_calendar">Events</a></li>
+            <li><a href="/event_calendar">Events</a></li>
             <li><a href="/game_list">Games</a></li>
             <li><a href="/company_list">Companies</a></li>
             {{#registered}}
@@ -330,20 +355,33 @@
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
+            
             <li>User:</li><input type="text" name="name">
             <li></li>
             <li>Password:</li><input type="text" name="password">
             <li></li>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login">            
+            <li></li><li></li><li></li><li></li>
             <li></li><li></li><li></li><li></li>
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
             {{#registered}}
             <li>Hello, {{name}}</li>
             {{/registered}}
+                        
           </ul>		
-        </form>      
+     </form>  
+     <div id="search">
+     	<form action="search" method="post">
+           	<input type="text" name="text">
+           	<input type="submit" value="Search">
+     	 </form>
       </div>
+      <div id="triangulo">
+      
+      </div>
+      </div>
+      <br>
   <script>  
   /*! jQuery v1.10.2 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
   //@ sourceMappingURL=jquery-1.10.2.min.map

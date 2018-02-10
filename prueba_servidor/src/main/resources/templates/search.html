@@ -10,7 +10,7 @@ li{
  font-family: "Andale Mono", monospace;
      color: rgb(33, 73, 138);
 }
- #navegador a{
+  #navegador a{
      font-family: "Andale Mono", monospace;
      color:  #F9FF35;
      text-decoration:none;
@@ -18,10 +18,9 @@ li{
  #navegador{
      background-color: rgb(33, 73, 138);
      padding-top: 2px;
-     color:  #F9FF35;
+     color:   rgb(33, 73, 138);
      height: 45px;
      line-height: 30px; 
-     font-size: 95%;
  }
  #navegador ul{
      list-style-type: none;
@@ -30,15 +29,15 @@ li{
  }
  #navegador li{
      font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
-     font-size: 130%;
+     color:  rgb(33, 73, 138);
+     font-size: 110%;
      display: inline;
      text-align: center;
      margin: 0 10px 0 0;
  }
  #navegador p{
      font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
+     color:   rgb(33, 73, 138);
      font-size: 130%;
  }
  input[type=submit] {
@@ -49,6 +48,28 @@ li{
      cursor:pointer;
      -webkit-border-radius: 5px;
      border-radius: 5px; 
+ }
+ #search{
+ 	background-color: rgb(33, 73, 138);
+ 	text-align:right;
+ 	width: auto;
+ 	float: right;
+ 	padding-right: 20px;
+ 	padding-left: 0px;
+ 	padding-bottom: 5px;
+ 	padding-top: 5px;
+ 	position:relative;
+ 	top: -5px;   
+ }
+ #triangulo{
+  	border-left: 35px solid transparent;
+    border-top: 50px solid  rgb(33, 73, 138);
+    float:right;
+    padding-right: 20px;
+	position: relative;
+	right: -10px;
+	top: -5px;
+	z-index: -3;
  }
 .TitleLit{
   font-size: 20px;
@@ -94,7 +115,7 @@ li{
 </head>
  <body style=" background-color:#406db5;"><div id="navegador">      
        <div id="navegador">      
-        <form action="login" method="post">
+     <form action="login" method="post">
           <ul>
             <li></li>
             <li><a href="/">Home</a></li>
@@ -107,19 +128,31 @@ li{
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
+            
             <li>User:</li><input type="text" name="name">
             <li></li>
             <li>Password:</li><input type="text" name="password">
             <li></li>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login">            
+            <li></li><li></li><li></li><li></li>
             <li></li><li></li><li></li><li></li>
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
             {{#registered}}
             <li>Hello, {{name}}</li>
             {{/registered}}
+                        
           </ul>		
-        </form>      
+     </form>  
+     <div id="search">
+     	<form action="search" method="post">
+           	<input type="text" name="text">
+           	<input type="submit" value="Search">
+     	 </form>
+      </div>
+      <div id="triangulo">
+      
+      </div>
       </div>
  		<br><br>
      

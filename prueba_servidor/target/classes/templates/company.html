@@ -5,7 +5,7 @@
     <style type="text/css">
         .images {width:310px;float:left;}
         #product-img {border: 1px solid #ccc; padding: 0px; float: left; margin-top: 5px;}
-        #product-img img {max-width:300px!important;height:auto;}
+        #product-img img {  max-width:300px!important;height:auto;}
         #product-img-zoom {text-align: center; margin-top: 3px;}
         #product-img-zoom a {color: #333; text-decoration: none; padding-left: 20px; background: url(../images/zoom-in.png) no-repeat left center; font-size: 90%;}
         #product-img-zoom a:hover {text-decoration: underline;}
@@ -70,6 +70,32 @@ li{
      -webkit-border-radius: 5px;
      border-radius: 5px; 
  }
+ input[type=text] {
+ 	color: rgb(33, 73, 138)
+ }
+ #search{
+ 	background-color: rgb(33, 73, 138);
+ 	text-align:right;
+ 	width: auto;
+ 	float: right;
+ 	padding-right: 20px;
+ 	padding-left: 0px;
+ 	padding-bottom: 5px;
+ 	padding-top: 5px;
+ 	position:relative;
+ 	top: -10px;   
+ }
+ #triangulo{
+  	border-left: 35px solid transparent;
+    border-top: 40px solid  rgb(33, 73, 138);
+    float:right;
+    padding-right: 20px;
+	position: relative;
+	right: -10px;
+	top: -10px;
+	z-index: -3;
+ }
+ 
         #w {
             display: block;
             width: 1200px;
@@ -95,8 +121,8 @@ li{
 </head>
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
     <body>
-            <div id="navegador">      
-        <form action="login" method="post">
+           <div id="navegador">      
+     <form action="login" method="post">
           <ul>
             <li></li>
             <li><a href="/">Home</a></li>
@@ -109,20 +135,33 @@ li{
             {{/registered}}
             <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
             {{#unregistered}}
+            
             <li>User:</li><input type="text" name="name">
             <li></li>
             <li>Password:</li><input type="text" name="password">
             <li></li>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login">            
+            <li></li><li></li><li></li><li></li>
             <li></li><li></li><li></li><li></li>
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
             {{#registered}}
             <li>Hello, {{name}}</li>
             {{/registered}}
+                        
           </ul>		
-        </form>      
+     </form>  
+     <div id="search">
+     	<form action="search" method="post">
+           	<input type="text" name="text">
+           	<input type="submit" value="Search">
+     	 </form>
       </div>
+      <div id="triangulo">
+      
+      </div>
+      </div>
+      <br>
     <div id="w">
     <div id="content" class="clearfix">
         <div class="images">
