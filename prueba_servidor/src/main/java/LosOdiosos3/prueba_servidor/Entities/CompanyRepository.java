@@ -12,4 +12,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 
 	// Enabling static ORDER BY for a query
 	List<Company> findByNameOrderByYearAsc(String name);
+	
+	// busqueda con nombre parcial
+	List<Company> findByNameContaining(String name);
 }

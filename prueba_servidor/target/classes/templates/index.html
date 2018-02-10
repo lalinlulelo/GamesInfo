@@ -21,11 +21,11 @@
 
 p{
   font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
+     color:  rgb(33, 73, 138);
 }
 li{
  font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
+     color:  rgb(33, 73, 138);
 }
  #navegador a{
      font-family: "Andale Mono", monospace;
@@ -42,11 +42,11 @@ li{
  #navegador ul{
      list-style-type: none;
      text-align: left;
-     color: #010201;
+     color: rgb(33, 73, 138);
  }
  #navegador li{
      font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
+     color:  rgb(33, 73, 138);
      font-size: 130%;
      display: inline;
      text-align: center;
@@ -54,7 +54,7 @@ li{
  }
  #navegador p{
      font-family: "Andale Mono", monospace;
-     color:  #F9FF35;
+     color:  rgb(33, 73, 138);
      font-size: 130%;
  }
  input[type=submit] {
@@ -66,6 +66,30 @@ li{
      -webkit-border-radius: 5px;
      border-radius: 5px; 
  }
+ input[type=text] {
+ 	color: rgb(33, 73, 138)
+ }
+ #search{
+ 	background-color: rgb(33, 73, 138);
+ 	text-align:right;
+ 	width: auto;
+ 	float: right;
+ 	padding-right: 20px;
+ 	padding-left: 0px;
+ 	padding-bottom: 5px;
+ 	padding-top: 5px;
+ 	position:relative;
+ 	top: -5px;   
+ }
+ #triangulo{
+  	border-left: 35px solid transparent;
+    border-top: 45px solid  rgb(33, 73, 138);
+    float:right;
+    padding-right: 20px;
+	position: relative;
+	right: -10px;
+	z-index: -3;
+ }
   </style><title>GamesInfo</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,36 +99,48 @@ li{
 </head>
   <body class="body">
     <div id="navegador">      
-        <form action="login" method="post">
+     <form action="login" method="post">
           <ul>
-            <li></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/event_calendar">Events</a></li>
-            <li><a href="/game_list">Games</a></li>
-            <li><a href="/company_list">Companies</a></li>
+          <div  class="row">
+            <div  class="col-md-4">
+	            <li><a href="/">Home</a></li>
+	            <li><a href="/event_calendar">Events</a></li>
+	            <li><a href="/game_list">Games</a></li>
+	            <li><a href="/company_list">Companies</a></li>
+            </div>
+            
             {{#registered}}
-            <li><a href="/my_lists">My Lists</a></li>            
-            <li><a href="/profile">Profile</a></li>
+            <div  class="col-md-5"> </div>
+            <div  class="col-md-3">
+	            <li><a href="/my_lists">My Lists</a></li>            
+	            <li><a href="/profile">Profile</a></li>
+            </div>
             {{/registered}}
-            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>                 
-            {{#unregistered}}
-            <li>User:</li><input type="text" name="name">
-            <li></li>
-            <li>Password:</li><input type="text" name="password">
-            <li></li>
-            <input type="submit" value="Login">
-            <li></li><li></li><li></li><li></li>
-            <li></li><li></li><li></li><li></li>
+                           
+            {{#unregistered}}  
+            <div  class="col-md-2"> </div>         
+	        <input type="text" placeholder="Username" name="name" required />
+	        <li></li>
+	        <input type="password" placeholder="Password" name="password"	required />
+	        <li></li>
+	        <input type="submit" value="Login">            
+	            
             <li><a href="/new_user">Register</a></li>
             {{/unregistered}}
-            {{#registered}}
-            <li>Hello, {{name}}</li>
-            {{/registered}}
+                    
+          </div>             
           </ul>		
-        </form>      
+     </form>  
+     <div id="search">
+     	<form action="search" method="post">
+           	<input type="text" name="text">
+           	<input type="submit" value="Search">
+     	 </form>
       </div>
-    
-    
+      <div id="triangulo">
+      
+      </div>
+      </div>
     
   <div class="container" style="width:100%; padding:0;">
     <h2 class="Title">GamesInfo</h2>  
