@@ -38,7 +38,7 @@ A continuación se dispone de la captura de las distintas pantallas citadas en e
 ## Diagrama de Entidad-Relación ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
-![Diagrama de Entidad-Relación](https://github.com/lalinlulelo/GamesInfo/blob/master/images/ERDia.png)
+![Diagrama de Entidad-Relación](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaER.png)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
