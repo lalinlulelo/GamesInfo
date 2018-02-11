@@ -85,6 +85,10 @@ public class webController {
 			companyRepository.save(Platinum_Games);
 			Company Square_Enix = new Company("Square Enix", "Japan", "Only make FF", 1975, "https://na.square-enix.com/sites/default/files/imagecache/post-image/image_gallery/587/6477ee99579631b75080a480f63952e8.jpg", "http://www.square-enix.com/");
 			companyRepository.save(Square_Enix);
+			Company Santa_Monica = new Company("Santa Monica", "EEUU", "Only God of War", 1999, "https://static.giantbomb.com/uploads/original/0/1992/1292491-sce_santa_monica_logo.png", "http://sms.playstation.com/");
+			companyRepository.save(Santa_Monica);
+			Company Epic_Games = new Company("Epic Games", "EEUU", "Caotic", 2003, "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Epic_Games_logo.svg/1200px-Epic_Games_logo.svg.png", "https://es.wikipedia.org/wiki/Epic_Games");
+			companyRepository.save(Epic_Games);
 			
 			// juegos
 			Game TLOU = new Game("The last of us", Naughty_Dog, "survival horror", "Good game", 2013, 9.5, "https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg","http://www.thelastofus.playstation.com/");
@@ -95,8 +99,16 @@ public class webController {
 			gameRepository.save(SMO);
 			Game CB = new Game("Crash Bandicoot N Sane Trilogy", Activision, "platform", "Hard Game", 2017, 8, "http://www.eliteguias.com/img/caratulas/_og_/playstation4/crash-bandicoot-n-sane-trilogy.jpg", "https://es.wikipedia.org/wiki/Crash_Bandicoot");	
 			gameRepository.save(CB);
-			Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2018, 8.5, "https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
+			Game BYNT = new Game("Bayonetta 2", Platinum_Games, "Hack n Slash", "witch hunting angels", 2017, 8.5, "https://gocdkeys.com/images/games/bayonetta-2-nintendo-switch.jpg", "https://www.nintendo.es/Juegos/Nintendo-Switch/Bayonetta-2-1313750.html");
 			gameRepository.save(BYNT);
+			Game TMBR = new Game("Rise of the Tomb Raider", Square_Enix, "adventure", "Tomb Raider Aniversary", 2016, 8, "https://images-na.ssl-images-amazon.com/images/I/51Hyk3IIfwL.jpg", "https://es.wikipedia.org/wiki/Rise_of_the_Tomb_Raider");
+			gameRepository.save(TMBR);
+			TLOU = new Game("The last of us 2", Naughty_Dog, "survival horror", "Good game", 2018, 9.5, "https://images-na.ssl-images-amazon.com/images/I/511VhhJg%2BbL.jpg","https://www.playstation.com/es-es/games/the-last-of-us-part-ii-ps4/");
+			gameRepository.save(TLOU);
+			Game GOW = new Game("God of War", Santa_Monica, "adventure", "Human vs Gods", 2018, 9.5, "https://i11d.3djuegos.com/juegos/11552/god_of_war_ps4__nombre_temporal_/fotos/ficha/god_of_war_ps4__nombre_temporal_-3754795.jpg", "https://www.playstation.com/es-es/games/god-of-war-ps4/");
+			gameRepository.save(GOW);
+			GOW = new Game("Gears of War", Epic_Games, "adventure", "apocalipsis", 2016, 7, "https://i11c.3djuegos.com/juegos/1444/gears_of_war/fotos/ficha/gears_of_war-1681066.jpg", "https://es.wikipedia.org/wiki/Gears_of_War");
+			gameRepository.save(GOW);
 			
 			// eventos
 			Event E3 = new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" );
@@ -224,6 +236,7 @@ public class webController {
 					usuario.setAttribute("password", usur.get(i).getPassword());
 					usuario.setAttribute("date", usur.get(i).getDate());
 					usuario.setAttribute("icon", usur.get(i).getIcon());
+					usuario.setAttribute("email", usur.get(i).getEmail());
 					
 					// se guarda un objeto User
 					User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
@@ -256,6 +269,18 @@ public class webController {
 		
 		
 		// se dirige a la pagina como iniciado
+		return "index";
+	}
+	
+	@RequestMapping("/log_out")
+	public String log_out (Model model, HttpSession usuario) {
+		usuario.setAttribute("registered", false);
+		// se guardan los atributos en el modelo
+		model.addAttribute("Titulo", "Juegos Nuevos");
+		model.addAttribute("Cuerpo", "Proximamente");
+		model.addAttribute("alert", "Good Bye");		
+		model.addAttribute("name", " ");
+		
 		return "index";
 	}
 	// ----------------------------- FIN INICIO DE SESION ----------------------------
