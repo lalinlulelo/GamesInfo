@@ -170,12 +170,19 @@ public class webController {
 		usuario.setAttribute("name", user.getName());
 		usuario.setAttribute("password", user.getPassword());
 		usuario.setAttribute("date", user.getDate());
+		usuario.setAttribute("email", user.getEmail());
 		usuario.setAttribute("icon",  user.getIcon());
 		
+		List<User> usur = null;
 		// se comprueba la existencia del nombre
-		List<User> usur = userRepository.findByName(user.getName());
+		usur = userRepository.findByName(user.getName());
 		if(usur.size() > 0) {
-			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('nombre ya existente');" + "window.location = 'new_user.html'; " + "</script>");		
+			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('name alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
+			return "new_user";
+		}
+		usur = userRepository.findByEmail(user.getEmail());
+		if(usur.size() > 0) {
+			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('email alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
 			return "new_user";
 		}
 		
@@ -262,12 +269,14 @@ public class webController {
 		String password = (String) usuario.getAttribute("password");
 		String date = (String) usuario.getAttribute("date");
 		String icon = (String) usuario.getAttribute("icon");
+		String email = (String) usuario.getAttribute("email");
 		
 		// se mandan los datos al modelo
 		model.addAttribute("name", name);
 		model.addAttribute("password", password);
 		model.addAttribute("date", date);	
 		model.addAttribute("icon", icon);
+		model.addAttribute("email", email);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
