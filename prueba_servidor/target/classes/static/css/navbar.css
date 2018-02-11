@@ -1,0 +1,69 @@
+@charset "UTF-8";
+	#navegador a{
+	    font-family: "Andale Mono", monospace;
+	    color:  #F9FF35;
+	    text-decoration:none;
+	}
+	#navegador{
+		background-color: rgb(33, 73, 138);
+	    padding-top: 2px;
+	    color:  #F9FF35;
+	    height: 45px;
+	    line-height: 30px; 
+	}
+	#navegador ul{
+	    list-style-type: none;
+	    text-align: left;
+	    color: rgb(33, 73, 138);
+	}
+	#navegador li{
+	    font-family: "Andale Mono", monospace;
+	    color:  rgb(33, 73, 138);
+	    font-size: 130%;
+	    display: inline;
+	    text-align: center;
+	    margin: 0 10px 0 0;
+	}
+	#navegador p{
+	    font-family: "Andale Mono", monospace;
+	    color:  rgb(33, 73, 138);
+	    font-size: 130%;
+	}
+	input[type=submit] {
+	    color: rgb(33, 73, 138);
+	    padding:5px 15px; 
+	    background:rgb(251, 255, 140); 
+	    border:0 none;
+	    cursor:pointer;
+	    -webkit-border-radius: 5px;
+	    border-radius: 5px; 
+	}
+	input[type=text] {
+	 	color: rgb(33, 73, 138)
+	}
+	#search{
+	 	background-color: rgb(33, 73, 138);
+	 	text-align:right;
+	 	width: auto;
+	 	float: right;
+	 	padding-right: 20px;
+	 	padding-left: 0px;
+	 	padding-bottom: 5px;
+	 	padding-top: 5px;
+	 	position:relative;
+	 	z-index: 2;
+	 	top: -5px;   
+	}
+	#triangulo{
+	  	border-left: 20px solid transparent;
+	    border-top: 50px solid  rgb(33, 73, 138);
+	    float:right;
+	    padding-right: 20px;			    
+		position: relative;
+		right: -10px;
+		z-index: 1;
+		top: -5px; 
+	}
+	#drop{
+		background-color: #406DB5;
+	}
