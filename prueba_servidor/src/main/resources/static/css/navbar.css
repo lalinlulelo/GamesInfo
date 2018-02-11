@@ -11,9 +11,9 @@
 	}
 	#navegador{
 		background-color: rgb(33, 73, 138);
-	    padding-top: 2px;
+	    padding-top: 13px;
 	    color:  #F9FF35;
-	    height: 45px;
+	    height: 65px;
 	    line-height: 30px; 
 	}
 	#navegador ul{
@@ -27,7 +27,7 @@
 	    font-size: 130%;
 	    display: inline;
 	    text-align: center;
-	    margin: 0 10px 0 0;
+	    margin: 20px 10px 0 0;
 	}
 	#navegador p{
 	    font-family: "Andale Mono", monospace;
@@ -61,7 +61,7 @@
 	}
 	#triangulo{
 	  	border-left: 20px solid transparent;
-	    border-top: 50px solid  rgb(33, 73, 138);
+	    border-top: 49.7px solid  rgb(33, 73, 138);
 	    float:right;
 	    padding-right: 20px;			    
 		position: relative;
