@@ -339,17 +339,39 @@ public class webController {
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
 	// ----------------------------- LISTA DE JUEGOS ---------------------------------
-	/*
+	
 	@RequestMapping("/game_list/{modo}")
 	public String game_list (Model model, HttpSession usuario, @PathVariable String modo) {
-	*/
-	@RequestMapping("/game_list")
-	public String game_list (Model model, HttpSession usuario){	
-		String modo = "year_up";
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
-		List<Game> list_games = gameRepository.findAll();
+		List<Game> list_games_2 = gameRepository.findAll();
+		//List<Game> list_games = gameRepository.findByNameContainingOrderByScoreAsc("");
 		
+		List<Game> list_games = null;
+		switch(modo) {
+			case "n":
+				list_games = gameRepository.findAll();
+				break;
+			case "score_up":
+				list_games = gameRepository.findByScoreAsc();
+				break;
+			case "score_down":
+				list_games = gameRepository.findByScoreDesc();
+				break;
+			case "letter_up":
+				list_games = gameRepository.findByNameAsc();
+				break;
+			case "letter_down":
+				list_games = gameRepository.findByNameDesc();
+				break;
+			case "year_up":
+				list_games = gameRepository.findByYearDesc();
+				break;
+			case "year_down":
+				list_games = gameRepository.findByYearAsc();
+				break;
+			
+		}
 		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 			String Url=list_games.get(i).getImage();
