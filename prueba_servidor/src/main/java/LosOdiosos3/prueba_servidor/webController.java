@@ -59,14 +59,19 @@ public class webController {
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
 			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
+			Juan.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Juan);
 			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
+			Pedro.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Pedro);
 			User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com");
+			Guille.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Guille);
 			User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com");
+			Sergio.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Sergio);
 			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com");
+			Agus.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Agus);
 			
 			// compañias
@@ -165,7 +170,7 @@ public class webController {
 		usuario.setAttribute("name", user.getName());
 		usuario.setAttribute("password", user.getPassword());
 		usuario.setAttribute("date", user.getDate());
-		usuario.setAttribute("icon",  icons.get((int)Math.random()*6));
+		usuario.setAttribute("icon",  user.getIcon());
 		
 		// se comprueba la existencia del nombre
 		List<User> usur = userRepository.findByName(user.getName());
@@ -185,6 +190,7 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
+			
 		}else {
 			model.addAttribute("name", " ");
 		}
@@ -210,6 +216,7 @@ public class webController {
 					usuario.setAttribute("name", usur.get(i).getName());
 					usuario.setAttribute("password", usur.get(i).getPassword());
 					usuario.setAttribute("date", usur.get(i).getDate());
+					usuario.setAttribute("icon", usur.get(i).getIcon());
 					
 					// se guarda un objeto User
 					User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
@@ -221,12 +228,14 @@ public class webController {
 					model.addAttribute("Cuerpo", "Proximamente");
 					
 					// se muestra el link de iniciar/registrar usuario si es false
+					
+					
 					model.addAttribute("registered", usuario.getAttribute("registered"));
 					boolean aux = !(Boolean) usuario.getAttribute("registered");
 					model.addAttribute("unregistered", aux);
 					model.addAttribute("name", usuario.getAttribute("name"));
 					model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
-
+					model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 					return "index";
 				}
 			}
@@ -237,6 +246,7 @@ public class webController {
 		model.addAttribute("Cuerpo", "Proximamente");
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");
+		
 		
 		// se dirige a la pagina como iniciado
 		return "index";
@@ -406,7 +416,7 @@ public class webController {
 	@RequestMapping("/company/{company_name}")
 	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
 		
-		System.err.println("Hola");
+		
 		// se adquiere la lista de juegos que contiene el nombre
 		List <Company> companies = companyRepository.findByName(company_name);
 		
