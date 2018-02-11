@@ -1,4 +1,5 @@
 # GamesInfo
+![#BAC1DA](https://placehold.it/15/BAC1DA/000000?text=+) `#BAC1DA`
 
 # Fase 1 #
 ## Descripción de la web ##
