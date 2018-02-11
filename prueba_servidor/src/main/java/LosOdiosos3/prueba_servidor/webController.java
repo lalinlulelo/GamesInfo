@@ -370,6 +370,9 @@ public class webController {
 			case "year_down":
 				list_games = gameRepository.findByYearAsc();
 				break;
+			case "companies":
+				list_games = gameRepository.findByCompanyAsc();
+				break;
 			
 		}
 		for(int i=0;i<list_games.size();i++) {
@@ -421,7 +424,7 @@ public class webController {
 				// si hay comentarios en el juego
 				if(companies.get(0).getComment().size()>0) {
 					List<Comment> list_comments=companies.get(0).getComment();			
-						System.err.println("prueba");
+						
 					for(int i=0;i<list_comments.size();i++) {
 						//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 						String User=list_comments.get(i).getUser().getName();
@@ -458,13 +461,30 @@ public class webController {
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
 	// ----------------------------- LISTA DE COMPAÑIAS -------------------------------
-	@RequestMapping("/company_list")
-	public String company_list (Model model, HttpSession usuario) {
+	@RequestMapping("/company_list/{mode}")
+	public String company_list (Model model, HttpSession usuario, @PathVariable String mode) {
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + 	"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
 		// lista de todas las compañias disponibles
-		List<Company> list_company=companyRepository.findAll();
+		List<Company> list_company = null;
+		switch(mode) {
+			case "n":
+				list_company=companyRepository.findAll();
+				break;
+			case "letter_up":
+				list_company = companyRepository.findByNameAsc();
+				break;
+			case "letter_down":
+				list_company = companyRepository.findByNameDesc();
+				break;
+			case "year_down":
+				list_company = companyRepository.findByYearAsc();
+				break;
+			case "year_up":
+				list_company = companyRepository.findByYearDesc();
+				break;
+		}
 		
 		for(int i=0;i<list_company.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
@@ -531,6 +551,30 @@ public class webController {
 	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
 		// lista que contiene los eventos con el nombre introudcido por url
 		List<Event> events = eventRepository.findByName(event_name);
+		
+		
+		List<String> list=new ArrayList<String>();
+		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+		
+		// si hay comentarios en el juego
+		if(events.get(0).getComment().size()>0) {
+			List<Comment> list_comments=events.get(0).getComment();			
+				
+			for(int i=0;i<list_comments.size();i++) {
+				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+				String User=list_comments.get(i).getUser().getName();
+				String Text=list_comments.get(i).getText();						
+				
+				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+				//Le damos formato a la variable auxiliar y la añadimos a la lista
+				String aux=String.format(div, User, Text);				
+				list.add(aux);				
+			}
+			model.addAttribute("comments", list);
+		}else {
+			model.addAttribute("comments","Prueba");
+		}
+		
 		
 		// se pasan a plantilla los atributos del evento
 		model.addAttribute("name_g", events.get(0).getName());
@@ -621,12 +665,11 @@ public class webController {
 			
 			// se retorna al juego
 			ret= "/game/"+game.getName();
-		}
-			
+		}else {
 			if(page.equals("company")) {
-				System.err.println(name+text);
+				
 				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
-				System.err.println("2");
+				
 				// se coge el juego donde se ha realizado el comentario
 				Company company= companyRepository.findByName(name).get(0);		
 				// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
@@ -638,9 +681,30 @@ public class webController {
 				
 				// se pasan los atributos de la barra de navegacion
 						
-				System.err.println(company.getName());
+			
 				// se retorna al juego
 				ret="/company/"+company.getName();
+		}else {
+			if(page.equals("event")) {
+				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+				
+				// se coge el juego donde se ha realizado el comentario
+				Event event= eventRepository.findByName(name).get(0);		
+				// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+				c.setEvent(event);
+				commentRepository.save(c);
+				// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+				event.setComment(c);
+				eventRepository.save(event);
+				
+				// se pasan los atributos de la barra de navegacion
+						
+			
+				// se retorna al juego
+				ret="/event/"+event.getName();
+			}
+			
+		}
 				
 			}
 			

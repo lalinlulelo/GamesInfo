@@ -31,6 +31,9 @@ public class Event {
 
 	private String image;
 	
+	@OneToMany(mappedBy="event", cascade=CascadeType.REMOVE)
+	private List<Comment> comments=new ArrayList<Comment>();
+	
 	@ManyToMany(mappedBy="events")
 	private List<Game> games;
 	
@@ -122,6 +125,13 @@ public class Event {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public List<Comment> getComment() {
+		return this.comments;
+	}
+	public void setComment(Comment c) {
+		this.comments.add(c);
 	}
 	
 	@Override
