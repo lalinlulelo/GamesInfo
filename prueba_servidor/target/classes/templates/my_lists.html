@@ -12,7 +12,7 @@
 			}
 			.body{
 			  	background: #406DB5;
-			}	
+			}
 			.TitleLit{
 			  	font-size: 20px;
 			  	text-align: center;
@@ -45,10 +45,10 @@
 			 	height: 100px;
 			 	display:block;
 			 	margin:0 auto 0 auto;
-			}			
+			}
 		</style>
 		
-		<title>My List</title>
+		<title>Game List</title>
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -97,7 +97,7 @@
 							  		<li><a href="/profile">Profile</a></li>
 									<li><a href="/my_lists">My Lists</a></li>
 									<div class="dropdown-divider"></div>            
-					            	<li><a href="#">Log out</a></li>					            
+					            	<li><a href="#">Logout</a></li>					            
 							  	</ul>
 							</li>            
 			            </div>
@@ -145,7 +145,16 @@
   
      		</div>
      		<div class="col-md-2" id="Recomendaciones">
-      			<div class="TitleLit">Recommendations</div>
+      			<div class="TitleLit">Order By:<br>
+	      			<a href="/game_list/n">Default</a><br>	
+	      			<a href="/game_list/score_down">Best Scored</a><br>
+	      			<a href="/game_list/score_up">Worst Scored</a><br>
+	      			<a href="/game_list/letter_up">A-Z Games</a><br>
+	      			<a href="/game_list/letter_down">Z-A Games</a><br>
+	      			<a href="/game_list/year_up">Newest Games</a><br>
+	      			<a href="/game_list/year_down">Oldest Games</a><br>
+	      			<a href="/game_list/companies">Companies</a>
+      			</div>
      		</div>    
    		</div>
   		<script>// Write JavaScript here </script>
