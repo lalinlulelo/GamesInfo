@@ -8,11 +8,11 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 - **Parte privada**: el usuario deberá iniciar sesión para poder puntuar, comentar los juegos u ojear sus listas. Gracias al servicio de correo electrónico estará al tanto de su juego, evento o compañía favorita.
 
 ## Entidades principales ##
--   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña y otros datos menos relevantes.
--   **Juego**: Portará un Id, el Nombre, Género, Fecha de Salida, Descripción, Id compañía, Puntuación, lista de Comentarios y otra de eventos a los que participa.
--   **Compañía**: Información de la compañía encargada de desarrollar el juego ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos.
--   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego. Este portará un Id, Usuario, el texto y el juego.
--   **Evento**: Relación N:M con juego y compañía. Contendrá un Id, Fecha, Lugar, Precio, Descripcion y las listas de juegos y compañías que están presentes.
+-   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña y su fecha de nacimiento. Cada usuario registrado tendrá su propia lista de juegos.
+-   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios y otra de eventos a los que participa.
+-   **Compañía**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos a los que participa.
+-   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
+-   **Evento**: Relación N:M con juego y compañía. Contendrá un Id, Fecha, Lugar, Precio, Descripción y las listas de juegos y compañías que están presentes.
 
 ## Servicio Interno ##
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
