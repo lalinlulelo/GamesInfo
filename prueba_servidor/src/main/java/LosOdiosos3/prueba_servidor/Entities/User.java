@@ -27,7 +27,9 @@ public class User {
 	private String date = "...";
 	private String icon = "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png";
 	
-	private ArrayList<ArrayList<Game>> my_lists = new ArrayList<ArrayList<Game>>();
+	//private ArrayList<ArrayList<Game>> my_lists = new ArrayList<ArrayList<Game>>();
+	@ManyToMany(mappedBy="users")
+	private List<Game> games = new ArrayList<Game>();
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
@@ -46,6 +48,14 @@ public class User {
 		this.password = password;
 		this.date = date;
 		this.email = email;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	// setters
@@ -94,8 +104,25 @@ public class User {
 	public String toString () {
 		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";
 	}
+
+	public List<Game> getGames() {
+		return games;
+	}
+
+	public void setGames(List<Game> games) {
+		this.games = games;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	
 	// metodos auxiliares
+	/*
 	public void addList (ArrayList<Game> list) {
 		my_lists.add(list);
 	}
@@ -107,4 +134,6 @@ public class User {
 	public ArrayList<ArrayList<Game>> getMyLists(){
 		return my_lists;
 	}
+	*/
+	
 }

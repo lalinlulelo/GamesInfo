@@ -36,6 +36,9 @@ public class Game {
 	
 	private String url;
 	
+	@ManyToMany 
+	private List<User> users=new ArrayList<User>();
+
 	@ManyToMany
 	private List<Event> events;
 	
@@ -55,6 +58,14 @@ public class Game {
 		this.score = score;
 		this.image = image;
 		this.url = url;
+	}	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -119,6 +130,22 @@ public class Game {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public List<Event> getEvents() {

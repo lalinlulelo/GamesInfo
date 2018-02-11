@@ -106,6 +106,7 @@ public class webController {
 			eventRepository.save(PGW);
 			
 			// listas de juegos
+			/*
 			ArrayList<Game> ninGameList = new ArrayList<Game>();
 			ArrayList<Game> sonyGameList = new ArrayList<Game>();
 			ninGameList.add(SMO);
@@ -115,6 +116,8 @@ public class webController {
 			Juan.addList(ninGameList);
 			Juan.addList(sonyGameList);
 			Pedro.addList(sonyGameList);
+			*/
+			
 			
 			// Variables iniciales del usuario
 			usuario.setAttribute("alert", "  ");
@@ -578,7 +581,7 @@ public class webController {
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
 	public String my_lists (Model model, HttpSession usuario) {
-		
+		/*
 		String div="<div class=\"col-md-3\">\r\n" + 
 				"    <div class=\"Game\">\r\n" + 
 				"<img src=\"%s\" class=\"imagen\">\r\n" + 
@@ -612,6 +615,7 @@ public class webController {
 		}
 
 		model.addAttribute("games", listString);
+		*/
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
