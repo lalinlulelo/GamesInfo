@@ -373,6 +373,9 @@ public class webController {
 			case "year_down":
 				list_games = gameRepository.findByYearAsc();
 				break;
+			case "companies":
+				list_games = gameRepository.findByCompanyAsc();
+				break;
 			
 		}
 		for(int i=0;i<list_games.size();i++) {
@@ -461,13 +464,30 @@ public class webController {
 	// ----------------------------- FIN COMPAÑIA -------------------------------------
 	
 	// ----------------------------- LISTA DE COMPAÑIAS -------------------------------
-	@RequestMapping("/company_list")
-	public String company_list (Model model, HttpSession usuario) {
+	@RequestMapping("/company_list/{mode}")
+	public String company_list (Model model, HttpSession usuario, @PathVariable String mode) {
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + 	"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
 		// lista de todas las compañias disponibles
-		List<Company> list_company=companyRepository.findAll();
+		List<Company> list_company = null;
+		switch(mode) {
+			case "n":
+				list_company=companyRepository.findAll();
+				break;
+			case "letter_up":
+				list_company = companyRepository.findByNameAsc();
+				break;
+			case "letter_down":
+				list_company = companyRepository.findByNameDesc();
+				break;
+			case "year_down":
+				list_company = companyRepository.findByYearAsc();
+				break;
+			case "year_up":
+				list_company = companyRepository.findByYearDesc();
+				break;
+		}
 		
 		for(int i=0;i<list_company.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables

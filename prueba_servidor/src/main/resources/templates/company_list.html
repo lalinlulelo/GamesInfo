@@ -31,6 +31,10 @@
 			 	display:block;
 			 	margin:0 auto 0 auto;
 			}
+			#busc{
+				text-align: left;
+				font-size: 90%;
+			}
 		</style>
 		
 		<title>Company List</title>
@@ -67,7 +71,7 @@
 				            <li><a href="/">HOME</a></li>
 				            <li><a href="/event_calendar">Events</a></li>
 				            <li><a href="/game_list/n">Games</a></li>
-				            <li><a href="/company_list">Companies</a></li>
+				            <li><a href="/company_list/n">Companies</a></li>
 			            </div>
 			            
 			            {{#registered}}
@@ -106,6 +110,7 @@
 		     	</form>
 		    </div>
 	    	<div id="triangulo"></div>
+    		
 	    </div>
  	
 	 	<br><br>    
@@ -128,7 +133,13 @@
 				</div>   
 			</div>
 		    <div class="col-md-2" id="Recomendaciones">
-		    	<div class="TitleLit">Recommendations</div>
+		    	<div class="TitleLit">Order By:<br>
+	      			<a id="busc" href="/company_list/n">Default</a><br>	
+	      			<a id="busc" href="/company_list/letter_up">A-Z Companies</a><br>
+	      			<a id="busc" href="/company_list/letter_down">Z-A Companies</a><br>
+	      			<a id="busc" href="/company_list/year_up">Newest Companies</a><br>
+	      			<a id="busc" href="/company_list/year_down">Oldest Companies</a><br>
+      			</div>
 		    </div>	     
 		</div>
 	  	<script>// Write JavaScript here </script>

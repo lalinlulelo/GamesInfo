@@ -4,6 +4,11 @@
 	    color:  #F9FF35;
 	    text-decoration:none;
 	}
+	#navegador a:hover{
+	    font-family: "Andale Mono", monospace;
+	    color:  #fcffaa;
+	    text-decoration:none;
+	}
 	#navegador{
 		background-color: rgb(33, 73, 138);
 	    padding-top: 2px;
@@ -66,4 +71,7 @@
 	}
 	#drop{
 		background-color: #406DB5;
+	}
+	#drop :hover{
+		background-color: #769fe2;
 	}

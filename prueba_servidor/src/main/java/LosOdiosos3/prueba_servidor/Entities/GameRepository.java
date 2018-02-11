@@ -38,4 +38,8 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 	// busqueda anio en orden descendente
 	@Query("SELECT game FROM Game game ORDER BY game.year DESC")
 	List<Game> findByYearDesc();
+	
+	// busqueda por compañia
+	@Query("SELECT game FROM Game game ORDER BY game.company ASC")
+	List<Game> findByCompanyAsc();
 }
