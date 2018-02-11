@@ -25,6 +25,13 @@ En el siguiente diagrama se puede visualizar desde qué paginas se puede navegar
 
 En esta fase no se han diferenciado las partes privada y pública. Sin embargo, el funcionamiento de la parte privada, será la posibilidad de visualizar las listas propias, creadas por el usuario, así como el acceso a su propio perfil para configurarlo o visualizar cierto detalles de él.
 
+A continuación se dispone de la captura de las distintas pantallas citadas en el diagrama:
+#### Pantalla de inicio sin usuario ####
+![Inicio sin Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home.jpg?raw=true)
+
+#### Pantalla de inicio con usuario ####
+![Inicio con Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home_loged.jpg?raw=true)
+
 ## Diagrama de Entidad-Relación ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
