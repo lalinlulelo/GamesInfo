@@ -49,8 +49,9 @@
 		
 		<title>Search List</title>
 		
-	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 		<meta charset="utf-8">
@@ -66,7 +67,7 @@
 		
 		<!-- Popper -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-	
+		
 		<!-- Custom styles for this template -->
     	<link href="../css/navbar.css" rel="stylesheet">
 	</head>
@@ -76,30 +77,33 @@
 			<form action="login" method="post">
 		    	<ul>
 		        	<div class="row">
-			            <div class="col-md-5">
+			            <div class="col-md-4">
 				            <li><a href="/">HOME</a></li>
 				            <li><a href="/event_calendar">Events</a></li>
 				            <li><a href="/game_list/n">Games</a></li>
 				            <li><a href="/company_list/n">Companies</a></li>
+				            
 			            </div>
-			            
+			            <div class="col-md-2">
+			            	<a><img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Title.png?raw=true" class="img-responsive img-centered"/></a>  	
+			            </div>
 			            {{#registered}}
-			            <div  class="col-md-5"> </div>
+			            <div  class="col-md-4"> </div>
 			            <div  class="col-md-2">
 				        	<li class="dropdown">
 							  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
-							  	<ul class="dropdown-menu" id="drop">							  	
-								  		<li><a href="/profile">Profile</a></li>
-										<li><a href="/my_lists">My Lists</a></li>
-										<div class="dropdown-divider"></div>            
-						            	<li><a href="#">Log out</a></li>
-						        </ul>
-							</li>             
+							  	<ul class="dropdown-menu" id="drop">
+							  		<li><a href="/profile">Profile</a></li>
+									<li><a href="/my_lists">My Lists</a></li>
+									<div class="dropdown-divider"></div>            
+					            	<li><a href="#">Log out</a></li>					            
+							  	</ul>
+							</li>            
 			            </div>
 			            {{/registered}}
 			                           
 			            {{#unregistered}}  
-			            <div  class="col-md-2"> </div>         
+			            <div  class="col-md-1"> </div>         
 				        <input type="text" placeholder="Username" name="name" required />
 				        <li></li>
 				        <input type="password" placeholder="Password" name="password"	required />
@@ -115,7 +119,7 @@
 		    <div id="search">
 		     	<form action="search" method="post">
 		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
-		           	<input type="submit" value="Search">
+		           	<input type="submit" value="Search"> 
 		     	</form>
 		    </div>
 	    	<div id="triangulo"></div>

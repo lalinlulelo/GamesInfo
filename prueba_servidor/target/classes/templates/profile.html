@@ -295,30 +295,33 @@
 			<form action="login" method="post">
 		    	<ul>
 		        	<div class="row">
-			            <div class="col-md-5">
+			            <div class="col-md-4">
 				            <li><a href="/">HOME</a></li>
 				            <li><a href="/event_calendar">Events</a></li>
 				            <li><a href="/game_list/n">Games</a></li>
 				            <li><a href="/company_list/n">Companies</a></li>
+				            
 			            </div>
-			            
+			            <div class="col-md-2">
+			            	<a><img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Title.png?raw=true" class="img-responsive img-centered"/></a>  	
+			            </div>
 			            {{#registered}}
-			            <div  class="col-md-5"> </div>
+			            <div  class="col-md-4"> </div>
 			            <div  class="col-md-2">
 				        	<li class="dropdown">
 							  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
-							  	<ul class="dropdown-menu" id="drop">							  	
-								  		<li><a href="/profile">Profile</a></li>
-										<li><a href="/my_lists">My Lists</a></li>
-										<div class="dropdown-divider"></div>            
-						            	<li><a href="#">Log out</a></li>
-						        </ul>
-							</li>             
+							  	<ul class="dropdown-menu" id="drop">
+							  		<li><a href="/profile">Profile</a></li>
+									<li><a href="/my_lists">My Lists</a></li>
+									<div class="dropdown-divider"></div>            
+					            	<li><a href="#">Log out</a></li>					            
+							  	</ul>
+							</li>            
 			            </div>
 			            {{/registered}}
 			                           
 			            {{#unregistered}}  
-			            <div  class="col-md-2"> </div>         
+			            <div  class="col-md-1"> </div>         
 				        <input type="text" placeholder="Username" name="name" required />
 				        <li></li>
 				        <input type="password" placeholder="Password" name="password"	required />
@@ -334,7 +337,7 @@
 		    <div id="search">
 		     	<form action="search" method="post">
 		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
-		           	<input type="submit" value="Search">
+		           	<input type="submit" value="Search"> 
 		     	</form>
 		    </div>
 	    	<div id="triangulo"></div>
