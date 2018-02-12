@@ -122,7 +122,20 @@ public class webController {
 			Juan.addList(sonyGameList);
 			Pedro.addList(sonyGameList);
 			*/
-			
+			Juan.addGame(TLOU);
+			Juan.addGame(LOZBTW);
+			userRepository.save(Juan);
+			Pedro.addGame(CB);
+			Pedro.addGame(SMO);
+			userRepository.save(Pedro);
+			TLOU.addUser(Juan);
+			LOZBTW.addUser(Juan);
+			CB.addUser(Pedro);
+			SMO.addUser(Pedro);
+			gameRepository.save(TLOU);
+			gameRepository.save(LOZBTW);
+			gameRepository.save(SMO);
+			gameRepository.save(CB);
 			
 			// Variables iniciales del usuario
 			usuario.setAttribute("alert", "  ");
@@ -619,42 +632,33 @@ public class webController {
 	
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model, HttpSession usuario) {
-		/*
-		String div="<div class=\"col-md-3\">\r\n" + 
-				"    <div class=\"Game\">\r\n" + 
-				"<img src=\"%s\" class=\"imagen\">\r\n" + 
-				"      <p style=\"text-align:center; color:  rgb(33, 73, 138);\">%s</p>\r\n" + 
-				"     \r\n" + 
-				"    </div>\r\n" + 
-				"  </div>";
-
-		
+	public String my_lists (Model model, HttpSession usuario) {		
 		// nombre del usuario
 		String name = (String) usuario.getAttribute("name");
 		//Accedo al repositorio de usuarios
-		List <User> users = userRepository.findByName(name);									
-					
-		//List <User> users = userRepository.findAll();
-		ArrayList<ArrayList<Game>> lists = users.get(0).getMyLists();
+		List <User> users = userRepository.findByName(name);
+		
+		System.out.println(users.size());
+		
+		//Cojo la lista de ese usuario			
+		List<Game> list_games = users.get(0).getGames();
+		
+		List<String> list=new ArrayList<String>();		
+		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 
-		List<String> listString = new ArrayList<String>();
-		//Accedo a la sublista de juegos
-		ArrayList<Game> subList = lists.get(0);
-		//variable auxiliar
-		for(int i=0;i<subList.size();i++) {
+		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=subList.get(i).getImage();
-			String Titulo=subList.get(i).getName();		
+			String Url=list_games.get(i).getImage();
+			String Titulo=list_games.get(i).getName();		
 			String link="/game/" + Titulo;
 			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 			//Le damos formato a la variable auxiliar y la añadimos a la lista
 			String aux=String.format(div, Url, link, Titulo);			
-			listString.add(aux);	
-		}
-
-		model.addAttribute("games", listString);
-		*/
+			list.add(aux);			
+		}		
+		
+		// se pasa la lista de juegos a la plantilla
+		model.addAttribute("games", list);
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));

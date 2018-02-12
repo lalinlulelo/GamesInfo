@@ -112,6 +112,10 @@ public class User {
 	public void setGames(List<Game> games) {
 		this.games = games;
 	}
+	
+	public void addGame(Game game){
+		games.add(game);
+	}
 
 	public List<Comment> getComments() {
 		return comments;
