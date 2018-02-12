@@ -103,12 +103,12 @@ public class webController {
 			gameRepository.save(BYNT);
 			Game TMBR = new Game("Rise of the Tomb Raider", Square_Enix, "adventure", "Tomb Raider Aniversary", 2016, 8, "https://images-na.ssl-images-amazon.com/images/I/51Hyk3IIfwL.jpg", "https://es.wikipedia.org/wiki/Rise_of_the_Tomb_Raider");
 			gameRepository.save(TMBR);
-			TLOU = new Game("The last of us 2", Naughty_Dog, "survival horror", "Good game", 2018, 9.5, "https://images-na.ssl-images-amazon.com/images/I/511VhhJg%2BbL.jpg","https://www.playstation.com/es-es/games/the-last-of-us-part-ii-ps4/");
-			gameRepository.save(TLOU);
+			Game TLOU2 = new Game("The last of us 2", Naughty_Dog, "survival horror", "Good game", 2018, 9.5, "https://images-na.ssl-images-amazon.com/images/I/511VhhJg%2BbL.jpg","https://www.playstation.com/es-es/games/the-last-of-us-part-ii-ps4/");
+			gameRepository.save(TLOU2);
 			Game GOW = new Game("God of War", Santa_Monica, "adventure", "Human vs Gods", 2018, 9.5, "https://i11d.3djuegos.com/juegos/11552/god_of_war_ps4__nombre_temporal_/fotos/ficha/god_of_war_ps4__nombre_temporal_-3754795.jpg", "https://www.playstation.com/es-es/games/god-of-war-ps4/");
 			gameRepository.save(GOW);
-			GOW = new Game("Gears of War", Epic_Games, "adventure", "apocalipsis", 2016, 7, "https://i11c.3djuegos.com/juegos/1444/gears_of_war/fotos/ficha/gears_of_war-1681066.jpg", "https://es.wikipedia.org/wiki/Gears_of_War");
-			gameRepository.save(GOW);
+			Game GOWX = new Game("Gears of War", Epic_Games, "adventure", "apocalipsis", 2016, 7, "https://i11c.3djuegos.com/juegos/1444/gears_of_war/fotos/ficha/gears_of_war-1681066.jpg", "https://es.wikipedia.org/wiki/Gears_of_War");
+			gameRepository.save(GOWX);
 			
 			// eventos
 			Event E3 = new Event("E3", "Los Angeles", 2018, 6, 15, 286, "muy chachi", "http://media.comicbook.com/2018/02/e3-2018-1080845.jpeg" );
