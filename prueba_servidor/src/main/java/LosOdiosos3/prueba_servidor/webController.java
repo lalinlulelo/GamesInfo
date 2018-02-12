@@ -77,7 +77,7 @@ public class webController {
 			// compañias
 			Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
 			companyRepository.save(Naughty_Dog);		
-			Company Nintendo = new Company("Nintendo", "Japon", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
+			Company Nintendo = new Company("Nintendo", "Japan", "Nintendo Company", 1889, "https://www.nintendo.com/images/social/fb-400x400.jpg", "https://www.nintendo.es/");
 			companyRepository.save(Nintendo);
 			Company Activision = new Company("Activision", "EEUU", "AAA Company", 1979, "https://static.blog.playstation.com/wp-content/uploads/avatars//tvj-D5G4_400x400.jpg?m=1475608799", "https://www.activision.com/es/home");
 			companyRepository.save(Activision);
@@ -123,17 +123,6 @@ public class webController {
 			eventRepository.save(PGW);
 			
 			// listas de juegos
-			/*
-			ArrayList<Game> ninGameList = new ArrayList<Game>();
-			ArrayList<Game> sonyGameList = new ArrayList<Game>();
-			ninGameList.add(SMO);
-			ninGameList.add(LOZBTW);
-			sonyGameList.add(TLOU);
-			sonyGameList.add(CB);
-			Juan.addList(ninGameList);
-			Juan.addList(sonyGameList);
-			Pedro.addList(sonyGameList);
-			*/
 			Juan.addGame(TLOU);
 			Juan.addGame(LOZBTW);
 			userRepository.save(Juan);
@@ -260,9 +249,7 @@ public class webController {
 					model.addAttribute("Titulo", "Juegos Nuevos");
 					model.addAttribute("Cuerpo", "Proximamente");
 					
-					// se muestra el link de iniciar/registrar usuario si es false
-					
-					
+					// se muestra el link de iniciar/registrar usuario si es false										
 					model.addAttribute("registered", usuario.getAttribute("registered"));
 					boolean aux = !(Boolean) usuario.getAttribute("registered");
 					model.addAttribute("unregistered", aux);
@@ -398,8 +385,7 @@ public class webController {
 	}
 	// ----------------------------- FIN JUEGO ---------------------------------------
 	
-	// ----------------------------- LISTA DE JUEGOS ---------------------------------
-	
+	// ----------------------------- LISTA DE JUEGOS ---------------------------------	
 	@RequestMapping("/game_list/{modo}")
 	public String game_list (Model model, HttpSession usuario, @PathVariable String modo) {
 		List<String> list=new ArrayList<String>();		
@@ -462,8 +448,7 @@ public class webController {
 	// ----------------------------- COMPAÑIA ----------------------------------------
 	@RequestMapping("/company/{company_name}")
 	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
-		
-		
+				
 		// se adquiere la lista de juegos que contiene el nombre
 		List <Company> companies = companyRepository.findByName(company_name);
 		
@@ -473,33 +458,30 @@ public class webController {
 		String description = companies.get(0).getDescription();
 		int year = companies.get(0).getYear();
 		String image = companies.get(0).getImage();
-		String url = companies.get(0).getUrl();
-		
-		
-		
-		// gestion de commentarios del juego
-				List<String> list=new ArrayList<String>();
-				String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+		String url = companies.get(0).getUrl();		
 				
-				// si hay comentarios en el juego
-				if(companies.get(0).getComment().size()>0) {
-					List<Comment> list_comments=companies.get(0).getComment();			
-						
-					for(int i=0;i<list_comments.size();i++) {
-						//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-						String User=list_comments.get(i).getUser().getName();
-						String Text=list_comments.get(i).getText();						
-						
-						//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-						//Le damos formato a la variable auxiliar y la añadimos a la lista
-						String aux=String.format(div, User, Text);				
-						list.add(aux);				
-					}
-					model.addAttribute("comments", list);
-				}else {
-					model.addAttribute("comments"," ");
+			// gestion de commentarios del juego
+			List<String> list=new ArrayList<String>();
+			String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+			
+			// si hay comentarios en el juego
+			if(companies.get(0).getComment().size()>0) {
+				List<Comment> list_comments=companies.get(0).getComment();			
+					
+				for(int i=0;i<list_comments.size();i++) {
+					//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+					String User=list_comments.get(i).getUser().getName();
+					String Text=list_comments.get(i).getText();						
+					
+					//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+					//Le damos formato a la variable auxiliar y la añadimos a la lista
+					String aux=String.format(div, User, Text);				
+					list.add(aux);				
 				}
-		
+				model.addAttribute("comments", list);
+			}else {
+				model.addAttribute("comments"," ");
+			}		
 		
 		// se transmiten los atributos a la plantilla
 		model.addAttribute("name_g", name);
@@ -610,8 +592,7 @@ public class webController {
 	@RequestMapping("/event/{event_name}")
 	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
 		// lista que contiene los eventos con el nombre introudcido por url
-		List<Event> events = eventRepository.findByName(event_name);
-		
+		List<Event> events = eventRepository.findByName(event_name);		
 		
 		List<String> list=new ArrayList<String>();
 		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
@@ -633,8 +614,7 @@ public class webController {
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments","Prueba");
-		}
-		
+		}		
 		
 		// se pasan a plantilla los atributos del evento
 		model.addAttribute("name_g", events.get(0).getName());
@@ -658,14 +638,12 @@ public class webController {
 	// ---------------------------------- MY LISTS ------------------------------------
 	@RequestMapping("/my_lists")
 	public String my_lists (Model model, HttpSession usuario) {		
-		// nombre del usuario
+		//Obtengo el nombre del usuario
 		String name = (String) usuario.getAttribute("name");
-		//Accedo al repositorio de usuarios
-		List <User> users = userRepository.findByName(name);
+		//Accedo al repositorio de usuarios con el nombre obtenido
+		List <User> users = userRepository.findByName(name);		
 		
-		System.out.println(users.size());
-		
-		//Cojo la lista de ese usuario			
+		//Cojo la lista de juegos de ese usuario			
 		List<Game> list_games = users.get(0).getGames();
 		
 		List<String> list=new ArrayList<String>();		
