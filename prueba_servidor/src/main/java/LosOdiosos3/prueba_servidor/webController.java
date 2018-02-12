@@ -155,6 +155,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");	
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
+			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		}else {
 			model.addAttribute("name", " ");
 		}
@@ -205,6 +207,8 @@ public class webController {
 		model.addAttribute("Titulo", "Juegos Nuevos");
 		model.addAttribute("Cuerpo", "Proximamente");
 		model.addAttribute("alert", " ");
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -308,6 +312,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		model.addAttribute("lists", " ");
 		
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
@@ -380,6 +386,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		return "game";
 	}
@@ -440,6 +448,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		return "game_list";
 	}
@@ -496,6 +506,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		//se accede a compañia
 		return "company";
@@ -547,6 +559,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 				
 		// se accede a la pagina que expone todas las comapañias
 		return "company_list";
@@ -583,6 +597,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		return "event_calendar";
 	}
@@ -613,7 +629,7 @@ public class webController {
 			}
 			model.addAttribute("comments", list);
 		}else {
-			model.addAttribute("comments","Prueba");
+			model.addAttribute("comments"," ");
 		}		
 		
 		// se pasan a plantilla los atributos del evento
@@ -629,6 +645,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		// se accede al html
 		return "event";
@@ -668,6 +686,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		
 		return "my_lists";
 	}
@@ -742,6 +762,8 @@ public class webController {
 			boolean aux = !(Boolean) usuario.getAttribute("registered");
 			model.addAttribute("unregistered", aux);
 			model.addAttribute("name", usuario.getAttribute("name"));
+			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 			model.addAttribute("alert"," ");
 			model.addAttribute("hello", " ");
 			model.addAttribute("Titulo", " ");
@@ -840,6 +862,8 @@ public class webController {
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");

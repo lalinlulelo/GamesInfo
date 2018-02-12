@@ -75,3 +75,8 @@
 	#drop :hover{
 		background-color: #769fe2;
 	}
+	
+	.profile_img{		
+				width:40px;
+				heigth:40px;			
+			}
