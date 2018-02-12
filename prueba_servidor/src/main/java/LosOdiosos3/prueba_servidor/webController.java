@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -353,7 +354,7 @@ public class webController {
 		
 		// gestion de commentarios del juego
 		List<String> list=new ArrayList<String>();
-		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+		String div="<div class=\"com\"><div class=\"commentsUser \">%s </div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
 		// si hay comentarios en el juego
 		if(games.get(0).getComment().size()>0) {
@@ -369,6 +370,7 @@ public class webController {
 				String aux=String.format(div, User, Text);				
 				list.add(aux);				
 			}
+			Collections.reverse(list);
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments"," ");
@@ -475,7 +477,7 @@ public class webController {
 				
 			// gestion de commentarios del juego
 			List<String> list=new ArrayList<String>();
-			String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+			String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 			
 			// si hay comentarios en el juego
 			if(companies.get(0).getComment().size()>0) {
@@ -491,6 +493,7 @@ public class webController {
 					String aux=String.format(div, User, Text);				
 					list.add(aux);				
 				}
+				Collections.reverse(list);
 				model.addAttribute("comments", list);
 			}else {
 				model.addAttribute("comments"," ");
@@ -614,7 +617,7 @@ public class webController {
 		List<Event> events = eventRepository.findByName(event_name);		
 		
 		List<String> list=new ArrayList<String>();
-		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+		String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
 		// si hay comentarios en el juego
 		if(events.get(0).getComment().size()>0) {
@@ -630,6 +633,7 @@ public class webController {
 				String aux=String.format(div, User, Text);				
 				list.add(aux);				
 			}
+			Collections.reverse(list);
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments"," ");
