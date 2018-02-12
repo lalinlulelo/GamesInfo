@@ -207,7 +207,12 @@
 		            <h3>More Info:</h3><a href="{{url}}">here</a>
 		
 		            <br><br>
-		            <input type="submit" name="submit" value="Add to List">
+		            {{#registered}}
+	     			<form action="/addList/game" method="post" class="but" >
+	     				<input type="hidden" name="name" value="{{name_g}}">
+		            	<input type="submit" value="addList">
+		            </form>
+		            {{/registered}}
 		        </div>
 		    </div>
 	     	<div id="comentarios" class="comment">

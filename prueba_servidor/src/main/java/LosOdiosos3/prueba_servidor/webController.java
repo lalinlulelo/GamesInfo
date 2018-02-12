@@ -392,7 +392,6 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
 		
 		return "game";
 	}
@@ -694,12 +693,55 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
 		
 		return "my_lists";
 	}
 	// ---------------------------------- FIN MY LISTS --------------------------------
+	
+	
+	// ----------------------------- addgame  -------------------------------------
+	@RequestMapping("/addList/{page}")
+	public String addList (Model model, HttpSession usuario, @RequestParam String name, @PathVariable String page) {	
+		String ret = null;
+		
+		if(page.equals("game")) {
+		
+			//Obtengo el nombre del usuario
+			String name2 = (String) usuario.getAttribute("name");
+			//Accedo al repositorio de usuarios con el nombre obtenido
+			List <User> users = userRepository.findByName(name2);			
+	
+			// se coge el juego donde me encuentro
+			Game gameAux = gameRepository.findByName(name).get(0);
+			
+			// se retorna al juego
+			ret= "/game/"+gameAux.getName();
+			
+			// se guarda el juego dentro del de la lista de juegos de usuario
+			users.get(0).addGame(gameAux);
+			userRepository.save(users.get(0));
+			
+			// se guarda el usuario que tiene el juego
+			gameAux.addUser(users.get(0));
+			gameRepository.save(gameAux);
+		}
+		
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		model.addAttribute("alert"," ");
+		model.addAttribute("hello", " ");
+		model.addAttribute("Titulo", " ");
+		model.addAttribute("Cuerpo", " ");		
+	
+		return ret;
+	}
+	// ----------------------------- FIN addgame  --------------------------------------------------
+	
+	
 	// ----------------------------- COMENTARIOS  -------------------------------------
 	@RequestMapping("/comment/{page}")
 	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name,@PathVariable String page) {	
