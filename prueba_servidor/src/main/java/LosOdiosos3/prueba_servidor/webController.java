@@ -51,6 +51,11 @@ public class webController {
 	// repositorio de la tabla comentarios
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	// repositorio de la tabla anuncios
+	@Autowired
+	private ArticleRepository articleRepository;
+	
 	// ------------------------------ FIN INYECCIONES --------------------------------
 
 	// ----------------------------- PAGINA INICIO -----------------------------------
@@ -139,6 +144,14 @@ public class webController {
 			gameRepository.save(SMO);
 			gameRepository.save(CB);
 			
+			// articulos
+			Article article = new Article (userRepository.findByName("Agus").get(0), "Nintendo Labo", "Nintendo saca un nuevo producto!", "Nintendo Labo es una nueva gama de experiencias interactivas con las que crear, jugar y descubrir, para inspirar a las mentes más creativas y los corazones más inquietos.", "https://statics.vrutal.com/m/7193/7193c0a1bd77df5d5aa766727a187b77.jpg");
+			articleRepository.save(article);
+			article = new Article(userRepository.findByName("Guille").get(0), "The Seven Deadly Sins: Knights of Britannia", "Nuevo juego de PS4 a la vista", "nos encontramos ante un juego de lucha tridimensional en el que nos podemos mover con total libertad por los escenarios de forma muy parecida a lo que vimos en J-Stars Victory VS.", "http://www.vostory.com/wp-content/uploads/2018/01/maxresdefault.jpg");
+			articleRepository.save(article);
+			article = new Article(userRepository.findByName("Sergio").get(0), "Kingdom Hearts 3", "¡Nuevas imágenes de Kingdom Hearts 3!", "El pasado fin de semana Square Enix presentó el mundo de Monstruos S.A para Kingdom Hearts III. Ahora nos llega una nueva galería de imágenes y renders que nos ponen los dientes largos esperando conocer más detalles.", "https://statics.vrutal.com/m/9168/9168def48ee8a753b36bde6312659da5.jpg");
+			articleRepository.save(article);
+			
 			// Variables iniciales del usuario
 			usuario.setAttribute("alert", "  ");
 			
@@ -149,8 +162,26 @@ public class webController {
 			usuario.setAttribute("registered", false);
 		}
 		// comentarios de abajo del html
-		model.addAttribute("Titulo", "Juegos Nuevos");
-		model.addAttribute("Cuerpo", "Proximamente");
+		model.addAttribute("Titulo", "Latest News");
+
+		
+		// articulos relevantes
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int i = 0; i < articles.size(); i++) {
+				String Url= articles.get(i).getImage();
+				String Titulo = articles.get(i).getTitle();	
+				String Head = articles.get(i).getHead();
+				String link="/article/" + Titulo;
+
+
+				String aux = String.format(div, Url, Titulo, Head, link);			
+				news += aux;			
+			}	
+		}
+		model.addAttribute("news", news);
 		
 		// condicionales para mostrar u ocultar contenido		
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -207,8 +238,8 @@ public class webController {
 		
 		// se da por registrado al usuario
 		userRepository.save(new User(user.getName(), user.getPassword(), user.getDate(), user.getEmail()));
-		model.addAttribute("Titulo", "Juegos Nuevos");
-		model.addAttribute("Cuerpo", "Proximamente");
+		model.addAttribute("Titulo", "Latest News");
+
 		model.addAttribute("alert", " ");
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
@@ -253,8 +284,8 @@ public class webController {
 					
 					// se deshabilita el alert
 					model.addAttribute("alert", "  ");	
-					model.addAttribute("Titulo", "Juegos Nuevos");
-					model.addAttribute("Cuerpo", "Proximamente");
+					model.addAttribute("Titulo", "Latest News");
+			
 					
 					// se muestra el link de iniciar/registrar usuario si es false										
 					model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -269,8 +300,8 @@ public class webController {
 		}
 		
 		// se guardan los atributos en el modelo
-		model.addAttribute("Titulo", "Juegos Nuevos");
-		model.addAttribute("Cuerpo", "Proximamente");
+		model.addAttribute("Titulo", "Latest News");
+
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");
 		
@@ -283,8 +314,7 @@ public class webController {
 	public String log_out (Model model, HttpSession usuario) {
 		usuario.setAttribute("registered", false);
 		// se guardan los atributos en el modelo
-		model.addAttribute("Titulo", "Juegos Nuevos");
-		model.addAttribute("Cuerpo", "Proximamente");
+		model.addAttribute("Titulo", "Latest News");
 		model.addAttribute("alert", "Good Bye");		
 		model.addAttribute("name", " ");
 		
@@ -433,16 +463,7 @@ public class webController {
 				break;
 			
 		}
-		for(int i=0;i<list_games.size();i++) {
-			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=list_games.get(i).getImage();
-			String Titulo=list_games.get(i).getName();		
-			String link="/game/" + Titulo;
-			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url, link, Titulo);			
-			list.add(aux);			
-		}		
+			
 		
 		// se pasa la lista de juegos a la plantilla
 		model.addAttribute("games", list);
@@ -935,6 +956,26 @@ public class webController {
 		model.addAttribute("Cuerpo", " ");	
 		
 		return "search";
+	}
+	// -------------------------------- FIN BUSQUEDAS ---------------------------------------------------
+	
+	// -------------------------------- ARTICULOS -------------------------------------------------------
+	@RequestMapping("/article/{news}")
+	public String article (Model model, HttpSession usuario, @PathVariable String news) {
+		List <Article> articles = articleRepository.findByTitle(news);
+		String head = articles.get(0).getHead();
+		String title = articles.get(0).getTitle();
+		String article = articles.get(0).getArticle();
+		String image = articles.get(0).getImage();
+		User user = articles.get(0).getUser();
+		
+		model.addAttribute("head", head);
+		model.addAttribute("title", title);
+		model.addAttribute("article", article);
+		model.addAttribute("image", image);
+		model.addAttribute("user", user.getName());
+		
+		return "article";
 	}
 
 }	
