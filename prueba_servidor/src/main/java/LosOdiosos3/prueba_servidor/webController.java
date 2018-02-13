@@ -1067,9 +1067,13 @@ public class webController {
 			
 		case "password":
 			
+			usur.setPassword(text);
+			userRepository.save(usur);
+			usuario.setAttribute("password", text);
+			
 			
 		}
-		modelAttrChange(usur,usuario,model);
+			modelAttrChange(usur,usuario,model);
 		
 		return"profile";
 	}
