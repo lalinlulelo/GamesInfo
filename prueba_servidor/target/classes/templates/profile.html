@@ -1,25 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style type="text/css">
-            html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-                margin: 0;
-                padding: 0;
-                border: 0;
-                font-size: 100%;
-                font: inherit;
-                vertical-align: baseline;
-                outline: none;
-                -webkit-font-smoothing: antialiased;
-                -webkit-text-size-adjust: 100%;
-                -ms-text-size-adjust: 100%;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                box-sizing: border-box;
-            }
-            html { 
-                overflow-y: scroll; 
-            }
+        <style type="text/css">           
             .body { 
                 background: #406DB5;                
             }
@@ -64,27 +46,6 @@
             table { border-collapse: collapse; border-spacing: 0; }
             img { border: 0; max-width: 100%; }
 
-            #topbar {
-                background: #4f4a41;
-                padding: 10px 0 10px 0;
-                text-align: center;
-                height: 36px;
-                overflow: hidden;
-                -webkit-transition: height 0.5s linear;
-                -moz-transition: height 0.5s linear;
-                transition: height 0.5s linear;
-            }
-            #topbar a {
-                color: #fff;
-                font-size:1.3em;
-                line-height: 1.25em;
-                text-decoration: none;
-                opacity: 0.5;
-                font-weight: bold;
-            }
-            #topbar a:hover {
-                opacity: 1;
-            }
 
             /** typography **/
             h1 {
@@ -191,7 +152,6 @@
                 text-decoration:none;
             }
 
-
             #profiletabs ul li a.sel {
                 background: rgb(119, 164, 235);
                 border-color: #d1cdb5;
@@ -261,7 +221,10 @@
                 margin: 4px 4px;
                 cursor: pointer;
                 border-radius: 8px;
-            }            
+            }      
+            #search{
+            	text-align
+            }      
 		</style>
    
 	    <meta http-equiv="Content-Type" content="text/html">
@@ -315,7 +278,7 @@
 							  		<li><a href="/profile">Profile</a></li>
 									<li><a href="/my_lists">My Lists</a></li>
 									<div class="dropdown-divider"></div>            
-					            	<li><a href="#">Logout</a></li>					            
+					            	<li><a href="/log_out">Logout</a></li>					            
 							  	</ul>
 							</li>            
 			            </div>
@@ -335,14 +298,15 @@
 		    	</ul>
 		    </form>
 		     
-		    <div id="/search">
-		     	<form action="search" method="post">
+		    <div id="search">
+		     	<form action="/search" method="post">
 		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
 		           	<input type="submit" value="Search"> 
 		     	</form>
 		    </div>
 	    	<div id="triangulo"></div>
 	    </div>
+	    
       	<br>
 		  <script>  
 		  /*! jQuery v1.10.2 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license

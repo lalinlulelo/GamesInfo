@@ -33,6 +33,9 @@ public class User {
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
+	
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
+	private List<Article> articles = new ArrayList<Article>();
 
 	// lista de juegos
 	// suscripcion juego

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -140,18 +141,20 @@ public class webController {
 			
 			// Variables iniciales del usuario
 			usuario.setAttribute("alert", "  ");
-			usuario.setAttribute("registered", false);
 			
 			// se fija el no retorno por esta fase
 			comienzo = true;
 		}		
-			
+		if(usuario.getAttribute("registered") == null) {
+			usuario.setAttribute("registered", false);
+		}
 		// comentarios de abajo del html
 		model.addAttribute("Titulo", "Juegos Nuevos");
 		model.addAttribute("Cuerpo", "Proximamente");
 		
 		// condicionales para mostrar u ocultar contenido		
 		model.addAttribute("registered", usuario.getAttribute("registered"));
+		
 		boolean aux = !(Boolean) usuario.getAttribute("registered");	
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
@@ -350,7 +353,7 @@ public class webController {
 		
 		// gestion de commentarios del juego
 		List<String> list=new ArrayList<String>();
-		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+		String div="<div class=\"com\"><div class=\"commentsUser \">%s </div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
 		// si hay comentarios en el juego
 		if(games.get(0).getComment().size()>0) {
@@ -366,6 +369,7 @@ public class webController {
 				String aux=String.format(div, User, Text);				
 				list.add(aux);				
 			}
+			Collections.reverse(list);
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments"," ");
@@ -387,7 +391,6 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
 		
 		return "game";
 	}
@@ -472,7 +475,7 @@ public class webController {
 				
 			// gestion de commentarios del juego
 			List<String> list=new ArrayList<String>();
-			String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+			String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 			
 			// si hay comentarios en el juego
 			if(companies.get(0).getComment().size()>0) {
@@ -488,6 +491,7 @@ public class webController {
 					String aux=String.format(div, User, Text);				
 					list.add(aux);				
 				}
+				Collections.reverse(list);
 				model.addAttribute("comments", list);
 			}else {
 				model.addAttribute("comments"," ");
@@ -611,7 +615,7 @@ public class webController {
 		List<Event> events = eventRepository.findByName(event_name);		
 		
 		List<String> list=new ArrayList<String>();
-		String div="<div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "<br>";
+		String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
 		// si hay comentarios en el juego
 		if(events.get(0).getComment().size()>0) {
@@ -627,6 +631,7 @@ public class webController {
 				String aux=String.format(div, User, Text);				
 				list.add(aux);				
 			}
+			Collections.reverse(list);
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments"," ");
@@ -687,12 +692,70 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
 		
 		return "my_lists";
 	}
 	// ---------------------------------- FIN MY LISTS --------------------------------
+	
+	
+	// ----------------------------- addgame  -------------------------------------
+	@RequestMapping("/addList/{page}")
+	public String addList (Model model, HttpSession usuario, @RequestParam String name, @PathVariable String page) {	
+		String ret = null;
+		
+		if(page.equals("game")) {
+		
+			//Obtengo el nombre del usuario
+			String name2 = (String) usuario.getAttribute("name");
+			//Accedo al repositorio de usuarios con el nombre obtenido
+			List <User> users = userRepository.findByName(name2);
+			
+			boolean repetido = false;
+			
+			// se coge el juego donde me encuentro
+			Game gameAux = gameRepository.findByName(name).get(0);
+			
+			//Coge la lista de juegos del usuario en caso de que sea repetido lo convierte en true
+			for(int i=0; i<users.get(0).getGames().size(); i++) {
+				if(gameAux == users.get(0).getGames().get(i)) {
+					repetido = true;
+				}				
+			}
+			
+			//En caso de que no este en la lista lo mete en la lista
+			if(repetido == false) {
+				// se guarda el juego dentro del de la lista de juegos de usuario
+				users.get(0).addGame(gameAux);
+				userRepository.save(users.get(0));
+				
+				// se guarda el usuario que tiene el juego
+				gameAux.addUser(users.get(0));
+				gameRepository.save(gameAux);
+				//model.addAttribute("alerta", " ");
+			}else {
+				//model.addAttribute("alerta", "<script type=\"text/javascript\">" + "alert('Game is already added.');" + "window.location = '/'; " + "</script>");		
+			}
+				
+			// se retorna al juego
+			ret= "/game/"+gameAux.getName();
+		}
+		
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		model.addAttribute("alert"," ");
+		model.addAttribute("hello", " ");
+		model.addAttribute("Titulo", " ");
+		model.addAttribute("Cuerpo", " ");		
+	
+		return ret;
+	}
+	// ----------------------------- FIN addgame  --------------------------------------------------
+	
+	
 	// ----------------------------- COMENTARIOS  -------------------------------------
 	@RequestMapping("/comment/{page}")
 	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name,@PathVariable String page) {	

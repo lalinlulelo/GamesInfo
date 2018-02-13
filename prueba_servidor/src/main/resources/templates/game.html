@@ -56,20 +56,51 @@
 		 	 	text-align:center;			 
 			}			
 			.commentBox{
-				width: 400px;
+				width: 600px;
 				height:100px;			
 				text-align:justify;
+				resize: none;
+				background-color: rgb(252, 255, 186);
+				border-radius: 10px;
+				border:solid 1px orange;
 			}			
-			.comments{		
-				background-color:white;
+			.but input[type=submit] {
+				border:solid 1px rgb(4, 0, 80);
+			    background-color: #406DB5;
+			    font-family: "Andale Mono", monospace;
+				color:  #F9FF35;
+			    padding: 12px 20px;
+			    margin-right: 25%;
+			    border: none;
+			    border-radius: 4px;
+			    cursor: pointer;
+			    float: right;
+			}
+			.comments{			
+				background-color: #ffe9b7;
 				text-align:left;
-				font-size:20px;
+				font-family: "Andale Mono", monospace;
+		     	color:  #406DB5;
+		     	font-size: 18px;
+				padding-left: 10px;
+				padding-bottom: 10px;
+				padding-top: 10px;
 			}
 			.commentsUser{			
-				background-color: #D0D0D0;
-				text-align:center;
-				font-size:30px;
-			}				
+				border-radius: 4px;
+				background-color: #ffdc8c;
+				text-align:left;
+				font-family: "Andale Mono", monospace;
+		     	color:  #406DB5;
+		     	font-size: 22px;
+		     	padding-left: 10px;
+			}
+			.com{
+				border-radius: 5px;
+				background-color:rgb(112, 155, 201) ;
+				font-family: "Andale Mono", monospace;
+				border:solid 1px orange;
+			}			
 			
 			.profile_img{
 			
@@ -176,18 +207,30 @@
 		            <h3>More Info:</h3><a href="{{url}}">here</a>
 		
 		            <br><br>
-		            <input type="submit" name="submit" value="Add to List">
+
+		            {{#registered}}
+	     			<form action="/addList/game" method="post" class="but" >
+	     				<input type="hidden" name="name" value="{{name_g}}">
+		            	<input type="submit" value="addList">
+		            </form>
+		            {{/registered}}
 		        </div>
 		    </div>
 	     	<div id="comentarios" class="comment">
 	     		<h1>Comments</h1>
-	     		<form action="/comment/game" method="post">
+	     		{{#registered}}
+	     		<form action="/comment/game" method="post" class="but" >
 	     			<textarea name="text" class="commentBox"></textarea>
 	     			<input type="hidden" name="name" value="{{name_g}}">
 	     			<br><br>
 	     			<input type="submit" value="comment">	     
 	     		</form>
 	    		<br>
+	    		<br>
+		     	<br>
+		     	<br>
+		     	<br>
+	    		{{/registered}}
 				<div>
 					{{#comments}}
 					{{{.}}}

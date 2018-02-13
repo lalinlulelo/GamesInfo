@@ -35,6 +35,18 @@ A continuación se dispone de la captura de las distintas pantallas citadas en e
 #### Pantalla de Registro de Nuevo Usuario ####
 ![Nuevo Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register.jpg?raw=true)
 
+#### Calendario de Eventos ####
+![Calendario Eventos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event_calendar.jpg?raw=true)
+
+#### Evento ####
+![Evento](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event.jpg?raw=true)
+
+#### Lista de Juegos ####
+![Lista Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/games.jpg?raw=true)
+
+#### Juego ####
+![Juego](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game.jpg?raw=true)
+
 ## Diagrama de Entidad-Relación ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
