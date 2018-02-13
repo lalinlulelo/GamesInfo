@@ -367,8 +367,23 @@
 		        </div>
 		        </div>
 		        </div>
-		        <p class="setting">Birthday: {{date}}</p>
-		        
+		        <p class="setting">Birthday: {{date}}<button type="button" class="btn btn-info btn-lg" style="margin-left:100px;"data-toggle="modal" data-target="#modalBirthday">Change</button></p>
+		        <div class="modal fade" id="modalBirthday" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New birthday</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/birthday" method="post">
+			     <input name="text" type="text">
+			     
+			     <input type="submit" value="Change">	
+        </div>
+		        </div>
+		        </div>
+		        </div>
 		        <p class="setting">Email: {{email}}</p>
 		      </section>
 		      
