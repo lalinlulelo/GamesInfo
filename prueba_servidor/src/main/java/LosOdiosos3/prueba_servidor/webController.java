@@ -1040,7 +1040,7 @@ public class webController {
 		
 		User usur=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 		
-		
+		System.err.println(text);
 		
 		switch(field) {
 	
@@ -1051,7 +1051,8 @@ public class webController {
 			for(int i=0;i<list.size();i++) {
 				
 				if(list.get(i).getName().equals(text)) {
-					System.err.println("Usuario ya existe");
+					modelAttrChange(usur,usuario,model);
+
 					return "profile";
 				}
 				
@@ -1068,6 +1069,13 @@ public class webController {
 			
 			
 		}
+		modelAttrChange(usur,usuario,model);
+		
+		return"profile";
+	}
+	
+	//Metodo que añade los atributos a change
+	private void modelAttrChange(User usur, HttpSession usuario,Model model) {
 		String name = (String) usur.getName();
 		String password = (String) usuario.getAttribute("password");
 		String date = (String) usuario.getAttribute("date");
@@ -1089,8 +1097,6 @@ public class webController {
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
 		model.addAttribute("lists", " ");
-		
-		return"profile";
 	}
 }
 	
