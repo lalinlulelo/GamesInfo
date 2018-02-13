@@ -977,9 +977,18 @@ public class webController {
 		
 		return "article";
 	}
-
-}	
-
+	//cambio de parametros usuario
+	@RequestMapping("/change/{field}")
+	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {
+		
+		switch(field) {
+		
+		case "name":
+		
+		}
+		return" ";
+	}
+}
 	
 
 
