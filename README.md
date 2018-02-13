@@ -13,7 +13,7 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 -   **Compañía**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos a los que participa.
 -   **Evento**: Relación N:M con juego y compañía. Contendrá un Id, Fecha, Lugar, Precio, Descripción y las listas de juegos y compañías que están presentes.
 -   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
--   **Artículo**: cada usuario podrá escribir un artículo. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
+-   **Artículo**: cada usuario podrá escribir artículos. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
 
 
 ## Servicio Interno ##
