@@ -475,7 +475,7 @@ public class webController {
 				
 			// gestion de commentarios del juego
 			List<String> list=new ArrayList<String>();
-			String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
+			String div="<div class=\"com\"><div class=\"commentsUser \">%s</div> <div class=\" Date\">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 			
 			// si hay comentarios en el juego
 			if(companies.get(0).getComment().size()>0) {
@@ -484,11 +484,12 @@ public class webController {
 				for(int i=0;i<list_comments.size();i++) {
 					//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 					String User=list_comments.get(i).getUser().getName();
-					String Text=list_comments.get(i).getText();						
+					String Text=list_comments.get(i).getText();
+					Date d=list_comments.get(i).getDate();
 					
 					//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 					//Le damos formato a la variable auxiliar y la añadimos a la lista
-					String aux=String.format(div, User, Text);				
+					String aux=String.format(div, User,d.toString() ,Text);				
 					list.add(aux);				
 				}
 				Collections.reverse(list);
