@@ -1070,10 +1070,15 @@ public class webController {
 			usur.setPassword(text);
 			userRepository.save(usur);
 			usuario.setAttribute("password", text);
+			break;
 			
+		case "birthday":
+			usur.setDate(text);
+			userRepository.save(usur);
+			usuario.setAttribute("date", text);
+			break;
 			
 		}
-			modelAttrChange(usur,usuario,model);
 		
 		return"profile";
 	}
