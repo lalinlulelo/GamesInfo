@@ -15,16 +15,17 @@ public class Comment {
 	private long id;
 	
 	@ManyToOne
-	private User user;
-
-	private String text;
-	
+	private User user;	
 	@OneToOne
 	private Game game;	
 	@OneToOne
 	private Company company;	
 	@OneToOne
 	private Event event;
+
+	private String text;
+	
+
 	
 	private Date date;
 

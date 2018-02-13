@@ -27,6 +27,12 @@ public class Game {
 	@ManyToOne 
 	private Company company;
 	
+	@ManyToMany 
+	private List<User> users=new ArrayList<User>();
+	
+	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
+	private List<Comment> comments = new ArrayList<Comment>();
+	
 	private String genre;
 	private String description;
 	private int year;
@@ -36,11 +42,7 @@ public class Game {
 	
 	private String url;
 	
-	@ManyToMany 
-	private List<User> users=new ArrayList<User>();
-	
-	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
-	private List<Comment> comments = new ArrayList<Comment>();
+
 	
 	public Game () {}
 	

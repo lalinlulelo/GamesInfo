@@ -21,11 +21,12 @@ public class Company {
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
     private List<Game> games = new ArrayList<Game>();
     
-	private String image;    
-    private String url;
-    
     @OneToMany(mappedBy="company", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
+    
+	private String image;    
+    private String url;
+   
 
     protected Company (){};
 
