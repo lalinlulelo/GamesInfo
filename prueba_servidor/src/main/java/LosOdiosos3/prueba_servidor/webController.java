@@ -1,5 +1,6 @@
 package LosOdiosos3.prueba_servidor;
 import LosOdiosos3.prueba_servidor.Entities.*;
+import javassist.compiler.SyntaxError;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -1037,14 +1038,59 @@ public class webController {
 	@RequestMapping("/change/{field}")
 	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {
 		
-		switch(field) {
+		User usur=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 		
+		
+		
+		switch(field) {
+	
 		case "name":
 		
+			List<User> list=userRepository.findAll();
+			
+			for(int i=0;i<list.size();i++) {
+				
+				if(list.get(i).getName().equals(text)) {
+					System.err.println("Usuario ya existe");
+					return "profile";
+				}
+				
+			}
+			
+			usur.setName(text);
+			userRepository.save(usur);
+			usuario.setAttribute("name", text);
+			
+			
+			break;
+			
+		case "password":
 			
 			
 		}
-		return" ";
+		String name = (String) usur.getName();
+		String password = (String) usuario.getAttribute("password");
+		String date = (String) usuario.getAttribute("date");
+		String icon = (String) usuario.getAttribute("icon");
+		String email = (String) usuario.getAttribute("email");
+		
+		// se mandan los datos al modelo
+		model.addAttribute("name", name);
+		model.addAttribute("password", password);
+		model.addAttribute("date", date);	
+		model.addAttribute("icon", icon);
+		model.addAttribute("email", email);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
+		model.addAttribute("lists", " ");
+		
+		return"profile";
 	}
 }
 	
