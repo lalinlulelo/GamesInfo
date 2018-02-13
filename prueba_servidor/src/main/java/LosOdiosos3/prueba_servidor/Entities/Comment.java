@@ -2,6 +2,7 @@ package LosOdiosos3.prueba_servidor.Entities;
 import LosOdiosos3.prueba_servidor.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -23,13 +24,16 @@ public class Comment {
 	@OneToOne
 	private Company company;	
 	@OneToOne
-	private Event event;	
+	private Event event;
+	
+	private Date date;
 
 	protected Comment() {};
 
-	public Comment(User user, String text) {		
+	public Comment(User user, String text, Date d) {		
 		this.user = user;
 		this.text = text;
+		this.date =d;
 	}
 	
 	public long getId() {
@@ -84,6 +88,14 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", user=" + user + ", text=" + text + ", game=" + game + "]";
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }
