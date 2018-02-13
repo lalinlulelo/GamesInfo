@@ -332,7 +332,23 @@
 		      <section id="profile">
 		        <br>
 		        <br>
-		        <p class="setting">Name: {{name}}</p>
+		        <p class="setting">Name: {{name}} <button type="button" class="btn btn-info btn-lg" style="margin-left:100px;"data-toggle="modal" data-target="#myModal">Change</button></p>
+		        <div class="modal fade" id="myModal" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New name</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/name" method="post">
+			     <input name="text" type="text">
+			     
+			     <input type="submit" value="Change">	
+        </div>
+		        </div>
+		        </div>
+		        </div>
 		        
 		        <p class="setting">Password: {{password}}</p>
 		        
