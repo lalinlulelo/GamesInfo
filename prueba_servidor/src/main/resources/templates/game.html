@@ -108,6 +108,12 @@
 			heigth:40px;
 			
 			}
+			.comment_img{
+			width:70px;
+			heigth:70px;
+			padding-right: 20px;
+			
+			}
     	</style>
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<title>Game</title>
@@ -207,6 +213,7 @@
 		            <h3>More Info:</h3><a href="{{url}}">here</a>
 		
 		            <br><br>
+
 		            {{#registered}}
 	     			<form action="/addList/game" method="post" class="but" >
 	     				<input type="hidden" name="name" value="{{name_g}}">

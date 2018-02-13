@@ -383,7 +383,7 @@ public class webController {
 		
 		// gestion de commentarios del juego
 		List<String> list=new ArrayList<String>();
-		String div="<div class=\"com\"><div class=\"commentsUser \">%s </div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
+		String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
 		// si hay comentarios en el juego
 		if(games.get(0).getComment().size()>0) {
@@ -393,10 +393,11 @@ public class webController {
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String User=list_comments.get(i).getUser().getName();
 				String Text=list_comments.get(i).getText();						
-				
+				Date d=list_comments.get(i).getDate();	
+				String img=list_comments.get(i).getUser().getIcon();
 				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 				//Le damos formato a la variable auxiliar y la añadimos a la lista
-				String aux=String.format(div, User, Text);				
+				String aux=String.format(div, img,User,d.toString(), Text);				
 				list.add(aux);				
 			}
 			Collections.reverse(list);
@@ -496,7 +497,7 @@ public class webController {
 				
 			// gestion de commentarios del juego
 			List<String> list=new ArrayList<String>();
-			String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
+			String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 			
 			// si hay comentarios en el juego
 			if(companies.get(0).getComment().size()>0) {
@@ -505,11 +506,12 @@ public class webController {
 				for(int i=0;i<list_comments.size();i++) {
 					//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 					String User=list_comments.get(i).getUser().getName();
-					String Text=list_comments.get(i).getText();						
-					
+					String Text=list_comments.get(i).getText();
+					Date d=list_comments.get(i).getDate();	
+					String img=list_comments.get(i).getUser().getIcon();
 					//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 					//Le damos formato a la variable auxiliar y la añadimos a la lista
-					String aux=String.format(div, User, Text);				
+					String aux=String.format(div, img,User,d.toString(), Text);						
 					list.add(aux);				
 				}
 				Collections.reverse(list);
@@ -636,7 +638,7 @@ public class webController {
 		List<Event> events = eventRepository.findByName(event_name);		
 		
 		List<String> list=new ArrayList<String>();
-		String div="<div class=\"com\"><div class=\"commentsUser \">%s</div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
+		String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
 		// si hay comentarios en el juego
 		if(events.get(0).getComment().size()>0) {
@@ -646,10 +648,10 @@ public class webController {
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String User=list_comments.get(i).getUser().getName();
 				String Text=list_comments.get(i).getText();						
-				
-				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+				Date d=list_comments.get(i).getDate();
+				String img=list_comments.get(i).getUser().getIcon();				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 				//Le damos formato a la variable auxiliar y la añadimos a la lista
-				String aux=String.format(div, User, Text);				
+				String aux=String.format(div, img,User,d.toString(), Text);				
 				list.add(aux);				
 			}
 			Collections.reverse(list);
@@ -729,21 +731,36 @@ public class webController {
 			//Obtengo el nombre del usuario
 			String name2 = (String) usuario.getAttribute("name");
 			//Accedo al repositorio de usuarios con el nombre obtenido
-			List <User> users = userRepository.findByName(name2);			
-	
+			List <User> users = userRepository.findByName(name2);
+			
+			boolean repetido = false;
+			
 			// se coge el juego donde me encuentro
 			Game gameAux = gameRepository.findByName(name).get(0);
 			
+			//Coge la lista de juegos del usuario en caso de que sea repetido lo convierte en true
+			for(int i=0; i<users.get(0).getGames().size(); i++) {
+				if(gameAux == users.get(0).getGames().get(i)) {
+					repetido = true;
+				}				
+			}
+			
+			//En caso de que no este en la lista lo mete en la lista
+			if(repetido == false) {
+				// se guarda el juego dentro del de la lista de juegos de usuario
+				users.get(0).addGame(gameAux);
+				userRepository.save(users.get(0));
+				
+				// se guarda el usuario que tiene el juego
+				gameAux.addUser(users.get(0));
+				gameRepository.save(gameAux);
+				//model.addAttribute("alerta", " ");
+			}else {
+				//model.addAttribute("alerta", "<script type=\"text/javascript\">" + "alert('Game is already added.');" + "window.location = '/'; " + "</script>");		
+			}
+				
 			// se retorna al juego
 			ret= "/game/"+gameAux.getName();
-			
-			// se guarda el juego dentro del de la lista de juegos de usuario
-			users.get(0).addGame(gameAux);
-			userRepository.save(users.get(0));
-			
-			// se guarda el usuario que tiene el juego
-			gameAux.addUser(users.get(0));
-			gameRepository.save(gameAux);
 		}
 		
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -769,7 +786,7 @@ public class webController {
 		
 		if(page.equals("game")) {
 			
-			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 			// se coge el juego donde se ha realizado el comentario
 			Game game= gameRepository.findByName(name).get(0);		
 			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
@@ -787,7 +804,7 @@ public class webController {
 		}else {
 			if(page.equals("company")) {
 				
-				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 				
 				// se coge el juego donde se ha realizado el comentario
 				Company company= companyRepository.findByName(name).get(0);		
@@ -805,7 +822,7 @@ public class webController {
 				ret="/company/"+company.getName();
 		}else {
 			if(page.equals("event")) {
-				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 				
 				// se coge el juego donde se ha realizado el comentario
 				Event event= eventRepository.findByName(name).get(0);		
