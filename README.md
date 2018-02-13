@@ -29,24 +29,30 @@ En esta fase no se han diferenciado las partes privada y pública. Sin embargo, 
 
 A continuación se dispone de la captura de las distintas pantallas citadas en el diagrama:
 #### Pantalla de inicio sin usuario ####
+Pantalla principal donde se muestra por medio de un carousel imagénes de los juegos más destacados de la actualidad. Debajo del carousel podremos visualizar los últimos artículos escritos. Y en el Navbar están las distintas páginas donde podemos navegar así como los placeholders para hacer login.
 ![Inicio sin Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home.jpg?raw=true)
 
 #### Pantalla de inicio con usuario ####
+En caso de que hayamos introducido correctamente los datos de un usuario existente entonces saldrá el nombre del usuario en el Navbar y podremos desplegarlo para acceder a mi perfil para modificar mis datos personales. También podremos acceder a mi lista de juegos o hacer logout para cerrar sesión.
 ![Inicio con Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home_loged.jpg?raw=true)
 
 #### Pantalla de Registro de Nuevo Usuario ####
+Si quisieramos crear un nuevo usuario simplemente tendriamos que rellenar el formulario para registrar un nuevo usuario dentro de la base de datos.
 ![Nuevo Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register.jpg?raw=true)
 
 #### Calendario de Eventos ####
+Para los eventos de videojuegos hemos implementado un calendario del que nos marcará todos los eventos disponibles en la base de datos.
 ![Calendario Eventos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event_calendar.jpg?raw=true)
 
 #### Evento ####
 ![Evento](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event.jpg?raw=true)
 
 #### Lista de Juegos ####
+La lista de juegos muestra todos los juegos registrados y gracias al uso de las consultas en repositorio podremos ordenarlos de distintas maneras.
 ![Lista Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/games.jpg?raw=true)
 
 #### Juego ####
+La ficha de juego donde contiene la información esencial de cada juego. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicho juego o agregarlo a nuestra propia lista.
 ![Juego](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game.jpg?raw=true)
 
 ## Diagrama de Entidad-Relación ##
