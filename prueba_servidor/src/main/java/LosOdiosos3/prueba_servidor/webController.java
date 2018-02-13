@@ -763,7 +763,7 @@ public class webController {
 		
 		if(page.equals("game")) {
 			
-			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 			// se coge el juego donde se ha realizado el comentario
 			Game game= gameRepository.findByName(name).get(0);		
 			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
@@ -781,7 +781,7 @@ public class webController {
 		}else {
 			if(page.equals("company")) {
 				
-				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 				
 				// se coge el juego donde se ha realizado el comentario
 				Company company= companyRepository.findByName(name).get(0);		
@@ -799,7 +799,7 @@ public class webController {
 				ret="/company/"+company.getName();
 		}else {
 			if(page.equals("event")) {
-				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text);
+				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 				
 				// se coge el juego donde se ha realizado el comentario
 				Event event= eventRepository.findByName(name).get(0);		
