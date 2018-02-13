@@ -526,7 +526,16 @@ public class webController {
 				break;
 			
 		}
-			
+		for(int i=0;i<list_games.size();i++) {
+			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+			String Url=list_games.get(i).getImage();
+			String Titulo=list_games.get(i).getName();
+			String link="/game/" + Titulo;			
+			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+			//Le damos formato a la variable auxiliar y la añadimos a la lista
+			String aux=String.format(div, Url, link, Titulo);
+			list.add(aux);			
+		}
 		
 		// se pasa la lista de juegos a la plantilla
 		model.addAttribute("games", list);
