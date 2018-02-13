@@ -343,8 +343,7 @@ public class webController {
 		model.addAttribute("Titulo", "Latest News");
 
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
-		model.addAttribute("name", " ");
-		
+		model.addAttribute("name", " ");		
 		
 		// se dirige a la pagina como iniciado
 		return "index";
@@ -374,6 +373,13 @@ public class webController {
 			}	
 		}
 		model.addAttribute("news", news);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		
 		return "index";
 	}
@@ -1070,11 +1076,34 @@ public class webController {
 			usur.setPassword(text);
 			userRepository.save(usur);
 			usuario.setAttribute("password", text);
+			break;
 			
+		case "birthday":
+			usur.setDate(text);
+			userRepository.save(usur);
+			usuario.setAttribute("date", text);
+			break;
 			
+		case "email":
+        List<User> listus=userRepository.findAll();
+			
+			for(int i=0;i<listus.size();i++) {
+				
+				if(listus.get(i).getEmail().equals(text)) {
+					modelAttrChange(usur,usuario,model);
+
+					return "profile";
+				}
+				
+			}
+			
+			usur.setName(text);
+			userRepository.save(usur);
+			usuario.setAttribute("email", text);
+			break;
 		}
-			modelAttrChange(usur,usuario,model);
 		
+		modelAttrChange(usur,usuario,model);
 		return"profile";
 	}
 	

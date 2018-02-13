@@ -11,8 +11,10 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 -   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña y su fecha de nacimiento. Cada usuario registrado tendrá su propia lista de juegos.
 -   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios y otra de eventos a los que participa.
 -   **Compañía**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos a los que participa.
--   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
 -   **Evento**: Relación N:M con juego y compañía. Contendrá un Id, Fecha, Lugar, Precio, Descripción y las listas de juegos y compañías que están presentes.
+-   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
+-   **Artículo**: cada usuario podrá escribir artículos. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
+
 
 ## Servicio Interno ##
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
@@ -27,24 +29,31 @@ En esta fase no se han diferenciado las partes privada y pública. Sin embargo, 
 
 A continuación se dispone de la captura de las distintas pantallas citadas en el diagrama:
 #### Pantalla de inicio sin usuario ####
+Pantalla principal donde se muestra por medio de un carousel imagénes de los juegos más destacados de la actualidad. Debajo del carousel podremos visualizar los últimos artículos escritos. Y en el Navbar están las distintas páginas donde podemos navegar así como los placeholders para hacer login.
 ![Inicio sin Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home.jpg?raw=true)
 
 #### Pantalla de inicio con usuario ####
+En caso de que hayamos introducido correctamente los datos de un usuario existente entonces saldrá el nombre del usuario en el Navbar y podremos desplegarlo para acceder a mi perfil para modificar mis datos personales. También podremos acceder a mi lista de juegos o hacer logout para cerrar sesión.
 ![Inicio con Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home_loged.jpg?raw=true)
 
 #### Pantalla de Registro de Nuevo Usuario ####
+Si quisieramos crear un nuevo usuario simplemente tendriamos que rellenar el formulario para registrar un nuevo usuario dentro de la base de datos.
 ![Nuevo Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register.jpg?raw=true)
 
 #### Calendario de Eventos ####
+Para los eventos de videojuegos hemos implementado un calendario del que nos marcará todos los eventos disponibles en la base de datos.
 ![Calendario Eventos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event_calendar.jpg?raw=true)
 
 #### Evento ####
+La ficha de evento donde contiene la información esencial de cada evento. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicho evento.
 ![Evento](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event.jpg?raw=true)
 
 #### Lista de Juegos ####
+La lista de juegos muestra todos los juegos registrados y gracias al uso de las consultas en repositorio podremos ordenarlos de distintas maneras.
 ![Lista Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/games.jpg?raw=true)
 
 #### Juego ####
+La ficha de juego donde contiene la información esencial de cada juego. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicho juego o agregarlo a nuestra propia lista.
 ![Juego](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game.jpg?raw=true)
 
 ## Diagrama de Entidad-Relación ##
