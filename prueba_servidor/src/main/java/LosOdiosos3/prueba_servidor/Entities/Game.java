@@ -38,9 +38,6 @@ public class Game {
 	
 	@ManyToMany 
 	private List<User> users=new ArrayList<User>();
-
-	@ManyToMany
-	private List<Event> events;
 	
 	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
@@ -152,13 +149,6 @@ public class Game {
 		this.comments = comments;
 	}
 
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
 	public void setComment(Comment comment){
 		comments.add(comment);
 	}
@@ -171,6 +161,6 @@ public class Game {
 	public String toString() {
 		return "Game [id=" + id + ", name=" + name + ", company=" + company + ", genre=" + genre + ", description="
 				+ description + ", year=" + year + ", score=" + score + ", image=" + image + ", url=" + url
-				+ ", events=" + events + ", comments=" + comments + "]";
+				+ ", events=" + ", comments=" + comments + "]";
 	}
 }
