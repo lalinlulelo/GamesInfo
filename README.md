@@ -45,6 +45,7 @@ Para los eventos de videojuegos hemos implementado un calendario del que nos mar
 ![Calendario Eventos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event_calendar.jpg?raw=true)
 
 #### Evento ####
+La ficha de evento donde contiene la información esencial de cada evento. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicho evento.
 ![Evento](https://github.com/lalinlulelo/GamesInfo/blob/master/images/event.jpg?raw=true)
 
 #### Lista de Juegos ####
