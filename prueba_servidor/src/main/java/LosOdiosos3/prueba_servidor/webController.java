@@ -60,7 +60,7 @@ public class webController {
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
 			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
-			Juan.setIcon(icons.get((int)Math.random()*6));
+			Juan.setIcon(icons.get(3));
 			userRepository.save(Juan);
 			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
 			Pedro.setIcon(icons.get((int)Math.random()*6));
@@ -141,7 +141,6 @@ public class webController {
 			
 			// Variables iniciales del usuario
 			usuario.setAttribute("alert", "  ");
-			usuario.setAttribute("registered", false);
 			
 			// se fija el no retorno por esta fase
 			comienzo = true;
