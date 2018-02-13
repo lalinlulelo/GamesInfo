@@ -24,9 +24,6 @@ public class Company {
 	private String image;    
     private String url;
     
-    @ManyToMany
-	private List<Event> events;
-    
     @OneToMany(mappedBy="company", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
 
@@ -106,19 +103,11 @@ public class Company {
 		this.games = games;
 	}
 	
-	public List<Event> getEvents() {
-		return events;
-	}
-	
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-	
 	@Override
 	public String toString() {
 		return "Company [id: " + id + ", name: " + name + ", country: " + country +
 				", description: " + description + ", year: " + year + ", image: " + image + 
-				", url: " + url + ", games: " + games + ", events: " + events + "]";
+				", url: " + url + ", games: " + games + "]";
 	}
 
 	public void setComment(Comment c) {

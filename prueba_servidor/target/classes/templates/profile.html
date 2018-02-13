@@ -225,6 +225,11 @@
             #search{
             	text-align
             }      
+            .button_ch{
+            float:right;
+            top:0;
+            
+            }
 		</style>
    
 	    <meta http-equiv="Content-Type" content="text/html">
@@ -332,13 +337,79 @@
 		      <section id="profile">
 		        <br>
 		        <br>
-		        <p class="setting">Name: {{name}}</p>
+		        <p class="setting">Name: {{name}} <button class="button_ch" type="button" class="btn btn-info btn-lg" style="margin-left:101px;"data-toggle="modal" data-target="#modalName">Change</button></p>
+		        <div class="modal fade" id="modalName" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New name</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/name" method="post">
+			     <input name="text" type="text">
+			     <input type="submit" value="change">	
+			     </form>
+        </div>
+		        </div>
+		        </div>
+		        </div>
 		        
-		        <p class="setting">Password: {{password}}</p>
+		        <p class="setting">Password: {{password}}<button class="button_ch" type="button" class="btn btn-info btn-lg" style="margin-left:39px;"data-toggle="modal" data-target="#modalPass">Change</button></p>
+		        <div class="modal fade" id="modalPass" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New password</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/password" method="post">
+			     <input name="text" type="text">
+			     
+			     <input type="submit" value="Change">
+			     </form>	
+        </div>
+		        </div>
+		        </div>
+		        </div>
+		        <p class="setting">Birthday: {{date}}<button class="button_ch" type="button" class="btn btn-info btn-lg" style="margin-left:100px;"data-toggle="modal" data-target="#modalBirthday">Change</button></p>
+		        <div class="modal fade" id="modalBirthday" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New birthday</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/birthday" method="post">
+			     <input name="text" type="text">
+			     
+			     <input type="submit" value="Change">
+			     </form>	
+        </div>
+		        </div>
+		        </div>
+		        </div>
 		        
-		        <p class="setting">Birthday: {{date}}</p>
-		        
-		        <p class="setting">Email: {{email}}</p>
+		        <p class="setting">Email: {{email}}<button class="button_ch" type="button" class="btn btn-info btn-lg" style="margin-left:115px;"data-toggle="modal" data-target="#modalEmail">Change</button></p>
+		        <div class="modal fade" id="modalEmail" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New Email</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/email" method="post">
+			     <input type="text" name="text"	required />
+			     
+			     <input type="submit" value="Change">	
+			     </form>
+        </div>
+		        </div>
+		        </div>
+		        </div>
 		      </section>
 		      
 		      <section id="my_lists" class="hidden">
