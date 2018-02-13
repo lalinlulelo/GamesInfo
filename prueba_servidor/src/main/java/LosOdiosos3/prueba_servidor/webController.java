@@ -709,21 +709,36 @@ public class webController {
 			//Obtengo el nombre del usuario
 			String name2 = (String) usuario.getAttribute("name");
 			//Accedo al repositorio de usuarios con el nombre obtenido
-			List <User> users = userRepository.findByName(name2);			
-	
+			List <User> users = userRepository.findByName(name2);
+			
+			boolean repetido = false;
+			
 			// se coge el juego donde me encuentro
 			Game gameAux = gameRepository.findByName(name).get(0);
 			
+			//Coge la lista de juegos del usuario en caso de que sea repetido lo convierte en true
+			for(int i=0; i<users.get(0).getGames().size(); i++) {
+				if(gameAux == users.get(0).getGames().get(i)) {
+					repetido = true;
+				}				
+			}
+			
+			//En caso de que no este en la lista lo mete en la lista
+			if(repetido == false) {
+				// se guarda el juego dentro del de la lista de juegos de usuario
+				users.get(0).addGame(gameAux);
+				userRepository.save(users.get(0));
+				
+				// se guarda el usuario que tiene el juego
+				gameAux.addUser(users.get(0));
+				gameRepository.save(gameAux);
+				//model.addAttribute("alerta", " ");
+			}else {
+				//model.addAttribute("alerta", "<script type=\"text/javascript\">" + "alert('Game is already added.');" + "window.location = '/'; " + "</script>");		
+			}
+				
 			// se retorna al juego
 			ret= "/game/"+gameAux.getName();
-			
-			// se guarda el juego dentro del de la lista de juegos de usuario
-			users.get(0).addGame(gameAux);
-			userRepository.save(users.get(0));
-			
-			// se guarda el usuario que tiene el juego
-			gameAux.addUser(users.get(0));
-			gameRepository.save(gameAux);
 		}
 		
 		model.addAttribute("registered", usuario.getAttribute("registered"));
