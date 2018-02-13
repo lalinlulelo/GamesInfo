@@ -1078,8 +1078,26 @@ public class webController {
 			usuario.setAttribute("date", text);
 			break;
 			
+		case "email":
+        List<User> listus=userRepository.findAll();
+			
+			for(int i=0;i<listus.size();i++) {
+				
+				if(listus.get(i).getEmail().equals(text)) {
+					modelAttrChange(usur,usuario,model);
+
+					return "profile";
+				}
+				
+			}
+			
+			usur.setName(text);
+			userRepository.save(usur);
+			usuario.setAttribute("email", text);
+			break;
 		}
 		
+		modelAttrChange(usur,usuario,model);
 		return"profile";
 	}
 	
