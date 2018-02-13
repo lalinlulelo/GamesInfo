@@ -29,7 +29,7 @@ En esta fase no se han diferenciado las partes privada y pública. Sin embargo, 
 
 A continuación se dispone de la captura de las distintas pantallas citadas en el diagrama:
 #### Pantalla de inicio sin usuario ####
-Pantalla principal donde se muestra por medio de un carousel imagénes de los juegos más destacados de la actualidad. Debajo del carousel podremos visualizar los últimos artículos escritos. Y en el Navbar están las distintas páginas donde podemos navegar así como los placeholders para hacer login.
+Pantalla principal donde se muestra por medio de un carousel imagénes de los juegos más destacados de la actualidad. Debajo del carousel podremos visualizar los últimos artículos escritos. Y en el Navbar están las distintas páginas donde podemos navegar así como los placeholders para hacer login y búsqueda
 ![Inicio sin Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home.jpg?raw=true)
 
 #### Pantalla de inicio con usuario ####
