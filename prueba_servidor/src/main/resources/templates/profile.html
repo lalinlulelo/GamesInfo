@@ -332,8 +332,8 @@
 		      <section id="profile">
 		        <br>
 		        <br>
-		        <p class="setting">Name: {{name}} <button type="button" class="btn btn-info btn-lg" style="margin-left:100px;"data-toggle="modal" data-target="#myModal">Change</button></p>
-		        <div class="modal fade" id="myModal" role="dialog">
+		        <p class="setting">Name: {{name}} <button type="button" class="btn btn-info btn-lg" style="margin-left:100px;"data-toggle="modal" data-target="#modalName">Change</button></p>
+		        <div class="modal fade" id="modalName" role="dialog">
    				 <div class="modal-dialog">
    				 <div class="modal-content">
         		<div class="modal-header">
@@ -350,8 +350,23 @@
 		        </div>
 		        </div>
 		        
-		        <p class="setting">Password: {{password}}</p>
-		        
+		        <p class="setting">Password: {{password}}<button type="button" class="btn btn-info btn-lg" style="margin-left:100px;"data-toggle="modal" data-target="#modalPass">Change</button></p>
+		        <div class="modal fade" id="modalPass" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New password</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/change/password" method="post">
+			     <input name="text" type="text">
+			     
+			     <input type="submit" value="Change">	
+        </div>
+		        </div>
+		        </div>
+		        </div>
 		        <p class="setting">Birthday: {{date}}</p>
 		        
 		        <p class="setting">Email: {{email}}</p>
