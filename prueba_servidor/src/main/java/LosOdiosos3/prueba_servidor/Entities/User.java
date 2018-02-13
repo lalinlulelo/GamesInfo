@@ -36,11 +36,6 @@ public class User {
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Article> articles = new ArrayList<Article>();
-
-	// lista de juegos
-	// suscripcion juego
-	// suscripcion compañia
-	// suscripcion evento
 	
 	// constructor
 	protected User () {}
@@ -126,21 +121,5 @@ public class User {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
-	}
-	
-	// metodos auxiliares
-	/*
-	public void addList (ArrayList<Game> list) {
-		my_lists.add(list);
-	}
-	
-	public void removeList(ArrayList<Game> list) {
-		my_lists.remove(list);
-	}
-	
-	public ArrayList<ArrayList<Game>> getMyLists(){
-		return my_lists;
-	}
-	*/
-	
+	}	
 }

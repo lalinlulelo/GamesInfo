@@ -34,12 +34,6 @@ public class Event {
 	@OneToMany(mappedBy="event", cascade=CascadeType.REMOVE)
 	private List<Comment> comments=new ArrayList<Comment>();
 	
-	@ManyToMany(mappedBy="events")
-	private List<Game> games;
-	
-	@ManyToMany(mappedBy="events")
-	private List<Company> companies;
-
 	protected Event() {
 	}
 
@@ -138,6 +132,6 @@ public class Event {
 	public String toString() {
 		return "Event [id: " + id + ", name: " + name + ", place: " + place +
 				", date: " + day + ", " + month + ", " + year + ", fee: " + fee + ", description: " + description + 
-				", image: " + image + ", games: " + games + ", companies: " + companies + "]";
+				", image: " + image + ", games: ]";
 	}
 }
