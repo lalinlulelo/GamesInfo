@@ -11,6 +11,8 @@
 			.body{
 			  	background: #406DB5;
 			  	width: 100%;
+			  	font-family: "Andale Mono", monospace;
+			  	color:#406DB5;
 			}
 			.TitleLit{
 			  	font-family: "Andale Mono", monospace;
@@ -22,7 +24,7 @@
 			}			
 			p{
 			  	font-family: "Andale Mono", monospace;
-			    color:  rgb(33, 73, 138);
+			    color:  #406DB5;
 			}
 			li{
 			 font-family: "Andale Mono", monospace;
@@ -36,7 +38,28 @@
 			#title_screen img{
 				width: 25%
 			}
-			
+			#new{
+				font-family: "Andale Mono", monospace;
+			  	color:#406DB5;
+			}
+			.card-img img{
+				max-width: 100%;
+			}
+			.media-container-row a{
+				font-family: "Andale Mono", monospace;
+			  	color:#40b5b5;
+			}
+			.card-box{
+				background-color: rgb(251, 255, 140);
+				padding-top: 10px;
+				padding-bottom: 5px;
+				padding-left: 5px;
+				text-align: center;
+			}
+			.card-title{
+				
+			}
+
 		</style>
 	
 		<meta charset="utf-8">
@@ -152,8 +175,13 @@
 		</div>
 		
 		<div>
-			<h1 class="TitleLit">{{Titulo}}</h1>
-		    <h3 class="Article">{{Cuerpo}}</h3>
+			<h1 class="TitleLit" style="text-align: center;">{{Titulo}}</h1>
 		</div><script>// Write JavaScript here </script>
+
+		<!-- Articles -->
+		<div class="media-container-row">
+			{{{news}}}            
+        </div>
+
 	</body>
 </html>

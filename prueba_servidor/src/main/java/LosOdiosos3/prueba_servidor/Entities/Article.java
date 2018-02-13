@@ -15,14 +15,15 @@ public class Article {
 	@ManyToOne
 	private User user;
 	
-	private String head;
+
 	private String title;
+	private String head;
 	private String article;
 	private String image;
 	
 	public Article () {}
 	
-	public Article (User user, String head, String title, String article, String image) {
+	public Article (User user, String title, String head, String article, String image) {
 		this.user = user;
 		this.head = head;
 		this.title = title;

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    	<style type="text/css">
+	        .images {width:310px;float:left;}
+	        #product-img {border: 1px solid #ccc; padding: 0px; float: left; margin-top: 5px;}
+	        #product-img img {max-width:300px!important;height:auto;}
+	        #product-img-zoom {text-align: center; margin-top: 3px;}
+	        #product-img-zoom a {color: #333; text-decoration: none; padding-left: 20px; background: url(../images/zoom-in.png) no-repeat left center; font-size: 90%;}
+	        #product-img-zoom a:hover {text-decoration: underline;}
+	        #product-details {margin-left: 325px; margin-top: 20px;}
+	        #product-details h1 {margin-top: 0;}
+	        #product-details #quantity {width: 20px;}
+	        .checked {
+	            color: orange;
+	        }
+	        
+	        p{
+	  			font-family: "Andale Mono", monospace;
+	     		color:  #406DB5;
+			}
+			li{
+				font-family: "Andale Mono", monospace;
+			    color:  #F9FF35;
+			}
+        	#w {
+            	display: block;
+            	width: 1200px;
+            	margin: 0 auto;
+            	padding-top: 30px;
+            	padding-bottom: 45px;
+        	}
+        	.body{
+			  	background: #406DB5;
+			}
+        	#content {
+		  		display: block;
+		  		width: 100%;
+		  		background: rgb(251, 255, 140);
+		  		padding: 25px 20px;
+		  		padding-bottom: 35px;
+		  		-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+		  		-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+		  		box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+			}
+			.comment{
+				display: block;
+			  	width: 100%;
+			  	background: rgb(251, 255, 140);
+			  	padding: 10px 20px;
+			  	padding-bottom: 35px;
+			  	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+			  	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+			  	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+		 	 	margin-top:30px;
+		 	 	text-align:center;			 
+			}			
+			.commentBox{
+				width: 600px;
+				height:100px;			
+				text-align:justify;
+				resize: none;
+				background-color: rgb(252, 255, 186);
+				border-radius: 10px;
+				border:solid 1px orange;
+			}			
+			.but input[type=submit] {
+				border:solid 1px rgb(4, 0, 80);
+			    background-color: #406DB5;
+			    font-family: "Andale Mono", monospace;
+				color:  #F9FF35;
+			    padding: 12px 20px;
+			    margin-right: 25%;
+			    border: none;
+			    border-radius: 4px;
+			    cursor: pointer;
+			    float: right;
+			}			
+			.comments{			
+				background-color: #ffe9b7;
+				text-align:left;
+				font-family: "Andale Mono", monospace;
+		     	color:  #406DB5;
+		     	font-size: 18px;
+				padding-left: 10px;
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+			.commentsUser{			
+				border-radius: 4px;
+				background-color: #ffdc8c;
+				text-align:left;
+				font-family: "Andale Mono", monospace;
+		     	color:  #406DB5;
+		     	font-size: 22px;
+		     	padding-left: 10px;
+			}
+			.com{
+				border-radius: 5px;
+				background-color:rgb(112, 155, 201) ;
+				font-family: "Andale Mono", monospace;
+				border:solid 1px orange;
+			}				
+    	</style>
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>Event</title>
+		
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<!-- jQuery library -->		
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.js"
+			integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+			crossorigin="anonymous">
+		</script>
+		
+		<!-- Popper -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	
+		<!-- Custom styles for this template -->
+    	<link href="../css/navbar.css" rel="stylesheet">	
+	</head>
+	
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    
+    <body class="body">
+        <div id="navegador">   
+			<form action="/login" method="post">
+		    	<ul>
+		        	<div class="row">
+			            <div class="col-md-4">
+				            <li><a href="/">HOME</a></li>
+				            <li><a href="/event_calendar">Events</a></li>
+				            <li><a href="/game_list/n">Games</a></li>
+				            <li><a href="/company_list/n">Companies</a></li>
+				            
+			            </div>
+			            <div class="col-md-2">
+			            	<a><img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Title.png?raw=true" class="img-responsive img-centered"/></a>  	
+			            </div>
+			            {{#registered}}
+			            <div  class="col-md-4"> </div>
+			            <div  class="col-md-2">
+				        	<li class="dropdown">
+							  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
+							  	{{{profile_img}}}
+							  	<ul class="dropdown-menu" id="drop">
+							  		<li><a href="/profile">Profile</a></li>
+									<li><a href="/my_lists">My Lists</a></li>
+									<div class="dropdown-divider"></div>            
+					            	<li><a href="#">Logout</a></li>					            
+							  	</ul>
+							</li>            
+			            </div>
+			            {{/registered}}
+			                           
+			            {{#unregistered}}  
+			            <div  class="col-md-1"> </div>         
+				        <input type="text" placeholder="Username" name="name" required />
+				        <li></li>
+				        <input type="password" placeholder="Password" name="password"	required />
+				        <li></li>
+				        <input type="submit" value="Login">            
+				        <li></li>    
+			            <li><a href="/new_user">Register</a></li>
+			            {{/unregistered}}			                               
+		          	</div>             
+		    	</ul>
+		    </form>
+		     
+		    <div id="search">
+		     	<form action="/search" method="post">
+		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
+		           	<input type="submit" value="Search"> 
+		     	</form>
+		    </div>
+	    	<div id="triangulo"></div>
+	    </div>
+	    
+	    <div id="w">
+		    <div id="content" class="clearfix">
+		        <div class="images">
+		            <div id="product-img">
+		                <img src="{{image}}">
+		            </div>
+		        </div>
+		        <div id="product-details">
+		            <h1>{{title}}</h1>
+		            <h3>{{head}}</h3>
+		            <p> {{article}}</p>
+		            <p>Author: {{user}}</p>	
+		            <br><br>
+		        </div>
+		    </div>	    
+	    </div>
+    </body>
+</html>
