@@ -194,6 +194,8 @@ public class webController {
 		}else {
 			model.addAttribute("name", " ");
 		}
+		
+		
 		model.addAttribute("unregistered", aux);
 		
 		// deshabilitacion del comando alert que saluda al usuario		
@@ -253,6 +255,24 @@ public class webController {
 		}else {
 			model.addAttribute("name", " ");
 		}
+		
+		// articulos relevantes
+				List<Article> articles = articleRepository.findAll();
+				String news = "";
+				if(articles.size() > 0) {
+					String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+					for(int i = 0; i < articles.size(); i++) {
+						String Url= articles.get(i).getImage();
+						String Titulo = articles.get(i).getTitle();	
+						String Head = articles.get(i).getHead();
+						String link="/article/" + Titulo;
+
+
+						String art = String.format(div, Url, Titulo, Head, link);			
+						news += art;			
+					}	
+				}
+				model.addAttribute("news", news);
 		model.addAttribute("unregistered", aux);
 		
 		return "index";
@@ -264,6 +284,7 @@ public class webController {
 	public String iniciar_sesion (Model model, User user, HttpSession usuario) {
 		// recopilamos la lista de usuarios que contienen el nombre
 		List<User> usur = userRepository.findByName(user.getName());
+		
 		
 		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
 		// con las disponibles
@@ -286,6 +307,24 @@ public class webController {
 					model.addAttribute("alert", "  ");	
 					model.addAttribute("Titulo", "Latest News");
 			
+					// articulos relevantes
+					List<Article> articles = articleRepository.findAll();
+					String news = "";
+					if(articles.size() > 0) {
+						String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+						for(int j = 0; j < articles.size(); j++) {
+							String Url= articles.get(j).getImage();
+							String Titulo = articles.get(j).getTitle();	
+							String Head = articles.get(j).getHead();
+							String link="/article/" + Titulo;
+
+
+							String art = String.format(div, Url, Titulo, Head, link);			
+							news += art;			
+						}	
+					}
+					model.addAttribute("news", news);
+					
 					
 					// se muestra el link de iniciar/registrar usuario si es false										
 					model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -317,6 +356,23 @@ public class webController {
 		model.addAttribute("Titulo", "Latest News");
 		model.addAttribute("alert", "Good Bye");		
 		model.addAttribute("name", " ");
+		// articulos relevantes
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int i = 0; i < articles.size(); i++) {
+				String Url= articles.get(i).getImage();
+				String Titulo = articles.get(i).getTitle();	
+				String Head = articles.get(i).getHead();
+				String link="/article/" + Titulo;
+
+
+				String art = String.format(div, Url, Titulo, Head, link);			
+				news += art;			
+			}	
+		}
+		model.addAttribute("news", news);
 		
 		return "index";
 	}
@@ -985,6 +1041,8 @@ public class webController {
 		
 		case "name":
 		
+			
+			
 		}
 		return" ";
 	}

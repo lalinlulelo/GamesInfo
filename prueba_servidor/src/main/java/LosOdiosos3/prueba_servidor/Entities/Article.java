@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 
-
-=======
->>>>>>> branch 'master' of https://github.com/lalinlulelo/GamesInfo.git
 package LosOdiosos3.prueba_servidor.Entities;
 
 import javax.persistence.Entity;
@@ -75,7 +71,4 @@ public class Article {
 		this.image = image;
 	}
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/lalinlulelo/GamesInfo.git
