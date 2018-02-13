@@ -343,8 +343,7 @@ public class webController {
 		model.addAttribute("Titulo", "Latest News");
 
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
-		model.addAttribute("name", " ");
-		
+		model.addAttribute("name", " ");		
 		
 		// se dirige a la pagina como iniciado
 		return "index";
@@ -374,6 +373,13 @@ public class webController {
 			}	
 		}
 		model.addAttribute("news", news);
+		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		
 		return "index";
 	}
