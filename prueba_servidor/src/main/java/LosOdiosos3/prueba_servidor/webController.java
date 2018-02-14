@@ -402,6 +402,8 @@ public class webController {
 		model.addAttribute("date", date);	
 		model.addAttribute("icon", icon);
 		model.addAttribute("email", email);
+		model.addAttribute("alert"," ");	
+
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -1067,6 +1069,7 @@ public class webController {
 				
 				if(list.get(i).getName().equals(text)) {
 					modelAttrChange(usur,usuario,model);
+					model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el email introducido está asociado a otra cuenta');" +  "</script>");		
 
 					return "profile";
 				}
@@ -1111,8 +1114,10 @@ public class webController {
 			usuario.setAttribute("email", text);
 			break;
 		}
-		
+		model.addAttribute("alert"," ");	
 		modelAttrChange(usur,usuario,model);
+			
+
 		return"profile";
 	}
 	
