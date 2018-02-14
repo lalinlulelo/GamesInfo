@@ -98,6 +98,11 @@ para añadir un juego a una lista, el usuario registrado, deberá dirigirse al j
 
 ![Juego en Lista](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game_to_list.jpg?raw=true)
 
+#### Articulo ####
+Desde la página principal se puede acceder a uno de los articulos expuestos, ampliando la información de la noticia.
+
+![Articulo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/article.jpg?raw=true)
+
 ## Diagrama de Entidad-Relación ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
@@ -107,6 +112,11 @@ En el siguiente diagrama se puede visualizar un modelo de datos donde se represe
 En el siguiente diagrama UML se puede visualizar los distintos atributos de las entidades y como estan relacionados entre sí.
 
 ![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
+
+## Diagrama de clases ##
+Mediante ObjectAid UML Diagram, se ha desarrollado un diagrama de las clases del proyecto.
+
+![Diagrama de Clases](https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20clases.png?raw=true)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
