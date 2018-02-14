@@ -65,7 +65,7 @@ En el siguiente diagrama se puede visualizar un modelo de datos donde se represe
 ## Diagrama UML de Entidades ##
 ![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
 
-## Diagrama UML de Clases##
+## Diagrama UML de Clases ##
 ![Diagrama de clases](https://github.com/lalinlulelo/GamesInfo/blob/5adc02192337de9962addb9975d75e5010aa0ee9/images/Diagrama%20de%20clases.png?raw=true)
 
 # Integrantes
