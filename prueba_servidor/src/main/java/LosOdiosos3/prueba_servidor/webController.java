@@ -1312,6 +1312,8 @@ public class webController {
 			        if(listus.size() > 0){		        		
 						for(int i=0;i<listus.size();i++) {					
 							if(listus.get(i).getEmail().equals(text)) {
+								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el email introducido está asociado a otra cuenta');" +  "</script>");		
+
 								modelAttrChange(usur,usuario,model);	
 								return "profile";
 							}					
@@ -1324,7 +1326,7 @@ public class webController {
 			}		
 			modelAttrChange(usur, usuario, model);
 		}
-		model.addAttribute("alert"," ");	
+		model.addAttribute("alert","<script type=\"text/javascript\">" + "alert('Cambio realizado con éxito');" +  "</script>");	
 		
 		modelAttrChange(usur,usuario,model);
 			
