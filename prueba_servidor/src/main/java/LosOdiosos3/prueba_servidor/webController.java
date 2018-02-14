@@ -25,14 +25,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class webController {	
-	// ----------------------------- VARIABLES DEL SERVIDOR --------------------------
+	// ----------------------------- VARIABLES DEL SERVIDOR ---------------------------
 	// iconos de usuario
 	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
 	// variable de inicio de controlador
 	boolean comienzo = false;
-	// ----------------------------- FIN VARIABLES DEL SERVIDOR ----------------------
+	// ----------------------------- FIN VARIABLES DEL SERVIDOR -----------------------
 	
-	// ----------------------------- INYECCIONES -------------------------------------	
+	// ----------------------------- INYECCIONES --------------------------------------	
 	// repositorio de la tabla usuarios 
 	@Autowired
 	private UserRepository userRepository;	
@@ -57,9 +57,13 @@ public class webController {
 	@Autowired
 	private ArticleRepository articleRepository;
 	
-	// ------------------------------ FIN INYECCIONES --------------------------------
+	//repositorio de la tabla listas
+	@Autowired
+	private MyListRepository mylistRepository;
+	
+	// ----------------------------- FIN INYECCIONES ----------------------------------
 
-	// ----------------------------- PAGINA INICIO -----------------------------------
+	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario) throws ParseException {
 		if(comienzo == false) {
@@ -130,20 +134,28 @@ public class webController {
 			eventRepository.save(PGW);
 			
 			// listas de juegos
-			Juan.addGame(TLOU);
-			Juan.addGame(LOZBTW);
+			MyList mylist = new MyList("played");
+			mylist.addGame(TLOU);
+			TLOU.addMyList(mylist);
+			mylist.addGame(CB);
+			CB.addMyList(mylist);
+			Juan.addList(mylist);
+			mylist.addUser(Juan);
+			mylistRepository.save(mylist);
 			userRepository.save(Juan);
-			Pedro.addGame(CB);
-			Pedro.addGame(SMO);
-			userRepository.save(Pedro);
-			TLOU.addUser(Juan);
-			LOZBTW.addUser(Juan);
-			CB.addUser(Pedro);
-			SMO.addUser(Pedro);
 			gameRepository.save(TLOU);
-			gameRepository.save(LOZBTW);
-			gameRepository.save(SMO);
 			gameRepository.save(CB);
+			mylist = new MyList("waiting for");
+			mylist.addGame(SMO);
+			SMO.addMyList(mylist);
+			mylist.addGame(GOW);
+			GOW.addMyList(mylist);
+			Juan.addList(mylist);
+			mylist.addUser(Juan);
+			mylistRepository.save(mylist);
+			userRepository.save(Juan);
+			gameRepository.save(GOW);
+			gameRepository.save(SMO);
 			
 			// articulos
 			Article article = new Article (userRepository.findByName("Agus").get(0), "Nintendo Labo", "Nintendo saca un nuevo producto!", "Nintendo Labo es una nueva gama de experiencias interactivas con las que crear, jugar y descubrir, para inspirar a las mentes más creativas y los corazones más inquietos.", "https://statics.vrutal.com/m/7193/7193c0a1bd77df5d5aa766727a187b77.jpg");
@@ -206,10 +218,10 @@ public class webController {
 		// se accede a la pagina principal
 		return "index";
 	}
-	// ----------------------------- FIN PAGINA INICIO -------------------------------
+	// ----------------------------- FIN PAGINA INICIO --------------------------------
 			
 	
-	// ----------------------------- REGISTRAR NUEVO USUARIO -------------------------
+	// ----------------------------- REGISTRAR NUEVO USUARIO --------------------------
 	@RequestMapping("/new_user")
 	public String new_user (Model model) {
 		model.addAttribute("alert", " ");
@@ -258,29 +270,30 @@ public class webController {
 		}
 		
 		// articulos relevantes
-				List<Article> articles = articleRepository.findAll();
-				String news = "";
-				if(articles.size() > 0) {
-					String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-					for(int i = 0; i < articles.size(); i++) {
-						String Url= articles.get(i).getImage();
-						String Titulo = articles.get(i).getTitle();	
-						String Head = articles.get(i).getHead();
-						String link="/article/" + Titulo;
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int i = 0; i < articles.size(); i++) {
+				String Url= articles.get(i).getImage();
+				String Titulo = articles.get(i).getTitle();	
+				String Head = articles.get(i).getHead();
+				String link="/article/" + Titulo;
 
 
-						String art = String.format(div, Url, Titulo, Head, link);			
-						news += art;			
-					}	
-				}
-				model.addAttribute("news", news);
-		model.addAttribute("unregistered", aux);
+				String art = String.format(div, Url, Titulo, Head, link);			
+				news += art;			
+			}	
+		}
+		model.addAttribute("news", news);
 		
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("hello", " ");
 		return "index";
 	}
-	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ---------------------
+	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ----------------------
 	
-	// ----------------------------- INICIO DE SESION --------------------------------
+	// ----------------------------- INICIO DE SESION ---------------------------------
 	@RequestMapping("/login")
 	public String iniciar_sesion (Model model, User user, HttpSession usuario) {
 		// recopilamos la lista de usuarios que contienen el nombre
@@ -341,9 +354,27 @@ public class webController {
 		
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
+		// articulos relevantes
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int j = 0; j < articles.size(); j++) {
+				String Url= articles.get(j).getImage();
+				String Titulo = articles.get(j).getTitle();	
+				String Head = articles.get(j).getHead();
+				String link="/article/" + Titulo;
+
+
+				String art = String.format(div, Url, Titulo, Head, link);			
+				news += art;			
+			}	
+		}
+		model.addAttribute("news", news);
 
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
+		model.addAttribute("hello", " ");
 		
 		// se dirige a la pagina como iniciado
 		return "index";
@@ -356,6 +387,7 @@ public class webController {
 		model.addAttribute("Titulo", "Latest News");
 		model.addAttribute("alert", "Good Bye");		
 		model.addAttribute("name", " ");
+		
 		// articulos relevantes
 		List<Article> articles = articleRepository.findAll();
 		String news = "";
@@ -380,12 +412,12 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-		
+		model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('See you soon " + usuario.getAttribute("name") + "!');"  + "</script>");
 		return "index";
 	}
-	// ----------------------------- FIN INICIO DE SESION ----------------------------
+	// ----------------------------- FIN INICIO DE SESION -----------------------------
 	
-	// ----------------------------- PERFIL DE USUARIO -------------------------------
+	// ----------------------------- PERFIL DE USUARIO --------------------------------
 	@RequestMapping("/profile")
 	public String init (Model model, HttpSession usuario) {		
 		
@@ -417,14 +449,13 @@ public class webController {
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
 	}
-	// ----------------------------- FIN PERFIL DE USUARIO ---------------------------
+	// ----------------------------- FIN PERFIL DE USUARIO ----------------------------
 	
-	// ----------------------------- JUEGO -------------------------------------------
+	// ----------------------------- JUEGO --------------------------------------------
 	@RequestMapping("/game/{game_name}")
 	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {
 		// se coge de la BBDD la lista de juegos con dicho nombre recibido por url
 		List <Game> games = gameRepository.findByName(game_name);		
-		
 		// se adquieren los atributos del juego
 		String name = games.get(0).getName();
 		Company company = games.get(0).getCompany();
@@ -434,7 +465,7 @@ public class webController {
 		int pts = (int)games.get(0).getScore();
 		String image = games.get(0).getImage();
 		String url = games.get(0).getUrl();
-		
+	
 		// se carga la puntuacion
 		String score = "";
 		switch(pts/2) {
@@ -445,7 +476,7 @@ public class webController {
 			case 4:	score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star\"></span>"; break;
 			case 5:	score = "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>" + "<span class=\"fa fa-star checked\"></span>"; break;
 		}
-		
+		model.addAttribute("options", " ");
 		// gestion de commentarios del juego
 		List<String> list=new ArrayList<String>();
 		String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
@@ -471,6 +502,24 @@ public class webController {
 			model.addAttribute("comments"," ");
 		}
 		
+		// añadir a la lista
+		if(usuario.getAttribute("name") != null) {
+			User user = userRepository.findByName((String)usuario.getAttribute("name")).get(0);
+			List<MyList> lists = user.getList();
+			String option = "<option value=\"%s \">%s</option>";
+			String options = "";
+			if(lists.size() > 0) {
+				for(int i = 0; i < lists.size(); i++) {
+					String Titulo = lists.get(i).getName();
+					String aux = String.format(option, Titulo, Titulo);
+					options += aux;
+				}
+				model.addAttribute("options", options);
+			}
+		}else {
+			model.addAttribute("options", " ");
+		}
+		
 		// se pasan los datos a la plantilla
 		model.addAttribute("name_g", name);
 		model.addAttribute("company", company.getName());
@@ -490,9 +539,9 @@ public class webController {
 		
 		return "game";
 	}
-	// ----------------------------- FIN JUEGO ---------------------------------------
+	// ----------------------------- FIN JUEGO ----------------------------------------
 	
-	// ----------------------------- LISTA DE JUEGOS ---------------------------------	
+	// ----------------------------- LISTA DE JUEGOS ----------------------------------	
 	@RequestMapping("/game_list/{modo}")
 	public String game_list (Model model, HttpSession usuario, @PathVariable String modo) {
 		List<String> list=new ArrayList<String>();		
@@ -552,9 +601,9 @@ public class webController {
 		
 		return "game_list";
 	}
-	// ----------------------------- FIN LISTA DE JUEGOS -----------------------------
+	// ----------------------------- FIN LISTA DE JUEGOS ------------------------------
 	
-	// ----------------------------- COMPAÑIA ----------------------------------------
+	// ----------------------------- COMPAÑIA -----------------------------------------
 	@RequestMapping("/company/{company_name}")
 	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
 				
@@ -666,9 +715,9 @@ public class webController {
 		// se accede a la pagina que expone todas las comapañias
 		return "company_list";
 	}	
-	// ----------------------------- FIN LISTA DE COMPAÑIAS -------------------------------------
+	// ----------------------------- FIN LISTA DE COMPAÑIAS ---------------------------
 	
-	// ----------------------------- CALENDARIO DE EVENTOS  -------------------------------------
+	// ----------------------------- CALENDARIO DE EVENTOS  ---------------------------
 	@RequestMapping("/event_calendar")
 	public String event_calendar (Model model, HttpSession usuario) {
 		// lista con todos los eventos disponibles
@@ -687,10 +736,7 @@ public class webController {
 		}
 		events += parcial;
 		// finalmente creamos la cadena que contendrá el script
-		String script = "<script>" + events + "var settings = {};\r\n" + 
-				"      var element = document.getElementById('caleandar');\r\n" + 
-				"      caleandar(element, events, settings);\r\n" + 
-				"    </script>";
+		String script = "<script>" + events + "var settings = {};\r\n" + "      var element = document.getElementById('caleandar');\r\n" + 	"      caleandar(element, events, settings);\r\n" + "    </script>";
 		model.addAttribute("eventos", script);	
 		
 		// variables referentes a la barra de navegacion
@@ -703,9 +749,9 @@ public class webController {
 		
 		return "event_calendar";
 	}
-	// ----------------------------- FIN CALENDARIO DE EVENTOS  ----------------------------------
+	// ----------------------------- FIN CALENDARIO DE EVENTOS  -----------------------
 	
-	// ----------------------------- EVENTO  -----------------------------------------------------
+	// ----------------------------- EVENTO  ------------------------------------------
 	@RequestMapping("/event/{event_name}")
 	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
 		// lista que contiene los eventos con el nombre introudcido por url
@@ -755,33 +801,153 @@ public class webController {
 	}	
 	// ---------------------------------- FIN EVENTO ----------------------------------
 	
-	// ---------------------------------- MY LISTS ------------------------------------
+	// ----------------------------- MY LISTS -----------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model, HttpSession usuario) {		
+	public String my_lists (Model model, HttpSession usuario) {
+		model.addAttribute("added", " ");
 		//Obtengo el nombre del usuario
 		String name = (String) usuario.getAttribute("name");
+		
 		//Accedo al repositorio de usuarios con el nombre obtenido
-		List <User> users = userRepository.findByName(name);		
+		List <User> users = userRepository.findByName(name);
 		
-		//Cojo la lista de juegos de ese usuario			
-		List<Game> list_games = users.get(0).getGames();
+		//Cojo las listas de juegos		
+		List<MyList> lists_games = users.get(0).getList();
 		
-		List<String> list=new ArrayList<String>();		
-		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
+		// comprueba que existan listas
+		if(lists_games.size() > 0) {
+			List<String> list = new ArrayList<String>();
+			String div_title = "<div class=\"col-md-11\" style=\"text-align: center;\"><br><br><h3> %s </h3></div>";
+			String div_game =
+					"<div class=\"col-md-3\">\r\n" + 
+					"    <div class=\"Game\">\r\n" + 
+					"      <img src=\"%s\" class=\"imagen\">\r\n" + 
+					"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
+					"     \r\n" + 
+					"    </div>\r\n" + 
+					"</div>";
+			for(int i=0;i<lists_games.size();i++) {
+				String list_name = (String)lists_games.get(i).getName();
+				String aux_1 = String.format(div_title, list_name);	
+				List<Game> games = lists_games.get(i).getList();
+				for(int j = 0; j < games.size(); j++) {
+					String Url = games.get(j).getImage();
+					String Titulo = games.get(j).getName();		
+					String link="/game/" + Titulo;
+					String aux_2 = String.format(div_game, Url, link, Titulo);
+					aux_1 += aux_2;
+				}
+				aux_1+="<div class=\"col-md-11\"><br></div>";
+				list.add(aux_1);
+			}
+			model.addAttribute("games", list);
+		}else {
+			String info = "<div class=\"col-md-11\" style=\"text-align: center;\"><br><br><h3> No lists created </h3></div>";
 
-		for(int i=0;i<list_games.size();i++) {
-			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-			String Url=list_games.get(i).getImage();
-			String Titulo=list_games.get(i).getName();		
-			String link="/game/" + Titulo;
-			//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-			//Le damos formato a la variable auxiliar y la añadimos a la lista
-			String aux=String.format(div, Url, link, Titulo);			
-			list.add(aux);			
-		}		
+			model.addAttribute("games", info);
+		}
+
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		
-		// se pasa la lista de juegos a la plantilla
-		model.addAttribute("games", list);
+		return "my_lists";
+	}
+	
+	@RequestMapping("my_lists_settings/{option}")
+	public String my_lists_option (Model model, @PathVariable String option, @RequestParam String list,  HttpSession usuario) {
+		User user = userRepository.findByName((String)usuario.getAttribute("name")).get(0);
+		MyList mylist = null;
+		boolean added = false;
+		switch(option) {
+			case "add":
+				boolean repetido = false;
+				for(int i = 0; i < user.getList().size(); i++) {
+					System.out.println(user.getList().get(i).getName() + " vs " + list);
+					if(user.getList().get(i).getName().equals(list)) {
+						System.out.println("entro");
+						repetido = true;
+						break;
+					}
+				}
+				if(repetido == false) {
+					mylist = new MyList(list);
+					user.addList(mylist);
+					mylist.addUser(user);
+					userRepository.save(user);				
+					mylistRepository.save(mylist);
+					added = true;
+				}
+				break;
+			/*
+			case "delete":
+				mylist = null;
+				for(int i = 0; i < user.getList().size(); i++) {
+					if(user.getList().get(i).getName().equals(list)) {
+						mylist = user.getList().get(i);
+					}
+				}
+				if(mylist != null) {
+					mylist.cleanList();
+					user.removeList(mylist);
+					userRepository.save(user);	
+				}
+				break;
+			*/
+		}
+		
+		// realizo todo lo referente a my_list
+		if(added == true) {
+			model.addAttribute("added", "<script type=\"text/javascript\">" + "alert('list " + list + " added!'); window.location = '/my_lists';"  + "</script>");
+		}
+		if(added == false) {
+			model.addAttribute("added", "<script type=\"text/javascript\">" + "alert('the list couldnt be added'); window.location = '/my_lists';"  + "</script>");
+
+		}
+		//Obtengo el nombre del usuario
+		String name = (String) usuario.getAttribute("name");
+		
+		//Accedo al repositorio de usuarios con el nombre obtenido
+		List <User> users = userRepository.findByName(name);
+		
+		//Cojo las listas de juegos		
+		List<MyList> lists_games = users.get(0).getList();
+		
+		// comprueba que existan listas
+		if(lists_games.size() > 0) {
+			List<String> list_ = new ArrayList<String>();
+			String div_title = "<div class=\"col-md-11\" style=\"text-align: center;\"><br><br><h3> %s </h3></div>";
+			String div_game =
+					"<div class=\"col-md-3\">\r\n" + 
+					"    <div class=\"Game\">\r\n" + 
+					"      <img src=\"%s\" class=\"imagen\">\r\n" + 
+					"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + 
+					"     \r\n" + 
+					"    </div>\r\n" + 
+					"</div>";
+			for(int i=0;i<lists_games.size();i++) {
+				String list_name = (String)lists_games.get(i).getName();
+				String aux_1 = String.format(div_title, list_name);	
+				List<Game> games = lists_games.get(i).getList();
+				for(int j = 0; j < games.size(); j++) {
+					String Url = games.get(j).getImage();
+					String Titulo = games.get(j).getName();		
+					String link="/game/" + Titulo;
+					String aux_2 = String.format(div_game, Url, link, Titulo);
+					aux_1 += aux_2;
+				}
+				aux_1+="<div class=\"col-md-11\"><br></div>";
+				list_.add(aux_1);
+			}
+			model.addAttribute("games", list_);
+		}else {
+			String info = "<div class=\"col-md-11\" style=\"text-align: center;\"><br><br><h3> No lists created </h3></div>";
+
+			model.addAttribute("games", info);
+		}
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -792,51 +958,162 @@ public class webController {
 		
 		return "my_lists";
 	}
-	// ---------------------------------- FIN MY LISTS --------------------------------
+	// ----------------------------- FIN MY LISTS -------------------------------------
 	
 	
-	// ----------------------------- addgame  -------------------------------------
+	// ----------------------------- ADD GAME  ----------------------------------------
 	@RequestMapping("/addList/{page}")
-	public String addList (Model model, HttpSession usuario, @RequestParam String name, @PathVariable String page) {	
+	public String addList (Model model, HttpSession usuario, @RequestParam String list, @RequestParam String name, @PathVariable String page) {	
 		String ret = null;
-		
+		boolean repetido = false;
 		if(page.equals("game")) {
-		
 			//Obtengo el nombre del usuario
-			String name2 = (String) usuario.getAttribute("name");
+			String user_name = (String) usuario.getAttribute("name");
 			//Accedo al repositorio de usuarios con el nombre obtenido
-			List <User> users = userRepository.findByName(name2);
-			
-			boolean repetido = false;
-			
+			User user = userRepository.findByName(user_name).get(0);
 			// se coge el juego donde me encuentro
-			Game gameAux = gameRepository.findByName(name).get(0);
-			
+			Game game = gameRepository.findByName(name).get(0);
+			// se coge las listas de juegos
+			List<MyList> mylists = user.getList();
+			MyList mylist = null;
+			// aceedo a la lista seleccionada
+			for(int i = 0; i < mylists.size(); i++) {
+				if(list.equals(mylists.get(i).getName() + " ")) {
+					mylist = mylists.get(i);
+					break;
+				}
+			}
+			List<Game> games = mylist.getList();
 			//Coge la lista de juegos del usuario en caso de que sea repetido lo convierte en true
-			for(int i=0; i<users.get(0).getGames().size(); i++) {
-				if(gameAux == users.get(0).getGames().get(i)) {
+			for(int i = 0; i < games.size(); i++) {
+				System.out.println(game.getName() +" vs "+games.get(i).getName());
+				if(game == games.get(i)) {
 					repetido = true;
+					break;
 				}				
 			}
-			
 			//En caso de que no este en la lista lo mete en la lista
 			if(repetido == false) {
-				// se guarda el juego dentro del de la lista de juegos de usuario
-				users.get(0).addGame(gameAux);
-				userRepository.save(users.get(0));
-				
-				// se guarda el usuario que tiene el juego
-				gameAux.addUser(users.get(0));
-				gameRepository.save(gameAux);
-				//model.addAttribute("alerta", " ");
-			}else {
-				//model.addAttribute("alerta", "<script type=\"text/javascript\">" + "alert('Game is already added.');" + "window.location = '/'; " + "</script>");		
+				mylist.addGame(game);
+				game.addMyList(mylist);
+				gameRepository.save(game);
+				mylistRepository.save(mylist);
+				userRepository.save(user);
 			}
-				
+			
+			// atributos de la pagina
+			model.addAttribute("registered", usuario.getAttribute("registered"));
+			boolean aux = !(Boolean) usuario.getAttribute("registered");
+			model.addAttribute("unregistered", aux);
+			model.addAttribute("name", usuario.getAttribute("name"));
+			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
+			model.addAttribute("alert"," ");
+			model.addAttribute("hello", " ");
+			model.addAttribute("Titulo", " ");
+			model.addAttribute("Cuerpo", " ");	
+
+			// añadir a la lista
+			if(usuario.getAttribute("name") != null) {
+				User user_aux = userRepository.findByName((String)usuario.getAttribute("name")).get(0);
+				List<MyList> lists = user_aux.getList();
+				String option = "<option value=\"%s \">%s</option>";
+				String options = "";
+				if(lists.size() > 0) {
+					for(int i = 0; i < lists.size(); i++) {
+						String Titulo = lists.get(i).getName();
+						String aux_ = String.format(option, Titulo, Titulo);
+						options += aux_;
+					}
+					model.addAttribute("options", options);
+				}
+			}else {
+				model.addAttribute("options", " ");
+			}
+			
 			// se retorna al juego
-			ret= "/game/"+gameAux.getName();
+			ret= "/game/"+game.getName();			
+			return ret;
 		}
+		// atributos de la pagina
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
+		model.addAttribute("alert"," ");
+		model.addAttribute("hello", " ");
+		model.addAttribute("Titulo", " ");
+		model.addAttribute("Cuerpo", " ");	
 		
+
+		// articulos relevantes
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int i = 0; i < articles.size(); i++) {
+				String Url= articles.get(i).getImage();
+				String Titulo = articles.get(i).getTitle();	
+				String Head = articles.get(i).getHead();
+				String link="/article/" + Titulo;
+				String aux_5 = String.format(div, Url, Titulo, Head, link);			
+				news += aux_5;			
+			}	
+		}
+		model.addAttribute("news", news);
+		
+		return "index";
+	}
+	// ----------------------------- FIN ADD GAME  ------------------------------------
+	
+	
+	// ----------------------------- COMENTARIOS  -------------------------------------
+	@RequestMapping("/comment/{page}")
+	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name,@PathVariable String page) {	
+		String ret = null;		
+		// comentario de juego
+		if(page.equals("game")) {			
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
+			// se coge el juego donde se ha realizado el comentario
+			Game game= gameRepository.findByName(name).get(0);		
+			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+			c.setGame(game);
+			commentRepository.save(c);
+			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			game.setComment(c);
+			gameRepository.save(game);
+			// se retorna al juego
+			ret= "/game/"+game.getName();
+		// comentario de compañia
+		}else if(page.equals("company")) {				
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());			
+			// se coge el juego donde se ha realizado el comentario
+			Company company= companyRepository.findByName(name).get(0);		
+			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+			c.setCompany(company);
+			commentRepository.save(c);
+			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			company.setComment(c);
+			companyRepository.save(company);
+			// se retorna al juego
+			ret="/company/"+company.getName();
+		// comentario de evento
+		}else if(page.equals("event")) {
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());				
+			// se coge el juego donde se ha realizado el comentario
+			Event event= eventRepository.findByName(name).get(0);		
+			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+			c.setEvent(event);
+			commentRepository.save(c);
+			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			event.setComment(c);
+			eventRepository.save(event);
+			// se retorna al juego
+			ret="/event/"+event.getName();
+		}			
+			
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
@@ -847,95 +1124,14 @@ public class webController {
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");		
-	
-		return ret;
-	}
-	// ----------------------------- FIN addgame  --------------------------------------------------
-	
-	
-	// ----------------------------- COMENTARIOS  -------------------------------------
-	@RequestMapping("/comment/{page}")
-	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name,@PathVariable String page) {	
-		String ret = null;
-		
-		if(page.equals("game")) {
-			
-			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
-			// se coge el juego donde se ha realizado el comentario
-			Game game= gameRepository.findByName(name).get(0);		
-			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
-			c.setGame(game);
-			commentRepository.save(c);
-			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
-			game.setComment(c);
-			gameRepository.save(game);
-			
-			// se pasan los atributos de la barra de navegacion
-				
-			
-			// se retorna al juego
-			ret= "/game/"+game.getName();
-		}else {
-			if(page.equals("company")) {
-				
-				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
-				
-				// se coge el juego donde se ha realizado el comentario
-				Company company= companyRepository.findByName(name).get(0);		
-				// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
-				c.setCompany(company);
-				commentRepository.save(c);
-				// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
-				company.setComment(c);
-				companyRepository.save(company);
-				
-				// se pasan los atributos de la barra de navegacion
-						
-			
-				// se retorna al juego
-				ret="/company/"+company.getName();
-		}else {
-			if(page.equals("event")) {
-				Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
-				
-				// se coge el juego donde se ha realizado el comentario
-				Event event= eventRepository.findByName(name).get(0);		
-				// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
-				c.setEvent(event);
-				commentRepository.save(c);
-				// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
-				event.setComment(c);
-				eventRepository.save(event);
-				
-				// se pasan los atributos de la barra de navegacion
-						
-			
-				// se retorna al juego
-				ret="/event/"+event.getName();
-			}
-			
-		}
-				
-			}
-			
-			model.addAttribute("registered", usuario.getAttribute("registered"));
-			boolean aux = !(Boolean) usuario.getAttribute("registered");
-			model.addAttribute("unregistered", aux);
-			model.addAttribute("name", usuario.getAttribute("name"));
-			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
-			model.addAttribute("alert"," ");
-			model.addAttribute("hello", " ");
-			model.addAttribute("Titulo", " ");
-			model.addAttribute("Cuerpo", " ");		
 		
 		return ret;
 		// se crea un comentario con el usuario y el texto introducido
 		
 	}
-	// ----------------------------- FIN COMENTARIOS  --------------------------------------------------
-	
-	// -------------------------------- BUSQUEDAS ------------------------------------------------------
+	// ----------------------------- FIN COMENTARIOS  ---------------------------------
+
+	// ----------------------------- BUSQUEDAS ----------------------------------------
 	@RequestMapping("/search")
 	public String search (Model model, HttpSession usuario, @RequestParam String text) {
 		System.out.println(text);
@@ -951,9 +1147,7 @@ public class webController {
 		boolean n_companies = false;
 		boolean n_events = false;
 		boolean no_lists = true;
-		System.out.println(games.size());
-		System.out.println(companies.size());
-		System.out.println(events.size());
+
 		if(games.size() > 0) {
 			no_lists = false;
 			n_games = true;
@@ -962,9 +1156,7 @@ public class webController {
 			for(int i=0; i < games.size(); i++) {
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String Url = games.get(i).getImage();
-				System.out.println(Url);
 				String Titulo = games.get(i).getName();
-				System.out.println(Titulo);
 				String link = "/game/" + Titulo;			
 				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
 				//Le damos formato a la variable auxiliar y la añadimos a la lista
@@ -1031,9 +1223,9 @@ public class webController {
 		
 		return "search";
 	}
-	// -------------------------------- FIN BUSQUEDAS ---------------------------------------------------
-	
-	// -------------------------------- ARTICULOS -------------------------------------------------------
+	// ----------------------------- FIN BUSQUEDAS ------------------------------------
+
+	// ----------------------------- ARTICULOS ----------------------------------------
 	@RequestMapping("/article/{news}")
 	public String article (Model model, HttpSession usuario, @PathVariable String news) {
 		List <Article> articles = articleRepository.findByTitle(news);
@@ -1049,85 +1241,99 @@ public class webController {
 		model.addAttribute("image", image);
 		model.addAttribute("user", user.getName());
 		
+		// se muestra el link de iniciar/registrar usuario si es false
+		model.addAttribute("registered", usuario.getAttribute("registered"));
+		boolean aux = !(Boolean) usuario.getAttribute("registered");
+		model.addAttribute("unregistered", aux);
+		model.addAttribute("name", usuario.getAttribute("name"));
+		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+
 		return "article";
-	}
-	//cambio de parametros usuario
+	}	
+	// -------------------------- -- FIN ARTICULOS ------------------------------------
+
+	// ----------------------------- AJUSTES PERFIL -----------------------------------
 	@RequestMapping("/change/{field}")
-	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {
-		
-		User usur=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
-		
-		System.err.println(text);
-		
-		switch(field) {
-	
-		case "name":
-		
-			List<User> list=userRepository.findAll();
-			
-			for(int i=0;i<list.size();i++) {
-				
-				if(list.get(i).getName().equals(text)) {
-					modelAttrChange(usur,usuario,model);
-					model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el email introducido está asociado a otra cuenta');" +  "</script>");		
+	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {		
+		List<User> usurs = userRepository.findByName((String)usuario.getAttribute("name"));		
+		User usur=null; 
+		if(usurs.size() > 0){
+			usur=usurs.get(0);
+			switch(field) {	
+				case "name":		
+					// se comprueba que no se repita
+					List<User> list=userRepository.findAll();		
+					if(list.size() > 0){		
+						for(int i=0;i<list.size();i++) {					
+							if(list.get(i).getName().equals(text)) {
+								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el nombre introducido está asociado a otra cuenta');" +  "</script>");		
 
-					return "profile";
-				}
+								modelAttrChange(usur,usuario,model);	
+								return "profile";
+							}					
+						}			
+						usur.setName(text);
+						userRepository.save(usur);
+						usuario.setAttribute("name", text);	
+					}		
+					break;
 				
-			}
-			
-			usur.setName(text);
-			userRepository.save(usur);
-			usuario.setAttribute("name", text);
-			
-			
-			break;
-			
-		case "password":
-			
-			usur.setPassword(text);
-			userRepository.save(usur);
-			usuario.setAttribute("password", text);
-			break;
-			
-		case "birthday":
-			usur.setDate(text);
-			userRepository.save(usur);
-			usuario.setAttribute("date", text);
-			break;
-			
-		case "email":
-        List<User> listus=userRepository.findAll();
-			
-			for(int i=0;i<listus.size();i++) {
-				
-				if(listus.get(i).getEmail().equals(text)) {
-					modelAttrChange(usur,usuario,model);
 
-					return "profile";
-				}
-				
-			}
 			
-			usur.setName(text);
-			userRepository.save(usur);
-			usuario.setAttribute("email", text);
-			break;
+				
+
+				case "password":			
+					usur.setPassword(text);
+					userRepository.save(usur);
+					usuario.setAttribute("password", text);
+					break;
+
+				
+				case "birthday":
+					usur.setDate(text);
+					userRepository.save(usur);
+					usuario.setAttribute("date", text);
+					break;
+				
+				case "email":
+					// se comprueba que no se repita
+			        List<User> listus=userRepository.findAll();			
+			        if(listus.size() > 0){		        		
+						for(int i=0;i<listus.size();i++) {					
+							if(listus.get(i).getEmail().equals(text)) {
+								modelAttrChange(usur,usuario,model);	
+								return "profile";
+							}					
+						}					
+						usur.setEmail(text);
+						userRepository.save(usur);
+						usuario.setAttribute("email", text);
+					}
+					break;
+			}		
+			modelAttrChange(usur, usuario, model);
 		}
 		model.addAttribute("alert"," ");	
+		
 		modelAttrChange(usur,usuario,model);
 			
 
 		return"profile";
 	}
 	
+	
+	
 	//Metodo que añade los atributos a change
-	private void modelAttrChange(User usur, HttpSession usuario,Model model) {
+	private void modelAttrChange(User usur, HttpSession usuario, Model model) {
 		String name = (String) usur.getName();
-		String password = (String) usuario.getAttribute("password");
-		String date = (String) usuario.getAttribute("date");
-		String icon = (String) usuario.getAttribute("icon");
-		String email = (String) usuario.getAttribute("email");
+		//String password = (String) usuario.getAttribute("password");
+		//String date = (String) usuario.getAttribute("date");
+		//String icon = (String) usuario.getAttribute("icon");
+		//String email = (String) usuario.getAttribute("email");
+		String password = (String) usur.getPassword();
+		String date = (String) usur.getDate();
+		String icon = (String) usur.getIcon();
+		String email = (String) usur.getEmail();
 		
 		// se mandan los datos al modelo
 		model.addAttribute("name", name);
@@ -1144,7 +1350,8 @@ public class webController {
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
 		model.addAttribute("lists", " ");
-	}
+	}	
+	// ----------------------------- FIN AJUSTES PERFIL --------------------------------
 }
 	
 

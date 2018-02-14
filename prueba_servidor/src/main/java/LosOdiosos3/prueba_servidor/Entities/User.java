@@ -27,9 +27,8 @@ public class User {
 	private String date = "...";
 	private String icon = null;
 	
-	//private ArrayList<ArrayList<Game>> my_lists = new ArrayList<ArrayList<Game>>();
-	@ManyToMany(mappedBy="users")
-	private List<Game> games = new ArrayList<Game>();
+	@OneToMany(mappedBy="user")
+	private List<MyList> lists = new ArrayList<MyList>();
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
@@ -54,6 +53,17 @@ public class User {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public void addList (MyList list) {
+		lists.add(list);
+	}
+	
+	public void removeList (MyList list) {
+		lists.remove(list);
+	}
+	public List<MyList> getList (){
+		return lists;
 	}
 	
 	// setters
@@ -101,18 +111,6 @@ public class User {
 	// toString
 	public String toString () {
 		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";
-	}
-
-	public List<Game> getGames() {
-		return games;
-	}
-
-	public void setGames(List<Game> games) {
-		this.games = games;
-	}
-	
-	public void addGame(Game game){
-		games.add(game);
 	}
 
 	public List<Comment> getComments() {
