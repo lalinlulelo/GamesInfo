@@ -56,6 +56,27 @@ La lista de juegos muestra todos los juegos registrados y gracias al uso de las 
 La ficha de juego donde contiene la información esencial de cada juego. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicho juego o agregarlo a nuestra propia lista.
 ![Juego](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game.jpg?raw=true)
 
+#### Lista de Compañias ####
+![Lista Compañias](https://github.com/lalinlulelo/GamesInfo/blob/master/images/companies.jpg?raw=true)
+
+#### Compañia ####
+![Compañia](https://github.com/lalinlulelo/GamesInfo/blob/master/images/company.jpg?raw=true)
+
+#### Perfil ####
+![Perfil](https://github.com/lalinlulelo/GamesInfo/blob/master/images/profile.jpg?raw=true)
+
+#### Perfil modificado #####
+![Perfil modificado](https://github.com/lalinlulelo/GamesInfo/blob/master/images/profile_modified.jpg?raw=true)
+
+#### Listas de Juegos ####
+![Listas de Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/my_list.jpg?raw=true)
+
+#### Nueva Lista de Juegos ####
+![Nueva Lista de Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/my_list_modified.jpg?raw=true)
+
+#### Añadir Juego a una Lista ####
+![Juego en Lista](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game_to_list.jpg?raw=true)
+
 ## Diagrama de Entidad-Relación ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
@@ -64,10 +85,6 @@ En el siguiente diagrama se puede visualizar un modelo de datos donde se represe
 
 ## Diagrama UML de Entidades ##
 ![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
-
-## Diagrama UML de Clases ##
-![Diagrama de clases](https://github.com/lalinlulelo/GamesInfo/blob/5adc02192337de9962addb9975d75e5010aa0ee9/images/Diagrama%20de%20clases.png?raw=true)
-
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
