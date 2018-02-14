@@ -21,7 +21,7 @@
 			  	color:  rgb(33, 73, 138);
 			}
 			#Recomendaciones{
-
+				align-text:center;
 				background-color: #fbff8a;
 				height: 80%;
 				margin-left: 3%;
@@ -45,6 +45,63 @@
 			 	height: 100px;
 			 	display:block;
 			 	margin:0 auto 0 auto;
+			}
+			/* The Modal (background) */
+			#myBtn{
+				border:solid 1px rgb(4, 0, 80);
+			    background-color: #406DB5;
+			    font-family: "Andale Mono", monospace;
+				color:  #F9FF35;
+	
+			    margin-right: 25%;
+			    border: none;
+			    border-radius: 4px;
+			    cursor: pointer;
+			    float: right;
+			}
+			#myBtn2{
+				border:solid 1px rgb(4, 0, 80);
+			    background-color: #406DB5;
+			    font-family: "Andale Mono", monospace;
+				color:  #F9FF35;
+			    margin-right: 25%;
+			    border: none;
+			    border-radius: 4px;
+			    cursor: pointer;
+			    float: right;
+			}
+			.modal {
+			    display: none; /* Hidden by default */
+			    position: fixed;
+			    z-index: 1; /* Sit on top */			    
+			    width: 100%; /* Full width */
+			    height: 100%; /* Full height */
+			    overflow: auto; /* Enable scroll if needed */
+			    background-color: rgb(0,0,0); /* Fallback color */
+			    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+			
+			.modal-content {
+			    background-color: #fefefe;
+			    margin: 15% auto; /* 15% from the top and centered */
+			    padding: 20px;
+			    border: 1px solid #888;
+			    width: 80%; /* Could be more or less, depending on screen size */
+			}
+			
+			/* The Close Button */
+			.close {
+			    color: #aaa;
+			    float: right;
+			    font-size: 28px;
+			    font-weight: bold;
+			}
+
+			.close:hover,
+			.close:focus {
+			    color: black;
+			    text-decoration: none;
+			    cursor: pointer;
 			}
 		</style>
 		
@@ -73,7 +130,8 @@
     	<link href="../css/navbar.css" rel="stylesheet">
 	</head>
 	
- 	<body class="body">      
+ 	<body class="body">   
+ 		{{{added}}}   
     	<div id="navegador">   
 			<form action="/login" method="post">
 		    	<ul>
@@ -128,7 +186,7 @@
 	    </div>
  		<br><br>
      
-		<!-- Start your code here -->
+		
 		<div class="col-md-11"><br></div>
 		<div class="row">
 			<div class="col-md-9" style="padding-left:5%">
@@ -142,7 +200,81 @@
 
 					</div>    
     			</div>   
-     		</div>    		    
+     		</div>    
+     		<div class="col-md-2" id="Recomendaciones">
+     			<div class="TitleLit">Options:<br>
+     			<br>
+	     			<button id="myBtn">Add new list</button>
+					<div id="myModal" class="modal" class="but">
+						<div class="modal-content">	   		
+						  	<form action="/my_lists_settings/add" method="post">
+						  		<p>Set the list's name</p>	
+						  		<input type="text" name="list">
+						  		<br><br>
+				     			<input type="submit" value="Accept">	     
+	     					</form>
+						</div>
+					</div>
+					<!-- desactivado  -->
+					<button id="myBtn2" style="display: none;">Delete a list</button>
+					<div id="myModal2" class="modal" class="but">
+						<div class="modal-content">	   		
+						  	<form action="/my_lists_settings/delete" method="post">
+						  		<p>Set the list's name</p>	
+						  		<input type="text" name="list">
+						  		<br><br>
+				     			<input type="submit" value="Accept">	     
+	     					</form>
+						</div>
+					</div>
+					<br><br>
+					<script>
+						// Get the modal
+						var modal = document.getElementById('myModal');
+	
+						// Get the button that opens the modal
+						var btn = document.getElementById("myBtn");
+						
+						// Get the modal
+						var modal2 = document.getElementById('myModal2');
+	
+						// Get the button that opens the modal
+						var btn2 = document.getElementById("myBtn2");
+	
+						// Get the <span> element that closes the modal
+						var span = document.getElementsByClassName("close")[0];
+	
+						// When the user clicks on the button, open the modal 
+						btn.onclick = function() {
+						    modal.style.display = "block";
+						}
+						
+						btn2.onclick = function() {
+						    modal2.style.display = "block";
+						}
+	
+						// When the user clicks on <span> (x), close the modal
+						span.onclick = function() {
+						    modal.style.display = "none";
+						}
+						span.onclick = function() {
+						    modal2.style.display = "none";
+						}
+	
+						// When the user clicks anywhere outside of the modal, close it
+						window.onclick = function(event) {
+						    if (event.target == modal) {
+						        modal.style.display = "none";
+						    }
+						}
+						window.onclick = function(event) {
+						    if (event.target == modal) {
+						        modal2.style.display = "none";
+						    }
+						}
+					</script>	
+				</div>
+     		</div>		    
    		</div>
   		<script>// Write JavaScript here </script>
   	</body>

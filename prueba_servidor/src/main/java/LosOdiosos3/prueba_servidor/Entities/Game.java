@@ -28,7 +28,7 @@ public class Game {
 	private Company company;
 	
 	@ManyToMany 
-	private List<User> users=new ArrayList<User>();
+	private List<MyList> lists = new ArrayList<MyList>();
 	
 	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
@@ -47,8 +47,7 @@ public class Game {
 	public Game () {}
 	
 	public Game(String name, Company company, String genre, String description, 
-			int year, double score, String image, String url) {		
-		
+			int year, double score, String image, String url) {				
 		this.name = name;
 		this.company = company;
 		this.genre = genre;
@@ -131,18 +130,10 @@ public class Game {
 		this.url = url;
 	}
 	
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void addMyList(MyList list){
+		lists.add(list);
 	}
 	
-	public void addUser(User user){
-		users.add(user);
-	}
-
 	public List<Comment> getComments() {
 		return comments;
 	}
