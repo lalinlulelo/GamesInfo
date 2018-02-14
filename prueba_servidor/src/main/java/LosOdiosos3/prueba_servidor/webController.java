@@ -176,18 +176,19 @@ public class webController {
 					"https://media.redadn.es/imagenes/fear-effect-sedna-pc-ps4-xbox-one_313695.jpg");
 			articleRepository.save(article);
 			
-			// Variables iniciales del usuario
-			usuario.setAttribute("alert", "  ");
+			
 			
 			// se fija el no retorno por esta fase
 			comienzo = true;
 		}		
 		if(usuario.getAttribute("registered") == null) {
 			usuario.setAttribute("registered", false);
+			
 		}
+		usuario.setAttribute("alert", "  ");
 		// comentarios de abajo del html
 		model.addAttribute("Titulo", "Latest News");
-
+		
 		
 		// articulos relevantes
 		List<Article> articles = articleRepository.findAll();
