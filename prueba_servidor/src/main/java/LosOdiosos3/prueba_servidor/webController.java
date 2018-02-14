@@ -164,6 +164,17 @@ public class webController {
 			articleRepository.save(article);
 			article = new Article(userRepository.findByName("Sergio").get(0), "Kingdom Hearts 3", "¡Nuevas imágenes de Kingdom Hearts 3!", "El pasado fin de semana Square Enix presentó el mundo de Monstruos S.A para Kingdom Hearts III. Ahora nos llega una nueva galería de imágenes y renders que nos ponen los dientes largos esperando conocer más detalles.", "https://statics.vrutal.com/m/9168/9168def48ee8a753b36bde6312659da5.jpg");
 			articleRepository.save(article);
+
+			article = new Article(userRepository.findByName("Guille").get(0),
+					"Sea of Thieves", "requisitos mínimos y recomendados en PC", 
+					"En la imagen podemos ver hasta seis configuraciones diferentes, las cuales van desde una resolución de 540p y 30 frames hasta los 4K y 60 frames. No cabe duda de que el estudio quiere abarcar una amplia gama de equipos.", 
+					"https://media.redadn.es/imagenes/sea-of-thieves-pc_317030.jpg");
+			articleRepository.save(article);
+			article = new Article(userRepository.findByName("Agus").get(0),
+					"Fear Effect Sedna", "llegará a PC, PS4, Xbox One y Switch el 6 de marzo", 
+					"Esta entrega, cuyos hechos se ambientan unos años después del primer título de la serie, estará disponible en próximo 6 de marzo en los sistemas PC, PlayStation 4, Xbox One y Nintendo Switch a través de las tiendas digitales de cada una de ellas. ", 
+					"https://media.redadn.es/imagenes/fear-effect-sedna-pc-ps4-xbox-one_313695.jpg");
+			articleRepository.save(article);
 			
 			// Variables iniciales del usuario
 			usuario.setAttribute("alert", "  ");
@@ -182,7 +193,7 @@ public class webController {
 		List<Article> articles = articleRepository.findAll();
 		String news = "";
 		if(articles.size() > 0) {
-			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			String div ="<div class=\"row\">\r\n" + "<div class=\"card p-3 col-xs-12 col-sm-4 col-md-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
 			for(int i = 0; i < articles.size(); i++) {
 				String Url= articles.get(i).getImage();
 				String Titulo = articles.get(i).getTitle();	
@@ -434,6 +445,8 @@ public class webController {
 		model.addAttribute("date", date);	
 		model.addAttribute("icon", icon);
 		model.addAttribute("email", email);
+		model.addAttribute("alert"," ");	
+
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -544,7 +557,7 @@ public class webController {
 	public String game_list (Model model, HttpSession usuario, @PathVariable String modo) {
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
-		List<Game> list_games_2 = gameRepository.findAll();
+		//List<Game> list_games_2 = gameRepository.findAll();
 		//List<Game> list_games = gameRepository.findByNameContainingOrderByScoreAsc("");
 		
 		List<Game> list_games = null;
@@ -1254,8 +1267,9 @@ public class webController {
 	@RequestMapping("/change/{field}")
 	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {		
 		List<User> usurs = userRepository.findByName((String)usuario.getAttribute("name"));		
+		User usur=null; 
 		if(usurs.size() > 0){
-			User usur = usurs.get(0);
+			usur=usurs.get(0);
 			switch(field) {	
 				case "name":		
 					// se comprueba que no se repita
@@ -1263,6 +1277,8 @@ public class webController {
 					if(list.size() > 0){		
 						for(int i=0;i<list.size();i++) {					
 							if(list.get(i).getName().equals(text)) {
+								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el nombre introducido está asociado a otra cuenta');" +  "</script>");		
+
 								modelAttrChange(usur,usuario,model);	
 								return "profile";
 							}					
@@ -1273,11 +1289,16 @@ public class webController {
 					}		
 					break;
 				
+
+			
+				
+
 				case "password":			
 					usur.setPassword(text);
 					userRepository.save(usur);
 					usuario.setAttribute("password", text);
 					break;
+
 				
 				case "birthday":
 					usur.setDate(text);
@@ -1303,30 +1324,15 @@ public class webController {
 			}		
 			modelAttrChange(usur, usuario, model);
 		}
-		// se muestra el link de iniciar/registrar usuario si es false
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		boolean aux = !(Boolean) usuario.getAttribute("registered");
-		model.addAttribute("unregistered", aux);
-		model.addAttribute("name", usuario.getAttribute("name"));
-		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+		model.addAttribute("alert"," ");	
 		
-		// recopilacion de informacion
-		String name = (String) usuario.getAttribute("name");
-		String password = (String) usuario.getAttribute("password");
-		String date = (String) usuario.getAttribute("date");
-		String icon = (String) usuario.getAttribute("icon");
-		String email = (String) usuario.getAttribute("email");
-		
-		// se mandan los datos al modelo
-		model.addAttribute("name", name);
-		model.addAttribute("password", password);
-		model.addAttribute("date", date);	
-		model.addAttribute("icon", icon);
-		model.addAttribute("email", email);
+		modelAttrChange(usur,usuario,model);
+			
 
-		model.addAttribute("lists", " ");
 		return"profile";
 	}
+	
+	
 	
 	//Metodo que añade los atributos a change
 	private void modelAttrChange(User usur, HttpSession usuario, Model model) {

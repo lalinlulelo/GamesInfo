@@ -14,7 +14,7 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una
 -   **Evento**: Contendrá un Id, Fecha, Lugar, Precio y Descripción
 -   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
 -   **Artículo**: cada usuario podrá escribir artículos. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
-
+-   **Lista**: contiene una serie de juegos al gusto del usuario. Este portará un Id, Nombre y lista de juegos.
 
 ## Servicio Interno ##
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
@@ -61,6 +61,9 @@ En el siguiente diagrama se puede visualizar un modelo de datos donde se represe
 
 ![Diagrama de Entidad-Relación](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaER.png)
 
+
+## Diagrama UML de Entidades ##
+![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
