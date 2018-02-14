@@ -500,7 +500,7 @@ public class webController {
 			for(int i=0;i<list_comments.size();i++) {
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String User=list_comments.get(i).getUser().getName();
-				String Text=list_comments.get(i).getText();						
+				String Text=list_comments.get(i).getText();					
 				Date d=list_comments.get(i).getDate();	
 				String img=list_comments.get(i).getUser().getIcon();
 				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
@@ -1279,13 +1279,14 @@ public class webController {
 						for(int i=0;i<list.size();i++) {					
 							if(list.get(i).getName().equals(text)) {
 								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el nombre introducido está asociado a otra cuenta');" +  "</script>");		
-
+								
 								modelAttrChange(usur,usuario,model);	
 								return "profile";
 							}					
 						}			
 						usur.setName(text);
 						userRepository.save(usur);
+						((User)usuario.getAttribute("Usuario")).setName(text);
 						usuario.setAttribute("name", text);	
 					}		
 					break;
@@ -1298,6 +1299,7 @@ public class webController {
 					usur.setPassword(text);
 					userRepository.save(usur);
 					usuario.setAttribute("password", text);
+					((User)usuario.getAttribute("Usuario")).setPassword(text);
 					break;
 
 				
@@ -1305,6 +1307,7 @@ public class webController {
 					usur.setDate(text);
 					userRepository.save(usur);
 					usuario.setAttribute("date", text);
+					((User)usuario.getAttribute("Usuario")).setDate(text);
 					break;
 				
 				case "email":
@@ -1313,6 +1316,8 @@ public class webController {
 			        if(listus.size() > 0){		        		
 						for(int i=0;i<listus.size();i++) {					
 							if(listus.get(i).getEmail().equals(text)) {
+								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el email introducido está asociado a otra cuenta');" +  "</script>");		
+
 								modelAttrChange(usur,usuario,model);	
 								return "profile";
 							}					
@@ -1320,12 +1325,13 @@ public class webController {
 						usur.setEmail(text);
 						userRepository.save(usur);
 						usuario.setAttribute("email", text);
+						((User)usuario.getAttribute("Usuario")).setEmail(text);
 					}
 					break;
 			}		
 			modelAttrChange(usur, usuario, model);
 		}
-		model.addAttribute("alert"," ");	
+		model.addAttribute("alert","<script type=\"text/javascript\">" + "alert('Cambio realizado con éxito');" +  "</script>");	
 		
 		modelAttrChange(usur,usuario,model);
 			
