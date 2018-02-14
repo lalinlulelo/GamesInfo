@@ -420,26 +420,13 @@
 		        </ul>
 		      </section>
 		      <script>
-		        /*
-		          <li><a href="#settings">Settings</a></li>
-		
-		          <section id="settings" class="hidden">
-		          <p>Edit your user settings:</p>          
-		          <p class="setting"><span>Name <button id="edit_name" onclick="myFunction()"> Edit </button></span> {{name}}</p>          
-		          <p class="setting"><span>Password <button id="edit_pass" onclick="myFunction()"> Edit </button></span> {{password}}</p>          
-		          <p class="setting"><span>Birthday <button id="edit_date" onclick="myFunction()"> Edit </button></span> {{date}}</p>
-		      </section>
-		        */
+
 		        function name() {
 		          var person = prompt("Please enter new user name:", " ");
 		          while(person == null || person == ""){
 		            alert("incorrect name");
 		            person = prompt("Please enter new user name:", " ");
 		          }
-		          /*
-		            He pensado que para mandar los datos al controlador, para que los actualice, se los mande mediante enlace
-		          */
-		          //window.onload
 		        }
 		        function pass() {
 		          var person = prompt("Please enter new password:", " ");
