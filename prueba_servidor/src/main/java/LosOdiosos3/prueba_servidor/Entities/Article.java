@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import LosOdiosos3.prueba_servidor.Application.*;
 @Entity
 public class Article {
 	@Id

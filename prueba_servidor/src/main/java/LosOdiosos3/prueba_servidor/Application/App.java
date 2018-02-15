@@ -1,4 +1,4 @@
-package LosOdiosos3.prueba_servidor;
+package LosOdiosos3.prueba_servidor.Application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
