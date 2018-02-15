@@ -1,4 +1,3 @@
-
 package LosOdiosos3.prueba_servidor.Entities;
 
 import javax.persistence.Entity;
