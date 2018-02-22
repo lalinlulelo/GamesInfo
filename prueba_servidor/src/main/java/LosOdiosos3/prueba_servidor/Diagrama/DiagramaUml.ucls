@@ -32,9 +32,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="4" language="java" name="LosOdiosos3.prueba_servidor.Entities.EventRepository" 
+  <interface id="4" language="java" name="LosOdiosos3.prueba_servidor.Application.EventRepository" 
     project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/EventRepository.java" binary="false" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/EventRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="484" y="512"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -43,8 +43,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="5" language="java" name="LosOdiosos3.prueba_servidor.Entities.UserRepository" project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/UserRepository.java" binary="false" 
+  <interface id="5" language="java" name="LosOdiosos3.prueba_servidor.Application.UserRepository" 
+    project="prueba_servidor" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/UserRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="756" y="532"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -53,8 +54,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="6" language="java" name="LosOdiosos3.prueba_servidor.Entities.Comment" project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/Comment.java" binary="false" 
+  <class id="6" language="java" name="LosOdiosos3.prueba_servidor.Application.Comment" project="prueba_servidor" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/Comment.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1716" y="934"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -63,9 +64,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="LosOdiosos3.prueba_servidor.Entities.CommentRepository" 
+  <interface id="7" language="java" name="LosOdiosos3.prueba_servidor.Application.CommentRepository" 
     project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/CommentRepository.java" binary="false" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/CommentRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="960" y="507"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -74,8 +75,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="LosOdiosos3.prueba_servidor.Entities.Company" project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/Company.java" binary="false" 
+  <class id="8" language="java" name="LosOdiosos3.prueba_servidor.Application.Company" project="prueba_servidor" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/Company.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2047" y="1100"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -84,8 +85,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="9" language="java" name="LosOdiosos3.prueba_servidor.Entities.GameRepository" project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/GameRepository.java" binary="false" 
+  <interface id="9" language="java" name="LosOdiosos3.prueba_servidor.Application.GameRepository" 
+    project="prueba_servidor" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/GameRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1173" y="588"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -94,8 +96,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="LosOdiosos3.prueba_servidor.Entities.Event" project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/Event.java" binary="false" 
+  <class id="10" language="java" name="LosOdiosos3.prueba_servidor.Application.Event" project="prueba_servidor" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/Event.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1465" y="876"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -114,9 +116,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="LosOdiosos3.prueba_servidor.Entities.ArticleRepository" 
+  <interface id="12" language="java" name="LosOdiosos3.prueba_servidor.Application.ArticleRepository" 
     project="prueba_servidor" 
-    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Entities/ArticleRepository.java" binary="false" 
+    file="/prueba_servidor/src/main/java/LosOdiosos3/prueba_servidor/Application/ArticleRepository.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1155" y="286"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -150,53 +152,54 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="17">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="18" name="company">        
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="18" name="comments">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="1">        
+      <multiplicity id="19" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="20">    
-    <bendpoint x="2197" y="1413"/>    
-    <bendpoint x="2197" y="662"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="21" name="user">        
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="21" name="articles">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="22" minimum="0" maximum="1">        
+      <multiplicity id="22" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="23">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="24" name="user">        
+    <bendpoint x="1881" y="1413"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="24" name="game">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="25" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="26">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="27" name="articles">        
+    <bendpoint x="2197" y="1413"/>    
+    <bendpoint x="2197" y="662"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="27" name="user">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="28" minimum="0" maximum="2147483647">        
+      <multiplicity id="28" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="29">    
@@ -212,69 +215,68 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="32">    
-    <bendpoint x="1860" y="1413"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="33" name="comments">        
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="33" name="games">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="34" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="36" name="games">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="37" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="38">    
+  <association id="35">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="39" name="company">        
+      <attribute id="36" name="company">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
+      <multiplicity id="37" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="41">    
+  <association id="38">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="42" name="comments">        
+      <attribute id="39" name="comments">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="43" minimum="0" maximum="2147483647">        
+      <multiplicity id="40" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="42" name="company">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="44">    
-    <bendpoint x="1881" y="1413"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="45" name="game">        
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="45" name="user">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="46" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="47">    
-    <end type="SOURCE" refId="8" navigable="false">      
+    <bendpoint x="1860" y="1413"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
       <attribute id="48" name="comments">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
