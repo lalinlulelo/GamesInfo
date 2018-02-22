@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
 public class webController {	
@@ -54,7 +57,7 @@ public class webController {
 
 	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
-	public String inicio (Model model, HttpSession usuario) throws ParseException {
+	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
 		if(comienzo == false) {
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
@@ -215,6 +218,9 @@ public class webController {
 		model.addAttribute("alert", usuario.getAttribute("alert"));
 		model.addAttribute("hello", " ");
 		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+
 		// se accede a la pagina principal
 		return "index";
 	}

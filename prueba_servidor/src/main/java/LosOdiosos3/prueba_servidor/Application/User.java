@@ -121,6 +121,8 @@ public class User {
 		this.roles = roles;
 	}
 	
+	
+	
 	// toString
 	public String toString () {
 		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";

@@ -21,12 +21,11 @@ public class Comment {
 	@OneToOne
 	private Company company;	
 	@OneToOne
-	private Event event;
+	private Event event;	
+	@OneToOne
+	private Article article;
 
 	private String text;
-	
-
-	
 	private Date date;
 
 	protected Comment() {};
@@ -84,12 +83,15 @@ public class Comment {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", user=" + user + ", text=" + text + ", game=" + game + "]";
+	
+	public Article getArticle() {
+		return article;
 	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
 
 	public Date getDate() {
 		return date;
@@ -99,4 +101,9 @@ public class Comment {
 		this.date = date;
 	}
 
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", user=" + user + ", game=" + game + ", company=" + company + ", event=" + event
+				+ ", article=" + article + ", text=" + text + ", date=" + date + "]";
+	}
 }

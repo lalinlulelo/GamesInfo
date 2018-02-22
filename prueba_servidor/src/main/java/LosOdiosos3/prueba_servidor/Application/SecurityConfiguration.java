@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -20,20 +21,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	
     	// Public pages
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/login").permitAll();
-        http.authorizeRequests().antMatchers("/loginerror").permitAll();
-        http.authorizeRequests().antMatchers("/logout").permitAll();
+        http.authorizeRequests().antMatchers("/index.html").permitAll();
+        http.authorizeRequests().antMatchers("/article.html").permitAll();
+        http.authorizeRequests().antMatchers("/company.html").permitAll();
+        http.authorizeRequests().antMatchers("/company_list.html").permitAll();
+        http.authorizeRequests().antMatchers("/event_calendar.html").permitAll();
+        http.authorizeRequests().antMatchers("/event.html").permitAll();
+        http.authorizeRequests().antMatchers("/game.html").permitAll();
+        http.authorizeRequests().antMatchers("/game_list.html").permitAll();
+        http.authorizeRequests().antMatchers("/new_user.html").permitAll();
+        http.authorizeRequests().antMatchers("/search.html").permitAll();
 
         // Private pages (all other pages)
-        http.authorizeRequests().antMatchers("/home").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/my_lists.html").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/profile.html").hasAnyRole("USER");
 
         // Login form
         http.formLogin().loginPage("/login");
-        http.formLogin().usernameParameter("username");
+        http.formLogin().usernameParameter("name");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/home");
-        http.formLogin().failureUrl("/loginerror");
+        http.formLogin().defaultSuccessUrl("/index.html");
+        http.formLogin().failureUrl("/login");
 
         // Logout
         http.logout().logoutUrl("/logout");
@@ -44,6 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         // Database authentication provider
-        auth.authenticationProvider(authenticationProvider);
+        auth.authenticationProvider(authenticationProvider);       
     }
+    
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+
+	}
+
 }

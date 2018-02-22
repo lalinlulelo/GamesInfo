@@ -197,7 +197,28 @@
 		            <p>Author: {{user}}</p>	
 		            <br><br>
 		        </div>
-		    </div>	    
+		    </div>	
+		    <div id="comentarios" class="comment">
+	     		<h1>Comments</h1>
+	     		{{#registered}}
+	     		<form action="/comment/game" method="post" class="but" >
+	     			<textarea name="text" class="commentBox"></textarea>
+	     			<input type="hidden" name="name" value="{{name_g}}">
+	     			<br><br>
+	     			<input type="submit" value="comment">	     
+	     		</form>
+	    		<br>
+	    		<br>
+		     	<br>
+		     	<br>
+		     	<br>
+	    		{{/registered}}
+				<div>
+					{{#comments}}
+					{{{.}}}
+					{{/comments}}				     
+				</div>	
+	     	</div>    
 	    </div>
     </body>
 </html>

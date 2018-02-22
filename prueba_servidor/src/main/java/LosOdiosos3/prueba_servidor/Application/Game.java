@@ -36,13 +36,9 @@ public class Game {
 	private String genre;
 	private String description;
 	private int year;
-	private double score;
-	
-	private String image;
-	
-	private String url;
-	
-
+	private double score;	
+	private String image;	
+	private String url;	
 	
 	public Game () {}
 	
@@ -145,11 +141,18 @@ public class Game {
 	public void setComment(Comment comment){
 		comments.add(comment);
 	}
-	public List<Comment> getComment(){
-		
+	public List<Comment> getComment(){		
 		return this.comments;
 	}
 	
+	public List<MyList> getLists() {
+		return lists;
+	}
+
+	public void setLists(List<MyList> lists) {
+		this.lists = lists;
+	}
+
 	@Override
 	public String toString() {
 		return "Game [id=" + id + ", name=" + name + ", company=" + company + ", genre=" + genre + ", description="

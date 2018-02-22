@@ -1,11 +1,12 @@
 package LosOdiosos3.prueba_servidor.Application;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import LosOdiosos3.prueba_servidor.Application.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+
+import LosOdiosos3.prueba_servidor.*;
+
 @Entity
 public class Article {
 	@Id
@@ -15,6 +16,9 @@ public class Article {
 	@ManyToOne
 	private User user;
 	
+	@OneToMany(mappedBy="article", cascade=CascadeType.REMOVE)
+	private List<Comment> comments = new ArrayList<Comment>();
+
 	private String head;
 	private String title;
 	private String article;
@@ -68,6 +72,22 @@ public class Article {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public void setComment(Comment c) {
+		comments.add(c);
+		
+	}
+
+	public List<Comment> getComment() {
+		// TODO Auto-generated method stub
+		return this.comments;
+	}
+	
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", user=" + user + ", comments=" + comments + ", head=" + head + ", title=" + title
+				+ ", article=" + article + ", image=" + image + "]";
 	}
 }
 
