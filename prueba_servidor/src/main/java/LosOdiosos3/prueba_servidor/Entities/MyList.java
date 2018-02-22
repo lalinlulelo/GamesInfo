@@ -2,7 +2,7 @@ package LosOdiosos3.prueba_servidor.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import LosOdiosos3.prueba_servidor.Application.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
