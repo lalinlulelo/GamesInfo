@@ -293,7 +293,7 @@ public class userController {
 			switch(field) {	
 				case "name":		
 					// se comprueba que no se repita
-					List<User> list=userRepository.findAll();		
+					List<User> list=(List<User>) userRepository.findAll();		
 					if(list.size() > 0){		
 						for(int i=0;i<list.size();i++) {					
 							if(list.get(i).getName().equals(text)) {
@@ -331,7 +331,7 @@ public class userController {
 				
 				case "email":
 					// se comprueba que no se repita
-			        List<User> listus=userRepository.findAll();			
+			        List<User> listus=(List<User>) userRepository.findAll();			
 			        if(listus.size() > 0){		        		
 						for(int i=0;i<listus.size();i++) {					
 							if(listus.get(i).getEmail().equals(text)) {
