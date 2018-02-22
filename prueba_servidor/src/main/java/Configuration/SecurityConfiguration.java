@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import LosOdiosos3.prueba_servidor.Entities.UserRepositoryAuthenticationProvider;
+import LosOdiosos3.prueba_servidor.Application.UserRepositoryAuthenticationProvider;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
