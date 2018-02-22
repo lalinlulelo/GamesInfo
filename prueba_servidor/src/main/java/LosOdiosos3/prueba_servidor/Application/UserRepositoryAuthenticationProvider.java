@@ -1,4 +1,4 @@
-package LosOdiosos3.prueba_servidor.Entities;
+package LosOdiosos3.prueba_servidor.Application;
 
 import java.util.ArrayList;
 import java.util.List;
