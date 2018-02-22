@@ -1,25 +1,15 @@
 package LosOdiosos3.prueba_servidor.Application;
 
-import javassist.compiler.SyntaxError;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -68,19 +58,19 @@ public class webController {
 		if(comienzo == false) {
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
-			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
+			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com", "ROLE_USER");
 			Juan.setIcon(icons.get(3));
 			userRepository.save(Juan);
-			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
+			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com", "ROLE_USER");;
 			Pedro.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Pedro);
-			User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com");
+			User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com", "ROLE_USER");;
 			Guille.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Guille);
-			User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com");
+			User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com", "ROLE_USER");;
 			Sergio.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Sergio);
-			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com");
+			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com", "ROLE_USER");;
 			Agus.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Agus);
 			

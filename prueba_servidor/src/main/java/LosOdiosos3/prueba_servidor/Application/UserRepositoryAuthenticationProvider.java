@@ -14,17 +14,21 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-public class UserRepositoryAuthenticationProvider implements AuthenticationProvider{
+@Component
+public class UserRepositoryAuthenticationProvider implements AuthenticationProvider {
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
+	@Override
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
+
 		User user = (User) userRepository.findByName(auth.getName());
-		
+
 		if (user == null) {
 			throw new BadCredentialsException("User not found");
 		}
-		
+
 		String password = (String) auth.getCredentials();
 		if (!new BCryptPasswordEncoder().matches(password, user.getPassword())) {
 			throw new BadCredentialsException("Wrong password");
@@ -37,7 +41,7 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 
 		return new UsernamePasswordAuthenticationToken(user.getName(), password, roles);
 	}
-	
+
 	@Override
 	public boolean supports(Class<?> authenticationObject) {
 		return true;

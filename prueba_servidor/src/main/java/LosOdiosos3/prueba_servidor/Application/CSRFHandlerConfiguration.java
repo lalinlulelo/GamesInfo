@@ -1,4 +1,4 @@
-package Configuration;
+package LosOdiosos3.prueba_servidor.Application;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
