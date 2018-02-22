@@ -20,6 +20,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	// roles de usuario
+	@ElementCollection (fetch = FetchType.EAGER)
+	private List <String> roles;
+	
 	// atributos del usuario
 	private String name = "...";
 	private String password = "...";
@@ -40,11 +44,12 @@ public class User {
 	protected User () {}
 	
 	// contructor
-	public User (String name, String password, String date, String email) {
+	public User (String name, String password, String date, String email, String... roles) {
 		this.name = name;
 		this.password = password;
 		this.date = date;
 		this.email = email;
+		this.roles = new ArrayList<String>(Arrays.asList(roles));
 	}
 	
 	public long getId() {
@@ -106,6 +111,14 @@ public class User {
 	
 	public String getIcon () {
 		return icon;
+	}
+	
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 	
 	// toString
