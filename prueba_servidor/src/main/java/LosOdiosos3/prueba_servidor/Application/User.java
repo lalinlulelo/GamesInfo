@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -46,7 +47,7 @@ public class User {
 	// contructor
 	public User (String name, String password, String date, String email, String... roles) {
 		this.name = name;
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
 		this.date = date;
 		this.email = email;
 		this.roles = new ArrayList<String>(Arrays.asList(roles));

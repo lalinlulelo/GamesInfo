@@ -3,6 +3,8 @@ package LosOdiosos3.prueba_servidor.Application;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,13 +25,14 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 	@Override
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
 
-		User user = (User) userRepository.findByName(auth.getName());
+		User user = userRepository.findByName(auth.getName()).get(0);
 
 		if (user == null) {
 			throw new BadCredentialsException("User not found");
 		}
 
 		String password = (String) auth.getCredentials();
+		
 		if (!new BCryptPasswordEncoder().matches(password, user.getPassword())) {
 			throw new BadCredentialsException("Wrong password");
 		}
@@ -38,10 +41,10 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		for (String role : user.getRoles()) {
 			roles.add(new SimpleGrantedAuthority(role));
 		}
-
+		System.out.println("entro " + auth.getName() + " " + password);
 		return new UsernamePasswordAuthenticationToken(user.getName(), password, roles);
 	}
-
+	
 	@Override
 	public boolean supports(Class<?> authenticationObject) {
 		return true;

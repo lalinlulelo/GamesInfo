@@ -36,12 +36,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/my_lists.html").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/profile.html").hasAnyRole("USER");
 
-        // Login form
+     // Login form
         http.formLogin().loginPage("/login");
         http.formLogin().usernameParameter("name");
         http.formLogin().passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/index.html");
-        http.formLogin().failureUrl("/login");
+        http.formLogin().defaultSuccessUrl("/login/true");
+        http.formLogin().failureUrl("/login/false");
 
         // Logout
         http.logout().logoutUrl("/logout");
@@ -52,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         // Database authentication provider
+    	System.out.println("hago aqui algo");
         auth.authenticationProvider(authenticationProvider);       
     }
     
