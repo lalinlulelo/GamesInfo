@@ -260,12 +260,12 @@ public class userController {
 			model.addAttribute("name", usuario.getAttribute("name"));
 			model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
 			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-			/*
+			
 			// atributos del token
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 			model.addAttribute("token", token.getToken());
-			*/
-			return "/";
+			
+			return "index";
 		}
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
@@ -290,13 +290,13 @@ public class userController {
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
 		model.addAttribute("hello", " ");
-		/*
+		
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
-		*/
+		
 		// se dirige a la pagina como iniciado
-		return "/";
+		return "index";
 	}
 	
 	@RequestMapping("/log_out")
