@@ -7,9 +7,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,7 +62,7 @@ public class articleController {
 	
 	// ----------------------------- ARTICULOS ----------------------------------------
 	@RequestMapping("/article/{news}")
-	public String article (Model model, HttpSession usuario, @PathVariable String news) {
+	public String article (Model model, HttpSession usuario, @PathVariable String news, HttpServletRequest request) {
 		List <Article> articles = articleRepository.findByTitle(news);
 		String head = articles.get(0).getHead();
 		String title = articles.get(0).getTitle();
@@ -106,6 +108,10 @@ public class articleController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return "article";
 	}	
 	// -------------------------- -- FIN ARTICULOS ------------------------------------

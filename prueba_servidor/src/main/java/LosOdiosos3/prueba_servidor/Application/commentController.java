@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,9 +56,9 @@ public class commentController {
 
 	// ----------------------------- COMENTARIOS  -------------------------------------
 	@RequestMapping("/comment/{page}")
-	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name,@PathVariable String page) {	
+	public String comment (Model model, HttpSession usuario,@RequestParam String text, @RequestParam String name, @PathVariable String page, HttpServletRequest request) {	
 		String ret = null;		
-		// comentario de juego
+		// comentario de juego, 
 		if(page.equals("game")) {			
 			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());
 			// se coge el juego donde se ha realizado el comentario
@@ -106,7 +108,11 @@ public class commentController {
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
-		model.addAttribute("Cuerpo", " ");		
+		model.addAttribute("Cuerpo", " ");
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return ret;
 		// se crea un comentario con el usuario y el texto introducido

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,7 +62,7 @@ public class userController {
 	}
 	
 	@PostMapping(value = "/register")
-	public String registrar(Model model, User user, HttpSession usuario) {
+	public String registrar(Model model, User user, HttpSession usuario, HttpServletRequest request) {
 		
 		// se inicializa el usuario con los datos del formulario
 		usuario.setAttribute("name", user.getName());
@@ -121,15 +122,20 @@ public class userController {
 		
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("hello", " ");
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return "/";
 	}
 	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ----------------------
 	
 	// ----------------------------- INICIO DE SESION ---------------------------------
 	@RequestMapping("/login/{loged}")
-	public String iniciar_sesion (Model model, UsernamePasswordAuthenticationToken user, HttpSession usuario, @PathVariable String loged) {
+	public String iniciar_sesion (Model model, UsernamePasswordAuthenticationToken user, HttpSession usuario, @PathVariable String loged, HttpServletRequest request) {
 		// recopilamos la lista de usuarios que contienen el nombre
-		User usur = userRepository.findByName(user.getName()).get(0);
+		
 		/*
 		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
 		// con las disponibles
@@ -211,6 +217,7 @@ public class userController {
 		return "index";
 		*/
 		if(loged.equals("true")) {
+			User usur = userRepository.findByName(user.getName()).get(0);
 			// se registra el usuario
 			usuario.setAttribute("registered", true);
 			usuario.setAttribute("name", usur.getName());
@@ -253,6 +260,11 @@ public class userController {
 			model.addAttribute("name", usuario.getAttribute("name"));
 			model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
 			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+			/*
+			// atributos del token
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("token", token.getToken());
+			*/
 			return "/";
 		}
 		// se guardan los atributos en el modelo
@@ -278,13 +290,17 @@ public class userController {
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
 		model.addAttribute("hello", " ");
-		
+		/*
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		*/
 		// se dirige a la pagina como iniciado
 		return "/";
 	}
 	
 	@RequestMapping("/log_out")
-	public String log_out (Model model, HttpSession usuario) {
+	public String log_out (Model model, HttpSession usuario, HttpServletRequest request) {
 		usuario.setAttribute("registered", false);
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
@@ -316,13 +332,18 @@ public class userController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('See you soon " + usuario.getAttribute("name") + "!');"  + "</script>");
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return "/";
 	}
 	// ----------------------------- FIN INICIO DE SESION -----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
 	@RequestMapping("/profile")
-	public String init (Model model, HttpSession usuario) {		
+	public String init (Model model, HttpSession usuario, HttpServletRequest request) {		
 		
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
@@ -349,6 +370,10 @@ public class userController {
 
 		model.addAttribute("lists", " ");
 		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
 	}
@@ -356,7 +381,7 @@ public class userController {
 
 	// ----------------------------- AJUSTES PERFIL -----------------------------------
 	@RequestMapping("/change/{field}")
-	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {		
+	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text, HttpServletRequest request) {		
 		List<User> usurs = userRepository.findByName((String)usuario.getAttribute("name"));		
 		User usur=null; 
 		if(usurs.size() > 0){
@@ -425,7 +450,10 @@ public class userController {
 		
 		modelAttrChange(usur,usuario,model);
 			
-
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return"profile";
 	}
 	

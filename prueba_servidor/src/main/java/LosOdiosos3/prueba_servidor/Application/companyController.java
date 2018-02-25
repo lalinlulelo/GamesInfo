@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +58,7 @@ public class companyController {
 	
 	// ----------------------------- COMPAÑIA -----------------------------------------
 	@RequestMapping("/company/{company_name}")
-	public String company (Model model, HttpSession usuario, @PathVariable String company_name){
+	public String company (Model model, HttpSession usuario, @PathVariable String company_name, HttpServletRequest request){
 				
 		// se adquiere la lista de juegos que contiene el nombre
 		List <Company> companies = companyRepository.findByName(company_name);
@@ -109,6 +111,9 @@ public class companyController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		//se accede a compañia
 		return "company";
@@ -117,7 +122,7 @@ public class companyController {
 	
 	// ----------------------------- LISTA DE COMPAÑIAS -------------------------------
 	@RequestMapping("/company_list/{mode}")
-	public String company_list (Model model, HttpSession usuario, @PathVariable String mode) {
+	public String company_list (Model model, HttpSession usuario, @PathVariable String mode, HttpServletRequest request) {
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + 	"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
@@ -162,6 +167,9 @@ public class companyController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 				
 		// se accede a la pagina que expone todas las comapañias
 		return "company_list";

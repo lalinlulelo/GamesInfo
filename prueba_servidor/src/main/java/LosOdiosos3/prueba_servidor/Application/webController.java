@@ -200,8 +200,7 @@ public class webController {
 		model.addAttribute("news", news);
 		
 		// condicionales para mostrar u ocultar contenido		
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		
+		model.addAttribute("registered", usuario.getAttribute("registered"));		
 		boolean aux = !(Boolean) usuario.getAttribute("registered");	
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
@@ -209,15 +208,14 @@ public class webController {
 
 		}else {
 			model.addAttribute("name", " ");
-		}
-		
-		
+		}		
 		model.addAttribute("unregistered", aux);
 		
 		// deshabilitacion del comando alert que saluda al usuario		
 		model.addAttribute("alert", usuario.getAttribute("alert"));
 		model.addAttribute("hello", " ");
 		
+		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 
@@ -228,7 +226,7 @@ public class webController {
 
 	// ----------------------------- BUSQUEDAS ----------------------------------------
 	@RequestMapping("/search")
-	public String search (Model model, HttpSession usuario, @RequestParam String text) {
+	public String search (Model model, HttpSession usuario, @RequestParam String text, HttpServletRequest request) {
 		System.out.println(text);
 		List<Game> games = gameRepository.findByNameContaining(text);
 		List<Company> companies = companyRepository.findByNameContaining(text);
@@ -315,6 +313,10 @@ public class webController {
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");	
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return "search";
 	}

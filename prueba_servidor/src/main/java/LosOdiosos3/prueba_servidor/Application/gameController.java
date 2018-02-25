@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +58,7 @@ public class gameController {
 
 	// ----------------------------- LISTA DE JUEGOS ----------------------------------	
 	@RequestMapping("/game_list/{modo}")
-	public String game_list (Model model, HttpSession usuario, @PathVariable String modo) {
+	public String game_list (Model model, HttpSession usuario, @PathVariable String modo, HttpServletRequest request) {
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		//List<Game> list_games_2 = gameRepository.findAll();
@@ -111,6 +113,9 @@ public class gameController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return "game_list";
 	}
@@ -118,7 +123,7 @@ public class gameController {
 	
 	// ----------------------------- JUEGO --------------------------------------------
 	@RequestMapping("/game/{game_name}")
-	public String Game (Model model, HttpSession usuario, @PathVariable String game_name) {
+	public String Game (Model model, HttpSession usuario, @PathVariable String game_name, HttpServletRequest request) {
 		// se coge de la BBDD la lista de juegos con dicho nombre recibido por url
 		List <Game> games = gameRepository.findByName(game_name);		
 		// se adquieren los atributos del juego
@@ -202,13 +207,17 @@ public class gameController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return "game";
 	}
 	// ----------------------------- FIN JUEGO ----------------------------------------
 	
 	// ----------------------------- ADD GAME  ----------------------------------------
 	@RequestMapping("/addList/{page}")
-	public String addList (Model model, HttpSession usuario, @RequestParam String list, @RequestParam String name, @PathVariable String page) {	
+	public String addList (Model model, HttpSession usuario, @RequestParam String list, @RequestParam String name, @PathVariable String page, HttpServletRequest request) {	
 		String ret = null;
 		boolean repetido = false;
 		if(page.equals("game")) {
@@ -276,6 +285,11 @@ public class gameController {
 				model.addAttribute("options", " ");
 			}
 			
+			// atributos del token
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("token", token.getToken());
+			
+			
 			// se retorna al juego
 			ret= "/game/"+game.getName();			
 			return ret;
@@ -308,6 +322,10 @@ public class gameController {
 			}	
 		}
 		model.addAttribute("news", news);
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return "index";
 	}
