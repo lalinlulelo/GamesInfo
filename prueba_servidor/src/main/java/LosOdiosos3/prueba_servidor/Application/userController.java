@@ -405,10 +405,6 @@ public class userController {
 						usuario.setAttribute("name", text);	
 					}		
 					break;
-				
-
-			
-				
 
 				case "password":			
 					usur.setPassword(text);
