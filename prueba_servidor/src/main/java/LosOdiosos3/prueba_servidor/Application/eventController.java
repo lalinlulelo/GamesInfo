@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +57,7 @@ public class eventController {
 
 	// ----------------------------- CALENDARIO DE EVENTOS  ---------------------------
 	@RequestMapping("/event_calendar")
-	public String event_calendar (Model model, HttpSession usuario) {
+	public String event_calendar (Model model, HttpSession usuario, HttpServletRequest request) {
 		// lista con todos los eventos disponibles
 		List<Event> event_list = eventRepository.findAll();
 		
@@ -82,6 +84,9 @@ public class eventController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return "event_calendar";
 	}
@@ -89,7 +94,7 @@ public class eventController {
 	
 	// ----------------------------- EVENTO  ------------------------------------------
 	@RequestMapping("/event/{event_name}")
-	public String event (Model model, HttpSession usuario, @PathVariable String event_name) {
+	public String event (Model model, HttpSession usuario, @PathVariable String event_name, HttpServletRequest request) {
 		// lista que contiene los eventos con el nombre introudcido por url
 		List<Event> events = eventRepository.findByName(event_name);		
 		
@@ -131,6 +136,9 @@ public class eventController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		// se accede al html
 		return "event";

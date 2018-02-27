@@ -1,27 +1,20 @@
 package LosOdiosos3.prueba_servidor.Application;
 
-import javassist.compiler.SyntaxError;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
 public class webController {	
@@ -64,23 +57,23 @@ public class webController {
 
 	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
-	public String inicio (Model model, HttpSession usuario) throws ParseException {
+	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
 		if(comienzo == false) {
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
-			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com");
+			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com", "ROLE_USER");
 			Juan.setIcon(icons.get(3));
 			userRepository.save(Juan);
-			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com");
+			User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com", "ROLE_USER");;
 			Pedro.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Pedro);
-			User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com");
+			User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com", "ROLE_USER");;
 			Guille.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Guille);
-			User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com");
+			User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com", "ROLE_USER");;
 			Sergio.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Sergio);
-			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com");
+			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com", "ROLE_USER");;
 			Agus.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Agus);
 			
@@ -207,8 +200,7 @@ public class webController {
 		model.addAttribute("news", news);
 		
 		// condicionales para mostrar u ocultar contenido		
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		
+		model.addAttribute("registered", usuario.getAttribute("registered"));		
 		boolean aux = !(Boolean) usuario.getAttribute("registered");	
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
@@ -216,15 +208,17 @@ public class webController {
 
 		}else {
 			model.addAttribute("name", " ");
-		}
-		
-		
+		}		
 		model.addAttribute("unregistered", aux);
 		
 		// deshabilitacion del comando alert que saluda al usuario		
 		model.addAttribute("alert", usuario.getAttribute("alert"));
 		model.addAttribute("hello", " ");
 		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+
 		// se accede a la pagina principal
 		return "index";
 	}
@@ -232,7 +226,7 @@ public class webController {
 
 	// ----------------------------- BUSQUEDAS ----------------------------------------
 	@RequestMapping("/search")
-	public String search (Model model, HttpSession usuario, @RequestParam String text) {
+	public String search (Model model, HttpSession usuario, @RequestParam String text, HttpServletRequest request) {
 		System.out.println(text);
 		List<Game> games = gameRepository.findByNameContaining(text);
 		List<Company> companies = companyRepository.findByNameContaining(text);
@@ -319,6 +313,10 @@ public class webController {
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
 		model.addAttribute("Cuerpo", " ");	
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return "search";
 	}

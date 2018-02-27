@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,7 +57,7 @@ public class mylistController {
 
 	// ----------------------------- MY LISTS -----------------------------------------
 	@RequestMapping("/my_lists")
-	public String my_lists (Model model, HttpSession usuario) {
+	public String my_lists (Model model, HttpSession usuario, HttpServletRequest request) {
 		model.addAttribute("added", " ");
 		//Obtengo el nombre del usuario
 		String name = (String) usuario.getAttribute("name");
@@ -106,11 +108,15 @@ public class mylistController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return "my_lists";
 	}
 	
 	@RequestMapping("my_lists_settings/{option}")
-	public String my_lists_option (Model model, @PathVariable String option, @RequestParam String list,  HttpSession usuario) {
+	public String my_lists_option (Model model, @PathVariable String option, @RequestParam String list,  HttpSession usuario, HttpServletRequest request) {
 		User user = userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 		MyList mylist = null;
 		boolean added = false;
@@ -205,6 +211,10 @@ public class mylistController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 		
 		return "my_lists";
 	}

@@ -2,9 +2,12 @@ package LosOdiosos3.prueba_servidor.Application;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,7 +62,7 @@ public class userController {
 	}
 	
 	@PostMapping(value = "/register")
-	public String registrar(Model model, User user, HttpSession usuario) {
+	public String registrar(Model model, User user, HttpSession usuario, HttpServletRequest request) {
 		
 		// se inicializa el usuario con los datos del formulario
 		usuario.setAttribute("name", user.getName());
@@ -119,17 +122,21 @@ public class userController {
 		
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("hello", " ");
-		return "index";
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
+		return "/";
 	}
 	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ----------------------
 	
 	// ----------------------------- INICIO DE SESION ---------------------------------
-	@RequestMapping("/login")
-	public String iniciar_sesion (Model model, User user, HttpSession usuario) {
+	@RequestMapping("/login/{loged}")
+	public String iniciar_sesion (Model model, UsernamePasswordAuthenticationToken user, HttpSession usuario, @PathVariable String loged, HttpServletRequest request) {
 		// recopilamos la lista de usuarios que contienen el nombre
-		List<User> usur = userRepository.findByName(user.getName());
 		
-		
+		/*
 		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
 		// con las disponibles
 		if(usur.size() > 0) {
@@ -208,10 +215,92 @@ public class userController {
 		
 		// se dirige a la pagina como iniciado
 		return "index";
+		*/
+		if(loged.equals("true")) {
+			User usur = userRepository.findByName(user.getName()).get(0);
+			// se registra el usuario
+			usuario.setAttribute("registered", true);
+			usuario.setAttribute("name", usur.getName());
+			usuario.setAttribute("password", usur.getPassword());
+			usuario.setAttribute("date", usur.getDate());
+			usuario.setAttribute("icon", usur.getIcon());
+			usuario.setAttribute("email", usur.getEmail());
+			
+			// se guarda un objeto User
+			User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
+			usuario.setAttribute("Usuario", newUser);
+			
+			// se deshabilita el alert
+			model.addAttribute("alert", "  ");	
+			model.addAttribute("Titulo", "Latest News");
+	
+			// articulos relevantes
+			List<Article> articles = articleRepository.findAll();
+			String news = "";
+			if(articles.size() > 0) {
+				String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+				for(int j = 0; j < articles.size(); j++) {
+					String Url= articles.get(j).getImage();
+					String Titulo = articles.get(j).getTitle();	
+					String Head = articles.get(j).getHead();
+					String link="/article/" + Titulo;
+
+
+					String art = String.format(div, Url, Titulo, Head, link);			
+					news += art;			
+				}	
+			}
+			model.addAttribute("news", news);
+			
+			
+			// se muestra el link de iniciar/registrar usuario si es false										
+			model.addAttribute("registered", usuario.getAttribute("registered"));
+			boolean aux = !(Boolean) usuario.getAttribute("registered");
+			model.addAttribute("unregistered", aux);
+			model.addAttribute("name", usuario.getAttribute("name"));
+			model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
+			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
+			
+			// atributos del token
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("token", token.getToken());
+			
+			return "index";
+		}
+		// se guardan los atributos en el modelo
+		model.addAttribute("Titulo", "Latest News");
+		// articulos relevantes
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int j = 0; j < articles.size(); j++) {
+				String Url= articles.get(j).getImage();
+				String Titulo = articles.get(j).getTitle();	
+				String Head = articles.get(j).getHead();
+				String link="/article/" + Titulo;
+	
+	
+				String art = String.format(div, Url, Titulo, Head, link);			
+				news += art;			
+			}	
+		}
+		model.addAttribute("news", news);
+	
+		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
+		model.addAttribute("name", " ");		
+		model.addAttribute("hello", " ");
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
+		// se dirige a la pagina como iniciado
+		return "index";
 	}
 	
 	@RequestMapping("/log_out")
-	public String log_out (Model model, HttpSession usuario) {
+	public String log_out (Model model, HttpSession usuario, HttpServletRequest request) {
 		usuario.setAttribute("registered", false);
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
@@ -243,13 +332,18 @@ public class userController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('See you soon " + usuario.getAttribute("name") + "!');"  + "</script>");
-		return "index";
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
+		return "/";
 	}
 	// ----------------------------- FIN INICIO DE SESION -----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
 	@RequestMapping("/profile")
-	public String init (Model model, HttpSession usuario) {		
+	public String init (Model model, HttpSession usuario, HttpServletRequest request) {		
 		
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
@@ -276,6 +370,10 @@ public class userController {
 
 		model.addAttribute("lists", " ");
 		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		// se devuelve el nombre de la lista, siendo el PERFIL del usuario
 		return "profile";
 	}
@@ -283,7 +381,7 @@ public class userController {
 
 	// ----------------------------- AJUSTES PERFIL -----------------------------------
 	@RequestMapping("/change/{field}")
-	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text ) {		
+	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text, HttpServletRequest request) {		
 		List<User> usurs = userRepository.findByName((String)usuario.getAttribute("name"));		
 		User usur=null; 
 		if(usurs.size() > 0){
@@ -352,7 +450,10 @@ public class userController {
 		
 		modelAttrChange(usur,usuario,model);
 			
-
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return"profile";
 	}
 	

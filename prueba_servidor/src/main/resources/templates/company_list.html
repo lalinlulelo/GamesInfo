@@ -87,21 +87,25 @@
 							  		<li><a href="/profile">Profile</a></li>
 									<li><a href="/my_lists">My Lists</a></li>
 									<div class="dropdown-divider"></div>            
-					            	<li><a href="/log_out">Logout</a></li>					            
+					            	<li><a href="/log_out">Logout</a></li>
+					            	<input type="hidden" name="_csrf" value="{{token}}">  					            
 							  	</ul>
 							</li>            
 			            </div>
+			            
 			            {{/registered}}
-			                           
+            
 			            {{#unregistered}}  
 			            <div  class="col-md-1"> </div>         
 				        <input type="text" placeholder="Username" name="name" required />
 				        <li></li>
 				        <input type="password" placeholder="Password" name="password"	required />
 				        <li></li>
-				        <input type="submit" value="Login">            
+				        <input type="submit" value="Login">
+				        <input type="hidden" name="_csrf" value="{{token}}">           
 				        <li></li>    
 			            <li><a href="/new_user">Register</a></li>
+			            <input type="hidden" name="_csrf" value="{{token}}">  
 			            {{/unregistered}}			                               
 		          	</div>             
 		    	</ul>
