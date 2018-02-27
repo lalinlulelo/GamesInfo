@@ -76,6 +76,8 @@ public class webController {
 			User Agus = new User("Agus", "1213", "14/10/96", "Agus@hotmail.com", "ROLE_USER");;
 			Agus.setIcon(icons.get((int)Math.random()*6));
 			userRepository.save(Agus);
+			User Admin=new User("Admin", "admin", "29/2/96", "Admin@hotmail.com", "ROLE_USER","ROLE_ADMIN");
+			userRepository.save(Admin);
 			
 			// compañias
 			Company Naughty_Dog = new Company("Naughty Dog", "EEUU", "PlayStation fisrt party",1984,"https://ih1.redbubble.net/image.37514287.0124/sticker,220x200-bg,ffffff-pad,220x200,ffffff.u2.jpg","https://www.naughtydog.com");
