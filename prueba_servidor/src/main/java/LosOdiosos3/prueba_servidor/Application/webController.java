@@ -20,8 +20,16 @@ import Socket.MailSender;
 import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
-public class webController {		
-	// ----------------------------- INYECCIONES --------------------------------------	
+public class webController {	
+	/*
+	// ----------------------------- VARIABLES DEL SERVIDOR ---------------------------
+	// iconos de usuario
+	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
+	// variable de inicio de controlador
+	boolean comienzo = false;
+// ----------------------------- FIN VARIABLES DEL SERVIDOR ----------------------
+*/
+	// -----/------------------------ INYECCIONES --------------------------------------	
 	// repositorio de la tabla usuarios 
 	@Autowired
 	private UserRepository userRepository;	
@@ -54,8 +62,8 @@ public class webController {
 	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
-<<<<<<< HEAD
-		if(comienzo == false) {
+		//if(comienzo == false) {
+			/*
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
 			User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com", "ROLE_USER");
@@ -145,17 +153,15 @@ public class webController {
 			userRepository.save(Juan);
 			gameRepository.save(GOW);
 			gameRepository.save(SMO);
-			
+		
 			// articulos
 			Article article = new Article (userRepository.findByName("Agus").get(0), "Nintendo Labo", "Nintendo saca un nuevo producto!", "Nintendo Labo es una nueva gama de experiencias interactivas con las que crear, jugar y descubrir, para inspirar a las mentes más creativas y los corazones más inquietos.", "https://statics.vrutal.com/m/7193/7193c0a1bd77df5d5aa766727a187b77.jpg");
 			articleRepository.save(article);
 			article = new Article(userRepository.findByName("Guille").get(0), "The Seven Deadly Sins: Knights of Britannia", "Nuevo juego de PS4 a la vista", "nos encontramos ante un juego de lucha tridimensional en el que nos podemos mover con total libertad por los escenarios de forma muy parecida a lo que vimos en J-Stars Victory VS.", "http://www.vostory.com/wp-content/uploads/2018/01/maxresdefault.jpg");
 			articleRepository.save(article);
 			article = new Article(userRepository.findByName("Sergio").get(0), "Kingdom Hearts 3", "¡Nuevas imágenes de Kingdom Hearts 3!", "El pasado fin de semana Square Enix presentó el mundo de Monstruos S.A para Kingdom Hearts III. Ahora nos llega una nueva galería de imágenes y renders que nos ponen los dientes largos esperando conocer más detalles.", "https://statics.vrutal.com/m/9168/9168def48ee8a753b36bde6312659da5.jpg");
-			articleRepository.save(article);
-=======
->>>>>>> 9393877d3d404538323d5adda012628582aedebd
-
+			articleRepository.save(article);*/
+		//}
 		if(usuario.getAttribute("registered") == null) {
 			usuario.setAttribute("registered", false);			
 		}

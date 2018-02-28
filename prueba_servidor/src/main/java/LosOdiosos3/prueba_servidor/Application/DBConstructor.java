@@ -67,7 +67,7 @@ public class DBConstructor implements InitializingBean {
 		User Pedro = new User("Pedro", "456", "15/6/92", "Pedro@hotmail.com", "ROLE_USER");;
 		Pedro.setIcon(icons.get((int)Math.random()*6));
 		userRepository.save(Pedro);
-		User Guille = new User("Guille", "789", "25/2/96", "Guille@hotmail.com", "ROLE_USER");;
+		User Guille = new User("Guille", "789", "25/2/96", "guillemelmor@gmail.com", "ROLE_USER");;
 		Guille.setIcon(icons.get((int)Math.random()*6));
 		userRepository.save(Guille);
 		User Sergio = new User("Sergio", "1011", "4/2/95", "Sergio@hotmail.com", "ROLE_USER");;
