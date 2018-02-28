@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Socket.MailSender;
+
 @Controller
 public class userController {
 	// ----------------------------- VARIABLES DEL SERVIDOR ---------------------------
@@ -360,7 +362,7 @@ public class userController {
 		model.addAttribute("email", email);
 		model.addAttribute("alert"," ");	
 
-		
+		MailSender.mailSender((String)usuario.getAttribute(name), (String)usuario.getAttribute("email"));
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
