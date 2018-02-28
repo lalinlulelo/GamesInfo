@@ -1,6 +1,5 @@
 package LosOdiosos3.prueba_servidor.Application;
 import LosOdiosos3.prueba_servidor.*;
-import LosOdiosos3.prueba_servidor.Application.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +27,7 @@ public class User {
 	// atributos del usuario
 	private String name = "...";
 	private String password = "...";
+	@Column(unique = true)
 	private String email;
 	private String date = "...";
 	private String icon = null;
@@ -114,6 +114,7 @@ public class User {
 		return icon;
 	}
 	
+	//Roles y comments
 	public List<String> getRoles() {
 		return roles;
 	}
@@ -122,13 +123,13 @@ public class User {
 		this.roles = roles;
 	}
 	
+	public void addRole(String role) {
+        if (roles == null) {
+            roles = new ArrayList<>();
+        }
+        roles.add(role);
+    }
 	
-	
-	// toString
-	public String toString () {
-		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";
-	}
-
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -136,4 +137,9 @@ public class User {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}	
+	
+	// toString
+	public String toString () {
+		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";
+	}
 }

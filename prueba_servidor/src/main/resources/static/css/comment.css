@@ -1,0 +1,65 @@
+@charset "UTF-8";
+	.comment{
+		display: block;
+	  	width: 100%;
+	  	background: rgb(251, 255, 140);
+	  	padding: 10px 20px;
+	  	padding-bottom: 35px;
+	  	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+	  	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+	  	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+ 	 	margin-top:30px;
+ 	 	text-align:center;			 
+	}			
+	.commentBox{
+		width: 600px;
+		height:100px;			
+		text-align:justify;
+		resize: none;
+		background-color: rgb(252, 255, 186);
+		border-radius: 10px;
+		border:solid 1px orange;
+	}		
+	.but input[type=submit] {
+		border:solid 1px rgb(4, 0, 80);
+	    background-color: #406DB5;
+	    font-family: "Andale Mono", monospace;
+		color:  #F9FF35;
+	    padding: 12px 20px;
+	    margin-right: 25%;
+	    border: none;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    float: right;
+	}			
+	.comments{			
+		background-color: #ffe9b7;
+		text-align:left;
+		font-family: "Andale Mono", monospace;
+     	color:  #406DB5;
+     	font-size: 18px;
+		padding-left: 10px;
+		padding-bottom: 10px;
+		padding-top: 10px;
+	}
+	.commentsUser{			
+		border-radius: 4px;
+		background-color: #ffdc8c;
+		text-align:left;
+		font-family: "Andale Mono", monospace;
+     	color:  #406DB5;
+     	font-size: 22px;
+     	padding-left: 10px;
+	}
+	.com{
+		border-radius: 5px;
+		background-color: #ffdc8c ;
+		font-family: "Andale Mono", monospace;
+		border:solid 1px orange;
+		color:  #406DB5;
+	}	
+	.comment_img{
+		width:70px;
+		heigth:70px;
+		padding-right: 20px;			
+	}		

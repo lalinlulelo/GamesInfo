@@ -20,14 +20,7 @@ import Socket.MailSender;
 import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
-public class webController {	
-	// ----------------------------- VARIABLES DEL SERVIDOR ---------------------------
-	// iconos de usuario
-	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
-	// variable de inicio de controlador
-	boolean comienzo = false;
-	// ----------------------------- FIN VARIABLES DEL SERVIDOR -----------------------
-	
+public class webController {		
 	// ----------------------------- INYECCIONES --------------------------------------	
 	// repositorio de la tabla usuarios 
 	@Autowired
@@ -61,6 +54,7 @@ public class webController {
 	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
+<<<<<<< HEAD
 		if(comienzo == false) {
 			// Datos de la Base de Datos cargados inicialmente
 			// usuarios
@@ -159,31 +153,15 @@ public class webController {
 			articleRepository.save(article);
 			article = new Article(userRepository.findByName("Sergio").get(0), "Kingdom Hearts 3", "¡Nuevas imágenes de Kingdom Hearts 3!", "El pasado fin de semana Square Enix presentó el mundo de Monstruos S.A para Kingdom Hearts III. Ahora nos llega una nueva galería de imágenes y renders que nos ponen los dientes largos esperando conocer más detalles.", "https://statics.vrutal.com/m/9168/9168def48ee8a753b36bde6312659da5.jpg");
 			articleRepository.save(article);
+=======
+>>>>>>> 9393877d3d404538323d5adda012628582aedebd
 
-			article = new Article(userRepository.findByName("Guille").get(0),
-					"Sea of Thieves", "requisitos mínimos y recomendados en PC", 
-					"En la imagen podemos ver hasta seis configuraciones diferentes, las cuales van desde una resolución de 540p y 30 frames hasta los 4K y 60 frames. No cabe duda de que el estudio quiere abarcar una amplia gama de equipos.", 
-					"https://media.redadn.es/imagenes/sea-of-thieves-pc_317030.jpg");
-			articleRepository.save(article);
-			article = new Article(userRepository.findByName("Agus").get(0),
-					"Fear Effect Sedna", "llegará a PC, PS4, Xbox One y Switch el 6 de marzo", 
-					"Esta entrega, cuyos hechos se ambientan unos años después del primer título de la serie, estará disponible en próximo 6 de marzo en los sistemas PC, PlayStation 4, Xbox One y Nintendo Switch a través de las tiendas digitales de cada una de ellas. ", 
-					"https://media.redadn.es/imagenes/fear-effect-sedna-pc-ps4-xbox-one_313695.jpg");
-			articleRepository.save(article);
-			
-			
-			
-			// se fija el no retorno por esta fase
-			comienzo = true;
-		}		
 		if(usuario.getAttribute("registered") == null) {
-			usuario.setAttribute("registered", false);
-			
+			usuario.setAttribute("registered", false);			
 		}
 		usuario.setAttribute("alert", "  ");
 		// comentarios de abajo del html
-		model.addAttribute("Titulo", "Latest News");
-		
+		model.addAttribute("Titulo", "Latest News");		
 		
 		// articulos relevantes
 		List<Article> articles = articleRepository.findAll();
