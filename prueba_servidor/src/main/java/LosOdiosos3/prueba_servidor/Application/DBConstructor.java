@@ -29,9 +29,6 @@ public class DBConstructor implements InitializingBean {
 			"https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg",
 			"https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");	
 	
-	@Value("${spring.jpa.hibernate.ddl-auto}")
-	String ddlAuto;
-	
 	// repositorio de la tabla usuarios 
 	@Autowired
 	private UserRepository userRepository;	

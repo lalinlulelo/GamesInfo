@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
-public class webController {	
-	
+public class webController {		
 	// ----------------------------- INYECCIONES --------------------------------------	
 	// repositorio de la tabla usuarios 
 	@Autowired

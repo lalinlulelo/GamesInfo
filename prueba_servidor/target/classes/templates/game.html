@@ -170,6 +170,7 @@
 		     	<form action="/search" method="post">
 		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
 		           	<input type="submit" value="Search"> 
+		           	<input type="hidden" name="_csrf" value="{{token}}">  
 		     	</form>
 		    </div>
 	    	<div id="triangulo"></div>
@@ -184,11 +185,7 @@
 		        </div>
 		        <div id="product-details">
 		        <!-- Son meras pruebas -->
-		        	
-					
-					
-					
-					
+		        				
 		            <h1>{{name_g}}</h1>
 		            <h2>Details:</h2>
 		            <h3>Company:</h3> <p> {{company}}</p>

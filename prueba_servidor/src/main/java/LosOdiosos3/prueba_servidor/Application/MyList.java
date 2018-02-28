@@ -2,13 +2,8 @@ package LosOdiosos3.prueba_servidor.Application;
 
 import java.util.ArrayList;
 import java.util.List;
-import LosOdiosos3.prueba_servidor.Application.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import LosOdiosos3.prueba_servidor.*;
+import javax.persistence.*;
 
 @Entity
 public class MyList {

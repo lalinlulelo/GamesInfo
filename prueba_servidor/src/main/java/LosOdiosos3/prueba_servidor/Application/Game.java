@@ -1,6 +1,5 @@
 package LosOdiosos3.prueba_servidor.Application;
 import LosOdiosos3.prueba_servidor.*;
-import LosOdiosos3.prueba_servidor.Application.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +9,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Game {
-	
+public class Game {	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
