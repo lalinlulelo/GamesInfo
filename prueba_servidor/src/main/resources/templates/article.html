@@ -64,7 +64,7 @@
 				background-color: rgb(252, 255, 186);
 				border-radius: 10px;
 				border:solid 1px orange;
-			}			
+			}		
 			.but input[type=submit] {
 				border:solid 1px rgb(4, 0, 80);
 			    background-color: #406DB5;
@@ -98,10 +98,16 @@
 			}
 			.com{
 				border-radius: 5px;
-				background-color:rgb(112, 155, 201) ;
+				background-color: #ffdc8c ;
 				font-family: "Andale Mono", monospace;
 				border:solid 1px orange;
-			}				
+				color:  #406DB5;
+			}	
+			.comment_img{
+				width:70px;
+				heigth:70px;
+				padding-right: 20px;			
+			}					
     	</style>
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<title>Event</title>
@@ -182,6 +188,7 @@
 		     	<form action="/search" method="post">
 		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
 		           	<input type="submit" value="Search"> 
+		           	<input type="hidden" name="_csrf" value="{{token}}">
 		     	</form>
 		    </div>
 	    	<div id="triangulo"></div>
@@ -205,11 +212,12 @@
 		    <div id="comentarios" class="comment">
 	     		<h1>Comments</h1>
 	     		{{#registered}}
-	     		<form action="/comment/game" method="post" class="but" >
+	     		<form action="/comment/article" method="post" class="but" >
 	     			<textarea name="text" class="commentBox"></textarea>
-	     			<input type="hidden" name="name" value="{{name_g}}">
+	     			<input type="hidden" name="name" value="{{title}}">
 	     			<br><br>
-	     			<input type="submit" value="comment">	     
+	     			<input type="submit" value="comment">
+	     			<input type="hidden" name="_csrf" value="{{token}}">  		     
 	     		</form>
 	    		<br>
 	    		<br>

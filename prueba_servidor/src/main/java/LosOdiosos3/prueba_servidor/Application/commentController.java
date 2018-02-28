@@ -66,7 +66,7 @@ public class commentController {
 			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
 			c.setGame(game);
 			commentRepository.save(c);
-			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			// se guarda el comentario dentro del juego y se guarda el juego en la BBDD
 			game.setComment(c);
 			gameRepository.save(game);
 			// se retorna al juego
@@ -74,30 +74,43 @@ public class commentController {
 		// comentario de compañia
 		}else if(page.equals("company")) {				
 			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());			
-			// se coge el juego donde se ha realizado el comentario
+			// se coge la compania donde se ha realizado el comentario
 			Company company= companyRepository.findByName(name).get(0);		
-			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+			// se guarda la compania dentro del objeto comentario y se guarda el comentario en la BBDD
 			c.setCompany(company);
 			commentRepository.save(c);
-			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			// se guarda el comentario dentro de la compania y se guarda la compania en la BBDD
 			company.setComment(c);
 			companyRepository.save(company);
-			// se retorna al juego
+			// se retorna a la compania
 			ret="/company/"+company.getName();
 		// comentario de evento
 		}else if(page.equals("event")) {
 			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());				
-			// se coge el juego donde se ha realizado el comentario
+			// se coge el evento donde se ha realizado el comentario
 			Event event= eventRepository.findByName(name).get(0);		
-			// se guarda el juego dentro del objeto comentario y se guarda el comentario en la BBDD
+			// se guarda el evento dentro del objeto comentario y se guarda el comentario en la BBDD
 			c.setEvent(event);
 			commentRepository.save(c);
-			// se guarda el comentario dentro del juego y se guarda el juego em la BBDD
+			// se guarda el comentario dentro del evento y se guarda el evento en la BBDD
 			event.setComment(c);
 			eventRepository.save(event);
-			// se retorna al juego
+			// se retorna al evento
 			ret="/event/"+event.getName();
-		}			
+		// comentario de articulo
+		}else if(page.equals("article")) {
+			Comment c = new Comment((User)usuario.getAttribute("Usuario"),text,new Date());				
+			// se coge el articulo donde se ha realizado el comentario
+			Article article= articleRepository.findByTitle(name).get(0);		
+			// se guarda el articulo dentro del objeto comentario y se guarda el comentario en la BBDD
+			c.setArticle(article);
+			commentRepository.save(c);
+			// se guarda el comentario dentro del articulo y se guarda el articulo en la BBDD
+			article.setComment(c);
+			articleRepository.save(article);
+			// se retorna al articulo
+			ret="/article/"+article.getTitle();
+		}				
 			
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");

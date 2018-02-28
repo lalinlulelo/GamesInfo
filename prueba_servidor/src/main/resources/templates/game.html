@@ -103,10 +103,6 @@
 				color:  #406DB5;
 			}			
 			
-			.profile_img{			
-				width:40px;
-				heigth:40px;			
-			}
 			.comment_img{
 				width:70px;
 				heigth:70px;
@@ -280,7 +276,8 @@
 							  		</select>
 							  		<br><br>
 							  		<input type="hidden" name="name" value="{{name_g}}">
-					     			<input type="submit" value="Accept">	     
+					     			<input type="submit" value="Accept">	
+					     			<input type="hidden" name="_csrf" value="{{token}}">       
 		     					</form>
 							</div>
 						</div>
@@ -322,7 +319,8 @@
 	     			<textarea name="text" class="commentBox"></textarea>
 	     			<input type="hidden" name="name" value="{{name_g}}">
 	     			<br><br>
-	     			<input type="submit" value="comment">	     
+	     			<input type="submit" value="comment">
+	     			<input type="hidden" name="_csrf" value="{{token}}">       	     
 	     		</form>
 	    		<br>
 	    		<br>
