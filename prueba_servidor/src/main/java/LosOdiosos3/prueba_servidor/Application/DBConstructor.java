@@ -171,11 +171,6 @@ public class DBConstructor implements InitializingBean {
 				"Esta entrega, cuyos hechos se ambientan unos años después del primer título de la serie, estará disponible en próximo 6 de marzo en los sistemas PC, PlayStation 4, Xbox One y Nintendo Switch a través de las tiendas digitales de cada una de ellas. ", 
 				"https://media.redadn.es/imagenes/fear-effect-sedna-pc-ps4-xbox-one_313695.jpg");
 		articleRepository.save(article);
-<<<<<<< HEAD
 		*/
 	}
-=======
-*/
-		}
->>>>>>> 908aa70cf42d9c37a1e39834af029a409c33ab91
 }
