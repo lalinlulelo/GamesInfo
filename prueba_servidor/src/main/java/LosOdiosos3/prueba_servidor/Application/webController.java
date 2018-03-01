@@ -21,14 +21,6 @@ import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
 public class webController {	
-	/*
-	// ----------------------------- VARIABLES DEL SERVIDOR ---------------------------
-	// iconos de usuario
-	private List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg", "https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");
-	// variable de inicio de controlador
-	boolean comienzo = false;
-// ----------------------------- FIN VARIABLES DEL SERVIDOR ----------------------
-*/
 	// -----/------------------------ INYECCIONES --------------------------------------	
 	// repositorio de la tabla usuarios 
 	@Autowired
