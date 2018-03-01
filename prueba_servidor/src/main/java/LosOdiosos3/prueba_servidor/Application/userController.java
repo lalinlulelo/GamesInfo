@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -349,7 +350,7 @@ public class userController {
 		
 		// se mandan los datos al modelo
 		model.addAttribute("name", name);
-		model.addAttribute("password", password);
+		model.addAttribute("password", "*******");
 		model.addAttribute("date", date);	
 		model.addAttribute("icon", icon);
 		model.addAttribute("email", email);
@@ -376,7 +377,7 @@ public class userController {
 
 	// ----------------------------- AJUSTES PERFIL -----------------------------------
 	@RequestMapping("/change/{field}")
-	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text, HttpServletRequest request) {		
+	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text, @RequestParam String text_1, @RequestParam String text_2, HttpServletRequest request) {		
 		List<User> usurs = userRepository.findByName((String)usuario.getAttribute("name"));		
 		User usur=null; 
 		if(usurs.size() > 0){
@@ -404,12 +405,24 @@ public class userController {
 
 			
 				
-
-				case "password":			
-					usur.setPassword(text);
+				case "password":
+					if(!new BCryptPasswordEncoder().matches(text, usur.getPassword())) {
+						System.out.println("mal metido");
+						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
+						modelAttrChange(usur,usuario,model);	
+						return "profile";
+					}
+					if(!text_1.equals(text_2)) {
+						System.out.println("no son iguales aaaah");
+						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
+						modelAttrChange(usur,usuario,model);	
+						return "profile";
+					}
+					String password = new BCryptPasswordEncoder().encode(text_1);
+					usur.setPassword(password);
 					userRepository.save(usur);
-					usuario.setAttribute("password", text);
-					((User)usuario.getAttribute("Usuario")).setPassword(text);
+					usuario.setAttribute("password", password);
+					((User)usuario.getAttribute("Usuario")).setPassword(password);
 					break;
 
 				
@@ -468,7 +481,7 @@ public class userController {
 		
 		// se mandan los datos al modelo
 		model.addAttribute("name", name);
-		model.addAttribute("password", password);
+		model.addAttribute("password", "*******");
 		model.addAttribute("date", date);	
 		model.addAttribute("icon", icon);
 		model.addAttribute("email", email);

@@ -368,7 +368,12 @@
        		 					</div>
        		 					<div class="modal-body">
 							        <form action="/change/password" method="post">
-									 	<input name="text" type="text">			     
+							        	<p>Old Password:</p>
+									 	<input name="text" type="text">		
+									 	<p>New Password:</p>
+									 	<input name="text_1" type="text">	
+									 	<p>Repeat new Password</p>    
+									 	<input name="text_2" type="text">	 
 										<input type="submit" value="Change">
 										<input type="hidden" name="_csrf" value="{{token}}"> 
 									</form>	
