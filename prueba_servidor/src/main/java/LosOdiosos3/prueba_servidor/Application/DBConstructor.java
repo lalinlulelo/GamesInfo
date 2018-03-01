@@ -60,6 +60,7 @@ public class DBConstructor implements InitializingBean {
 	@Override
 	@Transactional()
 	public void afterPropertiesSet() throws Exception {
+		/*
 		// usuarios
 		User Juan = new User("Juan", "123", "20/11/85", "Juan@gmail.com", "ROLE_USER");
 		Juan.setIcon(icons.get(3));
@@ -169,5 +170,6 @@ public class DBConstructor implements InitializingBean {
 				"Esta entrega, cuyos hechos se ambientan unos años después del primer título de la serie, estará disponible en próximo 6 de marzo en los sistemas PC, PlayStation 4, Xbox One y Nintendo Switch a través de las tiendas digitales de cada una de ellas. ", 
 				"https://media.redadn.es/imagenes/fear-effect-sedna-pc-ps4-xbox-one_313695.jpg");
 		articleRepository.save(article);
+		*/
 	}
 }

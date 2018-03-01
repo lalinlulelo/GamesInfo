@@ -51,8 +51,12 @@ public class userController {
 
 	// ----------------------------- REGISTRAR NUEVO USUARIO --------------------------
 	@RequestMapping("/new_user")
-	public String new_user (Model model) {
+	public String new_user (Model model, HttpServletRequest request) {
 		model.addAttribute("alert", " ");
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
 		return "new_user";
 	}
 	
@@ -96,28 +100,7 @@ public class userController {
 		}else {
 			model.addAttribute("name", " ");
 		}
-		
-		// articulos relevantes
-		List<Article> articles = articleRepository.findAll();
-		String news = "";
-		if(articles.size() > 0) {
-			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-			for(int i = 0; i < articles.size(); i++) {
-				String Url= articles.get(i).getImage();
-				String Titulo = articles.get(i).getTitle();	
-				String Head = articles.get(i).getHead();
-				String link="/article/" + Titulo;
-
-
-				String art = String.format(div, Url, Titulo, Head, link);			
-				news += art;			
-			}	
-		}
-		model.addAttribute("news", news);
-		
-		model.addAttribute("unregistered", aux);
-		model.addAttribute("hello", " ");
-		
+				
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
@@ -129,88 +112,6 @@ public class userController {
 	// ----------------------------- INICIO DE SESION ---------------------------------
 	@RequestMapping("/login/{loged}")
 	public String iniciar_sesion (Model model, UsernamePasswordAuthenticationToken user, HttpSession usuario, @PathVariable String loged, HttpServletRequest request) {
-		// recopilamos la lista de usuarios que contienen el nombre
-		
-		/*
-		// si la lista no esta vacía, la recorro comparando la contraseña introducida,
-		// con las disponibles
-		if(usur.size() > 0) {
-			for(int i = 0; i < usur.size(); i++) {
-				if(user.getPassword().equals(usur.get(i).getPassword())) {
-					// se registra el usuario
-					usuario.setAttribute("registered", true);
-					usuario.setAttribute("name", usur.get(i).getName());
-					usuario.setAttribute("password", usur.get(i).getPassword());
-					usuario.setAttribute("date", usur.get(i).getDate());
-					usuario.setAttribute("icon", usur.get(i).getIcon());
-					usuario.setAttribute("email", usur.get(i).getEmail());
-					
-					// se guarda un objeto User
-					User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
-					usuario.setAttribute("Usuario", newUser);
-					
-					// se deshabilita el alert
-					model.addAttribute("alert", "  ");	
-					model.addAttribute("Titulo", "Latest News");
-			
-					// articulos relevantes
-					List<Article> articles = articleRepository.findAll();
-					String news = "";
-					if(articles.size() > 0) {
-						String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-						for(int j = 0; j < articles.size(); j++) {
-							String Url= articles.get(j).getImage();
-							String Titulo = articles.get(j).getTitle();	
-							String Head = articles.get(j).getHead();
-							String link="/article/" + Titulo;
-
-
-							String art = String.format(div, Url, Titulo, Head, link);			
-							news += art;			
-						}	
-					}
-					model.addAttribute("news", news);
-					
-					
-					// se muestra el link de iniciar/registrar usuario si es false										
-					model.addAttribute("registered", usuario.getAttribute("registered"));
-					boolean aux = !(Boolean) usuario.getAttribute("registered");
-					model.addAttribute("unregistered", aux);
-					model.addAttribute("name", usuario.getAttribute("name"));
-					model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('welcome " + usuario.getAttribute("name") + "!');"  + "</script>");
-					model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-					return "index";
-				}
-			}
-		}
-		
-		// se guardan los atributos en el modelo
-		model.addAttribute("Titulo", "Latest News");
-		// articulos relevantes
-		List<Article> articles = articleRepository.findAll();
-		String news = "";
-		if(articles.size() > 0) {
-			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-			for(int j = 0; j < articles.size(); j++) {
-				String Url= articles.get(j).getImage();
-				String Titulo = articles.get(j).getTitle();	
-				String Head = articles.get(j).getHead();
-				String link="/article/" + Titulo;
-
-
-				String art = String.format(div, Url, Titulo, Head, link);			
-				news += art;			
-			}	
-		}
-		model.addAttribute("news", news);
-
-		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
-		model.addAttribute("name", " ");		
-		model.addAttribute("hello", " ");
-		
-		// se dirige a la pagina como iniciado
-		return "index";
-		*/
 		if(loged.equals("true")) {
 			User usur = userRepository.findByName(user.getName()).get(0);
 			// se registra el usuario
@@ -234,10 +135,10 @@ public class userController {
 			String news = "";
 			if(articles.size() > 0) {
 				String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-				for(int j = 0; j < articles.size(); j++) {
-					String Url= articles.get(j).getImage();
-					String Titulo = articles.get(j).getTitle();	
-					String Head = articles.get(j).getHead();
+				for(int i = 0; i < articles.size(); i++) {
+					String Url= articles.get(i).getImage();
+					String Titulo = articles.get(i).getTitle();	
+					String Head = articles.get(i).getHead();
 					String link="/article/" + Titulo;
 
 
@@ -457,10 +358,6 @@ public class userController {
 	//Metodo que añade los atributos a change
 	private void modelAttrChange(User usur, HttpSession usuario, Model model) {
 		String name = (String) usur.getName();
-		//String password = (String) usuario.getAttribute("password");
-		//String date = (String) usuario.getAttribute("date");
-		//String icon = (String) usuario.getAttribute("icon");
-		//String email = (String) usuario.getAttribute("email");
 		String password = (String) usur.getPassword();
 		String date = (String) usur.getDate();
 		String icon = (String) usur.getIcon();
