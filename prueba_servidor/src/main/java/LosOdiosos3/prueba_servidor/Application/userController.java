@@ -180,6 +180,40 @@ public class userController {
 		// se dirige a la pagina como iniciado
 		return "index";
 	}
+	
+	@RequestMapping("login")
+	public String login (Model model, HttpServletRequest request) {
+		// se guardan los atributos en el modelo
+		model.addAttribute("Titulo", "Latest News");
+		// articulos relevantes
+		List<Article> articles = articleRepository.findAll();
+		String news = "";
+		if(articles.size() > 0) {
+			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
+			for(int j = 0; j < articles.size(); j++) {
+				String Url= articles.get(j).getImage();
+				String Titulo = articles.get(j).getTitle();	
+				String Head = articles.get(j).getHead();
+				String link="/article/" + Titulo;
+	
+	
+				String art = String.format(div, Url, Titulo, Head, link);			
+				news += art;			
+			}	
+		}
+		model.addAttribute("news", news);
+	
+		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('insufficient permits');" + "window.location = '/'; " + "</script>");		
+		model.addAttribute("name", " ");		
+		model.addAttribute("hello", " ");
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
+		
+		// se dirige a la pagina como iniciado
+		return "index";
+	}
 	/*
 	@RequestMapping("/log_out")
 	public String log_out (Model model, HttpSession usuario, HttpServletRequest request) {
