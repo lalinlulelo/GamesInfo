@@ -63,7 +63,7 @@ public class userController {
 	
 	@PostMapping(value = "/register")
 	public String registrar(Model model, User user, HttpSession usuario, HttpServletRequest request) {
-		
+		MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se inicializa el usuario con los datos del formulario
 		usuario.setAttribute("name", user.getName());
 		usuario.setAttribute("password", user.getPassword());
@@ -211,7 +211,7 @@ public class userController {
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
 	@RequestMapping("/profile")
 	public String init (Model model, HttpSession usuario, HttpServletRequest request) {		
-		MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
+		//MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
 		String password = (String) usuario.getAttribute("password");
