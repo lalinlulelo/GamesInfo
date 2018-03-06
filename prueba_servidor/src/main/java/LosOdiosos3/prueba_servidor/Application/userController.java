@@ -63,7 +63,7 @@ public class userController {
 	
 	@PostMapping(value = "/register")
 	public String registrar(Model model, User user, HttpSession usuario, HttpServletRequest request) {
-		
+		MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se inicializa el usuario con los datos del formulario
 		usuario.setAttribute("name", user.getName());
 		usuario.setAttribute("password", user.getPassword());
