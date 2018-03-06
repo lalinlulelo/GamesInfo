@@ -117,8 +117,10 @@
 							  		<li><a href="/profile">Profile</a></li>
 									<li><a href="/my_lists">My Lists</a></li>
 									<div class="dropdown-divider"></div>            
-					            	
-					            	<input type="hidden" name="_csrf" value="{{token}}">  					            
+					            	<form action="/logout" method="post">
+										<input type="submit" value="Sign Out" />
+										<input type="hidden" name="_csrf" value="{{token}}"/>
+									</form> 					            
 							  	</ul>
 							</li>            
 			            </div>			            
@@ -147,12 +149,9 @@
 		           	<input type="hidden" name="_csrf" value="{{token}}">
 		     	</form>
 		    </div>
-	    	<div id="triangulo"></div>
+	    	<div id="triangulo"></div>		    	
 	    </div>
-		 <form action="/logout" method="post">
-				<input type="submit" value="Sign Out" />
-				<input type="hidden" name="_csrf" value="{{token}}"/>
-		</form>
+
 		<div class="container" style="width:100%; padding:0;">			
 
 	  		<div id="myCarousel" class="carousel slide" data-ride="carousel">
