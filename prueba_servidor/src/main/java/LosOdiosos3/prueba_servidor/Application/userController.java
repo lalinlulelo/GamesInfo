@@ -180,7 +180,7 @@ public class userController {
 		// se dirige a la pagina como iniciado
 		return "index";
 	}
-	
+	/*
 	@RequestMapping("/log_out")
 	public String log_out (Model model, HttpSession usuario, HttpServletRequest request) {
 		usuario.setAttribute("registered", false);
@@ -205,13 +205,13 @@ public class userController {
 		model.addAttribute("token", token.getToken());
 		
 		return "/";
-	}
+	}*/
 	// ----------------------------- FIN INICIO DE SESION -----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
 	@RequestMapping("/profile")
 	public String init (Model model, HttpSession usuario, HttpServletRequest request) {		
-		MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
+		//MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
 		String password = (String) usuario.getAttribute("password");
@@ -284,7 +284,6 @@ public class userController {
 						return "profile";
 					}
 					if(!text_1.equals(text_2)) {
-						System.out.println("no son iguales aaaah");
 						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
 						modelAttrChange(usur,usuario,model);	
 						return "profile";
