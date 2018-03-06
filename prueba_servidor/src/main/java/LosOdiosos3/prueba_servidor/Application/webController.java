@@ -54,29 +54,16 @@ public class webController {
 	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
+		// en caso de no estar inicializada la variable, se inicializa
 		if(usuario.getAttribute("registered") == null) {
 			usuario.setAttribute("registered", false);			
 		}
-		usuario.setAttribute("alert", "  ");
+		
 		// comentarios de abajo del html
 		model.addAttribute("Titulo", "Latest News");		
 		
 		// articulos relevantes
-		List<Article> articles = articleRepository.findAll();
-		String news = "";
-		if(articles.size() > 0) {
-			String div ="<div class=\"row\">\r\n" + "<div class=\"col-sm-1 col-md-1\"> </div>	"  +  "<div class=\"card p-3\">\r\n"  + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img  col-xs-12 col-sm-4 col-md-4\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box col-xs-12 col-sm-3 col-md-3\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Read more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" +   "            </div>\r\n"	+ 	"        </div>";			
-			for(int i = 0; i < articles.size(); i++) {
-				String Url= articles.get(i).getImage();
-				String Titulo = articles.get(i).getTitle();	
-				String Head = articles.get(i).getHead();
-				String link="/article/" + Titulo;								
-
-				String aux = String.format(div, Url, Titulo, Head, link);			
-				news += aux;			
-			}	
-		}
-		model.addAttribute("news", news);
+		model.addAttribute("news", articles());
 		
 		// condicionales para mostrar u ocultar contenido		
 		model.addAttribute("registered", usuario.getAttribute("registered"));		
@@ -84,13 +71,13 @@ public class webController {
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
 			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
 		}else {
 			model.addAttribute("name", " ");
 		}		
 		model.addAttribute("unregistered", aux);
 		
 		// deshabilitacion del comando alert que saluda al usuario		
+		usuario.setAttribute("alert", "  ");
 		model.addAttribute("alert", usuario.getAttribute("alert"));
 		model.addAttribute("hello", " ");
 		
@@ -106,15 +93,18 @@ public class webController {
 	// ----------------------------- BUSQUEDAS ----------------------------------------
 	@RequestMapping("/search")
 	public String search (Model model, HttpSession usuario, @RequestParam String text, HttpServletRequest request) {
-		System.out.println(text);
+		
+		// se adquieren las listas de juego, compañia y evento
 		List<Game> games = gameRepository.findByNameContaining(text);
 		List<Company> companies = companyRepository.findByNameContaining(text);
 		List<Event> events = eventRepository.findByNameContaining(text);
 		
+		// se crea una lista de cadenas por cada categoria
 		List<String> list_games = new ArrayList<String>();
 		List<String> list_companies = new ArrayList<String>();	
 		List<String> list_events = new ArrayList<String>();	
 		
+		// booleanos que controlan la presencia de elementos de cada categoría
 		boolean n_games = false;
 		boolean n_companies = false;
 		boolean n_events = false;
@@ -176,6 +166,8 @@ public class webController {
 			// se transmite la lista a la plantilla
 			model.addAttribute("events", list_events);
 		}
+		
+		// se mandan las listas a pantalla
 		model.addAttribute("no_lists", no_lists);
 		model.addAttribute("n_games", n_games);
 		model.addAttribute("n_companies", n_companies);
@@ -201,6 +193,25 @@ public class webController {
 	}
 	// ----------------------------- FIN BUSQUEDAS ------------------------------------
 	
+	// ---------------------------- METODOS AUXILIARES --------------------------------
+	public String articles () {
+		String article = "";
+		List<Article> articles = articleRepository.findAll();
+		if(articles.size() > 0) {
+			String div ="<div class=\"row\">\r\n" + "<div class=\"col-sm-1 col-md-1\"> </div>	"  +  "<div class=\"card p-3\">\r\n"  + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img  col-xs-12 col-sm-4 col-md-4\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box col-xs-12 col-sm-3 col-md-3\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Read more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" +   "            </div>\r\n"	+ 	"        </div>";			
+			for(int i = 0; i < articles.size(); i++) {
+				String Url= articles.get(i).getImage();
+				String Titulo = articles.get(i).getTitle();	
+				String Head = articles.get(i).getHead();
+				String link="/article/" + Titulo;								
+
+				String aux = String.format(div, Url, Titulo, Head, link);			
+				article += aux;			
+			}	
+		}
+		return article;
+	}
+	// ---------------------------- FIN METODOS AUXILIARES ----------------------------
 	
 	
 }

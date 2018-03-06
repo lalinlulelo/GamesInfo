@@ -130,24 +130,9 @@ public class userController {
 			// se deshabilita el alert
 			model.addAttribute("alert", "  ");	
 			model.addAttribute("Titulo", "Latest News");
-	
+			
 			// articulos relevantes
-			List<Article> articles = articleRepository.findAll();
-			String news = "";
-			if(articles.size() > 0) {
-				String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-				for(int i = 0; i < articles.size(); i++) {
-					String Url= articles.get(i).getImage();
-					String Titulo = articles.get(i).getTitle();	
-					String Head = articles.get(i).getHead();
-					String link="/article/" + Titulo;
-
-
-					String art = String.format(div, Url, Titulo, Head, link);			
-					news += art;			
-				}	
-			}
-			model.addAttribute("news", news);
+			model.addAttribute("news", articles ());
 			
 			
 			// se muestra el link de iniciar/registrar usuario si es false										
@@ -204,23 +189,8 @@ public class userController {
 		model.addAttribute("alert", "Good Bye");		
 		model.addAttribute("name", " ");
 		
-		// articulos relevantes
-		List<Article> articles = articleRepository.findAll();
-		String news = "";
-		if(articles.size() > 0) {
-			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-			for(int i = 0; i < articles.size(); i++) {
-				String Url= articles.get(i).getImage();
-				String Titulo = articles.get(i).getTitle();	
-				String Head = articles.get(i).getHead();
-				String link="/article/" + Titulo;
-
-
-				String art = String.format(div, Url, Titulo, Head, link);			
-				news += art;			
-			}	
-		}
-		model.addAttribute("news", news);
+		// articulos relevantes	
+		model.addAttribute("news", articles ());
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -394,4 +364,23 @@ public class userController {
 	}	
 	// ----------------------------- FIN AJUSTES PERFIL --------------------------------
 	
+	// ---------------------------- METODOS AUXILIARES --------------------------------
+	public String articles () {
+		String article = "";
+		List<Article> articles = articleRepository.findAll();
+		if(articles.size() > 0) {
+			String div ="<div class=\"row\">\r\n" + "<div class=\"col-sm-1 col-md-1\"> </div>	"  +  "<div class=\"card p-3\">\r\n"  + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img  col-xs-12 col-sm-4 col-md-4\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box col-xs-12 col-sm-3 col-md-3\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Read more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" +   "            </div>\r\n"	+ 	"        </div>";			
+			for(int i = 0; i < articles.size(); i++) {
+				String Url= articles.get(i).getImage();
+				String Titulo = articles.get(i).getTitle();	
+				String Head = articles.get(i).getHead();
+				String link="/article/" + Titulo;								
+
+				String aux = String.format(div, Url, Titulo, Head, link);			
+				article += aux;			
+			}	
+		}
+		return article;
+	}
+	// ---------------------------- FIN METODOS AUXILIARES ----------------------------
 }

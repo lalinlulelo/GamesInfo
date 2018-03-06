@@ -73,9 +73,7 @@ public class addGameController {
 		
 	}
 	
-	public void fillModel(Model model,HttpSession usuario,HttpServletRequest request) {
-		
-		
+	public void fillModel(Model model,HttpSession usuario,HttpServletRequest request) {		
 		// se pasan los atributos de la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
