@@ -41,7 +41,6 @@ public class UserRepositoryAuthenticationProvider implements AuthenticationProvi
 		for (String role : user.getRoles()) {
 			roles.add(new SimpleGrantedAuthority(role));
 		}
-		System.out.println("entro " + auth.getName() + " " + password);
 		return new UsernamePasswordAuthenticationToken(user.getName(), password, roles);
 	}
 	

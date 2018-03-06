@@ -117,7 +117,7 @@
 							  		<li><a href="/profile">Profile</a></li>
 									<li><a href="/my_lists">My Lists</a></li>
 									<div class="dropdown-divider"></div>            
-					            	<li><a href="/log_out">Logout</a></li>
+					            	
 					            	<input type="hidden" name="_csrf" value="{{token}}">  					            
 							  	</ul>
 							</li>            
@@ -139,7 +139,7 @@
 		          	</div>             
 		    	</ul>
 		    </form>
-		     
+		    
 		    <div id="search">
 		     	<form action="/search" method="post">
 		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
@@ -149,7 +149,10 @@
 		    </div>
 	    	<div id="triangulo"></div>
 	    </div>
-		
+		 <form action="/logout" method="post">
+				<input type="submit" value="Sign Out" />
+				<input type="hidden" name="_csrf" value="{{token}}"/>
+		</form>
 		<div class="container" style="width:100%; padding:0;">			
 
 	  		<div id="myCarousel" class="carousel slide" data-ride="carousel">

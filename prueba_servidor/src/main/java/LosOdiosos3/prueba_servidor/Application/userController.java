@@ -180,7 +180,7 @@ public class userController {
 		// se dirige a la pagina como iniciado
 		return "index";
 	}
-	
+	/*
 	@RequestMapping("/log_out")
 	public String log_out (Model model, HttpSession usuario, HttpServletRequest request) {
 		usuario.setAttribute("registered", false);
@@ -205,7 +205,7 @@ public class userController {
 		model.addAttribute("token", token.getToken());
 		
 		return "/";
-	}
+	}*/
 	// ----------------------------- FIN INICIO DE SESION -----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
@@ -284,7 +284,6 @@ public class userController {
 						return "profile";
 					}
 					if(!text_1.equals(text_2)) {
-						System.out.println("no son iguales aaaah");
 						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
 						modelAttrChange(usur,usuario,model);	
 						return "profile";
