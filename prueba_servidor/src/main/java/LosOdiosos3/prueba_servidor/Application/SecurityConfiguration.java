@@ -21,21 +21,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	
     	// Public pages
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/index.html").permitAll();
-        http.authorizeRequests().antMatchers("/article.html").permitAll();
-        http.authorizeRequests().antMatchers("/company.html").permitAll();
-        http.authorizeRequests().antMatchers("/company_list.html").permitAll();
-        http.authorizeRequests().antMatchers("/event_calendar.html").permitAll();
-        http.authorizeRequests().antMatchers("/event.html").permitAll();
-        http.authorizeRequests().antMatchers("/game.html").permitAll();
-        http.authorizeRequests().antMatchers("/game_list.html").permitAll();
-        http.authorizeRequests().antMatchers("/new_user.html").permitAll();
-        http.authorizeRequests().antMatchers("/search.html").permitAll();
+        http.authorizeRequests().antMatchers("/article").permitAll();
+        http.authorizeRequests().antMatchers("/company").permitAll();
+        http.authorizeRequests().antMatchers("/company_list").permitAll();
+        http.authorizeRequests().antMatchers("/event_calendar").permitAll();
+        http.authorizeRequests().antMatchers("/event").permitAll();
+        http.authorizeRequests().antMatchers("/game").permitAll();
+        http.authorizeRequests().antMatchers("/game_list").permitAll();
+        http.authorizeRequests().antMatchers("/new_user").permitAll();
+        http.authorizeRequests().antMatchers("/search").permitAll();
 
         //Private pages (all other pages)
-        http.authorizeRequests().antMatchers("/my_lists.html").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/profile.html").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/admin.html").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/my_lists").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/profile").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
 
         //Login form
         http.formLogin().loginPage("/login");
@@ -53,13 +52,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         // Database authentication provider
-    	System.out.println("hago aqui algo");
         auth.authenticationProvider(authenticationProvider);       
     }
-    
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-
-	}
-
 }

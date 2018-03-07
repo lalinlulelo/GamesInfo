@@ -131,21 +131,6 @@ public class mylistController {
 					added = true;
 				}
 				break;
-			/*
-			case "delete":
-				mylist = null;
-				for(int i = 0; i < user.getList().size(); i++) {
-					if(user.getList().get(i).getName().equals(list)) {
-						mylist = user.getList().get(i);
-					}
-				}
-				if(mylist != null) {
-					mylist.cleanList();
-					user.removeList(mylist);
-					userRepository.save(user);	
-				}
-				break;
-			*/
 		}
 		
 		// realizo todo lo referente a my_list
