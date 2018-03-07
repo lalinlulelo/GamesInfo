@@ -276,6 +276,59 @@
 		        </div>
 		        </div>
 		        
+		        
+		        <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalCompany">Add new company</button>
+		        <div class="modal fade" id="modalCompany" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New Company</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/addCompany" method="post">
+			     <div>Name: <input name="name" type="text"></div>
+			     <div>Country: <input name="country" type="text"></div>
+			     <div>Description: <input name="description" type="text"></div>
+			     <div>Date: <input name="date" type="text"></div>
+			     <div>Url image: <input name="img" type="text"></div>
+			     <input type="submit" value="Submit">	
+			      <input type="hidden" name="_csrf" value="{{token}}"> 
+			     </form>
+        </div>
+		        </div>
+		        </div>
+		        </div>
+		        
+		        
+		        <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalEvent">Add new Event</button>
+		        <div class="modal fade" id="modalEvent" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">New Event</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/addEvent" method="post">
+			     <div>Name: <input name="name" type="text"></div>
+			     <div>Place: <input name="place" type="text"></div>
+			     <div>Description: <input name="description" type="text"></div>
+			     <div>Fee: <input name="fee" type="text"></div>
+			     <div>Day: <input name="day" type="text"></div>
+			     <div>Month: <input name="month" type="text"></div>
+			     <div>Year: <input name="year" type="text"></div>
+			     <div>Url image: <input name="img" type="text"></div>
+			     <input type="submit" value="Submit">	
+			      <input type="hidden" name="_csrf" value="{{token}}"> 
+			     </form>
+        </div>
+		        </div>
+		        </div>
+		        
+		        
+		        
+		        
 		        </div>
 		    </div>
 	     	
