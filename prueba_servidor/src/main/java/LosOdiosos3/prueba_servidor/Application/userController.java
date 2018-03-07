@@ -267,7 +267,9 @@ public class userController {
 		model.addAttribute("icon", icon);
 		model.addAttribute("email", email);
 		model.addAttribute("alert"," ");	
+		
 
+		
 		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
