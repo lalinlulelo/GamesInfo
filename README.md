@@ -129,18 +129,18 @@ Para poder desplegar la aplicación, es necesaria la instalación previa de una 
 Tras su instalación, se le ha de añadir mediante consola
 * Java 
 
-  * sudo apt-get update
-  * sudo apt-get install default-jre
-  * sudo apt-get install default-jdk
+  * `sudo apt-get update`
+  * `sudo apt-get install default-jre`
+  * `sudo apt-get install default-jdk`
   
 * mySQL
 
-  * sudo apt-get update
-  * sudo apt-get install mysql-server mysql-client
-  * como contraseña se le colocará: 'gugus'
-  * sudo mysql_secure_installation
-  * Tras su correcta instalación, se instalará mySQL Workbench
-  * sudo apt-get install mysql-workbench
+  * `sudo apt-get update`
+  * `sudo apt-get install mysql-server mysql-client`
+   como contraseña se le colocará: 'gugus'
+  * `sudo mysql_secure_installation`
+   Tras su correcta instalación, se instalará mySQL Workbench
+  * `sudo apt-get install mysql-workbench`
   
 * Base de Datos
 
