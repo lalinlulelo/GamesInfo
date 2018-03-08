@@ -1,5 +1,44 @@
 # GamesInfo
 
+
+Indice
+=================
+<!--ts-->
+   * [Fase 1](#Fase 1)
+      * [Descripción de la web](#Descripción de la web)
+      * [Entidades principales](#Entidades principales)
+      * [Servicio Interno](#Servicio Interno)
+   * [Fase 2](#Fase 2)
+      * [Diagrama de Navegación](#Diagrama de Navegación)
+          * [Pantalla de inicio sin usuario](#Pantalla de inicio sin usuario)
+          * [Pantalla de inicio con usuario](#Pantalla de inicio con usuario)
+          * [Pantalla de Registro de Nuevo Usuario](#Pantalla de Registro de Nuevo Usuario)
+          * [Calendario de Eventos](#Calendario de Eventos)
+          * [Evento](#Evento)
+          * [Lista de Juegos](#Lista de Juegos)
+          * [Juego](#Juego)
+          * [Lista de Compañias](#Lista de Compañias)
+          * [Compañia](#Compañia)
+          * [Perfil](#Perfil)
+          * [Perfil modificado](#Perfil modificado)
+          * [Listas de Juegos](#Listas de Juegos)
+          * [Nueva Lista de Juegos](#Nueva Lista de Juegos)
+          * [Añadir Juego a una Lista](#Añadir Juego a una Lista)
+          * [Articulo](#Articulo)
+      * [Diagrama de Entidad-Relación](#Diagrama de Entidad-Relación)
+      * [Diagrama UML de Entidades](#Diagrama UML de Entidades)
+      * [Diagrama de clases](#Diagrama de clases)
+  * [Fase 3](#Fase 3)
+      * [Instrucciones para desplegar la aplicación](#Instrucciones para desplegar la aplicación)
+          * [1.- Inicialización de Ubuntu](#1.- Inicialización de Ubuntu)
+          * [2.- Elaboración del jar](#2.- Elaboración del jar)
+          * [3.- Arranque de los jar](#3.- Arranque de los jar)
+          * [4.- Inicio de página web](#4.- Inicio de página web)
+  * [Integrantes](#Integrantes)
+<!--te-->
+ 
+ 
+ 
 # Fase 1 #
 ## Descripción de la web ##
 Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una web donde encontrarás información acerca de videojuegos como la trama, la compañía, la puntuación pública y profesional. Además podrás ojear los eventos que se celebrarán próximamente y hacerte listas en tu perfil con los juegos o compañías que te interesen.
