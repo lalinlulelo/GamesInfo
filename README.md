@@ -123,7 +123,7 @@ Mediante ObjectAid UML Diagram, se ha desarrollado un diagrama de las clases del
 ## Instrucciones para desplegar la aplicación ##
 Para poder desplegar la aplicación, es necesaria la instalación previa de una máquina virtual VMWare con el Sistema Operativo **Ubuntu 14.04**
 <p align="center">
-  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true">
 </p>
 
 ### 1.- Inicialización de Ubuntu ###
@@ -138,7 +138,7 @@ Tras su instalación, se le ha de añadir mediante consola
 
   * `sudo apt-get update`
   * `sudo apt-get install mysql-server mysql-client`
-  * como contraseña se le colocará: 'gugus'
+  * como contraseña se le colocará: `gugus`
   * `sudo mysql_secure_installation`
   * Tras su correcta instalación, se instalará mySQL Workbench
   * `sudo apt-get install mysql-workbench`
@@ -162,13 +162,13 @@ Tras su instalación, se le ha de añadir mediante consola
 Para crear los ficheros jar, se ha de iniciar Spring Tool Suite abriendo los proyectos determinados. En él, nos dirigimos en cada proyecto a `Run As > Maven built...` apareciendo la siguiente ventana:
 
  <p align="center">
-  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/maven_built.jpg?raw=true">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/maven_built.jpg?raw=true">
 </p>
 
 En dicha ventana, en la seccion **Goals** se ha escribir: `clear package` y acto seguido, pulsar en run. Tras la notificación por consola, de la correcta compilación y construcción del 'jar', se puede recoger dentro de la carpeta **target** (situada en la propia carpeta del proyecto):
 
  <p align="center">
-  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/target.jpg?raw=true">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/target.jpg?raw=true">
 </p>
 
 ### 3.- Arranque de los jar ###
@@ -182,7 +182,7 @@ Acto seguido, vía terminales, se arrancan el servicio de mensajería y la propi
 Tras comprobar el correcto inicio de ambas aplicaciones, nos dirigimos al icono de internet de la barra de tareas, y mediante click derecho a él, seleccionamos `Connection Information`, apareciendo la siguiente ventana:
 
  <p align="center">
-  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/connection%20info.jpg?raw=true">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/connection%20info.jpg?raw=true">
 </p>
 
 ### 4.- Inicio de página web ###
