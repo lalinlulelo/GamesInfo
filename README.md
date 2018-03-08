@@ -126,7 +126,7 @@ Para poder desplegar la aplicación, es necesaria la instalación previa de una 
   <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true">
 </p>
 
-Tras su instalación, se le ha de añadir mediante consola:
+Tras su instalación, se le ha de añadir mediante consola
     - Java 
         - sudo apt-get update
         - sudo apt-get install default-jre
