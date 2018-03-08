@@ -126,6 +126,7 @@ Para poder desplegar la aplicación, es necesaria la instalación previa de una 
   <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true">
 </p>
 
+### 1.- Inicialización de Ubuntu ###
 Tras su instalación, se le ha de añadir mediante consola
 * Java 
 
@@ -137,9 +138,9 @@ Tras su instalación, se le ha de añadir mediante consola
 
   * `sudo apt-get update`
   * `sudo apt-get install mysql-server mysql-client`
-   como contraseña se le colocará: 'gugus'
+  * como contraseña se le colocará: 'gugus'
   * `sudo mysql_secure_installation`
-   Tras su correcta instalación, se instalará mySQL Workbench
+  * Tras su correcta instalación, se instalará mySQL Workbench
   * `sudo apt-get install mysql-workbench`
   
 * Base de Datos
@@ -155,7 +156,41 @@ Tras su instalación, se le ha de añadir mediante consola
   ![mySQLWorkbench_new_schema](https://github.com/lalinlulelo/GamesInfo/blob/master/images/new_schema.jpg?raw=true)
   
   ![mySQLWorkbench_schema name](https://github.com/lalinlulelo/GamesInfo/blob/master/images/schema_name.jpg?raw=true)
+  
+### 2.- Elaboración del jar ###
+
+Para crear los ficheros jar, se ha de iniciar Spring Tool Suite abriendo los proyectos determinados. En él, nos dirigimos en cada proyecto a `Run As > Maven built...` apareciendo la siguiente ventana:
+
+ <p align="center">
+  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/maven_built.jpg?raw=true">
+</p>
+
+En dicha ventana, en la seccion **Goals** se ha escribir: `clear package` y acto seguido, pulsar en run. Tras la notificación por consola, de la correcta compilación y construcción del 'jar', se puede recoger dentro de la carpeta **target** (situada en la propia carpeta del proyecto):
+
+ <p align="center">
+  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/target.jpg?raw=true">
+</p>
+
+### 3.- Arranque de los jar ###
+
+Los ficheros jar se pasan a la máquina virtual, mediante un dispositivo de almacenamiento USB, especificando a la máquina virtual (tras introducir los ficheros en el dispositivo) la detección del dispositivo en el entorno: `VM > Removable Devices > USB > Connect (Disconnect from Host)`.
+
+Acto seguido, vía terminales, se arrancan el servicio de mensajería y la propia aplicación mediante el comando `java -jar fichero.jar`:
+
+ ![Arranque de Jars](https://github.com/lalinlulelo/GamesInfo/blob/master/images/arrancar_jar.jpg?raw=true)
  
+Tras comprobar el correcto inicio de ambas aplicaciones, nos dirigimos al icono de internet de la barra de tareas, y mediante click derecho a él, seleccionamos `Connection Information`, apareciendo la siguiente ventana:
+
+ <p align="center">
+  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/connection%20info.jpg?raw=true">
+</p>
+
+### 4.- Inicio de página web ###
+
+Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e insertamos la **dirección IPv4** de la maquina virtual seguido del puerto de conexión. En nuestro caso: `https://192.168.42.131:8443/`
+
+![Pagina FInal](https://github.com/lalinlulelo/GamesInfo/blob/master/images/https%20page.jpg?raw=true)
+
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
