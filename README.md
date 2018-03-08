@@ -127,8 +127,7 @@ Para poder desplegar la aplicación, es necesaria la instalación previa de una 
 </p>
 
 Tras su instalación, se le ha de añadir mediante consola:
- Markup :
-    * Java
+  * Java
         * sudo apt-get update
         * sudo apt-get install default-jre
         * sudo apt-get install default-jdk
