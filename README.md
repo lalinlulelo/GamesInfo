@@ -122,7 +122,9 @@ Mediante ObjectAid UML Diagram, se ha desarrollado un diagrama de las clases del
 
 ## Instrucciones para desplegar la aplicación ##
 Para poder desplegar la aplicación, es necesaria la instalación previa de una máquina virtual VMWare con el Sistema Operativo **Ubuntu 14.04**
-
+<p align="center">
+  <img width="460" height="300" src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true">
+</p>
 ![Ubuntu Version](https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true)
 
 Tras su instalación, se le ha de añadir mediante consola:
