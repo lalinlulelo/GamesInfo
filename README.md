@@ -149,7 +149,9 @@ Tras su instalación, se le ha de añadir mediante consola
   
   ![mySQLWorkbench_new_conection](https://snag.gy/P7FuKm.jpg)
   
-  ![mySQLWorkbench_name](https://github.com/lalinlulelo/GamesInfo/blob/master/images/bd.jpg?raw=true)
+   <p align="center">
+    <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/bd.jpg?raw=true">
+  </p>
   
   * se crea un nuevo schema con nombre 'gamesinfo_db' aplicando los cambios
   
