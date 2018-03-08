@@ -128,24 +128,33 @@ Para poder desplegar la aplicación, es necesaria la instalación previa de una 
 
 Tras su instalación, se le ha de añadir mediante consola
 * Java 
+
   * sudo apt-get update
   * sudo apt-get install default-jre
   * sudo apt-get install default-jdk
+  
 * mySQL
+
   * sudo apt-get update
   * sudo apt-get install mysql-server mysql-client
   * como contraseña se le colocará: 'gugus'
   * sudo mysql_secure_installation
   * Tras su correcta instalación, se instalará mySQL Workbench
   * sudo apt-get install mysql-workbench
+  
 * Base de Datos
+
   * se inicia mySQLWorkbench y se crea una nueva conexión con nombre 'gamesinfo_db'
+  
   ![mySQLWorkbench_new_conection](https://snag.gy/P7FuKm.jpg)
-###Example
- - Item 1
- - Item 2
-  - Sub Item 1
-  - Sub Item 2
+  
+  ![mySQLWorkbench_name](https://github.com/lalinlulelo/GamesInfo/blob/master/images/bd.jpg?raw=true)
+  
+  * se crea un nuevo schema con nombre 'gamesinfo_db' aplicando los cambios
+  
+  ![mySQLWorkbench_new_schema](https://github.com/lalinlulelo/GamesInfo/blob/master/images/new_schema.jpg?raw=true)
+  
+  ![mySQLWorkbench_schema name](https://github.com/lalinlulelo/GamesInfo/blob/master/images/schema_name.jpg?raw=true)
  
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
