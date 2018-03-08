@@ -4,7 +4,7 @@
 Indice
 =================
 <!--ts-->
-   * [Fase 1](#Fase 1)
+   * [ Fase 1 ](# Fase 1 )
       * [Descripción de la web](#Descripción de la web)
       * [Entidades principales](#Entidades principales)
       * [Servicio Interno](#Servicio Interno)
