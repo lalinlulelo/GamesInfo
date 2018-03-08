@@ -3,7 +3,6 @@
 
 Indice
 =================
-- [GamesInfo](#gamesinfo)
 - [Fase 1](#fase-1)
   * [Descripción de la web](#descripci-n-de-la-web)
   * [Entidades principales](#entidades-principales)
@@ -36,11 +35,6 @@ Indice
     + [4.- Inicio de página web](#4--inicio-de-p-gina-web)
 - [Integrantes](#integrantes)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
- 
- 
- 
 # Fase 1 #
 ## Descripción de la web ##
 Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una web donde encontrarás información acerca de videojuegos como la trama, la compañía, la puntuación pública y profesional. Además podrás ojear los eventos que se celebrarán próximamente y hacerte listas en tu perfil con los juegos o compañías que te interesen.
