@@ -127,7 +127,7 @@ Para poder desplegar la aplicación, es necesaria la instalación previa de una 
 </p>
 
 Tras su instalación, se le ha de añadir mediante consola:
-####a
+
     * Java
         * sudo apt-get update
         * sudo apt-get install default-jre
@@ -142,7 +142,7 @@ Tras su instalación, se le ha de añadir mediante consola:
     * Base de Datos
         * se inicia mySQLWorkbench y se crea una nueva conexión con nombre 'gamesinfo_db'
         ![mySQLWorkbench_new_conection](https://snag.gy/P7FuKm.jpg)
-        * 
+        
  
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
