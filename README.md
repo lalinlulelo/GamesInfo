@@ -4,11 +4,11 @@
 Indice
 =================
 - [Fase 1](#fase-1)
-  * [Descripción de la web](#descripci-n-de-la-web)
+  * [Descripcion de la web](#descripcion-de-la-web)
   * [Entidades principales](#entidades-principales)
   * [Servicio Interno](#servicio-interno)
 - [Fase 2](#fase-2)
-  * [Diagrama de Navegación](#diagrama-de-navegaci-n)
+  * [Diagrama de Navegacion](#diagrama-de-navegacion)
       - [Pantalla de inicio sin usuario](#pantalla-de-inicio-sin-usuario)
       - [Pantalla de inicio con usuario](#pantalla-de-inicio-con-usuario)
       - [Pantalla de Registro de Nuevo Usuario](#pantalla-de-registro-de-nuevo-usuario)
@@ -24,38 +24,41 @@ Indice
       - [Nueva Lista de Juegos](#nueva-lista-de-juegos)
       - [Añadir Juego a una Lista](#a-adir-juego-a-una-lista)
       - [Articulo](#articulo)
-  * [Diagrama de Entidad-Relación](#diagrama-de-entidad-relaci-n)
+  * [Diagrama de Entidad-Relacion](#diagrama-de-entidad-relacion)
   * [Diagrama UML de Entidades](#diagrama-uml-de-entidades)
   * [Diagrama de clases](#diagrama-de-clases)
 - [Fase 3](#fase-3)
-  * [Instrucciones para desplegar la aplicación](#instrucciones-para-desplegar-la-aplicaci-n)
-    + [1.- Inicialización de Ubuntu](#1--inicializaci-n-de-ubuntu)
-    + [2.- Elaboración del jar](#2--elaboraci-n-del-jar)
+  * [Instrucciones para desplegar la aplicacion](#instrucciones-para-desplegar-la-aplicacion)
+    + [1.- Inicializacion de Ubuntu](#1--inicializacion-de-ubuntu)
+    + [2.- Elaboracion del jar](#2--elaboracion-del-jar)
     + [3.- Arranque de los jar](#3--arranque-de-los-jar)
-    + [4.- Inicio de página web](#4--inicio-de-p-gina-web)
+    + [4.- Inicio de pagina web](#4--inicio-de-pagina-web)
 - [Integrantes](#integrantes)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Fase 1 #
-## Descripción de la web ##
+## Descripcion de la web ##
 Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una web donde encontrarás información acerca de videojuegos como la trama, la compañía, la puntuación pública y profesional. Además podrás ojear los eventos que se celebrarán próximamente y hacerte listas en tu perfil con los juegos o compañías que te interesen.
-- **Parte pública**: el usuario podrá navegar por las distintas entidades descritas más adelante.
+- **Parte publica**: el usuario podrá navegar por las distintas entidades descritas más adelante.
 
 - **Parte privada**: el usuario deberá iniciar sesión para poder puntuar, comentar los juegos u ojear sus listas. Gracias al servicio de correo electrónico estará al tanto de su juego, evento o compañía favorita.
 
 ## Entidades principales ##
 -   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña y su fecha de nacimiento. Cada usuario registrado tendrá su propia lista de juegos.
 -   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios y otra de eventos a los que participa.
--   **Compañía**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos a los que participa.
+-   **Compañia**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos a los que participa.
 -   **Evento**: Contendrá un Id, Fecha, Lugar, Precio y Descripción
 -   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
--   **Artículo**: cada usuario podrá escribir artículos. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
+-   **Articulo**: cada usuario podrá escribir artículos. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
 -   **Lista**: contiene una serie de juegos al gusto del usuario. Este portará un Id, Nombre y lista de juegos.
 
 ## Servicio Interno ##
 En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
 
 # Fase 2 #
-## Diagrama de Navegación ##
+## Diagrama de Navegacion ##
 En el siguiente diagrama se puede visualizar desde qué paginas se puede navegar hasta cierta página:
 
 ![Diagrama de Navegacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/diagrama%20de%20flujos.png)
@@ -138,7 +141,7 @@ Desde la página principal se puede acceder a uno de los articulos expuestos, am
 
 ![Articulo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/article.jpg?raw=true)
 
-## Diagrama de Entidad-Relación ##
+## Diagrama de Entidad-Relacion ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
 ![Diagrama de Entidad-Relación](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaER.png)
@@ -155,13 +158,13 @@ Mediante ObjectAid UML Diagram, se ha desarrollado un diagrama de las clases del
 
 # Fase 3 #
 
-## Instrucciones para desplegar la aplicación ##
+## Instrucciones para desplegar la aplicacion ##
 Para poder desplegar la aplicación, es necesaria la instalación previa de una máquina virtual VMWare con el Sistema Operativo **Ubuntu 14.04**
 <p align="center">
   <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ubuntu.jpg?raw=true">
 </p>
 
-### 1.- Inicialización de Ubuntu ###
+### 1.- Inicializacion de Ubuntu ###
 Tras su instalación, se le ha de añadir mediante consola
 * Java 
 
@@ -194,7 +197,7 @@ Tras su instalación, se le ha de añadir mediante consola
   
   ![mySQLWorkbench_schema name](https://github.com/lalinlulelo/GamesInfo/blob/master/images/schema_name.jpg?raw=true)
   
-### 2.- Elaboración del jar ###
+### 2.- Elaboracion del jar ###
 
 Para crear los ficheros jar, se ha de iniciar Spring Tool Suite abriendo los proyectos determinados. En él, nos dirigimos en cada proyecto a `Run As > Maven built...` apareciendo la siguiente ventana:
 
@@ -222,7 +225,7 @@ Tras comprobar el correcto inicio de ambas aplicaciones, nos dirigimos al icono 
   <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/connection%20info.jpg?raw=true">
 </p>
 
-### 4.- Inicio de página web ###
+### 4.- Inicio de pagina web ###
 
 Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e insertamos la **dirección IPv4** de la maquina virtual seguido del puerto de conexión. En nuestro caso: `https://192.168.42.131:8443/`
 
