@@ -1,4 +1,4 @@
-# GamesInfo :cat:
+# GamesInfo 
 
 
 Indice
