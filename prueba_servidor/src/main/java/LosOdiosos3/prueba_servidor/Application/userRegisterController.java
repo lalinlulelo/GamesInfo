@@ -28,9 +28,6 @@ public class userRegisterController {
 	@Autowired
 	private UserRepository userRepository;	
 	
-	@Value("${dad.servicio.url}")
-	private String urlServicio;
-	
 	// ----------------------------- FIN INYECCIONES ----------------------------------
 
 	// ----------------------------- REGISTRAR NUEVO USUARIO --------------------------
@@ -84,10 +81,13 @@ public class userRegisterController {
 		String server = ext.substring(0, punto);
 		ext = ext.substring(punto + 1, ext.length());
 				
-		String urlFinal = urlServicio + "/user/" + user.getName() + "/mail/" + uMail + "/"+ server +"/" + ext;
+		String urlFinal = "http://localhost:8080/" + "/user/" + user.getName() + "/mail/" + uMail + "/"+ server +"/" + ext;
+		System.out.println("Usuario con url: " + urlFinal);
 
+		/////////////////Aqui se queda parado de momento
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getForObject(urlFinal, String.class);
+		System.out.println("Enviado al MailService.");
 		//Fin de comunicacion
 		
 		userRepository.save(nuevo);
