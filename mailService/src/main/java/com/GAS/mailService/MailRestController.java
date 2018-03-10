@@ -18,6 +18,12 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.sun.mail.smtp.SMTPTransport;
 
 
@@ -75,9 +81,6 @@ public class MailRestController {
 
 		} catch (MessagingException ex) {
 			System.out.println(ex);
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		System.out.println("paso 8");
