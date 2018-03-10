@@ -33,7 +33,10 @@ Indice
     + [2.- Elaboracion del jar](#2--elaboracion-del-jar)
     + [3.- Arranque de los jar](#3--arranque-de-los-jar)
     + [4.- Inicio de pagina web](#4--inicio-de-pagina-web)
-  * [Instrucciones para el servicio interno de correos](#instrucciones-para-el-servicio-interno-de-correos)
+  * [Servicio interno de correos](#Servicio-interno-de-correos)
+    - [Pantalla de relleno de datos](#pantalla-de-relleno-de-datos)
+    - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
+    - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
   
 - [Integrantes](#integrantes)
 
@@ -147,7 +150,7 @@ Desde la página principal se puede acceder a uno de los articulos expuestos, am
 ## Diagrama de Entidad-Relacion ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
-![Diagrama de Entidad-Relación](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaER.png)
+![Diagrama de Entidad-Relacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaER.png)
 
 ## Diagrama UML de Entidades ##
 En el siguiente diagrama UML se puede visualizar los distintos atributos de las entidades y como estan relacionados entre sí.
@@ -232,20 +235,21 @@ Tras comprobar el correcto inicio de ambas aplicaciones, nos dirigimos al icono 
 
 Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e insertamos la **dirección IPv4** de la maquina virtual seguido del puerto de conexión. En nuestro caso: `https://192.168.42.131:8443/`
 
-![Pagina FInal](https://github.com/lalinlulelo/GamesInfo/blob/master/images/https%20page.jpg?raw=true)
+![Pagina Final](https://github.com/lalinlulelo/GamesInfo/blob/master/images/https%20page.jpg?raw=true)
 
-## Instrucciones para el servicio interno de correos ##
+## Servicio interno de correos ##
 Para esta parte simplemente inicializamos tanto el MailService como la propia aplicación web. Después en Register nos llevará al html new_user y rellenamos los datos.
 #### Pantalla de relleno de datos ####
 Rellenamos los datos del usuario que queremos registrar, en este caso usaremos un correo electrónico generado por Fake Mail Generator para hacer la prueba.
-
+![Rellenar datos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register_fill.JPG?raw=true)
 
 #### Pantalla de recibo de correo ####
 Podemos comprobar que efectivamente se ha creado el usuario y además nos han llegado un correo.
-
+![Recibo correos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/mail_confirm.JPG?raw=true)
 
 #### Pantalla de usuario previamente registrado ####
 En caso de que el nombre usuario o el correo ya estén previamente registrados no nos dejará, y nos redirigirá de nuevo a la página de registro.
+![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
 
 # Integrantes
