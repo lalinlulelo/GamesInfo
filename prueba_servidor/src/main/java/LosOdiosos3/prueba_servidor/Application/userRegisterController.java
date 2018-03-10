@@ -55,12 +55,22 @@ public class userRegisterController {
 		usur = userRepository.findByName(user.getName());
 		if(usur.size() > 0) {
 			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('name alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
-			return "new_user";
+			
+			// atributos del token
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("token", token.getToken());
+			
+			return "/new_user";
 		}
 		usur = userRepository.findByEmail(user.getEmail());
 		if(usur.size() > 0) {
 			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('email alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
-			return "new_user";
+			
+			// atributos del token
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("token", token.getToken());
+			
+			return "/new_user";
 		}
 		List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png",
 				"https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png",
