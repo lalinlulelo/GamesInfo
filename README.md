@@ -33,6 +33,8 @@ Indice
     + [2.- Elaboracion del jar](#2--elaboracion-del-jar)
     + [3.- Arranque de los jar](#3--arranque-de-los-jar)
     + [4.- Inicio de pagina web](#4--inicio-de-pagina-web)
+  * [Instrucciones para el servicio interno de correos](#instrucciones-para-el-servicio-interno-de-correos)
+  
 - [Integrantes](#integrantes)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -40,26 +42,27 @@ Indice
 
 # Fase 1 #
 ## Descripcion de la web ##
-Este proyecto está dirigido a usuarios aficionados a los videojuegos. Será una web donde encontrarás información acerca de videojuegos como la trama, la compañía, la puntuación pública y profesional. Además podrás ojear los eventos que se celebrarán próximamente y hacerte listas en tu perfil con los juegos o compañías que te interesen.
-- **Parte publica**: el usuario podrá navegar por las distintas entidades descritas más adelante.
+Este proyecto está dirigido a usuarios aficionados a los videojuegos. Se trata de una web donde encontrarás información relativa a cualquier juegos como puede ser su trama, la compañía o la puntuación que les ha otorgado los usuarios. Además podrás ojear los eventos de videojuegos que se celebrarán próximamente y hacerte tus propias listas en tu perfil con los juegos que te interesen.
+- **Parte publica**: El usuario podrá navegar por las entidades de Juego, Compañía, Evento o Artículo.
 
-- **Parte privada**: el usuario deberá iniciar sesión para poder puntuar, comentar los juegos u ojear sus listas. Gracias al servicio de correo electrónico estará al tanto de su juego, evento o compañía favorita.
+- **Parte privada**: Gracias al servicio de correo electrónico serás notificado una vez que estés registrado. Para acceder a la parte privada el usuario deberá iniciar sesión para poder puntuar o comentar los juegos/compañías/eventos/artículo, así como ojear o modificar sus listas de juegos. También tendrá el usuario su perfil en el que podrá cambiar de correo electrónico o contraseña.
+En cuanto al administrador, podrá crear fichas de juegos, compañías, eventos o artículos.
 
 ## Entidades principales ##
--   **Usuario**: se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña y su fecha de nacimiento. Cada usuario registrado tendrá su propia lista de juegos.
--   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios y otra de eventos a los que participa.
--   **Compañia**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. También tiene una lista de juegos y otra de eventos a los que participa.
--   **Evento**: Contendrá un Id, Fecha, Lugar, Precio y Descripción
--   **Comentario**: cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
--   **Articulo**: cada usuario podrá escribir artículos. Este portará un Id, Usuario, Título, Cuerpo e Imagen.
--   **Lista**: contiene una serie de juegos al gusto del usuario. Este portará un Id, Nombre y lista de juegos.
+-   **Usuario**: Se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña, una fecha de nacimiento y su rol. Cada usuario registrado tendrá su propia lista de juegos.
+-   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios.
+-   **Compañia**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. Tiene su propia lista de juegos.
+-   **Evento**: Contendrá un Id, Fecha, Lugar, Precio, Descripción y una imagen.
+-   **Comentario**: Cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
+-   **Articulo**: Éste portará un Id, Usuario, Título, Cuerpo e Imagen. Todos los usuarios registrados podrán comentar en ellas, y los administradores podra crear artículos.
+-   **Lista**: Contiene una serie de juegos al gusto del usuario. Este portará un Id, Nombre y lista de juegos.
 
 ## Servicio Interno ##
-En todo momento el usuario estará al tanto de información nueva sobre cada juego, así como al tanto de los movimientos de una determinada compañía por medio del correo electrónico.
+El servicio interno implementado consiste en que nuestra aplicación web se comunique con nuestro servicio de correos interno mediante API REST. Su función es simplemente enviar un correo de bienvenida y confirmación a los nuevos usuarios registrados.
 
 # Fase 2 #
 ## Diagrama de Navegacion ##
-En el siguiente diagrama se puede visualizar desde qué paginas se puede navegar hasta cierta página:
+En el siguiente diagrama se puede visualizar desde qué páginas se puede navegar hasta cierta página:
 
 ![Diagrama de Navegacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/diagrama%20de%20flujos.png)
 
@@ -102,7 +105,7 @@ La ficha de juego contiene la información esencial de cada juego. En caso de qu
 ![Juego](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game.jpg?raw=true)
 
 #### Lista de Compañias ####
-La lista de compañias muestra todas las compañias que han desarollado los juegos expuestos en la página, y gracias al uso de las consultas en repositorio podremos ordenarlos de distintas maneras.
+La lista de compañías muestra todas las compañias que han desarollado los juegos expuestos en la página, y gracias al uso de las consultas en repositorio podremos ordenarlos de distintas maneras.
 
 ![Lista Compañias](https://github.com/lalinlulelo/GamesInfo/blob/master/images/companies.jpg?raw=true)
 
@@ -230,6 +233,20 @@ Tras comprobar el correcto inicio de ambas aplicaciones, nos dirigimos al icono 
 Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e insertamos la **dirección IPv4** de la maquina virtual seguido del puerto de conexión. En nuestro caso: `https://192.168.42.131:8443/`
 
 ![Pagina FInal](https://github.com/lalinlulelo/GamesInfo/blob/master/images/https%20page.jpg?raw=true)
+
+## Instrucciones para el servicio interno de correos ##
+Para esta parte simplemente inicializamos tanto el MailService como la propia aplicación web. Después en Register nos llevará al html new_user y rellenamos los datos.
+#### Pantalla de relleno de datos ####
+Rellenamos los datos del usuario que queremos registrar, en este caso usaremos un correo electrónico generado por Fake Mail Generator para hacer la prueba.
+
+
+#### Pantalla de recibo de correo ####
+Podemos comprobar que efectivamente se ha creado el usuario y además nos han llegado un correo.
+
+
+#### Pantalla de usuario previamente registrado ####
+En caso de que el nombre usuario o el correo ya estén previamente registrados no nos dejará, y nos redirigirá de nuevo a la página de registro.
+
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
