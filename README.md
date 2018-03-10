@@ -238,19 +238,22 @@ Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e ins
 ![Pagina Final](https://github.com/lalinlulelo/GamesInfo/blob/master/images/https%20page.jpg?raw=true)
 
 ## Servicio interno de correos ##
-Para esta parte simplemente inicializamos tanto el MailService como la propia aplicación web. Después en Register nos llevará al html new_user y rellenamos los datos.
+En esta sección inicializamos tanto el MailService como la propia aplicación web siguiendo los pasos indicados en el apartado anterior. Tras arrancar la página web en el navegador, si uno se dirige a Register nos llevará al html new_user y rellenamos los datos.
+
 #### Pantalla de relleno de datos ####
-Rellenamos los datos del usuario que queremos registrar, en este caso usaremos un correo electrónico generado por Fake Mail Generator para hacer la prueba.
+Se rellenan los datos del usuario que se desea registrar, empleando en este caso un correo electrónico generado por Fake Mail Generator para realizar la demostración.
+
 ![Rellenar datos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register_fill.JPG?raw=true)
 
 #### Pantalla de recibo de correo ####
-Podemos comprobar que efectivamente se ha creado el usuario y además nos ha llegado un correo de bienvenida por parte de infogamesurjc.
+Tras el correcto registro, se puede observar, que efectivamente se ha creado el usuario y además se ha recibido un correo.
+
 ![Recibo correos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/mail_confirm.JPG?raw=true)
 
 #### Pantalla de usuario previamente registrado ####
-En caso de que el nombre usuario o el correo ya estén previamente registrados no nos dejará, y nos redirigirá de nuevo a la página de registro.
-![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
+En caso de que el nombre usuario o el correo ya existan previamente, no permitirá avanzar, y redirigirá de nuevo a la página de registro.
 
+![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
