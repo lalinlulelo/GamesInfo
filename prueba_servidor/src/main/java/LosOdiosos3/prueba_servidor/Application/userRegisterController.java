@@ -84,7 +84,7 @@ public class userRegisterController {
 		String urlFinal = "http://localhost:8080/" + "/user/" + user.getName() + "/mail/" + uMail + "/"+ server +"/" + ext;
 		System.out.println("Usuario con url: " + urlFinal);
 
-		/////////////////Aqui se queda parado de momento
+		//Aqui es donde exactamente se comunica con el restcontroller
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getForObject(urlFinal, String.class);
 		System.out.println("Enviado al MailService.");
