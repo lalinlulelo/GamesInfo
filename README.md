@@ -33,7 +33,7 @@ Indice
     + [2.- Elaboracion del jar](#2--elaboracion-del-jar)
     + [3.- Arranque de los jar](#3--arranque-de-los-jar)
     + [4.- Inicio de pagina web](#4--inicio-de-pagina-web)
-  * [Servicio interno de correos](#Servicio-interno-de-correos)
+  * [Servicio interno de correos](#servicio-interno-de-correos)
     - [Pantalla de relleno de datos](#pantalla-de-relleno-de-datos)
     - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
     - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
