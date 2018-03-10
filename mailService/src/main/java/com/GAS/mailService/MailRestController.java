@@ -1,15 +1,7 @@
 package com.GAS.mailService;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.Socket;
 import java.security.Security;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Properties;
 
 import javax.mail.Message;
