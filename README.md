@@ -244,7 +244,7 @@ Rellenamos los datos del usuario que queremos registrar, en este caso usaremos u
 ![Rellenar datos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register_fill.JPG?raw=true)
 
 #### Pantalla de recibo de correo ####
-Podemos comprobar que efectivamente se ha creado el usuario y además nos ha llegado un correo de bienvenidapor parte de infogamesurjc.
+Podemos comprobar que efectivamente se ha creado el usuario y además nos ha llegado un correo de bienvenida por parte de infogamesurjc.
 ![Recibo correos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/mail_confirm.JPG?raw=true)
 
 #### Pantalla de usuario previamente registrado ####
