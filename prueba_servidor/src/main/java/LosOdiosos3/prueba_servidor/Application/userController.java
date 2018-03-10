@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import Socket.MailSender;
 
@@ -51,6 +53,7 @@ public class userController {
 	// ----------------------------- FIN INYECCIONES ----------------------------------
 
 	// ----------------------------- REGISTRAR NUEVO USUARIO --------------------------
+	/*
 	@RequestMapping("/new_user")
 	public String new_user (Model model, HttpServletRequest request) {
 		model.addAttribute("alert", " ");
@@ -63,7 +66,7 @@ public class userController {
 	
 	@PostMapping(value = "/register")
 	public String registrar(Model model, User user, HttpSession usuario, HttpServletRequest request) {
-		MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
+		//MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se inicializa el usuario con los datos del formulario
 		usuario.setAttribute("name", user.getName());
 		usuario.setAttribute("password", user.getPassword());
@@ -115,7 +118,8 @@ public class userController {
 		
 		return "/";
 	}
-	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ----------------------
+	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ----------------------	
+	 */
 	
 	// ----------------------------- INICIO DE SESION ---------------------------------
 	@RequestMapping("/login/{loged}")
