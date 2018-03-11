@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import LosOdiosos3.prueba_servidor.*;
-
 @Entity
 public class Article {
 	@Id

@@ -2,30 +2,18 @@ package LosOdiosos3.prueba_servidor.Application;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import Socket.MailSender;
-
 import org.springframework.security.web.csrf.CsrfToken;
 
 @Controller
 public class webController {	
-	// -----/------------------------ INYECCIONES --------------------------------------	
-	// repositorio de la tabla usuarios 
-	@Autowired
-	private UserRepository userRepository;	
-	
 	// repositorio de la tabla compañias
 	@Autowired
 	private CompanyRepository companyRepository;
@@ -38,19 +26,10 @@ public class webController {
 	@Autowired
 	private GameRepository gameRepository;
 	
-	// repositorio de la tabla comentarios
-	@Autowired
-	private CommentRepository commentRepository;
-	
 	// repositorio de la tabla anuncios
 	@Autowired
 	private ArticleRepository articleRepository;
 	
-	//repositorio de la tabla listas
-	@Autowired
-	private MyListRepository mylistRepository;	
-	// ----------------------------- FIN INYECCIONES ----------------------------------
-
 	// ----------------------------- PAGINA INICIO ------------------------------------
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
@@ -211,9 +190,7 @@ public class webController {
 		}
 		return article;
 	}
-	// ---------------------------- FIN METODOS AUXILIARES ----------------------------
-	
-	
+	// ---------------------------- FIN METODOS AUXILIARES ----------------------------	
 }
 	
 

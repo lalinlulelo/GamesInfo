@@ -1,9 +1,5 @@
 package LosOdiosos3.prueba_servidor.Application;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,33 +17,9 @@ public class addEventController {
 
 	
 	// ----------------------------- INYECCIONES --------------------------------------	
-				// repositorio de la tabla usuarios 
-				@Autowired
-				private UserRepository userRepository;	
-				
-				// repositorio de la tabla compañias
-				@Autowired
-				private CompanyRepository companyRepository;
-				
 				// repositorio de la tabla eventos
 				@Autowired
 				private EventRepository eventRepository;
-				
-				// repositorio de la tabla juegos
-				@Autowired
-				private GameRepository gameRepository;
-				
-				// repositorio de la tabla comentarios
-				@Autowired
-				private CommentRepository commentRepository;
-				
-				// repositorio de la tabla anuncios
-				@Autowired
-				private ArticleRepository articleRepository;
-				
-				//repositorio de la tabla listas
-				@Autowired
-				private MyListRepository mylistRepository;
 				// ----------------------------- FIN INYECCIONES ----------------------------------
 			
 			

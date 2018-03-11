@@ -1,9 +1,6 @@
 package LosOdiosos3.prueba_servidor.Application;
-import LosOdiosos3.prueba_servidor.*;
-import LosOdiosos3.prueba_servidor.Application.*;
-import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {

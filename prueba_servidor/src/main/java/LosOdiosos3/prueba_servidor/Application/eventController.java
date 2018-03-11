@@ -19,33 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class eventController {	
 	// ----------------------------- INYECCIONES --------------------------------------	
-	// repositorio de la tabla usuarios 
-	@Autowired
-	private UserRepository userRepository;	
-	
-	// repositorio de la tabla compañias
-	@Autowired
-	private CompanyRepository companyRepository;
-	
 	// repositorio de la tabla eventos
 	@Autowired
 	private EventRepository eventRepository;
-	
-	// repositorio de la tabla juegos
-	@Autowired
-	private GameRepository gameRepository;
-	
-	// repositorio de la tabla comentarios
-	@Autowired
-	private CommentRepository commentRepository;
-	
-	// repositorio de la tabla anuncios
-	@Autowired
-	private ArticleRepository articleRepository;
-	
-	//repositorio de la tabla listas
-	@Autowired
-	private MyListRepository mylistRepository;
 	// ----------------------------- FIN INYECCIONES ----------------------------------
 
 	// ----------------------------- CALENDARIO DE EVENTOS  ---------------------------

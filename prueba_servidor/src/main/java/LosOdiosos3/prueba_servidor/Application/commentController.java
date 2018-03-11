@@ -1,8 +1,6 @@
 package LosOdiosos3.prueba_servidor.Application;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class commentController {	
-	// ----------------------------- INYECCIONES --------------------------------------	
-	// repositorio de la tabla usuarios 
-	@Autowired
-	private UserRepository userRepository;	
-	
+	// ----------------------------- INYECCIONES --------------------------------------		
 	// repositorio de la tabla compañias
 	@Autowired
 	private CompanyRepository companyRepository;
@@ -41,10 +35,6 @@ public class commentController {
 	// repositorio de la tabla anuncios
 	@Autowired
 	private ArticleRepository articleRepository;
-	
-	//repositorio de la tabla listas
-	@Autowired
-	private MyListRepository mylistRepository;
 	// ----------------------------- FIN INYECCIONES ----------------------------------
 
 	// ----------------------------- COMENTARIOS  -------------------------------------
