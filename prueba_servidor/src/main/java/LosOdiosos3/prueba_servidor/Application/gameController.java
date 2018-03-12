@@ -1,7 +1,6 @@
 package LosOdiosos3.prueba_servidor.Application;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -23,23 +22,11 @@ public class gameController {
 	// repositorio de la tabla usuarios 
 	@Autowired
 	private UserRepository userRepository;	
-	
-	// repositorio de la tabla compañias
-	@Autowired
-	private CompanyRepository companyRepository;
-	
-	// repositorio de la tabla eventos
-	@Autowired
-	private EventRepository eventRepository;
-	
+
 	// repositorio de la tabla juegos
 	@Autowired
 	private GameRepository gameRepository;
-	
-	// repositorio de la tabla comentarios
-	@Autowired
-	private CommentRepository commentRepository;
-	
+
 	// repositorio de la tabla anuncios
 	@Autowired
 	private ArticleRepository articleRepository;

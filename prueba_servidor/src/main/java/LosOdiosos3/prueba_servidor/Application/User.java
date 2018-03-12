@@ -1,16 +1,10 @@
 package LosOdiosos3.prueba_servidor.Application;
-import LosOdiosos3.prueba_servidor.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.*;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.SessionScope;
-
-import com.mysql.fabric.xmlrpc.base.Array;
 
 // se indica que es un componente
 @Entity

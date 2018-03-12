@@ -1,12 +1,8 @@
 package LosOdiosos3.prueba_servidor.Application;
-import LosOdiosos3.prueba_servidor.*;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Game {	

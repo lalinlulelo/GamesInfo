@@ -1,10 +1,8 @@
 package LosOdiosos3.prueba_servidor.Application;
-import java.util.Arrays;
-import java.util.List;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,11 +10,8 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import Socket.MailSender;
 
 @Controller
 public class userController {
@@ -25,98 +20,11 @@ public class userController {
 	@Autowired
 	private UserRepository userRepository;	
 	
-	// repositorio de la tabla compañias
-	@Autowired
-	private CompanyRepository companyRepository;
-	
-	// repositorio de la tabla eventos
-	@Autowired
-	private EventRepository eventRepository;
-	
-	// repositorio de la tabla juegos
-	@Autowired
-	private GameRepository gameRepository;
-	
-	// repositorio de la tabla comentarios
-	@Autowired
-	private CommentRepository commentRepository;
-	
 	// repositorio de la tabla anuncios
 	@Autowired
 	private ArticleRepository articleRepository;
-	
-	//repositorio de la tabla listas
-	@Autowired
-	private MyListRepository mylistRepository;
 	// ----------------------------- FIN INYECCIONES ----------------------------------
 
-	// ----------------------------- REGISTRAR NUEVO USUARIO --------------------------
-	@RequestMapping("/new_user")
-	public String new_user (Model model, HttpServletRequest request) {
-		model.addAttribute("alert", " ");
-		// atributos del token
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		model.addAttribute("token", token.getToken());
-		
-		return "new_user";
-	}
-	
-	@PostMapping(value = "/register")
-	public String registrar(Model model, User user, HttpSession usuario, HttpServletRequest request) {
-		MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
-		// se inicializa el usuario con los datos del formulario
-		usuario.setAttribute("name", user.getName());
-		usuario.setAttribute("password", user.getPassword());
-		usuario.setAttribute("date", user.getDate());
-		usuario.setAttribute("email", user.getEmail());
-		usuario.setAttribute("icon",  user.getIcon());
-		
-		List<User> usur = null;
-		// se comprueba la existencia del nombre
-		usur = userRepository.findByName(user.getName());
-		if(usur.size() > 0) {
-			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('name alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
-			return "new_user";
-		}
-		usur = userRepository.findByEmail(user.getEmail());
-		if(usur.size() > 0) {
-			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('email alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
-			return "new_user";
-		}
-		List<String> icons = Arrays.asList("https://mir-s3-cdn-cf.behance.net/project_modules/disp/bb3a8833850498.56ba69ac33f26.png",
-				"https://mir-s3-cdn-cf.behance.net/project_modules/disp/1bdc9a33850498.56ba69ac2ba5b.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png",
-				"https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/e70b1333850498.56ba69ac32ae3.png",
-				"https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png", "http://blogs.studentlife.utoronto.ca/lifeatuoft/files/2015/02/FullSizeRender.jpg",
-				"https://i.pinimg.com/474x/c3/53/7f/c3537f7ba5a6d09a4621a77046ca926d--soccer-quotes-lineman.jpg");	
-		
-		// se da por registrado al usuario
-		User nuevo = new User(user.getName(), user.getPassword(), user.getDate(), user.getEmail(),"ROLE_USER");
-		nuevo.setIcon(icons.get((int)Math.random()*6));
-		userRepository.save(nuevo);
-		model.addAttribute("Titulo", "Latest News");
-
-		model.addAttribute("alert", " ");
-		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
-		
-		// se muestra el link de iniciar/registrar usuario si es false
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		boolean aux = !(Boolean) usuario.getAttribute("registered");
-		if(aux == false) {
-			model.addAttribute("name", usuario.getAttribute("name"));
-			
-		}else {
-			model.addAttribute("name", " ");
-		}
-				
-		// atributos del token
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		model.addAttribute("token", token.getToken());
-		
-		return "/";
-	}
-	// ----------------------------- FIN REGISTRAR NUEVO USUARIO ----------------------
-	
 	// ----------------------------- INICIO DE SESION ---------------------------------
 	@RequestMapping("/login/{loged}")
 	public String iniciar_sesion (Model model, UsernamePasswordAuthenticationToken user, HttpSession usuario, @PathVariable String loged, HttpServletRequest request) {
@@ -221,32 +129,6 @@ public class userController {
 		// se dirige a la pagina como iniciado
 		return "index";
 	}
-	/*
-	@RequestMapping("/log_out")
-	public String log_out (Model model, HttpSession usuario, HttpServletRequest request) {
-		usuario.setAttribute("registered", false);
-		// se guardan los atributos en el modelo
-		model.addAttribute("Titulo", "Latest News");
-		model.addAttribute("alert", "Good Bye");		
-		model.addAttribute("name", " ");
-		
-		// articulos relevantes	
-		model.addAttribute("news", articles ());
-		
-		// se muestra el link de iniciar/registrar usuario si es false
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		boolean aux = !(Boolean) usuario.getAttribute("registered");
-		model.addAttribute("unregistered", aux);
-		model.addAttribute("name", usuario.getAttribute("name"));
-		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-		model.addAttribute("hello", "<script type=\"text/javascript\">" + "alert('See you soon " + usuario.getAttribute("name") + "!');"  + "</script>");
-		
-		// atributos del token
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		model.addAttribute("token", token.getToken());
-		
-		return "/";
-	}*/
 	// ----------------------------- FIN INICIO DE SESION -----------------------------
 	
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
@@ -255,7 +137,6 @@ public class userController {
 		//MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
-		String password = (String) usuario.getAttribute("password");
 		String date = (String) usuario.getAttribute("date");
 		String icon = (String) usuario.getAttribute("icon");
 		String email = (String) usuario.getAttribute("email");
@@ -267,10 +148,7 @@ public class userController {
 		model.addAttribute("icon", icon);
 		model.addAttribute("email", email);
 		model.addAttribute("alert"," ");	
-		
 
-		
-		
 		// se muestra el link de iniciar/registrar usuario si es false
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
@@ -314,11 +192,8 @@ public class userController {
 						((User)usuario.getAttribute("Usuario")).setName(text);
 						usuario.setAttribute("name", text);	
 					}		
-					break;
-				
-
-			
-				
+					break;	
+					
 				case "password":
 					if(!new BCryptPasswordEncoder().matches(text, usur.getPassword())) {
 						System.out.println("mal metido");
@@ -336,9 +211,8 @@ public class userController {
 					userRepository.save(usur);
 					usuario.setAttribute("password", password);
 					((User)usuario.getAttribute("Usuario")).setPassword(password);
-					break;
-
-				
+					break;		
+					
 				case "birthday":
 					usur.setDate(text);
 					userRepository.save(usur);
@@ -376,14 +250,13 @@ public class userController {
 		model.addAttribute("token", token.getToken());
 		
 		return"profile";
-	}
+	}	
+	// ----------------------------- FIN AJUSTES PERFIL --------------------------------
 	
-	
-	
+	// ---------------------------- METODOS AUXILIARES --------------------------------
 	//Metodo que añade los atributos a change
 	private void modelAttrChange(User usur, HttpSession usuario, Model model) {
 		String name = (String) usur.getName();
-		String password = (String) usur.getPassword();
 		String date = (String) usur.getDate();
 		String icon = (String) usur.getIcon();
 		String email = (String) usur.getEmail();
@@ -404,9 +277,7 @@ public class userController {
 
 		model.addAttribute("lists", " ");
 	}	
-	// ----------------------------- FIN AJUSTES PERFIL --------------------------------
 	
-	// ---------------------------- METODOS AUXILIARES --------------------------------
 	public String articles () {
 		String article = "";
 		List<Article> articles = articleRepository.findAll();

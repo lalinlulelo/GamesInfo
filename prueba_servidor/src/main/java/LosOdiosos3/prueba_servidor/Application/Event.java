@@ -1,7 +1,6 @@
 package LosOdiosos3.prueba_servidor.Application;
-import LosOdiosos3.prueba_servidor.Application.*;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;

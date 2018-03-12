@@ -14,7 +14,6 @@
 	<relativePath/>
    </parent>
 
-
   <name>prueba_servidor</name>
   <url>http://maven.apache.org</url>
 
@@ -22,6 +21,23 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <build>
+  	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-compiler-plugin</artifactId>
+		    <version>3.1</version>
+		    <configuration>
+		        <source>1.7</source>
+		        <target>1.7</target>
+		    </configuration>
+		</plugin>
+	</plugins>
+  </build>
   <dependencies>
     <dependency>
       	<groupId>junit</groupId>
@@ -60,6 +76,8 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
+	
+
 	
 	<dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
