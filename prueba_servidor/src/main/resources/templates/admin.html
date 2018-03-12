@@ -342,8 +342,9 @@
           <form action="/deleteGame" method="post">
 
    <select name="Game">    
-       <option value="Windows" selected="selected">Windows</option>
-       <option value="Machintosh">Mac</option>
+       {{#listGames}}
+       {{{.}}}
+       {{/listGames}}
        <option value="Linux">Linux</option>
    </select>
 			    <input type="submit" value="Submit">	
