@@ -1,9 +1,15 @@
 Manifest-Version: 1.0
 Implementation-Title: prueba_servidor
 Implementation-Version: 0.0.1-SNAPSHOT
+<<<<<<< HEAD
 Built-By: cgrss
 Implementation-Vendor-Id: LosOdiosos3
 Build-Jdk: 1.8.0_91
+=======
+Built-By: Agustￃﾭn
+Implementation-Vendor-Id: LosOdiosos3
+Build-Jdk: 1.8.0_161
+>>>>>>> 9ef045c5439615a2527d26cc4750591907ea55a6
 Implementation-URL: http://maven.apache.org
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
