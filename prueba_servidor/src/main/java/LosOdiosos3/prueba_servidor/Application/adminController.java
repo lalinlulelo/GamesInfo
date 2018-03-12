@@ -135,5 +135,79 @@ public class adminController {
 			model.addAttribute("token", token.getToken());
 			
 		}
+		
+		@RequestMapping("/addCompany")
+		public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String country,
+		@RequestParam String description,@RequestParam int date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request) {
+		
+		
+			List<Company> listc=companyRepository.findAll();
+			
+			for(Company c:listc) {
+				
+				if(c.getName().equals(name)) {
+					fillModel(model,usuario,request);
+					return "admin";
+				}
+				}
+			
+			
+			
+			Company newCompany=new Company(name,country,description,date,img,url);
+			companyRepository.save(newCompany);
+			
+			fillModel(model,usuario,request);
+			return "admin";
+		
+		}
+		@RequestMapping("/addEvent")
+		public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String place,
+		@RequestParam String description,@RequestParam double fee,@RequestParam int day,@RequestParam int month, @RequestParam int year, @RequestParam String img, HttpServletRequest request) {
+		
+		
+			List<Event> liste=eventRepository.findAll();
+			
+			for(Event e:liste) {
+				
+				if(e.getName().equals(name)) {
+					fillModel(model,usuario,request);
+					return "admin";
+				}
+				}
+			
+			
+			
+			Event newEvent=new Event(name,place,year,month,day,fee,description,img);
+			eventRepository.save(newEvent);
+			
+			fillModel(model,usuario,request);
+			return "admin";
+		
+		}
+		@RequestMapping("/addGame")
+		public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String company,
+		@RequestParam String description,@RequestParam String genre,@RequestParam double score,@RequestParam int date,
+		@RequestParam String info,@RequestParam String img , HttpServletRequest request) {
+			
+			
+			List<Game> listg=gameRepository.findAll();
+			
+			for(Game g:listg) {
+				
+				if(g.getName().equals(name)) {
+					fillModel(model,usuario,request);
+					return "admin";
+				}
+				}
+			List<Company> listc=companyRepository.findByName(company);
+			
+			
+			Game newGame=new Game(name,listc.get(0),genre,description,date,score,img," ");
+			gameRepository.save(newGame);
+			
+			fillModel(model,usuario,request);
+			return "admin";
+			
+		}
 	}
 
