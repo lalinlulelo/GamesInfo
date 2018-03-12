@@ -13,6 +13,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class adminController {
@@ -34,6 +35,52 @@ public class adminController {
 		@RequestMapping("/admin")
 		public String addGame (Model model, HttpSession usuario, HttpServletRequest request) {
 			
+			
+			
+		fillModel(model,usuario,request);
+			
+			return "admin";
+			
+		}
+		
+		
+		@RequestMapping("/deleteGame")
+		public String deleteGame (Model model, HttpSession usuario, HttpServletRequest request, @RequestParam String Game) {
+			
+			List<Game> list =gameRepository.findByName(Game);
+			
+			gameRepository.delete(list.get(0));
+			
+			fillModel(model,usuario,request);
+			
+			return "admin";
+		}
+		
+		@RequestMapping("/deleteCompany")
+		public String deleteCompany (Model model, HttpSession usuario, HttpServletRequest request, @RequestParam String Company) {
+			
+			List<Company> list =companyRepository.findByName(Company);
+			
+			companyRepository.delete(list.get(0));
+			
+			fillModel(model,usuario,request);
+			
+			return "admin";
+		}
+		
+		@RequestMapping("/deleteEvent")
+		public String deleteEvent (Model model, HttpSession usuario, HttpServletRequest request, @RequestParam String Event) {
+			
+			List<Event> list =eventRepository.findByName(Event);
+			
+			eventRepository.delete(list.get(0));
+			
+			fillModel(model,usuario,request);
+			
+			return "admin";
+		}
+		
+		public void fillModel(Model model,HttpSession usuario,HttpServletRequest request) {
 			List<Game> games=gameRepository.findAll();
 			List<Company> companies=companyRepository.findAll();
 			List<Event> events=eventRepository.findAll();
@@ -70,15 +117,6 @@ public class adminController {
 			}
 			
 			model.addAttribute("listEvents", listEvents);
-			
-		fillModel(model,usuario,request);
-			
-			return "admin";
-			
-		}
-		
-		public void fillModel(Model model,HttpSession usuario,HttpServletRequest request) {
-			
 			
 			// se pasan los atributos de la barra de navegacion
 			model.addAttribute("registered", usuario.getAttribute("registered"));
