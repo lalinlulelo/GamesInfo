@@ -326,6 +326,80 @@
         </div>
 		        </div>
 		        </div>
+		        </div>
+		        
+		        <br/>
+		        
+		         <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteG">Delete Game</button>
+		        <div class="modal fade" id="modalDeleteG" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">Delete game</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/deleteGame" method="post">
+
+   <select name="Game">    
+       {{#listGames}}
+       {{{.}}}
+       {{/listGames}}
+   </select>
+			    <input type="submit" value="Submit">	
+			      <input type="hidden" name="_csrf" value="{{token}}"> 
+			     </form>
+		        </div>
+		        </div>
+		        </div>
+		        </div>
+		        
+		        <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteC">Delete Company</button>
+		        <div class="modal fade" id="modalDeleteC" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">Delete game</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/deleteCompany" method="post">
+
+   <select name="Company">    
+       {{#listCompanies}}
+       {{{.}}}
+       {{/listCompanies}}
+   </select>
+			    <input type="submit" value="Submit">	
+			      <input type="hidden" name="_csrf" value="{{token}}"> 
+			     </form>
+		        </div>
+		        </div>
+		        </div>
+		        </div>
+		        
+		         <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteE">Delete Event</button>
+		        <div class="modal fade" id="modalDeleteE" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">Delete Event</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/deleteEvent" method="post">
+
+   <select name="Company">    
+       {{#listEvents}}
+       {{{.}}}
+       {{/listEvents}}
+   </select>
+			    <input type="submit" value="Submit">	
+			      <input type="hidden" name="_csrf" value="{{token}}"> 
+			     </form>
+		        </div>
+		        </div>
+		        </div>
 		        
 		        
 		        
