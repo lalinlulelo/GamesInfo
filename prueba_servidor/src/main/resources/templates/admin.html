@@ -326,7 +326,32 @@
         </div>
 		        </div>
 		        </div>
+		        </div>
 		        
+		        <br/>
+		        
+		         <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteG">Delete Game</button>
+		        <div class="modal fade" id="modalDeleteG" role="dialog">
+   				 <div class="modal-dialog">
+   				 <div class="modal-content">
+        		<div class="modal-header">
+         		
+         	 <h4 class="modal-title">Delete game</h4>
+       		 </div>
+       		 <div class="modal-body">
+          <form action="/deleteGame" method="post">
+
+   <select name="Game">    
+       <option value="Windows" selected="selected">Windows</option>
+       <option value="Machintosh">Mac</option>
+       <option value="Linux">Linux</option>
+   </select>
+			    <input type="submit" value="Submit">	
+			      <input type="hidden" name="_csrf" value="{{token}}"> 
+			     </form>
+		        </div>
+		        </div>
+		        </div>
 		        
 		        
 		        
