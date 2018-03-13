@@ -158,7 +158,14 @@ En el siguiente diagrama UML se puede visualizar los distintos atributos de las 
 ![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
 
 ## Diagrama de clases ##
-Mediante ObjectAid UML Diagram, se ha desarrollado un diagrama de las clases del proyecto.
+Mediante ObjectAid UML Diagram,se ha adquirido un esquema inicial, que posteriormente ha sido simplificado y complementado con los templates. Su leyenda sería la siguiente:
+![#8faadc](https://placehold.it/15/#8faadc/000000?text=+) Clases Java:
+* ____Controller: clase de tipo **@Controller**
+* ____Configuration: clase de tipo **@Configuration**
+* ____Repository: clase de tipo **@Repository**
+
+![#f4b183](https://placehold.it/15/#f4b183/000000?text=+) Clases HTML
+
 
 ![Diagrama de Clases](https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20clases.png?raw=true)
 
