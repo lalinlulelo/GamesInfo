@@ -38,6 +38,13 @@ public class userController {
 			usuario.setAttribute("icon", usur.getIcon());
 			usuario.setAttribute("email", usur.getEmail());
 			
+			//Comprobar si es admin
+			if(usur.getRoles().contains("ROLE_ADMIN")) {
+				usuario.setAttribute("admin", true);
+				model.addAttribute("admin", usuario.getAttribute("admin"));
+				boolean aux2 = !(Boolean) usuario.getAttribute("admin");
+			}
+			
 			// se guarda un objeto User
 			User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 			usuario.setAttribute("Usuario", newUser);
@@ -48,8 +55,7 @@ public class userController {
 			
 			// articulos relevantes
 			model.addAttribute("news", articles ());
-			
-			
+						
 			// se muestra el link de iniciar/registrar usuario si es false										
 			model.addAttribute("registered", usuario.getAttribute("registered"));
 			boolean aux = !(Boolean) usuario.getAttribute("registered");
@@ -67,22 +73,7 @@ public class userController {
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
 		// articulos relevantes
-		List<Article> articles = articleRepository.findAll();
-		String news = "";
-		if(articles.size() > 0) {
-			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-			for(int j = 0; j < articles.size(); j++) {
-				String Url= articles.get(j).getImage();
-				String Titulo = articles.get(j).getTitle();	
-				String Head = articles.get(j).getHead();
-				String link="/article/" + Titulo;
-	
-	
-				String art = String.format(div, Url, Titulo, Head, link);			
-				news += art;			
-			}	
-		}
-		model.addAttribute("news", news);
+		model.addAttribute("news", articles ());		
 	
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
@@ -101,23 +92,8 @@ public class userController {
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
 		// articulos relevantes
-		List<Article> articles = articleRepository.findAll();
-		String news = "";
-		if(articles.size() > 0) {
-			String div ="<div class=\"card p-3 col-12 col-md-6 col-lg-4\">\r\n" + 	"<div class=\"card-wrapper\">\r\n" + 	"                <div class=\"card-img\">\r\n" + "                    <img src=\"  %s  \" alt=\"Mobirise\" title=\"\" media-simple=\"true\">\r\n" + "                </div>\r\n" + 	"                <div class=\"card-box\">\r\n" + 	"                    <h4 class=\"card-title pb-3 mbr-fonts-style display-7\">  %s  </h4>\r\n" + 	"                    <p class=\"mbr-text mbr-fonts-style display-7\">\r\n" + 	"                        %s  <a href=\"  %s  \">   Learn more...</a>\r\n" + 	"                    </p>\r\n" + 		"                </div>\r\n" + 		"            </div>\r\n" + 		"        </div>";			
-			for(int j = 0; j < articles.size(); j++) {
-				String Url= articles.get(j).getImage();
-				String Titulo = articles.get(j).getTitle();	
-				String Head = articles.get(j).getHead();
-				String link="/article/" + Titulo;
-	
-	
-				String art = String.format(div, Url, Titulo, Head, link);			
-				news += art;			
-			}	
-		}
-		model.addAttribute("news", news);
-	
+		model.addAttribute("news", articles ());	
+			
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('insufficient permits');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
 		model.addAttribute("hello", " ");
