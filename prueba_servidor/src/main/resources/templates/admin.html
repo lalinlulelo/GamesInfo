@@ -52,6 +52,7 @@
 				color:  #F9FF35;
 			    padding: 12px 20px;
 			    margin-right: 25%;
+			    margin-bottom: 10%;
 			    border: none;
 			    border-radius: 4px;
 			    cursor: pointer;
@@ -184,9 +185,13 @@
 	    	<div id="triangulo"></div>		    	
 	    </div>	    
       	<br>
+      	<br>
 	    <div id="w">
-		    <div id="content" class="clearfix">		        		        
-		    	<button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalGame">Add new game</button>
+		    <div id="content" class="clearfix">	
+		    	<h1 style="text-align:center; color:#406DB5; font-family: "Andale Mono", monospace;">Admin Options</h1>
+		    	<br>	        		        
+		    	<button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style=" margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalGame">Add new game</button>
+		        <br><br><br><br>
 		        <div class="modal fade" id="modalGame" role="dialog">
    				 	<div class="modal-dialog">
    				 		<div class="modal-content">
@@ -210,8 +215,9 @@
 		        		</div>
 		        	</div>
 		        </div>
-		        		        
-		        <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalCompany">Add new company</button>
+     
+		        <button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalCompany">Add new company</button>
+		        <br><br><br><br>
 		        <div class="modal fade" id="modalCompany" role="dialog">
    					<div class="modal-dialog">
    				 		<div class="modal-content">
@@ -233,8 +239,9 @@
 		        		</div>
 		        	</div>
 		        </div>
-		        		        
-		        <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalEvent">Add new Event</button>
+		        	        
+		        <button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalEvent">Add new Event</button>
+		        <br><br><br><br>
 		        <div class="modal fade" id="modalEvent" role="dialog">
    					<div class="modal-dialog">
    				 		<div class="modal-content">
@@ -257,85 +264,77 @@
     						</div>
 		        		</div>
 		        	</div>
-		        </div>
-		        
-		        <br/>
-		        
-		         <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteG">Delete Game</button>
-		        <div class="modal fade" id="modalDeleteG" role="dialog">
-   				 <div class="modal-dialog">
-   				 <div class="modal-content">
-        		<div class="modal-header">
-         		
-         	 <h4 class="modal-title">Delete game</h4>
-       		 </div>
-       		 <div class="modal-body">
-          <form action="/deleteGame" method="post">
+	        	 </div>
 
-   <select name="Game">    
-       {{#listGames}}
-       {{{.}}}
-       {{/listGames}}
-   </select>
-			    <input type="submit" value="Submit">	
-			      <input type="hidden" name="_csrf" value="{{token}}"> 
-			     </form>
-		        </div>
-		        </div>
-		        </div>
+		         <button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteG">Delete Game</button>
+	        	 <br><br><br><br>
+	        	 <div class="modal fade" id="modalDeleteG" role="dialog">
+   				 	<div class="modal-dialog">
+   				 		<div class="modal-content">
+        		 			<div class="modal-header">         		
+	         	 				<h4 class="modal-title">Delete game</h4>
+	       		 			</div>
+	       		 			<div class="modal-body">
+	          		 			<form action="/deleteGame" method="post">	
+	   								<select name="Game">    
+								       {{#listGames}}
+								       {{{.}}}
+								       {{/listGames}}
+					   				</select>
+				    				<input type="submit" value="Submit">	
+				      				<input type="hidden" name="_csrf" value="{{token}}"> 
+				     			</form>
+		        			</div>
+		        		</div>
+		        	</div>
 		        </div>
 		        
-		        <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteC">Delete Company</button>
+		        <button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteC">Delete Company</button>
+		        <br><br><br><br>
 		        <div class="modal fade" id="modalDeleteC" role="dialog">
-   				 <div class="modal-dialog">
-   				 <div class="modal-content">
-        		<div class="modal-header">
-         		
-         	 <h4 class="modal-title">Delete game</h4>
-       		 </div>
-       		 <div class="modal-body">
-          <form action="/deleteCompany" method="post">
-
-   <select name="Company">    
-       {{#listCompanies}}
-       {{{.}}}
-       {{/listCompanies}}
-   </select>
-			    <input type="submit" value="Submit">	
-			      <input type="hidden" name="_csrf" value="{{token}}"> 
-			     </form>
-		        </div>
-		        </div>
-		        </div>
+  					<div class="modal-dialog">
+   						<div class="modal-content">
+        					<div class="modal-header">         		
+         	 					<h4 class="modal-title">Delete game</h4>
+       		 				</div>
+       		 				<div class="modal-body">
+	        					<form action="/deleteCompany" method="post">
+								   <select name="Company">    
+								       {{#listCompanies}}
+								       {{{.}}}
+								       {{/listCompanies}}
+								   </select>
+				    				<input type="submit" value="Submit">	
+				      				<input type="hidden" name="_csrf" value="{{token}}"> 
+				     			</form>
+	        				</div>
+		        		</div>
+		        	</div>
 		        </div>
 		        
-		         <button class="button_ch" type="button" class="btn btn-info btn-lg" style="display: block; margin:auto; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteE">Delete Event</button>
+	         	<button class="button_ch" type="button"  id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteE">Delete Event</button>
+		        <br><br><br><br>
 		        <div class="modal fade" id="modalDeleteE" role="dialog">
-   				 <div class="modal-dialog">
-   				 <div class="modal-content">
-        		<div class="modal-header">
-         		
-         	 <h4 class="modal-title">Delete Event</h4>
-       		 </div>
-       		 <div class="modal-body">
-          <form action="/deleteEvent" method="post">
-
-   <select name="Event">    
-       {{#listEvents}}
-       {{{.}}}
-       {{/listEvents}}
-   </select>
-			    <input type="submit" value="Submit">	
-			      <input type="hidden" name="_csrf" value="{{token}}"> 
-			     </form>
+  					<div class="modal-dialog">
+   				 		<div class="modal-content">
+        					<div class="modal-header">         		
+         	 					<h4 class="modal-title">Delete Event</h4>
+       		 				</div>
+       		 				<div class="modal-body">
+          						<form action="/deleteEvent" method="post">
+								   <select name="Event">    
+								       {{#listEvents}}
+								       {{{.}}}
+								       {{/listEvents}}
+								   </select>
+			    					<input type="submit" value="Submit">	
+			      					<input type="hidden" name="_csrf" value="{{token}}"> 
+		    					</form>
+		        			</div>
+		        		</div>
+		        	</div>          
 		        </div>
-		        </div>
-		        </div>
-		        
-	        
-		        </div>
-		    </div>
-	     	
+		    </div>	     	
 	    </div>
     </body>
 </html>
