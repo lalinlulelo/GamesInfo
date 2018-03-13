@@ -78,7 +78,6 @@ public class Article {
 	}
 
 	public List<Comment> getComment() {
-		// TODO Auto-generated method stub
 		return this.comments;
 	}
 	
