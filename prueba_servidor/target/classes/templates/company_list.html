@@ -86,7 +86,10 @@
 						  	<ul class="dropdown-menu" id="drop">
 						  		<li><a href="/profile">Profile</a></li>
 								<li><a href="/my_lists">My Lists</a></li>
-								<div class="dropdown-divider"></div>            
+								<div class="dropdown-divider"></div> 
+								{{#admin}}   
+								<li><a href="/admin">Admin features</a></li> 
+								{{/admin}}           
 				            	<form action="/logout" method="post">
 									<input type="submit" class="col-md-12" value="Logout" />
 									<input type="hidden" name="_csrf" value="{{token}}"/>

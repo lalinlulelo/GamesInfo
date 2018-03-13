@@ -158,8 +158,15 @@ En el siguiente diagrama UML se puede visualizar los distintos atributos de las 
 ![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
 
 ## Diagrama de clases ##
-Mediante ObjectAid UML Diagram, se ha desarrollado un diagrama de las clases del proyecto.
+Mediante ObjectAid UML Diagram,se ha adquirido un esquema inicial, que posteriormente ha sido simplificado y complementado con los templates. Su leyenda sería la siguiente:
 
+![#8faadc](https://github.com/lalinlulelo/GamesInfo/blob/master/images/claseJava.png?raw=true) Clases Java:
+* ____Controller: clase de tipo **@Controller**
+* ____Configuration: clase de tipo **@Configuration**
+* ____Repository: clase de tipo **@Repository**
+* Event, Company, Article, Comment, User, MyList & Comment: clase de tipo **@Entity**
+
+![#f4b183](https://github.com/lalinlulelo/GamesInfo/blob/master/images/claseHTML.png?raw=true) Clases HTML
 ![Diagrama de Clases](https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20clases.png?raw=true)
 
 # Fase 3 #
