@@ -24,6 +24,7 @@ Indice
       - [Nueva Lista de Juegos](#nueva-lista-de-juegos)
       - [Añadir Juego a una Lista](#a-adir-juego-a-una-lista)
       - [Articulo](#articulo)
+      - [Pantalla de administrador](#Pantalla-de-administrador)
   * [Diagrama de Entidad-Relacion](#diagrama-de-entidad-relacion)
   * [Diagrama UML de Entidades](#diagrama-uml-de-entidades)
   * [Diagrama de clases](#diagrama-de-clases)
@@ -147,6 +148,11 @@ Desde la página principal se puede acceder a uno de los articulos expuestos, am
 
 ![Articulo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/article.jpg?raw=true)
 
+### Pantalla de administrador ###
+Si el administrador inicia sesión en su cuenta, en la sección desplegable de su usuario tiene la opción **Admin Features** donde se le dirige a la pantalla expuesta en la imagen, donde mediante un formulario puede añadir uno de los tres posibles tipos de juego, y mediante una lista desplegable, eliminar un elemento del tipo de objeto expuesto, y ya existente:
+
+![admin](https://github.com/lalinlulelo/GamesInfo/blob/master/images/admin.jpg?raw=true)
+
 ## Diagrama de Entidad-Relacion ##
 En el siguiente diagrama se puede visualizar un modelo de datos donde se representan las entidades de un sistema de información así como sus interrelaciones y propiedades.
 
@@ -261,11 +267,6 @@ Tras el correcto registro, se puede observar, que efectivamente se ha creado el 
 En caso de que el nombre usuario o el correo ya existan previamente, no permitirá avanzar, y redirigirá de nuevo a la página de registro.
 
 ![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
-
-### Pantalla de administrador ###
-Si el administrador inicia sesión en su cuenta, en la sección desplegable de su usuario tiene la opción **Admin Features** donde se le dirige a la pantalla expuesta en la imagen, donde mediante un formulario puede añadir uno de los tres posibles tipos de juego, y mediante una lista desplegable, eliminar un elemento del tipo de objeto expuesto, y ya existente:
-
-![admin](https://github.com/lalinlulelo/GamesInfo/blob/master/images/admin.jpg?raw=true)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
