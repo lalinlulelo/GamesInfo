@@ -262,6 +262,11 @@ En caso de que el nombre usuario o el correo ya existan previamente, no permitir
 
 ![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
+### Pantalla de administrador ###
+Si el administrador inicia sesión en su cuenta, en la sección desplegable de su usuario tiene la opción **Admin Features** donde se le dirige a la pantalla expuesta en la imagen, donde mediante un formulario puede añadir uno de los tres posibles tipos de juego, y mediante una lista desplegable, eliminar un elemento del tipo de objeto expuesto, y ya existente:
+
+![admin](https://github.com/lalinlulelo/GamesInfo/blob/master/images/admin.jpg?raw=true)
+
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
