@@ -24,7 +24,7 @@ Indice
       - [Nueva Lista de Juegos](#nueva-lista-de-juegos)
       - [Añadir Juego a una Lista](#a-adir-juego-a-una-lista)
       - [Articulo](#articulo)
-      - [Pantalla de administrador](#Pantalla-de-administrador)
+      - [Pantalla de administrador](#pantalla-de-administrador)
   * [Diagrama de Entidad-Relacion](#diagrama-de-entidad-relacion)
   * [Diagrama UML de Entidades](#diagrama-uml-de-entidades)
   * [Diagrama de clases](#diagrama-de-clases)
