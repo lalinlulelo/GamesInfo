@@ -159,6 +159,7 @@ En el siguiente diagrama UML se puede visualizar los distintos atributos de las 
 
 ## Diagrama de clases ##
 Mediante ObjectAid UML Diagram,se ha adquirido un esquema inicial, que posteriormente ha sido simplificado y complementado con los templates. Su leyenda sería la siguiente:
+
 ![#8faadc](https://placehold.it/15/#8faadc/000000?text=+) Clases Java:
 * ____Controller: clase de tipo **@Controller**
 * ____Configuration: clase de tipo **@Configuration**
