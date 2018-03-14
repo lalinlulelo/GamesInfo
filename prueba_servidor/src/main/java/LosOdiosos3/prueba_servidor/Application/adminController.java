@@ -227,7 +227,7 @@ public class adminController {
 		List<Company> listc=companyRepository.findAll();
 		for(Company c:listc) {			
 			if(c.getName().equals(company)) {				
-				Game newGame=new Game(name,listc.get(0),genre,description,Integer.parseInt(date),Double.parseDouble(score),img,info);
+				Game newGame=new Game(name,c,genre,description,Integer.parseInt(date),Double.parseDouble(score),img,info);
 				gameRepository.save(newGame);
 				
 				usuario.setAttribute("alert"," ");
