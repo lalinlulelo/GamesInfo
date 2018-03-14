@@ -1,10 +1,8 @@
 LosOdiosos3\prueba_servidor\Application\Company.class
 LosOdiosos3\prueba_servidor\Application\SecurityConfiguration.class
-Socket\MailSender.class
 LosOdiosos3\prueba_servidor\Application\User.class
 LosOdiosos3\prueba_servidor\Application\webController.class
 LosOdiosos3\prueba_servidor\Application\gameController.class
-LosOdiosos3\prueba_servidor\Application\DBConstructor.class
 LosOdiosos3\prueba_servidor\Application\GameRepository.class
 LosOdiosos3\prueba_servidor\Application\MyList.class
 LosOdiosos3\prueba_servidor\Application\CSRFHandlerConfiguration.class
