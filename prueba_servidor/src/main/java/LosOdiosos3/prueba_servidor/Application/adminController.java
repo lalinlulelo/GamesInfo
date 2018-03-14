@@ -2,9 +2,11 @@ package LosOdiosos3.prueba_servidor.Application;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javassist.compiler.Parser;
 
 @Controller
 public class adminController {
@@ -118,10 +122,10 @@ public class adminController {
 		//Para activar admin
 		model.addAttribute("admin", usuario.getAttribute("admin"));
 		
-		model.addAttribute("alert"," ");
+		model.addAttribute("alert", usuario.getAttribute("alert"));
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
-		model.addAttribute("Cuerpo", " ");	
+		model.addAttribute("Cuerpo", " ");			
 		
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -129,71 +133,111 @@ public class adminController {
 	}
 	
 	@RequestMapping("/addCompany")
-	public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String country,
-	@RequestParam String description,@RequestParam int date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request) {	
-	
-		List<Company> listc=companyRepository.findAll();
+	public String addCompany (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String country,
+	@RequestParam String description,@RequestParam String date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request){	
+		if(name=="" || country=="" || description=="" || date=="" || img=="" || url=="") {
+			System.out.println("One of the gap is empty");
+			
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/'; " + "</script>");		
+        	fillModel(model,usuario,request);
+        	
+        	return "admin";
+		}		
 		
-		for(Company c:listc) {			
-			if(c.getName().equals(name)) {
-				fillModel(model,usuario,request);
-				return "admin";
-			}
-		}	
+		try {					
+			List<Company> listc=companyRepository.findAll();
+			
+			for(Company c:listc) {			
+				if(c.getName().equals(name)) {
+					System.out.println("Name repeated");
+					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/'; " + "</script>");		
+					fillModel(model,usuario,request);
+					return "admin";
+				}
+			}							
+			
+			Company newCompany=new Company(name,country,description,Integer.parseInt(date),img,url);
+			companyRepository.save(newCompany);
+			
+			usuario.setAttribute("alert"," ");		
+			fillModel(model,usuario,request);
+			return "admin";	
 		
-		Company newCompany=new Company(name,country,description,date,img,url);
-		companyRepository.save(newCompany);
-		
-		fillModel(model,usuario,request);
-		return "admin";	
+		}catch(NumberFormatException ex){
+        	System.out.println("NumberFormatException");
+        	fillModel(model,usuario,request);
+        	
+        	return "admin";
+    	}		
 	}
 	
 	@RequestMapping("/addEvent")
-	public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String place,
-	@RequestParam String description,@RequestParam double fee,@RequestParam int day,@RequestParam int month, @RequestParam int year, @RequestParam String img, HttpServletRequest request) {
-	
+	public String addEvent (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String place,
+	@RequestParam String description,@RequestParam String fee,@RequestParam String day,@RequestParam String month, @RequestParam String year, @RequestParam String img, HttpServletRequest request) {
+		if(name=="" || place=="" || description=="" || fee=="" || img=="" || day=="" || month=="" || year=="" || img=="") {
+			System.out.println("One of the gap is empty");
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/'; " + "</script>");		
+        	fillModel(model,usuario,request);
+        	
+        	return "admin";
+		}
 	
 		List<Event> liste=eventRepository.findAll();
 		
-		for(Event e:liste) {
-			
+		for(Event e:liste) {			
 			if(e.getName().equals(name)) {
+				System.out.println("Name repeated");
+				usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/'; " + "</script>");		
 				fillModel(model,usuario,request);
 				return "admin";
 			}
-		}
-				
+		}				
 		
-		Event newEvent=new Event(name,place,year,month,day,fee,description,img);
+		Event newEvent=new Event(name,place,Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),Double.parseDouble(fee),description,img);
 		eventRepository.save(newEvent);
 		
+		usuario.setAttribute("alert"," ");
 		fillModel(model,usuario,request);
 		return "admin";	
 	}
 	
 	@RequestMapping("/addGame")
 	public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String company,
-	@RequestParam String description,@RequestParam String genre,@RequestParam double score,@RequestParam int date,
+	@RequestParam String description,@RequestParam String genre,@RequestParam String score,@RequestParam String date,
 	@RequestParam String info,@RequestParam String img , HttpServletRequest request) {
-		
+		if(name=="" || company=="" || description=="" || genre=="" || score=="" || date=="" || info=="" || img=="") {
+			System.out.println("One of the gap is empty");
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/'; " + "</script>");		
+        	fillModel(model,usuario,request);
+        	
+        	return "admin";
+		}
 		
 		List<Game> listg=gameRepository.findAll();
 		
-		for(Game g:listg) {
-			
+		for(Game g:listg) {			
 			if(g.getName().equals(name)) {
+				System.out.println("Name repeated");
+				usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/'; " + "</script>");		
 				fillModel(model,usuario,request);
 				return "admin";
 			}
 		}
-		List<Company> listc=companyRepository.findByName(company);
 		
-		
-		Game newGame=new Game(name,listc.get(0),genre,description,date,score,img," ");
-		gameRepository.save(newGame);
-		
+		List<Company> listc=companyRepository.findAll();
+		for(Company c:listc) {			
+			if(c.getName().equals(name)) {				
+				Game newGame=new Game(name,listc.get(0),genre,description,Integer.parseInt(date),Double.parseDouble(score),img,info);
+				gameRepository.save(newGame);
+				
+				usuario.setAttribute("alert"," ");
+				fillModel(model,usuario,request);
+				return "admin";	
+			}
+		}
+		System.out.println("Company doesn't exist");
+		usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Company doesn't exist');" + "window.location = '/'; " + "</script>");		
 		fillModel(model,usuario,request);
-		return "admin";		
-	}
-	
+		return "admin";
+	}	
 }

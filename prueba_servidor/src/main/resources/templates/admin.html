@@ -188,6 +188,7 @@
       	<br>
 	    <div id="w">
 		    <div id="content" class="clearfix">	
+		    	{{{alert}}}
 		    	<h1 style="text-align:center; color:#406DB5; font-family: "Andale Mono", monospace;">Admin Options</h1>
 		    	<br>	        		        
 		    	<button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style=" margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalGame">Add new game</button>
@@ -231,10 +232,10 @@
 							     	<div>Description: <input name="description" type="text"></div>
 							     	<div>Date: <input name="date" type="text"></div>
 							     	<div>Url image: <input name="img" type="text"></div>
-							      	<div>Url: <input name="url" type="text"></div>
+							      	<div>Url: <input name="url" type="text"></div>							      	
 							     	<input type="submit" value="Submit">	
-							      	<input type="hidden" name="_csrf" value="{{token}}"> 
-							     </form>
+							      	<input type="hidden" name="_csrf" value="{{token}}">							      	 							      	
+							     </form>							     
 			        		</div>
 		        		</div>
 		        	</div>
