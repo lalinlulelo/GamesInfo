@@ -31,13 +31,13 @@ public class mylistController {
 	@RequestMapping("/my_lists")
 	public String my_lists (Model model, HttpSession usuario, HttpServletRequest request) {
 		model.addAttribute("added", " ");
-		//Obtengo el nombre del usuario
+		// Obtengo el nombre del usuario
 		String name = (String) usuario.getAttribute("name");
 		
-		//Accedo al repositorio de usuarios con el nombre obtenido
+		// Accedo al repositorio de usuarios con el nombre obtenido
 		List <User> users = userRepository.findByName(name);
 		
-		//Cojo las listas de juegos		
+		// Cojo las listas de juegos		
 		List<MyList> lists_games = users.get(0).getList();
 		
 		// comprueba que existan listas
@@ -92,9 +92,11 @@ public class mylistController {
 	
 	@RequestMapping("my_lists_settings/{option}")
 	public String my_lists_option (Model model, @PathVariable String option, @RequestParam String list,  HttpSession usuario, HttpServletRequest request) {
+		// cojo el usuario 
 		User user = userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 		MyList mylist = null;
 		boolean added = false;
+		// escojo la opción añadir
 		switch(option) {
 			case "add":
 				boolean repetido = false;

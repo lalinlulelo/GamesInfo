@@ -29,19 +29,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/new_user").permitAll();
         http.authorizeRequests().antMatchers("/search").permitAll();
 
-        //Private pages (all other pages)
+        // paginas referentes al usuario logeado
         http.authorizeRequests().antMatchers("/my_lists").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/profile").hasAnyRole("USER");
+        // paginas referentes al administrador
         http.authorizeRequests().antMatchers("/admin").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/addGame").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/addEvent").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/addCompany").hasAnyRole("ADMIN");
-
-        //Login form
+        
+        // login settings ...
+        // en caso de acceder a una página errónea, se le dirige a login, y acto seguido a index
         http.formLogin().loginPage("/login");
+        // atributos de cara a poder iniciar sesion
         http.formLogin().usernameParameter("name");
         http.formLogin().passwordParameter("password");
+        // en caso del correcto inicio de sesion
         http.formLogin().defaultSuccessUrl("/login/true");
+        // en caso del incorrecto inicio de sesion
         http.formLogin().failureUrl("/login/false");
 
         // Logout
@@ -50,9 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        // Database authentication provider
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider);       
     }
 }

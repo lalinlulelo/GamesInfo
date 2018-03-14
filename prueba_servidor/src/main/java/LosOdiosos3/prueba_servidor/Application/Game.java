@@ -6,21 +6,23 @@ import javax.persistence.*;
 
 @Entity
 public class Game {	
+	// identificacion de la entidad
 	@Id	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	private String name;
-	
+	// compañía a la que pertenece el juego
 	@ManyToOne 
 	private Company company;
-	
+	// listas a las que pertenece el juego
 	@ManyToMany 
 	private List<MyList> lists = new ArrayList<MyList>();
-	
+	// comentarios publicados en el juego
 	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
 	
+	// atributos principales de la entidad
+	private String name;
 	private String genre;
 	private String description;
 	private int year;
@@ -28,10 +30,11 @@ public class Game {
 	private String image;	
 	private String url;	
 	
+	// constructor de la entidad
 	public Game () {}
 	
-	public Game(String name, Company company, String genre, String description, 
-			int year, double score, String image, String url) {				
+	// constructor del objeto Juego
+	public Game(String name, Company company, String genre, String description, int year, double score, String image, String url) {				
 		this.name = name;
 		this.company = company;
 		this.genre = genre;
@@ -42,6 +45,7 @@ public class Game {
 		this.url = url;
 	}	
 	
+	// ------------------------------ GETTERS Y SETTERS ----------------------------------
 	public long getId() {
 		return id;
 	}
@@ -147,4 +151,5 @@ public class Game {
 				+ description + ", year=" + year + ", score=" + score + ", image=" + image + ", url=" + url
 				+ ", events=" + ", comments=" + comments + "]";
 	}
+	// ------------------------------ FIN GETTERS Y SETTERS ------------------------------
 }

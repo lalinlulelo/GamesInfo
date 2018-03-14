@@ -57,6 +57,7 @@ public class companyController {
 					String aux=String.format(div, img,User,d.toString(), Text);						
 					list.add(aux);				
 				}
+				// se muestra del más reciente al más antiguo
 				Collections.reverse(list);
 				model.addAttribute("comments", list);
 			}else {

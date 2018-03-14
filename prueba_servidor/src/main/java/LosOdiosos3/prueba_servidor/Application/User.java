@@ -6,10 +6,9 @@ import java.util.List;
 import javax.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-// se indica que es un componente
 @Entity
 public class User {	
-	// id de la entidad user	
+	// id de la entidad 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -18,7 +17,7 @@ public class User {
 	@ElementCollection (fetch = FetchType.EAGER)
 	private List <String> roles;
 	
-	// atributos del usuario
+	// atributos principales de la entidad
 	private String name = "...";
 	private String password = "...";
 	@Column(unique = true)
@@ -26,19 +25,22 @@ public class User {
 	private String date = "...";
 	private String icon = null;
 	
+	// listas que posee el usuario
 	@OneToMany(mappedBy="user")
 	private List<MyList> lists = new ArrayList<MyList>();
 	
+	// comentarios publicados por el usuario
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
 	
+	// articulos publicados por el usuario
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private List<Article> articles = new ArrayList<Article>();
 	
-	// constructor
+	// constructor de la entidad
 	protected User () {}
 	
-	// contructor
+	// contructor del objeto Usuario
 	public User (String name, String password, String date, String email, String... roles) {
 		this.name = name;
 		this.password = new BCryptPasswordEncoder().encode(password);
@@ -47,6 +49,7 @@ public class User {
 		this.roles = new ArrayList<String>(Arrays.asList(roles));
 	}
 	
+	// ------------------------------ GETTERS Y SETTERS ----------------------------------
 	public long getId() {
 		return id;
 	}
@@ -87,7 +90,6 @@ public class User {
 		icon = url;
 	}
 	
-	// getters
 	public String getName () {
 		return name;
 	}
@@ -108,7 +110,6 @@ public class User {
 		return icon;
 	}
 	
-	//Roles y comments
 	public List<String> getRoles() {
 		return roles;
 	}
@@ -132,8 +133,8 @@ public class User {
 		this.comments = comments;
 	}	
 	
-	// toString
 	public String toString () {
 		return "User [name: " + name + "/npassword: " + password + "/nbirthday: " + date + "/nemail" + email + "]";
 	}
+	// ------------------------------ FIN GETTERS Y SETTERS ------------------------------
 }

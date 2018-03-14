@@ -29,6 +29,7 @@ public class userController {
 	@RequestMapping("/login/{loged}")
 	public String iniciar_sesion (Model model, UsernamePasswordAuthenticationToken user, HttpSession usuario, @PathVariable String loged, HttpServletRequest request) {
 		if(loged.equals("true")) {
+			// se coge el usuario a raiz del nombre adquirido del userRepositoryAuthentication
 			User usur = userRepository.findByName(user.getName()).get(0);
 			// se registra el usuario
 			usuario.setAttribute("registered", true);
@@ -38,7 +39,7 @@ public class userController {
 			usuario.setAttribute("icon", usur.getIcon());
 			usuario.setAttribute("email", usur.getEmail());
 			
-			//Comprobar si es admin
+			// Comprobar si es admin
 			if(usur.getRoles().contains("ROLE_ADMIN")) {
 				usuario.setAttribute("admin", true);
 				model.addAttribute("admin", usuario.getAttribute("admin"));
@@ -46,7 +47,7 @@ public class userController {
 			}
 			
 			// se guarda un objeto User
-			User newUser=userRepository.findByName((String)usuario.getAttribute("name")).get(0);
+			User newUser = userRepository.findByName((String)usuario.getAttribute("name")).get(0);
 			usuario.setAttribute("Usuario", newUser);
 			
 			// se deshabilita el alert
@@ -70,11 +71,13 @@ public class userController {
 			
 			return "index";
 		}
+		// si no se ha logeado el usuario correctamente
+		
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
 		// articulos relevantes
 		model.addAttribute("news", articles ());		
-	
+		// se manda un alert avisando que un campo ha sido rellenado erróneamente
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('User or password incorrect');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
 		model.addAttribute("hello", " ");
@@ -91,9 +94,11 @@ public class userController {
 	public String login (Model model, HttpServletRequest request) {
 		// se guardan los atributos en el modelo
 		model.addAttribute("Titulo", "Latest News");
+		
 		// articulos relevantes
 		model.addAttribute("news", articles ());	
-			
+		
+		// se le notifica que no tiene acceso a dicha pagina
 		model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('insufficient permits');" + "window.location = '/'; " + "</script>");		
 		model.addAttribute("name", " ");		
 		model.addAttribute("hello", " ");
@@ -102,7 +107,7 @@ public class userController {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		
-		// se dirige a la pagina como iniciado
+		// se dirige a la pagina como no iniciado
 		return "index";
 	}
 	// ----------------------------- FIN INICIO DE SESION -----------------------------
@@ -110,7 +115,6 @@ public class userController {
 	// ----------------------------- PERFIL DE USUARIO --------------------------------
 	@RequestMapping("/profile")
 	public String init (Model model, HttpSession usuario, HttpServletRequest request) {		
-		//MailSender.mailSender((String)usuario.getAttribute("name"), (String)usuario.getAttribute("email"));
 		// se cogen del usuario los atributos
 		String name = (String) usuario.getAttribute("name");
 		String date = (String) usuario.getAttribute("date");
@@ -133,8 +137,7 @@ public class userController {
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
 		//Para activar admin
-		model.addAttribute("admin", usuario.getAttribute("admin"));
-		
+		model.addAttribute("admin", usuario.getAttribute("admin"));		
 		model.addAttribute("lists", " ");
 		
 		// atributos del token
@@ -174,17 +177,19 @@ public class userController {
 					break;	
 					
 				case "password":
+					// se comprueba que la antigua contraseña coincida con su campo insertado
 					if(!new BCryptPasswordEncoder().matches(text, usur.getPassword())) {
-						System.out.println("mal metido");
 						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
 						modelAttrChange(usur,usuario,model);	
 						return "profile";
 					}
+					// se comprueba la confirmación de la contraseña
 					if(!text_1.equals(text_2)) {
 						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
 						modelAttrChange(usur,usuario,model);	
 						return "profile";
 					}
+					// se encripta la contraseña y se guarda
 					String password = new BCryptPasswordEncoder().encode(text_1);
 					usur.setPassword(password);
 					userRepository.save(usur);

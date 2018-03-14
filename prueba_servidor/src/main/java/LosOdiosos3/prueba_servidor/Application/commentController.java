@@ -94,7 +94,8 @@ public class commentController {
 			// se retorna al articulo
 			ret="/article/"+article.getTitle();
 		}				
-			
+		
+		// se pasan los atributos del navbar al modelo
 		model.addAttribute("registered", usuario.getAttribute("registered"));
 		boolean aux = !(Boolean) usuario.getAttribute("registered");
 		model.addAttribute("unregistered", aux);
@@ -104,6 +105,7 @@ public class commentController {
 		//Para activar admin
 		model.addAttribute("admin", usuario.getAttribute("admin"));
 		
+		// atributos del index
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");

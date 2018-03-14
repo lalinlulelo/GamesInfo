@@ -16,9 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*
- 	Controlador de entidad articulo
- */
 @Controller
 public class articleController {	
 	// ----------------------------- INYECCIONES --------------------------------------	
@@ -30,19 +27,22 @@ public class articleController {
 	// ----------------------------- ARTICULOS ----------------------------------------
 	@RequestMapping("/article/{news}")
 	public String article (Model model, HttpSession usuario, @PathVariable String news, HttpServletRequest request) {
+		// se adquiere el articulo seleccionado
 		List <Article> articles = articleRepository.findByTitle(news);
+		// se adquieren los atributos del artículo
 		String head = articles.get(0).getHead();
 		String title = articles.get(0).getTitle();
 		String article = articles.get(0).getArticle();
 		String image = articles.get(0).getImage();
 		User user = articles.get(0).getUser();
 		
-		// gestion de commentarios del juego
+		// gestion de commentarios del artículo
 		List<String> list=new ArrayList<String>();
 		String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
 		
-		// si hay comentarios en el juego
+		// si hay comentarios en el artículo
 		if(articles.get(0).getComment().size()>0) {
+			// se adquiere la lista de comentarios
 			List<Comment> list_comments=articles.get(0).getComment();			
 				
 			for(int i=0;i<list_comments.size();i++) {
@@ -56,12 +56,14 @@ public class articleController {
 				String aux=String.format(div, img,User,d.toString(), Text);						
 				list.add(aux);				
 			}
+			// se muestra del más reciente al más antiguo
 			Collections.reverse(list);
 			model.addAttribute("comments", list);
 		}else {
 			model.addAttribute("comments"," ");
 		}		
 		
+		// se cargan los atributos del articulo en el modelo
 		model.addAttribute("head", head);
 		model.addAttribute("title", title);
 		model.addAttribute("article", article);
@@ -82,6 +84,7 @@ public class articleController {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		
+		// se retorna a la página de artículo
 		return "article";
 	}	
 	// -------------------------- -- FIN ARTICULOS ------------------------------------

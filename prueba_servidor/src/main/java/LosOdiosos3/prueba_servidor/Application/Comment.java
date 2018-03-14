@@ -6,32 +6,42 @@ import javax.persistence.*;
 
 @Entity
 public class Comment {
+	// identificador de la entidad
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	// usuario que publicó el comentario
 	@ManyToOne
 	private User user;	
+	// juego en el que fue publicadon el comentario
 	@OneToOne
 	private Game game;	
+	// compañía en la que fue publicada el comentario
 	@OneToOne
 	private Company company;	
+	// evento en el que fue publicado el comentario
 	@OneToOne
 	private Event event;	
+	// articulo en el que fue publicado el comentario
 	@OneToOne
 	private Article article;
 
+	// atributos principales de la entidad
 	private String text;
 	private Date date;
 
+	// constructor de la entidad
 	protected Comment() {};
-
+	
+	// constructor del objeto Comentario
 	public Comment(User user, String text, Date d) {		
 		this.user = user;
 		this.text = text;
 		this.date =d;
 	}
 	
+	//----------------------------------- GETTER Y SETTERS ---------------------------------
 	public long getId() {
 		return id;
 	}
@@ -102,4 +112,5 @@ public class Comment {
 		return "Comment [id=" + id + ", user=" + user + ", game=" + game + ", company=" + company + ", event=" + event
 				+ ", article=" + article + ", text=" + text + ", date=" + date + "]";
 	}
+	//----------------------------------- FIN GETTER Y SETTERS -----------------------------
 }

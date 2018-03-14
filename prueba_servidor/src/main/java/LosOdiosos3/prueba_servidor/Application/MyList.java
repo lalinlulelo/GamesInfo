@@ -6,30 +6,36 @@ import javax.persistence.*;
 
 @Entity
 public class MyList {
+	// identificacion de la entidd
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	// una lista puede tener varios juegos
+	// lista de juegos 
 	@ManyToMany(mappedBy="lists")
 	private List<Game> games = new ArrayList<Game>();
 	
-	// un usuario puede tener varias listas
+	// usuario al que pertenece la lista
 	@ManyToOne
 	private User user;
 	
+	// atributo principal de la entidad
 	private String name;
 	
+	// constructor de la entidad
 	public MyList () {}
 	
+	// constructor del objeto Entidad
 	public MyList (String name) {
 		this.name = name;
 	}
 	
+	// metodo que vacía la lista
 	public void cleanList () {
 		this.games.clear();
 	}
 	
+	// ------------------------------ GETTERS Y SETTERS ----------------------------------
 	public void setName (String name) {
 		this.name = name;
 	}
@@ -49,4 +55,5 @@ public class MyList {
 	public void addUser(User user) {
 		this.user = user;
 	}
+	// ------------------------------ FIN GETTERS Y SETTERS ------------------------------
 }

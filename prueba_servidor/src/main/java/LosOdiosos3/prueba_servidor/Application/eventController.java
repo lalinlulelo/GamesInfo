@@ -60,6 +60,7 @@ public class eventController {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
 		
+		// se retorna a la pagina del calendario de eventos
 		return "event_calendar";
 	}
 	// ----------------------------- FIN CALENDARIO DE EVENTOS  -----------------------
@@ -75,8 +76,7 @@ public class eventController {
 		
 		// si hay comentarios en el juego
 		if(events.get(0).getComment().size()>0) {
-			List<Comment> list_comments=events.get(0).getComment();			
-				
+			List<Comment> list_comments=events.get(0).getComment();					
 			for(int i=0;i<list_comments.size();i++) {
 				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 				String User=list_comments.get(i).getUser().getName();

@@ -39,11 +39,11 @@ public class gameController {
 	// ----------------------------- LISTA DE JUEGOS ----------------------------------	
 	@RequestMapping("/game_list/{modo}")
 	public String game_list (Model model, HttpSession usuario, @PathVariable String modo, HttpServletRequest request) {
+		// lista de juegos
 		List<String> list=new ArrayList<String>();		
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
-		//List<Game> list_games_2 = gameRepository.findAll();
-		//List<Game> list_games = gameRepository.findByNameContainingOrderByScoreAsc("");
 		
+		// modo de ordenación de la lista de juegos
 		List<Game> list_games = null;
 		switch(modo) {
 			case "n":
@@ -248,9 +248,10 @@ public class gameController {
 			model.addAttribute("name", usuario.getAttribute("name"));
 			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
-			//Para activar admin
+			// Para activar admin
 			model.addAttribute("admin", usuario.getAttribute("admin"));
 			
+			// atributos referentes a index
 			model.addAttribute("alert"," ");
 			model.addAttribute("hello", " ");
 			model.addAttribute("Titulo", " ");

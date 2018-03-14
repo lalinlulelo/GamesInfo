@@ -7,10 +7,12 @@ import javax.persistence.*;
 
 @Entity
 public class Event {
+	// identificador de la entidad
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	// atributos principales de la entidad
 	private String name;	
 	private String place;	
 	private int year;
@@ -18,17 +20,17 @@ public class Event {
 	private int day;
 	private double fee;
 	private String description;
-
-
 	private String image;
 	
+	// comentarios publicados en el evento
 	@OneToMany(mappedBy="event", cascade=CascadeType.REMOVE)
 	private List<Comment> comments=new ArrayList<Comment>();
 	
+	// construcor de la entidad
 	protected Event() {
 	}
-
-
+	
+	// constructor del objeto Evento
 	public Event(String name, String place, int year, int month, int day, double fee, String description, String image) {
 		this.name = name;
 		this.place = place;
@@ -40,6 +42,7 @@ public class Event {
 		this.image = image;	
 	}
 	
+	// ------------------------------ GETTERS Y SETTERS ----------------------------------
 	public long getId() {
 		return id;
 	}
@@ -125,4 +128,5 @@ public class Event {
 				", date: " + day + ", " + month + ", " + year + ", fee: " + fee + ", description: " + description + 
 				", image: " + image + ", games: ]";
 	}
+	// ------------------------------ FIN GETTERS Y SETTERS ------------------------------
 }

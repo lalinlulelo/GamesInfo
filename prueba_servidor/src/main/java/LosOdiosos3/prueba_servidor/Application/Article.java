@@ -7,23 +7,29 @@ import javax.persistence.*;
 
 @Entity
 public class Article {
+	// identificador de la entidad
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	// usuario que escribió el artículo
 	@ManyToOne
 	private User user;
 	
+	// comentarios referentes al artículo
 	@OneToMany(mappedBy="article", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
-
+	
+	// atributos principales de la entidad
 	private String head;
 	private String title;
 	private String article;
 	private String image;
 	
+	// constructor de la entidad
 	public Article () {}
 	
+	// constructor del objeto Artículo
 	public Article (User user, String head, String title, String article, String image) {
 		this.user = user;
 		this.head = head;
@@ -31,7 +37,8 @@ public class Article {
 		this.article = article;
 		this.image = image;
 	}
-
+	
+	// ------------------------------ GETTERS Y SETTERS ----------------------------------
 	public User getUser() {
 		return user;
 	}
@@ -86,5 +93,6 @@ public class Article {
 		return "Article [id=" + id + ", user=" + user + ", comments=" + comments + ", head=" + head + ", title=" + title
 				+ ", article=" + article + ", image=" + image + "]";
 	}
+	// ------------------------------ FIN GETTERS Y SETTERS -------------------------------
 }
 

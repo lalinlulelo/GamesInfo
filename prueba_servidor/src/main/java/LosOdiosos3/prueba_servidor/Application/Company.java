@@ -8,29 +8,31 @@ import javax.persistence.*;
 
 @Entity
 public class Company {
+	// identificador de la entidad
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	// atributos principales de la entidad
     private String name;
     private String country;
     private String description;
     private int year;
+    private String image;    
+    private String url;
     
+    // lista de juegos que pertenecen a la compañía
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
     private List<Game> games = new ArrayList<Game>();
-    
+    // lista de comentarios que pertenecen a la compañía
     @OneToMany(mappedBy="company", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
     
-	private String image;    
-    private String url;
-   
-
+    // constructor de la entidad
     protected Company (){};
 
-    public Company(String name, String country, String description, 
-    				int year, String image, String url) {
+    // constructor del objeto Compañía
+    public Company(String name, String country, String description, int year, String image, String url) {
     	this.name = name;
 		this.country = country;
 		this.description = description;
@@ -38,7 +40,8 @@ public class Company {
 		this.image = image;
 		this.url = url;
 	}
-    
+
+	// ------------------------------ GETTERS Y SETTERS ----------------------------------
     public long getId() {
 		return id;
 	}
@@ -119,4 +122,5 @@ public class Company {
 		// TODO Auto-generated method stub
 		return this.comments;
 	}
+	// ------------------------------ FIN GETTERS Y SETTERS ------------------------------
 }
