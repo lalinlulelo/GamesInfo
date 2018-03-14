@@ -101,6 +101,9 @@ public class commentController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");

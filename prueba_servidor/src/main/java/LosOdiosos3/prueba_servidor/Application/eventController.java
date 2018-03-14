@@ -53,6 +53,9 @@ public class eventController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
@@ -105,6 +108,9 @@ public class eventController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());

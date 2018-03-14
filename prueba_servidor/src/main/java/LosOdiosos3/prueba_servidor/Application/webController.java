@@ -55,6 +55,9 @@ public class webController {
 		}		
 		model.addAttribute("unregistered", aux);
 		
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		// deshabilitacion del comando alert que saluda al usuario		
 		usuario.setAttribute("alert", "  ");
 		model.addAttribute("alert", usuario.getAttribute("alert"));
@@ -158,7 +161,10 @@ public class webController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
+		
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+				
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");

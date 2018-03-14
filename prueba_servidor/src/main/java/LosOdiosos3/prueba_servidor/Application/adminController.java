@@ -114,7 +114,10 @@ public class adminController {
 		model.addAttribute("unregistered", aux);
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
+		
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
@@ -127,19 +130,16 @@ public class adminController {
 	
 	@RequestMapping("/addCompany")
 	public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String country,
-	@RequestParam String description,@RequestParam int date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request) {
-	
+	@RequestParam String description,@RequestParam int date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request) {	
 	
 		List<Company> listc=companyRepository.findAll();
 		
-		for(Company c:listc) {
-			
+		for(Company c:listc) {			
 			if(c.getName().equals(name)) {
 				fillModel(model,usuario,request);
 				return "admin";
 			}
-		}
-				
+		}	
 		
 		Company newCompany=new Company(name,country,description,date,img,url);
 		companyRepository.save(newCompany);

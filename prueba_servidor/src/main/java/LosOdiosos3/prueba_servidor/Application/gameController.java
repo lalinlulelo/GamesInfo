@@ -93,6 +93,9 @@ public class gameController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
@@ -187,6 +190,9 @@ public class gameController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 		
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token", token.getToken());
@@ -242,6 +248,9 @@ public class gameController {
 			model.addAttribute("name", usuario.getAttribute("name"));
 			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+			//Para activar admin
+			model.addAttribute("admin", usuario.getAttribute("admin"));
+			
 			model.addAttribute("alert"," ");
 			model.addAttribute("hello", " ");
 			model.addAttribute("Titulo", " ");
@@ -267,8 +276,7 @@ public class gameController {
 			
 			// atributos del token
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-			model.addAttribute("token", token.getToken());
-			
+			model.addAttribute("token", token.getToken());			
 			
 			// se retorna al juego
 			ret= "/game/"+game.getName();			
@@ -281,11 +289,13 @@ public class gameController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));
+		
 		model.addAttribute("alert"," ");
 		model.addAttribute("hello", " ");
 		model.addAttribute("Titulo", " ");
-		model.addAttribute("Cuerpo", " ");	
-		
+		model.addAttribute("Cuerpo", " ");			
 
 		// articulos relevantes
 		List<Article> articles = articleRepository.findAll();
