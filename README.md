@@ -170,6 +170,7 @@ Mediante ObjectAid UML Diagram,se ha adquirido un esquema inicial, que posterior
 * ____Controller: clase de tipo **@Controller**
 * ____Configuration: clase de tipo **@Configuration**
 * ____Repository: clase de tipo **@Repository**
+* UserRepositoryAuthenticationProvider: clase de tipo **@Component**
 * Event, Company, Article, Comment, User, MyList & Comment: clase de tipo **@Entity**
 
 ![#f4b183](https://github.com/lalinlulelo/GamesInfo/blob/master/images/claseHTML.png?raw=true) Clases HTML
