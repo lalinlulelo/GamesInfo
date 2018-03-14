@@ -138,7 +138,7 @@ public class adminController {
 		if(name=="" || country=="" || description=="" || date=="" || img=="" || url=="") {
 			System.out.println("One of the gap is empty");
 			
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/'; " + "</script>");		
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/admin'; " + "</script>");		
         	fillModel(model,usuario,request);
         	
         	return "admin";
@@ -150,7 +150,7 @@ public class adminController {
 			for(Company c:listc) {			
 				if(c.getName().equals(name)) {
 					System.out.println("Name repeated");
-					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/'; " + "</script>");		
+					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/admin'; " + "</script>");		
 					fillModel(model,usuario,request);
 					return "admin";
 				}
@@ -175,8 +175,7 @@ public class adminController {
 	public String addEvent (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String place,
 	@RequestParam String description,@RequestParam String fee,@RequestParam String day,@RequestParam String month, @RequestParam String year, @RequestParam String img, HttpServletRequest request) {
 		if(name=="" || place=="" || description=="" || fee=="" || img=="" || day=="" || month=="" || year=="" || img=="") {
-			System.out.println("One of the gap is empty");
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/'; " + "</script>");		
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/admin'; " + "</script>");		
         	fillModel(model,usuario,request);
         	
         	return "admin";
@@ -186,8 +185,7 @@ public class adminController {
 		
 		for(Event e:liste) {			
 			if(e.getName().equals(name)) {
-				System.out.println("Name repeated");
-				usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/'; " + "</script>");		
+				usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/admin'; " + "</script>");		
 				fillModel(model,usuario,request);
 				return "admin";
 			}
@@ -207,7 +205,7 @@ public class adminController {
 	@RequestParam String info,@RequestParam String img , HttpServletRequest request) {
 		if(name=="" || company=="" || description=="" || genre=="" || score=="" || date=="" || info=="" || img=="") {
 			System.out.println("One of the gap is empty");
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/'; " + "</script>");		
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/admin'; " + "</script>");		
         	fillModel(model,usuario,request);
         	
         	return "admin";
@@ -218,7 +216,7 @@ public class adminController {
 		for(Game g:listg) {			
 			if(g.getName().equals(name)) {
 				System.out.println("Name repeated");
-				usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/'; " + "</script>");		
+				usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/admin'; " + "</script>");		
 				fillModel(model,usuario,request);
 				return "admin";
 			}
@@ -236,7 +234,7 @@ public class adminController {
 			}
 		}
 		System.out.println("Company doesn't exist");
-		usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Company doesn't exist');" + "window.location = '/'; " + "</script>");		
+		usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Company doesn't exist');" + "window.location = '/admin'; " + "</script>");		
 		fillModel(model,usuario,request);
 		return "admin";
 	}	
