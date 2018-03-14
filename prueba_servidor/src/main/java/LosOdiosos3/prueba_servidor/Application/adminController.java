@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class adminController {
 	// ----------------------------- INYECCIONES --------------------------------------	
-	// repositorio de la tabla juegos
+	// repositorio de la tabla juegos 
 	@Autowired
 	private GameRepository gameRepository;
 	
