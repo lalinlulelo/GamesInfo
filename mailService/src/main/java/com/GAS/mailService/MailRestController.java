@@ -39,6 +39,7 @@ public class MailRestController {
 			props.setProperty("mail.smtp.port", "465");
 			props.setProperty("mail.smtp.socketFactory.port", "465");
 			props.setProperty("mail.smtps.auth", "true");
+			//props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtps.quitwait", "false");
 
 			Session session = Session.getInstance(props, null);
