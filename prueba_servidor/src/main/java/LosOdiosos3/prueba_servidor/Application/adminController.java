@@ -226,7 +226,7 @@ public class adminController {
 		
 		List<Company> listc=companyRepository.findAll();
 		for(Company c:listc) {			
-			if(c.getName().equals(name)) {				
+			if(c.getName().equals(listc.get(0).getName())) {				
 				Game newGame=new Game(name,listc.get(0),genre,description,Integer.parseInt(date),Double.parseDouble(score),img,info);
 				gameRepository.save(newGame);
 				
