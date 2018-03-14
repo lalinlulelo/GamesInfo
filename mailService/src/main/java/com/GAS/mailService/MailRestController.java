@@ -69,6 +69,7 @@ public class MailRestController {
 			t.sendMessage(msg, msg.getAllRecipients());
 			// se cierra conexión
 			t.close();
+			System.out.println("correo enviado con exito");
 		} catch (MessagingException ex) {
 			System.out.println(ex);
 		}
