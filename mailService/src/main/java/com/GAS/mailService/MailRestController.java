@@ -18,19 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sun.mail.smtp.SMTPTransport;
 
-
+// controlador de api rest
 @RestController
 public class MailRestController {
-	
+	// adquiere como parametros el usuario, el correo y el servidor de correo
 	@GetMapping(value = "/user/{user}/mail/{nameM}/{server}/{ext}")
 	public ResponseEntity<String> getMail(@PathVariable String user, @PathVariable String nameM, @PathVariable String server, @PathVariable String ext) {
-
+		// notificamos por consola el email recibido
 		System.out.println("Email received ="+ user + ": " + nameM + "@" + server + "." + ext);
 		try {
 
 			Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 			final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-			System.out.println("paso 1");
 
 			// Get a Properties object
 			Properties props = System.getProperties();
@@ -40,43 +39,39 @@ public class MailRestController {
 			props.setProperty("mail.smtp.port", "465");
 			props.setProperty("mail.smtp.socketFactory.port", "465");
 			props.setProperty("mail.smtps.auth", "true");
-			
-			System.out.println("paso 2");
-
 			props.put("mail.smtps.quitwait", "false");
 
 			Session session = Session.getInstance(props, null);
-
+			
+			// String que portará el mensaje a enviar
 			final MimeMessage msg = new MimeMessage(session);
-			System.out.println("paso 4");
 
 			// -- Set the FROM and TO fields --
+			// emisor
 			msg.setFrom(new InternetAddress("infogamesurjc@gmail.com"));
+			// receptor
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(nameM + "@" + server + "." + ext, false));
-
+			// mensaje del correo
 			msg.setSubject("Welcome to GamesInfo");
 			msg.setText(
 					"Hi " + user
 							+ "\\n\\nThankyou for colaborate on our web page. We hope you'll enjoy it as much as we enjoyed developing it. Please, we need you to confirm your account, "
 							+ "by clicking on the link below\\n\\nOur best regards, Team GamesInfo",
 					"utf-8");
+			// fecha de envío
 			msg.setSentDate(new Date());
-			System.out.println("paso 5");
-
+			// se inicia la conexión
 			SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
-
+			// se inicia sesión en el correo
 			t.connect("smtp.gmail.com", "infogamesurjc@gmail.com", "movimientoNaranja");
-			System.out.println("paso 6");
+			// se añade el mensaje a enviar
 			t.sendMessage(msg, msg.getAllRecipients());
-			System.out.println("paso 7");
+			// se cierra conexión
 			t.close();
-
 		} catch (MessagingException ex) {
 			System.out.println(ex);
 		}
-		
-		System.out.println("paso 8");
+		// se notifica el correcto envío
 		return new ResponseEntity<>("Mail send to "+ user + ": " + nameM + "@" + server + "." + ext, HttpStatus.OK);
-
 	}
 }
