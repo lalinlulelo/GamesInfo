@@ -140,7 +140,7 @@ public class adminController {
 	@RequestParam String description,@RequestParam String date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request){	
 		// se comprueba que ningún campo se quede vacío, sino se notifica con un alert
 		if(name=="" || country=="" || description=="" || date=="" || img=="" || url=="") {
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/admin'; " + "</script>");		
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');"  + "</script>");		
         	fillModel(model,usuario,request);
         	return "admin";
 		}		
@@ -152,7 +152,7 @@ public class adminController {
 			// se comprueba que el objeto introducido no se exista ya, sino se notifica con un alert
 			for(Company c:listc) {			
 				if(c.getName().equals(name)) {
-					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/admin'; " + "</script>");		
+					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');"  + "</script>");		
 					fillModel(model,usuario,request);
 					return "admin";
 				}
@@ -182,7 +182,7 @@ public class adminController {
 	@RequestParam String description,@RequestParam String fee,@RequestParam String day,@RequestParam String month, @RequestParam String year, @RequestParam String img, HttpServletRequest request) {
 		// se comprueba que ningún campo se quede vacío, sino se notifica con un alert
 		if(name=="" || place=="" || description=="" || fee=="" || img=="" || day=="" || month=="" || year=="" || img=="") {
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/admin'; " + "</script>");		
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "</script>");		
         	fillModel(model,usuario,request);        	
         	return "admin";
 		}
@@ -193,7 +193,7 @@ public class adminController {
 			// se comprueba que el objeto introducido no se exista ya, sino se notifica con un alert
 			for(Event e:liste) {			
 				if(e.getName().equals(name)) {
-					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/admin'; " + "</script>");		
+					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "</script>");		
 					fillModel(model,usuario,request);
 					return "admin";
 				}
@@ -223,7 +223,7 @@ public class adminController {
 	@RequestParam String info,@RequestParam String img , HttpServletRequest request) {
 		// se comprueba que ningún campo se quede vacío, sino se notifica con un alert
 		if(name=="" || company=="" || description=="" || genre=="" || score=="" || date=="" || info=="" || img=="") {
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "window.location = '/admin'; " + "</script>");		
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "</script>");		
         	fillModel(model,usuario,request);        	
         	return "admin";
 		}
@@ -234,7 +234,7 @@ public class adminController {
 			// se comprueba que el objeto introducido no se exista ya, sino se notifica con un alert
 			for(Game g:listg) {			
 				if(g.getName().equals(name)) {
-					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "window.location = '/admin'; " + "</script>");		
+					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "</script>");		
 					fillModel(model,usuario,request);
 					return "admin";
 				}
@@ -253,7 +253,8 @@ public class adminController {
 			}
 			
 			// se rellena el navbar y se desactiva la alerta
-			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Company doesn't exist');" + "window.location = '/admin'; " + "</script>");		
+			System.out.println("Compania no existente");
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Company doesn't exist');" + "</script>");		
 			fillModel(model,usuario,request);
 			
 			// se retorna a admin
