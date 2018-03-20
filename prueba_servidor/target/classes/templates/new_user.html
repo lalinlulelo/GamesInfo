@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html>
-<head><style type="text/css">
-html{
-  background-color: #406DB5;
-}
-h1{
-  text-align: center;
-  font-family: "Andale Mono", monospace;
-  color:  #F9FF35;
-  font-size: 40px;
-  font-style: bold;
-}
-p{
-  font-family: "Andale Mono", monospace;
-  color:  #F9FF35;
-  font-size: 20px;
-}
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input[type=submit] {
-    width: 100%;
-    background-color: #FFF161;
-    color: #618CFF;
-    font-size: 20px;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #FFEE3A;
-}
-
-div {
-    border-radius: 5px;
-    background-color: hsl(255, 255, 255, 0.6);
-    padding: 20px;
-}
-</style>
-</head>
-<body>
-<!-- alerta que notifica si el nombre existe -->
-{{{alert}}}
-  <h1> Registration </h1>
-<!-- Formulario que registra un nuevo usuario -->
-  <div>
-	<form action="/register" method="post">
-      <p>User Name:</p>
-		<input type="text" name="name">
-		<br>
-      <p>Password:</p>
-		<input type="text" name="password">
-		<br>
-      <p>Birthday:</p>
-		<input type="text" name="date">
-		<br>
-	<p>Email:</p>
-		<input type="text" name="email">
+	<head><style type="text/css">
+		html{
+		  background-color: #406DB5;
+		}
+		h1{
+		  text-align: center;
+		  font-family: "Andale Mono", monospace;
+		  color:  #F9FF35;
+		  font-size: 40px;
+		  font-style: bold;
+		}
+		p{
+		  font-family: "Andale Mono", monospace;
+		  color:  #F9FF35;
+		  font-size: 20px;
+		}
+		input[type=text], select {
+		    width: 100%;
+		    padding: 12px 20px;
+		    margin: 8px 0;
+		    display: inline-block;
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+		    box-sizing: border-box;
+		}
 		
-		<br><br><br><br>
-		<input type="submit" value="Register">
-		<input type="hidden" name="_csrf" value="{{token}}"> 
-	</form>
-  </div>
-</body>
+		input[type=submit] {
+		    width: 100%;
+		    background-color: #FFF161;
+		    color: #618CFF;
+		    font-size: 20px;
+		    padding: 14px 20px;
+		    margin: 8px 0;
+		    border: none;
+		    border-radius: 4px;
+		    cursor: pointer;
+		}
+		
+		input[type=submit]:hover {
+		    background-color: #FFEE3A;
+		}
+		
+		div {
+		    border-radius: 5px;
+		    background-color: hsl(255, 255, 255, 0.6);
+		    padding: 20px;
+		}
+		</style>
+	</head>
+	<body>
+		<!-- alerta que notifica si el nombre existe -->
+		{{{alert}}}
+		  <h1> Registration </h1>
+		<!-- Formulario que registra un nuevo usuario -->
+		  <div>
+			<form action="/register" method="post">
+		      <p>User Name:</p>
+				<input type="text" name="name">
+				<br>
+		      <p>Password:</p>
+				<input type="text" name="password">
+				<br>
+		      <p>Birthday:</p>
+				<input type="text" name="date">
+				<br>
+			<p>Email:</p>
+				<input type="text" name="email">
+				
+				<br><br><br><br>
+				<input type="submit" value="Register">
+				<input type="hidden" name="_csrf" value="{{token}}"> 
+			</form>
+		  </div>
+	</body>
 </html>
