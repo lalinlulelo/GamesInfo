@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
+
 @Controller
 public class userRegisterController {
 	// ----------------------------- INYECCIONES --------------------------------------	
@@ -43,7 +44,7 @@ public class userRegisterController {
 		// se comprueba la existencia del nombre
 		usur = userRepository.findByName(user.getName());
 		if(usur.size() > 0) {
-			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('name alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
+			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Username created previously');" + "window.location = 'new_user.html'; " + "</script>");		
 			
 			// atributos del token
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -53,7 +54,7 @@ public class userRegisterController {
 		}
 		usur = userRepository.findByEmail(user.getEmail());
 		if(usur.size() > 0) {
-			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('email alredy getted');" + "window.location = 'new_user.html'; " + "</script>");		
+			model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('email alredy used');" + "window.location = 'new_user.html'; " + "</script>");		
 			
 			// atributos del token
 			CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -73,48 +74,20 @@ public class userRegisterController {
 		nuevo.setIcon(icons.get((int)Math.random()*6));
 		
 		// ------------------------------------- MAIL SERVICE ------------------------------------------
-		//Envio mensaje rest al MailGamesInfo
-		// numero de caracteres hasta la arroba
-		int arroba = user.getEmail().indexOf("@");
-		// se coge la primera parte de la dirección
-		String uMail = user.getEmail().substring(0, arroba);
-		// se coge la extensión del correo
-		String ext = user.getEmail().substring(arroba+1, user.getEmail().length());
-		
-		// numero de caracteres que ocupa la empresa de correo
-		int punto = ext.indexOf(".");
-		// se coge el servidor de correo
-		String server = ext.substring(0, punto);
-		// se coge la terminacion (.es, .com, ...)
-		ext = ext.substring(punto + 1, ext.length());
-		
-		// se manda al puerto del mail service la información
-		String urlFinal = "http://localhost:8080/" + "/user/" + user.getName() + "/mail/" + uMail + "/"+ server +"/" + ext;
-		System.out.println("Usuario con url: " + urlFinal);
+		// Se manda al puerto del mail service la información
+		String urlFinal = "http://localhost:8080/mail";		
+		System.out.println("Enviado a " + nuevo.getName() + " con mail: " + nuevo.getEmail());
+		Mail mail = new Mail(nuevo.getName(), nuevo.getEmail());
 
 		//Aqui es donde exactamente se comunica con el restcontroller
 		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.getForObject(urlFinal, String.class);
+		restTemplate.postForEntity(urlFinal, mail, String.class);
 		System.out.println("Enviado al MailService.");
 		//Fin de comunicacion
 		// ------------------------------------- FIN MAIL SERVICE --------------------------------------
 		
 		// se guarda al nuevo usuario en el repositorio
-		userRepository.save(nuevo);
-		
-		// se cargan los atributos de index
-		model.addAttribute("Titulo", "Latest News");
-		model.addAttribute("alert", " ");
-		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
-
-		// se muestra el link de iniciar/registrar usuario si es false
-		model.addAttribute("registered", usuario.getAttribute("registered"));
-		boolean aux = !(Boolean) usuario.getAttribute("registered");
-		if(aux == false) {
-			model.addAttribute("name", usuario.getAttribute("name"));			
-		}else {
-			model.addAttribute("name", " ");
-		}
+		userRepository.save(nuevo);	
 				
 		// atributos del token
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
