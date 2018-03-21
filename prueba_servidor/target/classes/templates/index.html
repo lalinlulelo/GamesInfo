@@ -10,13 +10,13 @@
 			}
 			.body{
 			  	background: #406DB5;
-			  	width: 100%;
-			  	font-family: "Andale Mono", monospace;
-			  	color:#406DB5;
 			}
 			.TitleLit{
-			  	font-family: "Andale Mono", monospace;
-			  	color:  #F9FF35;
+			  	font-size: 20px;
+			  	text-align: center;
+			  	font-family: "Andale Mono",monospace;
+			  	text-decoration: underline;
+			  	color:  rgb(33, 73, 138);
 			}
 			.Article{
 			  	font-family: "Andale Mono", monospace;
@@ -140,10 +140,8 @@
 						  	</ul>
 						</li>            
 		            </div>			            
-		            {{/registered}}
-		            
-		            {{{hello}}} 
-		             
+		            {{/registered}}		            
+		            		             
 		            {{#unregistered}}
 		            <div  class="col-xs-1 col-sm-1 col-md-1"> </div> 
 		            <div  class="col-xs-12 col-sm-12 col-md-5">   
@@ -174,6 +172,9 @@
 		    </div>
 	    	<div id="triangulo"></div>		    	
 	    </div>
+	    
+	    {{{hello}}} 
+		{{{alert}}}
 				
   		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		    <!-- Indicators -->
@@ -182,7 +183,7 @@
 		      	<li data-target="#myCarousel" data-slide-to="1"></li>
 		      	<li data-target="#myCarousel" data-slide-to="2"></li>
 		    </ol>
-	      	{{{alert}}}
+	      	
 	    	<!-- Wrapper for slides -->
 	   	 	<div class="carousel-inner">
 	      		<div class="item active">
@@ -207,17 +208,13 @@
 	      		<span class="glyphicon glyphicon-chevron-right"></span>
 	      		<span class="sr-only">Next</span>
 	    	</a>
-  		</div>
-				
-		<div>
-			<h1 class="TitleLit" style="text-align: center;">{{Titulo}}</h1>
-		</div>
+  		</div>				
 
 		<!-- Articles -->
 		<div class="media-container-row">
+			<h1 class="TitleLit" style="color:#F9FF35;" style="font-size:200%;">{{Titulo}}</h1>
 			{{{news}}}			         
-        </div>
-             
+        </div>             
 		
 		<br><br>
 		<div class="footer">
