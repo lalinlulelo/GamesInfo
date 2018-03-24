@@ -327,7 +327,11 @@ En él se añaden las siguientes líneas:
        `...`
        
 El archivo debería quedar como se observa en la imagen a continuación:
- 
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
+</p>
+
 Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
 
 * `sudo service haproxy restart`
@@ -338,8 +342,9 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 * `sudo service haproxy start`
 
 ### 6.- Inicio de HAProxy en Navegador Web ###
-Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar `localhost/haproxy?stats` para poder observar los datos del balanceador:
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `192.168.42.133/haproxy?stats` para poder observar los datos del balanceador:
 
+ ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
        
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
