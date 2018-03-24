@@ -305,15 +305,15 @@ En él se añaden las siguientes líneas:
   * `option http-server-close`
   
 * Y se crea una nueva sección añadiendo:
-  * `listen webfarm 0.0.0.0:80`
-       `mode http`
-       `stats enable`
-       `stats uri /haproxy?stats`
-       `balance roundrobin`
-       `option httpclose`
-       `option forwardfor`
-       `server nombre1 direccionIP:Puerto`
-       `server nombre2 direccionIP:Puerto`
+  * `listen webfarm 0.0.0.0:80`\n
+       `mode http`\n
+       `stats enable`\n
+       `stats uri /haproxy?stats`\n
+       `balance roundrobin`\n
+       `option httpclose`\n
+       `option forwardfor`\n
+       `server nombre1 direccionIP:Puerto`\n
+       `server nombre2 direccionIP:Puerto`\n
        `...`
        
 El archivo debería quedar como se observa en la imagen a continuación:
