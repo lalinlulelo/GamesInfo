@@ -280,6 +280,7 @@ El siguiente paso es actualizar el sistema:
 
 * `apt-get update`
 * `apt-get dist-upgrade`
+
 Tras la correcta actualización, se instala HAProxy:
 
 * `apt-get install haproxy`
@@ -295,22 +296,26 @@ Y se procede a editarlo:
 Obteniendo la siguiente vista:
 
 En él se añaden las siguientes líneas:
+
 * Debajo de daemon:
   * `maxconn 3072`
+  
 * En la sección defaults:
   * `option forwardfor`
   * `option http-server-close`
+  
 * Y se crea una nueva sección añadiendo:
-  * `listen webfarm 0.0.0.0:80
-       mode http
-       stats enable
-       stats uri /haproxy?stats
-       balance roundrobin
-       option httpclose
-       option forwardfor
-       server nombre1 direccionIP:Puerto
-       server nombre2 direccionIP:Puerto
-       ...`
+  * `listen webfarm 0.0.0.0:80`
+       `mode http`
+       `stats enable`
+       `stats uri /haproxy?stats`
+       `balance roundrobin`
+       `option httpclose`
+       `option forwardfor`
+       `server nombre1 direccionIP:Puerto`
+       `server nombre2 direccionIP:Puerto`
+       `...`
+       
 El archivo debería quedar como se observa en la imagen a continuación:
  
 Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
