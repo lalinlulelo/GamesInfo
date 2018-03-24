@@ -273,16 +273,25 @@ En caso de que el nombre usuario o el correo ya existan previamente, no permitir
 
 ## Instrucciones para la instalacion de HAProxy ##
 Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
+
 * `add-apt-repository ppa:vbernat/haproxy-1.5`
+
 El siguiente paso es actualizar el sistema:
+
 * `apt-get update`
 * `apt-get dist-upgrade`
 Tras la correcta actualización, se instala HAProxy:
+
 * `apt-get install haproxy`
+
 Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
+
 * `chmod +rwx haproxy.cfg`
+
 Y se procede a editarlo:
+
 * `sudo nano haproxy.cfg`
+
 Obteniendo la siguiente vista:
 
 En él se añaden las siguientes líneas:
