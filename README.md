@@ -269,6 +269,50 @@ En caso de que el nombre usuario o el correo ya existan previamente, no permitir
 
 ![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
+# Fase 4 #
+
+## Instrucciones para la instalacion de HAProxy ##
+Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
+* `add-apt-repository ppa:vbernat/haproxy-1.5`
+El siguiente paso es actualizar el sistema:
+* `apt-get update`
+* `apt-get dist-upgrade`
+Tras la correcta actualización, se instala HAProxy:
+* `apt-get install haproxy`
+Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
+* `chmod +rwx haproxy.cfg`
+Y se procede a editarlo:
+* `sudo nano haproxy.cfg`
+Obteniendo la siguiente vista:
+
+En él se añaden las siguientes líneas:
+* Debajo de daemon:
+  * `maxconn 3072`
+* En la sección defaults:
+  * `option forwardfor`
+  * `option http-server-close`
+* Y se crea una nueva sección añadiendo:
+  * `listen webfarm 0.0.0.0:80
+       mode http
+       stats enable
+       stats uri /haproxy?stats
+       balance roundrobin
+       option httpclose
+       option forwardfor
+       server nombre1 direccionIP:Puerto
+       server nombre2 direccionIP:Puerto
+       ...`
+El archivo debería quedar como se observa en la imagen a continuación:
+ 
+Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+* `sudo service haproxy restart`
+Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+* `sudo service haproxy start`
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar `localhost/haproxy?stats` para poder observar los datos del balanceador:
+
+ 
+ 
+       
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
