@@ -305,27 +305,29 @@ En él se añaden las siguientes líneas:
   * `option http-server-close`
   
 * Y se crea una nueva sección añadiendo:
-  * `listen webfarm 0.0.0.0:80`\n
-       `mode http`\n
-       `stats enable`\n
-       `stats uri /haproxy?stats`\n
-       `balance roundrobin`\n
-       `option httpclose`\n
-       `option forwardfor`\n
-       `server nombre1 direccionIP:Puerto`\n
-       `server nombre2 direccionIP:Puerto`\n
+  * `listen webfarm 0.0.0.0:80`<br>
+       `mode http`<br>
+       `stats enable`<br>
+       `stats uri /haproxy?stats`<br>
+       `balance roundrobin`<br>
+       `option httpclose`<br>
+       `option forwardfor`<br>
+       `server nombre1 direccionIP:Puerto`<br>
+       `server nombre2 direccionIP:Puerto`<br>
        `...`
        
 El archivo debería quedar como se observa en la imagen a continuación:
  
 Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+
 * `sudo service haproxy restart`
+
 Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+
 * `sudo service haproxy start`
+
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar `localhost/haproxy?stats` para poder observar los datos del balanceador:
 
- 
- 
        
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
