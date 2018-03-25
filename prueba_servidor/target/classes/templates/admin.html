@@ -161,17 +161,14 @@
 		            {{#unregistered}}
 		            <div  class="col-xs-1 col-sm-1 col-md-1"> </div> 
 		            <div  class="col-xs-12 col-sm-12 col-md-5">   
-			            <form action="/login" method="post">          		              				                    
+			            <form action="/login" method="post">      		              				                    
 					        <input type="text" placeholder="Username" name="name" required />
-					        <input type="password" placeholder="Password" name="password"	required />
-					        
-					        <li></li>
-					        
-					        <span class="glyphicon glyphicon-log-in"></span>
+					    	<input type="password" placeholder="Password" name="password"	required />					        
+   					        
 					        <input type="submit" value="Login">
-					        <input type="hidden" name="_csrf" value="{{token}}">           
-					           
-				            <li><a href="/new_user"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+					        <input type="hidden" name="_csrf" value="{{token}}"> 					                
+					         							
+				            <li><a href="/new_user"> Register</a></li>
 				            <input type="hidden" name="_csrf" value="{{token}}">  		            
 			            </form>	
 		            </div>	

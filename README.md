@@ -38,7 +38,14 @@ Indice
     - [Pantalla de relleno de datos](#pantalla-de-relleno-de-datos)
     - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
     - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
-  
+  - [Fase 4](#fase-4)
+  * [Instrucciones para la instalacion de HAProxy](#instrucciones-para-la-instalacion-de-haproxy)
+    + [1.- Instalacion PPA](#1--instalacion-ppa)
+    + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema)
+    + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy)
+    + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
+    + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
+    + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
 - [Integrantes](#integrantes)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -269,6 +276,76 @@ En caso de que el nombre usuario o el correo ya existan previamente, no permitir
 
 ![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
+# Fase 4 #
+
+## Instrucciones para la instalacion de HAProxy ##
+
+### 1.- Instalacion PPA ###
+Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
+
+* `add-apt-repository ppa:vbernat/haproxy-1.5`
+
+### 2.- Actualizacion del sistema ###
+El siguiente paso es actualizar el sistema:
+
+* `apt-get update`
+* `apt-get dist-upgrade`
+
+### 3.- Instalacion de HAProxy ###
+Tras la correcta actualización, se instala HAProxy:
+
+* `apt-get install haproxy`
+
+### 4.- Configuracion de HAProxy ###
+Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
+
+* `chmod +rwx haproxy.cfg`
+
+Y se procede a editarlo:
+
+* `sudo nano haproxy.cfg`
+
+En él se añaden las siguientes líneas:
+
+* Debajo de daemon:
+  * `maxconn 3072`
+  
+* En la sección defaults:
+  * `option forwardfor`
+  * `option http-server-close`
+  
+* Y se crea una nueva sección añadiendo:
+  * `listen webfarm 0.0.0.0:80`<br>
+       `mode http`<br>
+       `stats enable`<br>
+       `stats uri /haproxy?stats`<br>
+       `balance roundrobin`<br>
+       `option httpclose`<br>
+       `option forwardfor`<br>
+       `server nombre1 direccionIP:Puerto`<br>
+       `server nombre2 direccionIP:Puerto`<br>
+       `...`
+       
+El archivo debería quedar como se observa en la imagen a continuación:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
+</p>
+
+Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+
+* `sudo service haproxy restart`
+
+### 5.- Inicio de HAProxy ###
+Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+
+* `sudo service haproxy start`
+
+### 6.- Inicio de HAProxy en Navegador Web ###
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `192.168.42.133/haproxy?stats` para poder observar los datos del balanceador:
+
+ ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
+       
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
