@@ -345,7 +345,37 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `192.168.42.133/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
-       
+
+## Instalacion de Vagrant ##
+Tras la ejecución del ejecutable .msi de la propia página de vagrant, se han de realizar los siguientes pasos:
+
+### 1.- Instalacion de Ubuntu ###
+Lo primero a realizar será crear una carpeta con nombre `vagrant` donde más adelante se creará el vagrant file. A continuación, nos ponemos a instalar Ubuntu 14.04, para ello ejecutamos el siguiente comando:
+
+* `vagrant box add ubuntu/trusty64`
+
+Tras la correcta instalación se ejecuta el siguiente comando:
+
+* `vagrant init ubuntu/trusty64`
+
+Y finalmente, tras completar la iniciación, se realiza:
+
+* `vagrant up`
+
+Creando el vagrantfile
+
+### 2.- Configuración del vagrantfile ###
+Para declarar una IP privada, es necesario descomentar la línea del fichero:
+
+* `# config.vm.network "private_network", ip: "192.168.33.10”`
+
+Podiendo comprobar su correcto funcionamiento mediante el comando:
+
+* `ping 192.168.33.10`
+
+### 3.- Inicialización ###
+A partir de este paso, seguir los pasos iniciales de la instalación de Ubuntu en VMWare. Finalmente copiar los archivos -jar en la misma carpeta que el vagrantfile y ejecutarlos.
+
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
