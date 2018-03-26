@@ -56,8 +56,6 @@ Indice
       - [4.3.- Máquina Virtual de Servicio Web](#43--m-quina-virtual-de-servicio-web)
 - [Integrantes](#integrantes)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 # Fase 1 #
 ## Descripcion de la web ##
 Este proyecto está dirigido a usuarios aficionados a los videojuegos. Se trata de una web donde encontrarás información relativa a cualquier juegos como puede ser su trama, la compañía o la puntuación que les ha otorgado los usuarios. Además podrás ojear los eventos de videojuegos que se celebrarán próximamente y hacerte tus propias listas en tu perfil con los juegos que te interesen.
