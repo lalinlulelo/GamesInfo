@@ -48,12 +48,12 @@ Indice
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
   * [Instalacion de Vagrant](#instalacion-de-vagrant)
     + [1.- Instalacion de Ubuntu](#1--instalacion-de-ubuntu)
-    + [2.- Configuración del vagrantfile](#2--configuraci-n-del-vagrantfile)
-    + [3.- Inicialización](#3--inicializaci-n)
-    + [4.- División de Servicios](#4--divisi-n-de-servicios)
+    + [2.- Configuracion del vagrantfile](#2--configuracion-del-vagrantfile)
+    + [3.- Inicializacion](#3--inicializacion)
+    + [4.- Division de Servicios](#4--division-de-servicios)
       - [4.1.- Maquina Virtual de Base de Datos](#41--maquina-virtual-de-base-de-datos)
       - [4.2.- Maquina Virtual de Servicio Interno](#42--maquina-virtual-de-servicio-interno)
-      - [4.3.- Máquina Virtual de Servicio Web](#43--m-quina-virtual-de-servicio-web)
+      - [4.3.- Maquina Virtual de Servicio Web](#43--maquina-virtual-de-servicio-web)
 - [Integrantes](#integrantes)
 
 # Fase 1 #
@@ -369,7 +369,7 @@ Y finalmente, tras completar la iniciación, se realiza:
 
 Creando el vagrantfile, siendo notificado por consola.
 
-### 2.- Configuración del vagrantfile ###
+### 2.- Configuracion del vagrantfile ###
 Para declarar una IP privada, es necesario descomentar la línea del fichero vagrantfile, para ello nos dirigimos a la carpeta `vagrant` anteriormente creada y abrimos el fichero con un editor de texto como `notepad++`:
 
 * `# config.vm.network "private_network", ip: "192.168.33.10”`
@@ -378,7 +378,7 @@ Tras guardar el fichero, se puede comprobar su correcto funcionamiento mediante 
 
 * `ping 192.168.33.10`
 
-### 3.- Inicialización ###
+### 3.- Inicializacion ###
 A continuación nos dispondremos a configurar el Sistema Operativo creado para tener los programas necesarios para la correcta ejecución de los servicios:
 * Arrancamos el sistema operativo mediante el siguiente comando
 
@@ -398,7 +398,7 @@ A continuación nos dispondremos a configurar el Sistema Operativo creado para t
   * Tras su correcta instalación, se instalará mySQL Workbench
   * `sudo apt-get install mysql-workbench`
   
-### 4.- División de Servicios ###
+### 4.- Division de Servicios ###
 Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso tres veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile`declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
 
 * Servicio Web: `192.168.33.10`
@@ -480,7 +480,7 @@ Y en el ejecutamos el .jar con el comando:
 
 * `java -jar mailService-0.0.1-SNAPSHOT.jar`
 
-#### 4.3.- Máquina Virtual de Servicio Web ####
+#### 4.3.- Maquina Virtual de Servicio Web ####
 Lo primero que debemos realizar puesto que la base de datos se encuentra en una máquina virtual distinta a la del servicio web, es cambiar en el fichero properties del proyecto, la línea:
 
 * `spring.jpa.hibernate.ddl-auto=update`
