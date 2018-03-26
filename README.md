@@ -491,9 +491,7 @@ A `none`:
 
 Y construir como en el anterior apartado el debido fichero .jar. Tras su construcción se copia y pega en el mismo directorio que el archvo `vagrantfile` de esta máquina virtual y se procede a su ejecución con el siguiente comando donde se detallan ciertas propiedades de la aplicación (recordemos que el usuario declarado en la base de datos fue `root` y su contraseña `gugus`, que la dirección IP de la máquina virtual de la base de datos fue `192.168.33.12`y que la base de datos creada se llama `gamesinfo_db`):
 
-* `java -jar prueba_servidor-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql://192.168.33.12:3306/gamesinfo_db?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="root" --spring.datasource.password="gugus" --spring.jpa.hibernate.dll-auto="update"
-
-
+* `java -jar prueba_servidor-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql://192.168.33.12:3306/gamesinfo_db?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="root" --spring.datasource.password="gugus" --spring.jpa.hibernate.dll-auto="update"`
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
