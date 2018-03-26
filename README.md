@@ -352,7 +352,7 @@ Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
 ## Instalacion de Vagrant ##
-Para poder duplicar y separar los distintos servicios de la aplicación web (servicio web, servicio interno y bases de datos), fue necesaria la instalación de Vagrant. Para ello fue necesaria la descarga de [Vagrant] (https://www.vagrantup.com/downloads.html), así como la descarga e instalación de [Virtual Box](https://www.virtualbox.org/wiki/Downloads), todo ello en el Sistema Operativo Host. Tras la ejecución del ejecutable .msi de la propia página de vagrant, se han de realizar los siguientes pasos:
+Para poder duplicar y separar los distintos servicios de la aplicación web (servicio web, servicio interno y bases de datos), fue necesaria la instalación de Vagrant. Para ello fue necesaria la descarga de [Vagrant](https://www.vagrantup.com/downloads.html), así como la descarga e instalación de [Virtual Box](https://www.virtualbox.org/wiki/Downloads), todo ello en el Sistema Operativo Host. Tras la ejecución del ejecutable .msi de la propia página de vagrant, se han de realizar los siguientes pasos:
 
 ### 1.- Instalacion de Ubuntu ###
 Lo primero a realizar será crear una carpeta con nombre `vagrant` en un directorio escogido (en nuestro caso Documents), donde más adelante se creará el vagrant file. A continuación, nos ponemos a instalar Ubuntu 14.04, para ello ejecutamos el siguiente comando desde una ventana de comandos (`Ejecutar > cmd`):
