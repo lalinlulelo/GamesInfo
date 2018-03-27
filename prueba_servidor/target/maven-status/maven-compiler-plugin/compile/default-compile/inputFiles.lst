@@ -1,29 +1,30 @@
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\ArticleRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\UserRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\MyList.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\userRegisterController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\UserRepositoryAuthenticationProvider.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\User.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\CommentRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\DBConstructor.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Company.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Event.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Game.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\companyController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\EventRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\commentController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\CompanyRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\eventController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Article.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\gameController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\webController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\adminController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Comment.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\userController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\SecurityConfiguration.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\mylistController.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\GameRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\App.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\MyListRepository.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\CSRFHandlerConfiguration.java
-D:\Downloads\URJC\Cuarto\2 cuatrimestre\DAD\Practica\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\articleController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\CompanyRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\companyController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\User.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Company.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\MyListRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\CSRFHandlerConfiguration.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\DBConstructor.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\CommentRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\adminController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\ArticleRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\userController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Event.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Comment.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\eventController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\mylistController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\gameController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\SecurityConfiguration.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\userRegisterController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\GameRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\MyList.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\UserRepositoryAuthenticationProvider.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Mail.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Article.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\webController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\commentController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\UserRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\App.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\EventRepository.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\articleController.java
+C:\Users\guille-hp\Documents\GitHub\GamesInfo\prueba_servidor\src\main\java\LosOdiosos3\prueba_servidor\Application\Game.java

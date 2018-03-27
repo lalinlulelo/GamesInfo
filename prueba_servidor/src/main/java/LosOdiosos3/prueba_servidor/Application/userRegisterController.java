@@ -75,12 +75,15 @@ public class userRegisterController {
 		
 		// ------------------------------------- MAIL SERVICE ------------------------------------------
 		// Se manda al puerto del mail service la información
-		String urlFinal = "http://localhost:8080/mail";		
+		String urlFinal = "http://localhost:8080/mail";
+		// IP del servicio mail
+		//String urlFinal = "http://192.168.33.11:8080/mail";
 		System.out.println("Enviado a " + nuevo.getName() + " con mail: " + nuevo.getEmail());
 		Mail mail = new Mail(nuevo.getName(), nuevo.getEmail());
 
 		//Aqui es donde exactamente se comunica con el restcontroller
 		RestTemplate restTemplate = new RestTemplate();
+		System.out.println("Paso la creacion de restTemplate");
 		restTemplate.postForEntity(urlFinal, mail, String.class);
 		System.out.println("Enviado al MailService.");
 		//Fin de comunicacion
