@@ -1,5 +1,6 @@
 package LosOdiosos3.prueba_servidor.Application;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +8,7 @@ import javax.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-public class User {	
+public class User implements Serializable{	
 	// id de la entidad 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
