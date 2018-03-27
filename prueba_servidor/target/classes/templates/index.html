@@ -7,16 +7,12 @@
 			   	text-align: center;
 			  	font-family: "Andale Mono", monospace;
 				color:  #F9FF35; 
-			}
-			.body{
-			  	background: #406DB5;
-			}
+			}			
 			.TitleLit{
-			  	font-size: 20px;
-			  	text-align: center;
+			  	font-size: 50px;
 			  	font-family: "Andale Mono",monospace;
 			  	text-decoration: underline;
-			  	color:  rgb(33, 73, 138);
+			  	color:  #F9FF35;
 			}
 			.Article{
 			  	font-family: "Andale Mono", monospace;
@@ -58,16 +54,7 @@
 			}
 			.card-title{
 				
-			}
-			
-			.footer {			    
-			    left: 0;
-			    bottom: 0;
-			    width: 100%;
-			    background-color: #F9FF35;
-			    color: #406DB5;
-			    text-align: center;
-			}
+			}			
 			
 			.carousel, .carousel-inner > .item > img {
 			  	width: 100%;
@@ -80,6 +67,44 @@
 				width: 100%;
 				margin-top: 5%;
 				text-align: center;
+			}			
+			
+			section {
+				width:77%;		
+				margin: 0 0 2% 0;	
+				float: left;	
+			}
+			
+			aside {
+				width: 16%;
+				margin: 3% 5% 2% 0%;
+				float: right;
+				font-family: "Andale Mono", monospace;
+				background-color: #F9FF35;
+			}
+			
+			.fa {
+			  	padding: 20px;
+			  	font-size: 30px;
+			  	width: 50px;
+			  	text-align: center;
+			  	text-decoration: none;
+			  	margin: 5px 2px;
+			}
+			
+			.fa-facebook {
+			  	background: #3B5998;
+			  	color: white;
+			}
+			
+			.fa-twitter {
+			  	background: #55ACEE;
+			  	color: white;
+			}
+			
+			.fa-google {
+			  	background: #dd4b39;
+			  	color: white;
 			}
 
 		</style>
@@ -90,6 +115,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- jQuery library -->		
 		<script
@@ -103,6 +129,7 @@
 	
 		<!-- Custom styles for this template -->
     	<link href="../css/navbar.css" rel="stylesheet">
+    	<link href="../css/body.css" rel="stylesheet">
 	</head>
 	
 	<body class="body">		
@@ -205,20 +232,49 @@
 	      		<span class="glyphicon glyphicon-chevron-right"></span>
 	      		<span class="sr-only">Next</span>
 	    	</a>
-  		</div>				
+  		</div>		
+	
+		<section>		
+			<!-- Articles -->
+			<div class="media-container-row">
+				<row>
+					<div  class="col-xs-2 col-sm-2 col-md-2"> </div> 
+					<h1 class="TitleLit">{{Titulo}}</h1>		
+				</row>			
+				{{{news}}}			         
+	        </div>                 
+        </section>
+        
+        <aside>
+        	<div>
+        		<h2>Most Popular Games</h2>       	
+        		<div class="container">
+        			<a href="game/Legend%20of%20Zelda%20Breath%20of%20Wild">
+				  		<p>1. The Legend of Zelda </br> Breath of the Wild</p>            
+				  		<img src="http://polvar.ir/wp-content/uploads/2018/02/Nintendo_Switch_ESRB_cover.jpg" class="img-thumbnail" alt="zelda top" width="130" height="150"> 
+					</a>
+					<a href="http://www.thelastofus.playstation.com/">
+				  		<p>2. The Last of Us</p>            
+				  		<img src="https://media.vandal.net/m/23887/the-last-of-us-remastered-201449185610_1.jpg" class="img-thumbnail" alt="tlou top" width="130" height="150"> 
+					</a>
+					<a href="https://es.wikipedia.org/wiki/Gears_of_War">
+				  		<p>3. Gears of War</p>            
+				  		<img src="https://i11c.3djuegos.com/juegos/1444/gears_of_war/fotos/ficha/gears_of_war-1681066.jpg" class="img-thumbnail" alt="gow top" width="130" height="150"> 
+					</a>
+				</div>        	
+	        </div>
+        				
+			<h2>Follow us on</h2>
+			<!-- Add font awesome icons -->
+			<a href="#" class="fa fa-facebook"></a>
+			<a href="#" class="fa fa-twitter"></a>
+			<a href="#" class="fa fa-google"></a>		
+		</aside>
 
-		<!-- Articles -->
-		<div class="media-container-row">
-			<h1 class="TitleLit" style="color:#F9FF35;" style="font-size:200%;">{{Titulo}}</h1>
-			{{{news}}}			         
-        </div>             
-		
-		<br><br>
 		<div class="footer">
 		  	<div class="container-fluid">
             	© 2018 Copyright: <a href="https://github.com/lalinlulelo/GamesInfo"> GamesInfo </a>
         	</div>
 		</div>
-
 	</body>
 </html>

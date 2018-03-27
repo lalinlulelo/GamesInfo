@@ -116,8 +116,7 @@ public class commentController {
 		model.addAttribute("token", token.getToken());
 		
 		return ret;
-		// se crea un comentario con el usuario y el texto introducido
-		
+		// se crea un comentario con el usuario y el texto introducido		
 	}
 	// ----------------------------- FIN COMENTARIOS  ---------------------------------
 

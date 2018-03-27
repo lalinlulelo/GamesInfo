@@ -35,6 +35,7 @@ public class App {
     
     private static final Log LOG = LogFactory.getLog(App.class);
 
+    
     @Bean
     public Config config() {
     	Config config = new Config();
@@ -48,9 +49,10 @@ public class App {
     	return config;
     }
     
+    
     @Bean
     public CacheManager cacheManager() {
     	LOG.info("Activating cache...");
     	return new ConcurrentMapCacheManager("games");
-    }
+    }    
 }
