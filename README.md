@@ -24,7 +24,7 @@ Indice
       - [Nueva Lista de Juegos](#nueva-lista-de-juegos)
       - [Añadir Juego a una Lista](#a-adir-juego-a-una-lista)
       - [Articulo](#articulo)
-      - [Pantalla de administrador](#pantalla-de-administrador)
+    + [Pantalla de administrador](#pantalla-de-administrador)
   * [Diagrama de Entidad-Relacion](#diagrama-de-entidad-relacion)
   * [Diagrama UML de Entidades](#diagrama-uml-de-entidades)
   * [Diagrama de clases](#diagrama-de-clases)
@@ -35,10 +35,10 @@ Indice
     + [3.- Arranque de los jar](#3--arranque-de-los-jar)
     + [4.- Inicio de pagina web](#4--inicio-de-pagina-web)
   * [Servicio interno de correos](#servicio-interno-de-correos)
-    - [Pantalla de relleno de datos](#pantalla-de-relleno-de-datos)
-    - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
-    - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
-  - [Fase 4](#fase-4)
+      - [Pantalla de relleno de datos](#pantalla-de-relleno-de-datos)
+      - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
+      - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
+- [Fase 4](#fase-4)
   * [Instrucciones para la instalacion de HAProxy](#instrucciones-para-la-instalacion-de-haproxy)
     + [1.- Instalacion PPA](#1--instalacion-ppa)
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema)
@@ -46,10 +46,15 @@ Indice
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
     + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
+  * [Instalacion de Vagrant](#instalacion-de-vagrant)
+    + [1.- Instalacion de Ubuntu](#1--instalacion-de-ubuntu)
+    + [2.- Configuracion del vagrantfile](#2--configuracion-del-vagrantfile)
+    + [3.- Inicializacion](#3--inicializacion)
+    + [4.- Division de Servicios](#4--division-de-servicios)
+      - [4.1.- Maquina Virtual de Base de Datos](#41--maquina-virtual-de-base-de-datos)
+      - [4.2.- Maquina Virtual de Servicio Interno](#42--maquina-virtual-de-servicio-interno)
+      - [4.3.- Maquina Virtual de Servicio Web](#43--maquina-virtual-de-servicio-web)
 - [Integrantes](#integrantes)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -345,7 +350,149 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `192.168.42.133/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
-       
+
+## Instalacion de Vagrant ##
+Para poder duplicar y separar los distintos servicios de la aplicación web (servicio web, servicio interno y bases de datos), fue necesaria la instalación de Vagrant. Para ello fue necesaria la descarga de [Vagrant](https://www.vagrantup.com/downloads.html), así como la descarga e instalación de [Virtual Box](https://www.virtualbox.org/wiki/Downloads), todo ello en el Sistema Operativo Host. Tras la ejecución del ejecutable .msi de la propia página de vagrant, se han de realizar los siguientes pasos:
+
+### 1.- Instalacion de Ubuntu ###
+Lo primero a realizar será crear una carpeta con nombre `vagrant` en un directorio escogido (en nuestro caso Documents), donde más adelante se creará el vagrant file. A continuación, nos ponemos a instalar Ubuntu 14.04, para ello ejecutamos el siguiente comando desde una ventana de comandos (`Ejecutar > cmd`):
+
+* `vagrant box add ubuntu/trusty64`
+
+Tras la correcta instalación se ejecuta el siguiente comando:
+
+* `vagrant init ubuntu/trusty64`
+
+Y finalmente, tras completar la iniciación, se realiza:
+
+* `vagrant up`
+
+Creando el vagrantfile, siendo notificado por consola.
+
+### 2.- Configuracion del vagrantfile ###
+Para declarar una IP privada, es necesario descomentar la línea del fichero vagrantfile, para ello nos dirigimos a la carpeta `vagrant` anteriormente creada y abrimos el fichero con un editor de texto como `notepad++`:
+
+* `# config.vm.network "private_network", ip: "192.168.33.10”`
+
+Tras guardar el fichero, se puede comprobar su correcto funcionamiento mediante el comando:
+
+* `ping 192.168.33.10`
+
+### 3.- Inicializacion ###
+A continuación nos dispondremos a configurar el Sistema Operativo creado para tener los programas necesarios para la correcta ejecución de los servicios:
+* Arrancamos el sistema operativo mediante el siguiente comando
+
+ * `vagrant ssh`
+
+* Java 
+
+  * `sudo apt-get update`
+ * `sudo apt-get install default-jre`  * `sudo apt-get install default-jdk`
+  
+* mySQL
+
+  * `sudo apt-get update`
+  * `sudo apt-get install mysql-server mysql-client`
+  * como contraseña se le colocará: `gugus`
+  * `sudo mysql_secure_installation`
+  * Tras su correcta instalación, se instalará mySQL Workbench
+  * `sudo apt-get install mysql-workbench`
+  
+### 4.- Division de Servicios ###
+Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso tres veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile`declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
+
+* Servicio Web: `192.168.33.10`
+
+* Servicio Interno: `192.168.33.11`
+
+* Base de Datos: `192.168.33.12`
+
+Una vez creadas las tres máquinas virtuales, es necesario configurar ciertas funcionalidades en las distintas máquinas virtuales.
+
+#### 4.1.- Maquina Virtual de Base de Datos ####
+Debido a que se ha separado la base de datos de la aplicación web, se ha de configurarla para que sea accesible mediante su dirección IP privada, y permitiendo al servicio web acceder a ella. Para ello accedemos inicialmente al archivo `my.cnf` localizado en `/vagrant/etc/mysql/`permitiendo cualquier tipo de modificación en el fichero:
+
+* `sudo chmod +rwx my.cnf`
+
+Y accediendo mediante el editor:
+
+* `sudo nano my.cnf`
+
+Cambiamos la línea `bind address` por la IP privada de la propia máquina virtual, en nuestro caso `192.168.33.12`, quedando como en la siguiente imagen:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/vagrant%20my_cnf.jpg?raw=true">
+</p>
+
+Tras su correcto guardado mediante `Ctrl + X` y asegurando el guardado y sobreescribiedolo, reiniciamos el servicio mediante:
+
+* `sudo service mysql service`
+
+Una vez el servicio se ha reiniciado, accedemos a la consola de **mysql** mediante el siguiente comando:
+
+* mysql -u root -p
+
+Y una vez tenemos como path `mysql>` se dispone a crear el usuario, recomendamos que sea el mismo que se tiene declarado en el fichero properties del proyecto del servicio web, en nuestro caso `root`con contraseña `gugus`:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/vagrant%20mysql%20properties.jpg?raw=true">
+</p>
+
+Para ello colocamos en la consola el siguiente comando:
+
+* `create user usuario@direccion_ip_privada_maquina_servicio_web identified by 'contraseña'`
+
+En nuestro caso el comando sería el siguiente:
+
+* `create user root@192.168.33.10 identified by 'gugus';`
+
+Tras ello, se crea la base de datos (con el mismo nombre que la primera vez que se hizo) con el comando:
+
+* `create database gamesinfo_db;`
+
+Se le aportan todos los permisos posibles al servicio web, sobre dicha base de datos con los comandos:
+
+* `grant all privileges on gamesinfo_db.* to root@192.168.33.10;`
+* `flush privileges;`
+
+Y por si se desea comprobar la correcta creación del usuario, se puede ejecutar el siguiente comando:
+
+* `select user, host, password from mysql.user;`
+
+Saliendo la siguiente información por consola:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/vagrant%20mysql%20create%20user.jpg?raw=true">
+</p>
+
+Finalmente salimos de la consola de mysql con el siguiente comando:
+
+* `exit`
+
+#### 4.2.- Maquina Virtual de Servicio Interno ####
+A diferencia de la máquina de bases de datos, aquí simplemente se tiene que realizar el archivo jar para ello se pueden seguir los pasos indicados en el punto 2 de la Fase 3: [Elaboracion del jar](#2--elaboracion-del-jar).
+
+Una vez creado el fichero `.jar` se copia y se pega en el mismo directorio en el que se encuentra el archivo 'vagrantfile' de esta máquina virtual, y se procede a su ejecución. Para ello nos dirigimos al directorio principal mediante el comando:
+
+* `cd /vagrant`
+
+Y en el ejecutamos el .jar con el comando:
+
+* `java -jar mailService-0.0.1-SNAPSHOT.jar`
+
+#### 4.3.- Maquina Virtual de Servicio Web ####
+Lo primero que debemos realizar puesto que la base de datos se encuentra en una máquina virtual distinta a la del servicio web, es cambiar en el fichero properties del proyecto, la línea:
+
+* `spring.jpa.hibernate.ddl-auto=update`
+
+A `none`:
+
+* `spring.jpa.hibernate.ddl-auto=none`
+
+Y construir como en el anterior apartado el debido fichero .jar. Tras su construcción se copia y pega en el mismo directorio que el archvo `vagrantfile` de esta máquina virtual y se procede a su ejecución con el siguiente comando donde se detallan ciertas propiedades de la aplicación (recordemos que el usuario declarado en la base de datos fue `root` y su contraseña `gugus`, que la dirección IP de la máquina virtual de la base de datos fue `192.168.33.12`y que la base de datos creada se llama `gamesinfo_db`):
+
+* `java -jar prueba_servidor-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql://192.168.33.12:3306/gamesinfo_db?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="root" --spring.datasource.password="gugus" --spring.jpa.hibernate.dll-auto="update"`
+
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 

@@ -4,11 +4,23 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
+
+@CacheConfig(cacheNames="games")
 public interface GameRepository extends JpaRepository<Game, Long> {
-	// busqueda por nombre
-	List<Game> findByName (String name);
 	
+	@CacheEvict(allEntries=true)
+	Game save(Game game);
+	
+	// busqueda por nombre
+	@Cacheable	
+	List<Game> findByName (String name);
+		
 	// busqueda con nombre parcial
+	@Cacheable
 	List<Game> findByNameContaining(String name);
 	
 	// busqueda puntuacion en orden ascendente
