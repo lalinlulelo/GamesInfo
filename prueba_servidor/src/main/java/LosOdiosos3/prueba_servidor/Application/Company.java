@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+
 
 @Entity
 public class Company {
@@ -22,6 +26,8 @@ public class Company {
     private String url;
     
     // lista de juegos que pertenecen a la compañía
+    // evita error de la cache, pero la hace petar
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
     private List<Game> games = new ArrayList<Game>();
     // lista de comentarios que pertenecen a la compañía

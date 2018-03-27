@@ -30,11 +30,10 @@ public class App {
     	SpringApplication.run(App.class, args);
     }
     
-    @Value("${hazelcast.member}")
-	private String HAZELCAST_MEMBER;
     
+    @Value("${hazelcast.member}")
+	private String HAZELCAST_MEMBER;    
     private static final Log LOG = LogFactory.getLog(App.class);
-
     
     @Bean
     public Config config() {
@@ -53,6 +52,9 @@ public class App {
     @Bean
     public CacheManager cacheManager() {
     	LOG.info("Activating cache...");
+    	// nombre de la caché
     	return new ConcurrentMapCacheManager("games");
-    }    
+    }
+    
+    
 }

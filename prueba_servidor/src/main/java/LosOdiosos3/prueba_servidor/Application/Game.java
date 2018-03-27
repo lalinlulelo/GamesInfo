@@ -14,11 +14,12 @@ public class Game {
 	// compañía a la que pertenece el juego
 	@ManyToOne 
 	private Company company;
+	
 	// listas a las que pertenece el juego
 	@ManyToMany 
 	private List<MyList> lists = new ArrayList<MyList>();
 	// comentarios publicados en el juego
-	@OneToMany(mappedBy="game", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="game", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
 	
 	// atributos principales de la entidad

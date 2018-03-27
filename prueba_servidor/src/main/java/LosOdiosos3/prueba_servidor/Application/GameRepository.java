@@ -16,8 +16,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 	Game save(Game game);
 	
 	// busqueda por nombre
-	@Cacheable	
+	@Cacheable
 	List<Game> findByName (String name);
+	
+	@Cacheable
+	List<Game> findAll ();
 		
 	// busqueda con nombre parcial
 	@Cacheable
