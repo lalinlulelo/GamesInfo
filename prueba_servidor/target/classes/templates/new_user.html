@@ -2,9 +2,6 @@
 <html>
 	<head>
 		<style type="text/css">
-			html{
-			  background-color: #406DB5;
-			}
 			h1{
 			  text-align: center;
 			  font-family: "Andale Mono", monospace;
@@ -40,7 +37,7 @@
 			input[type=submit]:hover {
 			    background-color: #FFEE3A;
 			}			
-			div {
+			#divi {
 			    border-radius: 5px;
 			    background-color: hsl(255, 255, 255, 0.6);
 			    padding: 20px;
@@ -85,63 +82,16 @@
 		            
 		            <div class="col-xs-12 col-sm-8 col-md-2">
 		            	<a><img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Title.png?raw=true" class="img-responsive img-centered"/></a>  	
-		            </div>
-		            
-		            {{#registered}}
-		            <div  class="col-xs-12 col-sm-8 col-md-4"> </div>
-		            <div  class="col-xs-10 col-sm-8 col-md-2">
-			        	<li class="dropdown">
-						  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{name}}<b class="caret"></b></a>
-						  	{{{profile_img}}}
-						  	<ul class="dropdown-menu" id="drop">
-						  		<li><a href="/profile">Profile</a></li>
-								<li><a href="/my_lists">My Lists</a></li>
-								<div class="dropdown-divider"></div>
-								{{#admin}}   
-								<li><a href="/admin">Admin features</a></li> 
-								{{/admin}}      
-				            	<form action="/logout" method="post">
-									<input type="submit" class="col-md-12" value="Logout" />
-									<input type="hidden" name="_csrf" value="{{token}}"/>
-								</form> 					            
-						  	</ul>
-						</li>            
-		            </div>			            
-		            {{/registered}}
-		             
-		            {{#unregistered}}
-		            <div  class="col-xs-1 col-sm-1 col-md-1"> </div> 
-		            <div  class="col-xs-12 col-sm-12 col-md-5">   
-			            <form action="/login" method="post">      		              				                    
-					        <input type="text" placeholder="Username" name="name" required />
-					    	<input type="password" placeholder="Password" name="password"	required />					        
-   					        
-					        <input type="submit" value="Login">
-					        <input type="hidden" name="_csrf" value="{{token}}"> 					                
-					         							
-				            <li><a href="/new_user"> Register</a></li>
-				            <input type="hidden" name="_csrf" value="{{token}}">  		            
-			            </form>	
-		            </div>	
-		            {{/unregistered}}	                               
+		            </div>	                               
 	          	</div>             
-	    	</ul>
-		    		    
-		    <div id="search">
-		     	<form action="/search" method="post">
-		           	<input type="text" name="text" placeholder="Search" aria-label="Search">
-		           	<input type="submit" value="Search"> 
-		           	<input type="hidden" name="_csrf" value="{{token}}">
-		     	</form>
-		    </div>
-	    	<div id="triangulo"></div>		    	
+	    	</ul>		    		       	
 	    </div>
 	
 		<!-- alerta que notifica si el nombre existe -->
 		{{{alert}}}
 		<h1> Registration </h1>
 		<!-- Formulario que registra un nuevo usuario -->
-		<div>
+		<div id="divi">
 			<form action="/register" method="post">
 	      		<p>User Name:</p>
 				<input type="text" name="name">
