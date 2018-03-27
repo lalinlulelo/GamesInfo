@@ -21,8 +21,8 @@ public class Article {
 	private List<Comment> comments = new ArrayList<Comment>();
 	
 	// atributos principales de la entidad
-	private String head;
 	private String title;
+	private String head;	
 	private String article;
 	private String image;
 	
@@ -30,10 +30,10 @@ public class Article {
 	public Article () {}
 	
 	// constructor del objeto Artículo
-	public Article (User user, String head, String title, String article, String image) {
+	public Article (User user, String title, String head, String article, String image) {
 		this.user = user;
-		this.head = head;
 		this.title = title;
+		this.head = head;		
 		this.article = article;
 		this.image = image;
 	}
@@ -46,6 +46,14 @@ public class Article {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getHead() {
 		return head;
@@ -53,14 +61,6 @@ public class Article {
 
 	public void setHead(String head) {
 		this.head = head;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getArticle() {

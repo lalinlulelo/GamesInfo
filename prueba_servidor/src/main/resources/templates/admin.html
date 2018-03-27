@@ -265,6 +265,28 @@
 		        		</div>
 		        	</div>
 	        	 </div>
+	        	 
+	        	<button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalArticle">Add new Article</button>
+		        <br><br><br><br>
+		        <div class="modal fade" id="modalArticle" role="dialog">
+   					<div class="modal-dialog">
+   				 		<div class="modal-content">
+        					<div class="modal-header">        		
+         	 					<h4 class="modal-title">New Article</h4>
+       		 				</div>
+       		 				<div class="modal-body">
+						        <form action="/addArticle" method="post">
+									<div>Title: <input name="title" type="text"></div>
+								    <div>Head: <input name="head" type="text"></div>
+									<div>Body: <input name="body" type="text"></div>
+									<div>Url Image: <input name="image" type="text"></div>
+									<input type="submit" value="Submit">	
+									<input type="hidden" name="_csrf" value="{{token}}"> 
+								</form>
+    						</div>
+		        		</div>
+		        	</div>
+	        	 </div>
 
 		         <button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteG">Delete Game</button>
 	        	 <br><br><br><br>
@@ -326,6 +348,29 @@
 								       {{#listEvents}}
 								       {{{.}}}
 								       {{/listEvents}}
+								   </select>
+			    					<input type="submit" value="Submit">	
+			      					<input type="hidden" name="_csrf" value="{{token}}"> 
+		    					</form>
+		        			</div>
+		        		</div>
+		        	</div>          
+		        </div>
+		        
+		        <button class="button_ch" type="button"  id="myBtn" class="btn btn-info btn-lg" style="display: block; margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalDeleteA">Delete Article</button>
+		        <br><br><br><br>
+		        <div class="modal fade" id="modalDeleteA" role="dialog">
+  					<div class="modal-dialog">
+   				 		<div class="modal-content">
+        					<div class="modal-header">         		
+         	 					<h4 class="modal-title">Delete Article</h4>
+       		 				</div>
+       		 				<div class="modal-body">
+          						<form action="/deleteArticle" method="post">
+								   <select name="Article">    
+								       {{#listArticles}}
+								       {{{.}}}
+								       {{/listArticles}}
 								   </select>
 			    					<input type="submit" value="Submit">	
 			      					<input type="hidden" name="_csrf" value="{{token}}"> 

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,12 @@ public class adminController {
 	
 	@Autowired
 	private EventRepository eventRepository;
+	
+	@Autowired
+	private ArticleRepository articleRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	// ----------------------------- FIN INYECCIONES ----------------------------------
 	
 	// ---------------------------------- ADMIN ---------------------------------------
@@ -75,6 +82,19 @@ public class adminController {
 		// se retorna a la página de admin
 		return "admin";
 	}
+	
+	// función borrar evento
+	@RequestMapping("/deleteArticle")
+	public String deleteArticle (Model model, HttpSession usuario, HttpServletRequest request, @RequestParam String Article) {
+		// se adquieren todos los eventos
+		List<Article> list = articleRepository.findByTitle(Article);
+		// se borra del repositorio el evento seleccionado
+		articleRepository.delete(list.get(0));
+		// se rellena el navbar
+		fillModel(model,usuario,request);
+		// se retorna a la página de admin
+		return "admin";
+	}
 	// ---------------------------------- FIN BORRAR ----------------------------------
 	
 	// --------------------------- FUNCIONES AUXILIARES -------------------------------
@@ -84,10 +104,12 @@ public class adminController {
 		List<Game> games=gameRepository.findAll();
 		List<Company> companies=companyRepository.findAll();
 		List<Event> events=eventRepository.findAll();
+		List<Article> articles=articleRepository.findAll();
 		// se crean listas para abarcar las cajas desplegables
 		List<String>listGames=new ArrayList<String>();
 		List<String>listCompanies=new ArrayList<String>();
-		List<String>listEvents=new ArrayList<String>();			
+		List<String>listEvents=new ArrayList<String>();		
+		List<String>listArticles=new ArrayList<String>();	
 		
 		// se cargan los juegos en la lista desplegable
 		for(Game g:games) {
@@ -112,6 +134,14 @@ public class adminController {
 			listEvents.add(aux);
 		}		
 		model.addAttribute("listEvents", listEvents);
+		
+		// se cargan los articulos en la lista desplegable
+		for(Article a:articles) {
+			String name=a.getTitle();			
+			String aux=String.format("<option value=\"%s\">%s</option>", name,name);
+			listArticles.add(aux);
+		}		
+		model.addAttribute("listArticles", listArticles);
 		
 		// se pasan los atributos de la barra de navegacion
 		model.addAttribute("registered", usuario.getAttribute("registered"));
@@ -149,7 +179,7 @@ public class adminController {
 			// se adquiere la lista de compañías
 			List<Company> listc = companyRepository.findAll();
 			
-			// se comprueba que el objeto introducido no se exista ya, sino se notifica con un alert
+			// se comprueba que el objeto introducido no exista ya, sino se notifica con un alert
 			for(Company c:listc) {			
 				if(c.getName().equals(name)) {
 					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');"  + "</script>");		
@@ -190,7 +220,7 @@ public class adminController {
 			// se adquiere la lista de eventos
 			List<Event> liste=eventRepository.findAll();
 			
-			// se comprueba que el objeto introducido no se exista ya, sino se notifica con un alert
+			// se comprueba que el objeto introducido no exista ya, sino se notifica con un alert
 			for(Event e:liste) {			
 				if(e.getName().equals(name)) {
 					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "</script>");		
@@ -231,7 +261,7 @@ public class adminController {
 			// se adquiere la lista de juegos
 			List<Game> listg = gameRepository.findAll();
 			
-			// se comprueba que el objeto introducido no se exista ya, sino se notifica con un alert
+			// se comprueba que el objeto introducido no exista ya, sino se notifica con un alert
 			for(Game g:listg) {			
 				if(g.getName().equals(name)) {
 					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "</script>");		
@@ -266,4 +296,47 @@ public class adminController {
         	return "admin";
     	}
 	}	
+	
+	// función de añadir evento
+	@RequestMapping("/addArticle")
+	public String addArticle (Model model, HttpSession usuario, UsernamePasswordAuthenticationToken user, @RequestParam String title,
+	@RequestParam String head,@RequestParam String body,@RequestParam String image, HttpServletRequest request) {
+		// se comprueba que ningún campo se quede vacío, sino se notifica con un alert
+		if(title=="" || head=="" || body=="" || image=="") {
+			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "</script>");		
+        	fillModel(model,usuario,request);        	
+        	return "admin";
+		}
+		try {			
+			// se adquiere la lista de articulos
+			List<Article> lista=articleRepository.findAll();
+			
+			// se comprueba que el objeto introducido no exista ya, sino se notifica con un alert
+			for(Article a:lista) {			
+				if(a.getTitle().equals(title)) {
+					usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: Name repeated');" + "</script>");		
+					fillModel(model,usuario,request);
+					return "admin";
+				}
+			}		
+			
+			User usur = userRepository.findByName(user.getName()).get(0);
+			
+			// se crea el articulo y se añade al repositorio
+			Article newArticle=new Article(usur,title,head,body,image);
+			articleRepository.save(newArticle);
+			
+			// se rellena el navbar y se desactiva la alerta
+			usuario.setAttribute("alert"," ");
+			fillModel(model,usuario,request);
+			
+			// se retorna a admin
+			return "admin";	
+		}catch(NumberFormatException ex){
+			// se rellena el navbar
+        	fillModel(model,usuario,request);    
+        	// se retorna a admin
+        	return "admin";
+    	}	
+	}
 }
