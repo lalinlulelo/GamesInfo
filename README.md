@@ -337,6 +337,17 @@ El archivo debería quedar como se observa en la imagen a continuación:
   <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
 </p>
 
+HAProxy ofrece principalmente tres algoritmos de balanceo:
+  
+  * **Basado en Round Robin**: el balanceador selecciona a los distintos servidores por turnos
+    * `balance roundrobin`
+  * **Basado en el numero de conexiones**: el balanceador selecciona el servidor con menor número de conexiones, empleando Round Robin en aquellos empatados
+    * `balance leastconn`
+  * **Basado en la IP origen y/o destino**: el balanceador selecciona el servidor en función del seleccionado inicialmente a un usuario.
+    * `source`
+    
+Puesto que en esta aplicación web se realiza el uso de **tokens**, para eviar la pérdida de ellos, se empleará el algoritmo basado en la IP origen y/o destino, sustituyendo por tanto el `roundrobin` por `source`. 
+
 Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
 
 * `sudo service haproxy restart`
