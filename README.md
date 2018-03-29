@@ -398,7 +398,8 @@ A continuación nos dispondremos a configurar el Sistema Operativo creado para t
 * Java 
 
   * `sudo apt-get update`
- * `sudo apt-get install default-jre`  * `sudo apt-get install default-jdk`
+  * `sudo apt-get install default-jre`  
+  * `sudo apt-get install default-jdk`
   
 * mySQL
 
