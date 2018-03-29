@@ -344,7 +344,7 @@ HAProxy ofrece principalmente tres algoritmos de balanceo:
   * **Basado en el numero de conexiones**: el balanceador selecciona el servidor con menor número de conexiones, empleando Round Robin en aquellos empatados
     * `balance leastconn`
   * **Basado en la IP origen y/o destino**: el balanceador selecciona el servidor en función del seleccionado inicialmente a un usuario.
-    * `source`
+    * `balance source`
     
 Puesto que en esta aplicación web se realiza el uso de **tokens**, para eviar la pérdida de ellos, se empleará el algoritmo basado en la IP origen y/o destino, sustituyendo por tanto el `roundrobin` por `source`. 
 
