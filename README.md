@@ -413,11 +413,19 @@ A continuación nos dispondremos a configurar el Sistema Operativo creado para t
 ### 4.- Division de Servicios ###
 Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso tres veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile`declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
 
-* Servicio Web: `192.168.33.10`
+* Servicio Web 1: `192.168.33.10`
 
-* Servicio Interno: `192.168.33.11`
+* Servicio Interno 1: `192.168.33.11`
 
-* Base de Datos: `192.168.33.12`
+* Base de Datos 1: `192.168.33.12`
+
+* Servicio Web 2: `192.168.33.13`
+
+* Servicio Interno 2: `192.168.33.14`
+
+* Base de Datos 2: `192.168.33.15`
+
+* Balanceador: `192.168.33.16`
 
 Una vez creadas las tres máquinas virtuales, es necesario configurar ciertas funcionalidades en las distintas máquinas virtuales.
 
