@@ -62,18 +62,18 @@ Indice
 # Fase 1 #
 ## Descripcion de la web ##
 Este proyecto está dirigido a usuarios aficionados a los videojuegos. Se trata de una web donde encontrarás información relativa a cualquier juegos como puede ser su trama, la compañía o la puntuación que les ha otorgado los usuarios. Además podrás ojear los eventos de videojuegos que se celebrarán próximamente y hacerte tus propias listas en tu perfil con los juegos que te interesen.
-- **Parte publica**: El usuario podrá navegar por las entidades de Juego, Compañía, Evento o Artículo.
+- **Parte pública**: El usuario podrá navegar por las entidades de Juego, Compañía, Evento o Artículo.
 
-- **Parte privada**: Gracias al servicio de correo electrónico serás notificado una vez que estés registrado. Para acceder a la parte privada el usuario deberá iniciar sesión para poder puntuar o comentar los juegos/compañías/eventos/artículo, así como ojear o modificar sus listas de juegos. También tendrá el usuario su perfil en el que podrá cambiar de correo electrónico o contraseña.
+- **Parte privada**: Para acceder a esta parte, primero se creará una cuenta del que se recibirá una notificación por el servicio de correo electrónico para confirmar el registro. Una vez iniciada la sesión, el usuario tendrá dispopnible la parte privada para poder puntuar o comentar los juegos/compañías/eventos/artículo, así como ojear o modificar sus listas de juegos. También tendrá el usuario su perfil en el que podrá cambiar de correo electrónico o contraseña.
 En cuanto al administrador, podrá crear fichas de juegos, compañías, eventos o artículos.
 
 ## Entidades principales ##
--   **Usuario**: Se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un nombre de usuario, una Contraseña, una fecha de nacimiento y su rol. Cada usuario registrado tendrá su propia lista de juegos.
+-   **Usuario**: Se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un Nombre de usuario, una Contraseña, una Fecha de Nacimiento y su Rol. Cada usuario registrado tendrá sus propias listas de juegos.
 -   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios.
--   **Compañia**: Información de la compañía encargada de desarrollar un juego, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y descripción. Tiene su propia lista de juegos.
--   **Evento**: Contendrá un Id, Fecha, Lugar, Precio, Descripción y una imagen.
--   **Comentario**: Cada usuario podrá aportar su opinión sobre cualquier juego, compañía o evento. Este portará un Id, Usuario y el propio texto.
--   **Articulo**: Éste portará un Id, Usuario, Título, Cuerpo e Imagen. Todos los usuarios registrados podrán comentar en ellas, y los administradores podra crear artículos.
+-   **Compañía**: Información de la compañía encargada de desarrollar juegos, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y Descripción. Tiene su propia lista de juegos y comentarios.
+-   **Evento**: Contendrá un Id, Fecha, Lugar, Precio, Descripción y una imagen. Puede contener comentarios realizados por los usuarios.
+-   **Comentario**: Cada usuario podrá aportar su opinión sobre cualquier juego, compañía, evento o artículo. Este portará un Id, Usuario y el propio texto.
+-   **Articulo**: Éste portará un Id, Usuario, Título, Cuerpo e Imagen. Todos los usuarios registrados podrán comentar en ellas, y los administradores podrán crear artículos.
 -   **Lista**: Contiene una serie de juegos al gusto del usuario. Este portará un Id, Nombre y lista de juegos.
 
 ## Servicio Interno ##
@@ -81,17 +81,18 @@ El servicio interno implementado consiste en que nuestra aplicación web se comu
 
 # Fase 2 #
 ## Diagrama de Navegacion ##
-En el siguiente diagrama se puede visualizar desde qué páginas se puede navegar hasta cierta página:
+En el siguiente diagrama se puede visualizar la accesibilidad entre las distintas páginas:
 
 ![Diagrama de Navegacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/diagrama%20de%20flujos.png)
 
-En esta fase no se han diferenciado las partes privada y pública. Sin embargo, el funcionamiento de la parte privada, será la posibilidad de visualizar las listas propias, creadas por el usuario, así como el acceso a su propio perfil para configurarlo o visualizar cierto detalles de él.
+En esta fase no se ha diferenciado las partes privada y pública. Sin embargo, el funcionamiento de la parte privada, será la posibilidad de visualizar las listas propias, creadas por el usuario, así como el acceso a su propio perfil para configurarlo o visualizar ciertos detalles de él.
 
 A continuación se dispone de la captura de las distintas pantallas citadas en el diagrama:
 #### Pantalla de inicio sin usuario ####
-Pantalla principal donde se muestra por medio de un carousel imagénes de los juegos más destacados de la actualidad. Debajo del carousel podremos visualizar los últimos artículos escritos. Y en el Navbar están las distintas páginas donde podemos navegar así como los placeholders para hacer login y búsqueda
+Pantalla principal donde se muestra por medio de un carousel imagénes de los juegos más destacados de la actualidad. Debajo del carousel podremos visualizar los últimos artículos escritos y los juegos más populares de la web. Y en el Navbar están las distintas páginas donde podemos navegar así como los placeholders para hacer login y búsqueda.
 
 ![Inicio sin Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home.jpg?raw=true)
+![Inicio sin Usuario2](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home2.jpg?raw=true)
 
 #### Pantalla de inicio con usuario ####
 En caso de que hayamos introducido correctamente los datos de un usuario existente entonces saldrá el nombre del usuario en el Navbar y podremos desplegarlo para acceder a mi perfil para modificar mis datos personales. También podremos acceder a mi lista de juegos o hacer logout para cerrar sesión.
@@ -99,7 +100,7 @@ En caso de que hayamos introducido correctamente los datos de un usuario existen
 ![Inicio con Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/home_loged.jpg?raw=true)
 
 #### Pantalla de Registro de Nuevo Usuario ####
-Si quisieramos crear un nuevo usuario simplemente tendriamos que rellenar el formulario para registrar un nuevo usuario dentro de la base de datos.
+Si quisieramos crear un nuevo usuario simplemente tendríamos que rellenar el formulario para registrar un nuevo usuario dentro de la base de datos.
 
 ![Nuevo Usuario](https://github.com/lalinlulelo/GamesInfo/blob/master/images/register.jpg?raw=true)
 
@@ -129,7 +130,7 @@ La lista de compañías muestra todas las compañias que han desarollado los jue
 ![Lista Compañias](https://github.com/lalinlulelo/GamesInfo/blob/master/images/companies.jpg?raw=true)
 
 #### Compañia ####
-La ficha de compañia contiene la información esencial de cada compañia. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicha compañia.
+La ficha de compañía contiene la información esencial de cada compañia. En caso de que hayamos iniciado sesión también podremos comentar nuestra opinión sobre dicha compañía.
 
 ![Compañia](https://github.com/lalinlulelo/GamesInfo/blob/master/images/company.jpg?raw=true)
 
@@ -144,27 +145,27 @@ La información del usuario puede ser modificada, pulsando el boton "change" cor
 ![Perfil modificado](https://github.com/lalinlulelo/GamesInfo/blob/master/images/profile_modified.jpg?raw=true)
 
 #### Listas de Juegos ####
-Esta seccion del usuario muestra las distintas listas de juego que ha creado el personalmente y por interés.
+Esta sección del usuario muestra las distintas listas de juegos que ha creado personalmente a su interés.
 
 ![Listas de Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/my_list.jpg?raw=true)
 
 #### Nueva Lista de Juegos ####
-Para poder crear una nueva coleccion de juegos, será necesario crear una nueva lista, insertándole un nombre para identificarla.
+Para poder crear una nueva colección de juegos, será necesario crear una nueva lista, insertándole un nombre para identificarla.
 
 ![Nueva Lista de Juegos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/my_list_modified.jpg?raw=true)
 
 #### Añadir Juego a una Lista ####
-para añadir un juego a una lista, el usuario registrado, deberá dirigirse al juego en sí, seleccionar la opción de añadir a lista, y especificar en que lista guardar el juego.
+Para añadir un juego a una lista, el usuario registrado, deberá dirigirse al juego en sí, seleccionar la opción de añadir a lista, y especificar en que lista guardar el juego.
 
 ![Juego en Lista](https://github.com/lalinlulelo/GamesInfo/blob/master/images/game_to_list.jpg?raw=true)
 
 #### Articulo ####
-Desde la página principal se puede acceder a uno de los articulos expuestos, ampliando la información de la noticia.
+Desde la página principal se puede acceder a uno de los artículos expuestos, ampliando la información de la noticia. Podrá comentar en caso de haber iniciado sesión.
 
 ![Articulo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/article.jpg?raw=true)
 
 ### Pantalla de administrador ###
-Si el administrador inicia sesión en su cuenta, en la sección desplegable de su usuario tiene la opción **Admin Features** donde se le dirige a la pantalla expuesta en la imagen, donde mediante un formulario puede añadir uno de los tres posibles tipos de juego, y mediante una lista desplegable, eliminar un elemento del tipo de objeto expuesto, y ya existente:
+Si el administrador inicia sesión en su cuenta, en la sección desplegable de su usuario tiene la opción **Admin Features** donde se le dirige a la pantalla expuesta en la imagen. En esta página mediante un formulario puede añadir un juego, compañía, evento, artículo o eliminar un elemento del tipo de entidad expuesto ya existente.
 
 ![admin](https://github.com/lalinlulelo/GamesInfo/blob/master/images/admin.jpg?raw=true)
 
@@ -174,7 +175,7 @@ En el siguiente diagrama se puede visualizar un modelo de datos donde se represe
 ![Diagrama de Entidad-Relacion](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaER.png)
 
 ## Diagrama UML de Entidades ##
-En el siguiente diagrama UML se puede visualizar los distintos atributos de las entidades y como estan relacionados entre sí.
+En el siguiente diagrama UML se puede visualizar los distintos atributos de las entidades y cómo están relacionados entre sí.
 
 ![Diagrama UML de Entidades](https://github.com/lalinlulelo/GamesInfo/blob/master/images/DiagramaUML.png?raw=true)
 
@@ -262,7 +263,7 @@ Tras comprobar el correcto inicio de ambas aplicaciones, nos dirigimos al icono 
 
 ### 4.- Inicio de pagina web ###
 
-Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e insertamos la **dirección IPv4** de la maquina virtual seguido del puerto de conexión. En nuestro caso: `https://192.168.42.131:8443/`
+Finalmente nos dirigimos a un navegador web (fuera de la máquina virtual) e insertamos la **dirección IPv4** de la máquina virtual seguido del puerto de conexión. En nuestro caso: `https://192.168.42.131:8443/`
 
 ![Pagina Final](https://github.com/lalinlulelo/GamesInfo/blob/master/images/https%20page.jpg?raw=true)
 
@@ -280,7 +281,7 @@ Tras el correcto registro, se puede observar, que efectivamente se ha creado el 
 ![Recibo correos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/mail_confirm.JPG?raw=true)
 
 #### Pantalla de usuario previamente registrado ####
-En caso de que el nombre usuario o el correo ya existan previamente, no permitirá avanzar, y redirigirá de nuevo a la página de registro.
+En caso de que el nombre de usuario o el correo ya existan previamente, redirigirá de nuevo a la página de registro sin completar el registro.
 
 ![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
@@ -394,7 +395,7 @@ Tras ello, se crea la base de datos (con el mismo nombre que la primera vez que 
 
 * `create database gamesinfo_db;`
 
-Se le aportan todos los permisos posibles al servicio web, sobre dicha base de datos con los comandos:
+Se le aporta todos los permisos posibles al servicio web, sobre dicha base de datos con los comandos:
 
 * `grant all privileges on gamesinfo_db.* to root@192.168.33.10;`
 * `flush privileges;`
@@ -576,12 +577,12 @@ Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
     -   E-mail: a.lopezarri@alumnos.urjc.es
-    -   Github: Agustwin
+    -   Github: [Agustwin](https://github.com/Agustwin)
         
 -  **Zhong Hao Lin Chen**:
     -   E-mail: z.linc@alumnos.urjc.es
-    -   Github: lalinlulelo
+    -   Github: [lalinlulelo](https://github.com/lalinlulelo)
         
 -  **Guillermo Meléndez Morales**:
     -   E-mail: g.melendezm@alumnos.urjc.es
-    -   Github: guillemelmor
+    -   Github: [guillemelmor](https://github.com/guillemelmor)
