@@ -8,6 +8,9 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 
 @Entity
@@ -29,7 +32,12 @@ public class Company {
     // evita error de la cache, pero la hace petar
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
+    @Column(nullable = true)
+    @JsonIgnore
+    //@JsonIgnore
     private List<Game> games = new ArrayList<Game>();
+    
+    
     // lista de comentarios que pertenecen a la compañía
     @OneToMany(mappedBy="company", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();

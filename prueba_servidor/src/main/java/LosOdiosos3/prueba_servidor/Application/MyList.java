@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class MyList {
 	// identificacion de la entidd
@@ -13,6 +15,7 @@ public class MyList {
 	
 	// lista de juegos 
 	@ManyToMany(mappedBy="lists")
+	@JsonIgnore
 	private List<Game> games = new ArrayList<Game>();
 	
 	// usuario al que pertenece la lista

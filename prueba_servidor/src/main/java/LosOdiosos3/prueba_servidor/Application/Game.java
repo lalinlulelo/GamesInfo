@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Game {	
 	// identificacion de la entidad
@@ -12,13 +18,17 @@ public class Game {
 	private long id;
 	
 	// compañía a la que pertenece el juego
-	@ManyToOne 
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn(name="company_fk")
+	@JsonIgnore
 	private Company company;
 	
 	// listas a las que pertenece el juego
 	@ManyToMany 
+	@JsonIgnore
 	private List<MyList> lists = new ArrayList<MyList>();
 	// comentarios publicados en el juego
+	
 	@OneToMany(mappedBy="game", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
 	
