@@ -43,9 +43,10 @@ Indice
     + [1.- Instalacion PPA](#1--instalacion-ppa)
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema)
     + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy)
-    + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
-    + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
-    + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
+    + [4.- Generacion de Certificado SSL](#4--generacion-de-certificado-ssl)
+    + [5.- Configuracion de HAProxy](#5--configuracion-de-haproxy)
+    + [6.- Inicio de HAProxy](#6--inicio-de-haproxy)
+    + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web)
   * [Instalacion de Vagrant](#instalacion-de-vagrant)
     + [1.- Instalacion de Ubuntu](#1--instalacion-de-ubuntu)
     + [2.- Configuracion del vagrantfile](#2--configuracion-del-vagrantfile)
@@ -55,6 +56,7 @@ Indice
       - [4.2.- Maquina Virtual de Servicio Interno](#42--maquina-virtual-de-servicio-interno)
       - [4.3.- Maquina Virtual de Servicio Web](#43--maquina-virtual-de-servicio-web)
 - [Integrantes](#integrantes)
+
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -349,6 +351,8 @@ Finalmente se crea el certificado necesario para haproxy, creado a partir de `xi
 * `sudo -s cat xip.io.crt xip.io.key \ | sudo tee xip.io.pem`
 
 Completando este último comando, se puede comprobar que además de contener los tres ficheros anteriores, ahora también se contiene a `xip.io.pem`.
+
+En el caso de que se haya perdido un paso, tiene más información en este [enlace](https://serversforhackers.com/c/using-ssl-certificates-with-haproxy) y en este [enlace](https://www.youtube.com/watch?v=PsZ6MOQXRGM).
 
 ### 5.- Configuracion de HAProxy ###
 Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
