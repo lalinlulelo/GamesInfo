@@ -68,13 +68,13 @@ Este proyecto está dirigido a usuarios aficionados a los videojuegos. Se trata 
 En cuanto al administrador, podrá crear fichas de juegos, compañías, eventos o artículos.
 
 ## Entidades principales ##
--   **Usuario**: Se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un Nombre de usuario, una Contraseña, una Fecha de Nacimiento y su Rol. Cada usuario registrado tendrá sus propias listas de juegos.
--   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y url de la web oficial. También contendrá su correspondiente lista de Comentarios.
+-   **Usuario**: Se distinguirá entre usuario registrado, no registrado y administrador. Éste portará un Id, un Correo, un Nombre de usuario, una Contraseña, una Fecha de Nacimiento, una Foto de perfil y su Rol. Cada usuario registrado tendrá sus propias listas de juegos.
+-   **Juego**: Portará un Id, Nombre, Género, Fecha de Salida, Descripción, Compañía, Puntuación, Imagen y Url de la web oficial. También contendrá su correspondiente lista de comentarios.
 -   **Compañía**: Información de la compañía encargada de desarrollar juegos, ya sea indie o empresa grande. Contiene Id, País, Fecha de Fundación y Descripción. Tiene su propia lista de juegos y comentarios.
--   **Evento**: Contendrá un Id, Fecha, Lugar, Precio, Descripción y una imagen. Puede contener comentarios realizados por los usuarios.
--   **Comentario**: Cada usuario podrá aportar su opinión sobre cualquier juego, compañía, evento o artículo. Este portará un Id, Usuario y el propio texto.
--   **Articulo**: Éste portará un Id, Usuario, Título, Cuerpo e Imagen. Todos los usuarios registrados podrán comentar en ellas, y los administradores podrán crear artículos.
--   **Lista**: Contiene una serie de juegos al gusto del usuario. Este portará un Id, Nombre y lista de juegos.
+-   **Evento**: Contendrá un Id, Fecha, Lugar, Precio, Descripción y una Imagen. Puede contener comentarios realizados por los usuarios.
+-   **Comentario**: Cada usuario podrá aportar su opinión sobre cualquier juego, compañía, evento o artículo. Éste portará un Id, Usuario y el propio Texto.
+-   **Artículo**: Éste portará un Id, Usuario, Título, Copete, Cuerpo e Imagen. Todos los usuarios registrados podrán comentar en ellas, y los administradores podrán crear artículos.
+-   **Lista**: Contiene una serie de juegos al gusto del usuario. Éste portará un Id, Nombre y Lista de juegos.
 
 ## Servicio Interno ##
 El servicio interno implementado consiste en que nuestra aplicación web se comunique con nuestro servicio de correos interno mediante API REST. Su función es simplemente enviar un correo de bienvenida y confirmación a los nuevos usuarios registrados.
@@ -281,7 +281,7 @@ Tras el correcto registro, se puede observar, que efectivamente se ha creado el 
 ![Recibo correos](https://github.com/lalinlulelo/GamesInfo/blob/master/images/mail_confirm.JPG?raw=true)
 
 #### Pantalla de usuario previamente registrado ####
-En caso de que el nombre de usuario o el correo ya existan previamente, redirigirá de nuevo a la página de registro sin completar el registro.
+En caso de que el nombre de usuario o el correo ya existan previamente, te redirigirá de nuevo a la página de nuevo usuario sin completar el registro previo.
 
 ![registro previo](https://github.com/lalinlulelo/GamesInfo/blob/master/images/already_exist.JPG?raw=true)
 
@@ -315,7 +315,7 @@ Tras guardar el fichero, se puede comprobar su correcto funcionamiento mediante 
 * `ping 192.168.33.10`
 
 ### 3.- Inicializacion ###
-A continuación nos dispondremos a configurar el Sistema Operativo creado para tener los programas necesarios para la correcta ejecución de los servicios:
+A continuación, nos dispondremos a configurar el Sistema Operativo creado para tener los programas necesarios para la correcta ejecución de los servicios:
 * Arrancamos el sistema operativo mediante el siguiente comando
 
  * `vagrant ssh`
@@ -336,7 +336,7 @@ A continuación nos dispondremos a configurar el Sistema Operativo creado para t
   * `sudo apt-get install mysql-workbench`
   
 ### 4.- Division de Servicios ###
-Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso tres veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile`declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
+Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso tres veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile` declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
 
 * Servicio Web 1: `192.168.33.10`
 
@@ -553,7 +553,7 @@ HAProxy ofrece principalmente tres algoritmos de balanceo:
     
 Puesto que en esta aplicación web se realiza el uso de **tokens**, para eviar la pérdida de ellos, se empleará el algoritmo basado en la IP origen y/o destino, sustituyendo por tanto el `roundrobin` por `source`. 
 
-El archivo debería quedar como se observa en la imagen a continuación:
+El archivo debería quedar como se observa en la imagen de a continuación:
 
 <p align="center">
   <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
@@ -569,7 +569,7 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 * `sudo service haproxy start`
 
 ### 7.- Inicio de HAProxy en Navegador Web ###
-Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `https://192.168.33.16/haproxy?stats` para poder observar los datos del balanceador:
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `https://192.168.33.16/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
