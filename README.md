@@ -39,14 +39,6 @@ Indice
       - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
       - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
 - [Fase 4](#fase-4)
-  * [Instrucciones para la instalacion de HAProxy](#instrucciones-para-la-instalacion-de-haproxy)
-    + [1.- Instalacion PPA](#1--instalacion-ppa)
-    + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema)
-    + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy)
-    + [4.- Generacion de Certificado SSL](#4--generacion-de-certificado-ssl)
-    + [5.- Configuracion de HAProxy](#5--configuracion-de-haproxy)
-    + [6.- Inicio de HAProxy](#6--inicio-de-haproxy)
-    + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web)
   * [Instalacion de Vagrant](#instalacion-de-vagrant)
     + [1.- Instalacion de Ubuntu](#1--instalacion-de-ubuntu)
     + [2.- Configuracion del vagrantfile](#2--configuracion-del-vagrantfile)
@@ -55,7 +47,16 @@ Indice
       - [4.1.- Maquina Virtual de Base de Datos](#41--maquina-virtual-de-base-de-datos)
       - [4.2.- Maquina Virtual de Servicio Interno](#42--maquina-virtual-de-servicio-interno)
       - [4.3.- Maquina Virtual de Servicio Web](#43--maquina-virtual-de-servicio-web)
+  * [Instrucciones para la instalacion de HAProxy](#instrucciones-para-la-instalacion-de-haproxy)
+    + [1.- Instalacion PPA](#1--instalacion-ppa)
+    + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema)
+    + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy)
+    + [4.- Generacion de Certificado SSL](#4--generacion-de-certificado-ssl)
+    + [5.- Configuracion de HAProxy](#5--configuracion-de-haproxy)
+    + [6.- Inicio de HAProxy](#6--inicio-de-haproxy)
+    + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web)
 - [Integrantes](#integrantes)
+
 
 
 # Fase 1 #
@@ -285,141 +286,6 @@ En caso de que el nombre usuario o el correo ya existan previamente, no permitir
 
 # Fase 4 #
 
-## Instrucciones para la instalacion de HAProxy ##
-
-### 1.- Instalacion PPA ###
-Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
-
-* `add-apt-repository ppa:vbernat/haproxy-1.5`
-
-### 2.- Actualizacion del sistema ###
-El siguiente paso es actualizar el sistema:
-
-* `apt-get update`
-* `apt-get dist-upgrade`
-
-### 3.- Instalacion de HAProxy ###
-Tras la correcta actualización, se instala HAProxy:
-
-* `apt-get install haproxy`
-
-### 4.- Generacion de Certificado SSL ###
-Debido a que nuestros servidores web emplean certificado y por tanto protocolo https, es necesario generar un certificado para que haproxy permita la redirección a dichos servidores. Para ello lo primero que se hará es crear un directorio donde guardar las claves y certificados:
-
-* `sudo mkdir /etc/ssl/xip.io`
-
-A continuación nos dirigimos a dicho directorio creado para ello realizamos esta serie de comandos:
-
-* `cd`
-* `cd /vagrant`
-* `cd /etc`
-* `cd ssl`
-* `cd xip.io`
-
-Y creamos el fichero que contiene la clave privada:
-
-* `sudo openssl genrsa -out xip.io.key 1024`
-
-Tras su creación, se crea el primer certificado con el siguiente comando:
-
-* `sudo openssl req -new -key xip.io.key \-out xip.io.csr`
-
-El cual nos mostrará un formulario que se completará como se ve a continuación:
-<br>
-`> Country Name (2 letter code) [AU]:US`<br>
-`> State or Province Name (full name) [Some-State]:Connecticut`<br>
-`> Locality Name (eg, city) []:New Haven`<br>
-`> Organization Name (eg, company) [Internet Widgits Pty Ltd]:SFH`<br>
-`> Organizational Unit Name (eg, section) []:`<br>
-`> Common Name (e.g. server FQDN or YOUR name) []:*.xip.io`<br>
-`> Email Address []:gamesinfourjc@gmail-com`<br>
-`> Please enter the following 'extra' attributes to be sent with your certificate request`<br>
-`> A challenge password []:gugus`<br>
-`> An optional company name []:URJC`<br>
-
-Tras ello, creamos el segundo certificado:
-
-* `sudo openssl x509 -req -days 365 -in xip.io.csr \-signkey xip.io.key \-out xip.io.crt`
-
-Tras su finalización se podrá comprobar mediante el comando 'dir' que se tienen los siguientes ficheros en el directorio:
-  * `xip.io.key`
-  * `xip.io.csr`
-  * `xip.io.crt`
-
-Finalmente se crea el certificado necesario para haproxy, creado a partir de `xip.io.key`y `xip.io.crt`, mediante el comando:
-
-* `sudo -s cat xip.io.crt xip.io.key \ | sudo tee xip.io.pem`
-
-Completando este último comando, se puede comprobar que además de contener los tres ficheros anteriores, ahora también se contiene a `xip.io.pem`.
-
-En el caso de que se haya perdido un paso, tiene más información en este [enlace](https://serversforhackers.com/c/using-ssl-certificates-with-haproxy) y en este [enlace](https://www.youtube.com/watch?v=PsZ6MOQXRGM).
-
-### 5.- Configuracion de HAProxy ###
-Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
-
-* `chmod +rwx haproxy.cfg`
-
-Y se procede a editarlo:
-
-* `sudo nano haproxy.cfg`
-
-En él se añaden las siguientes líneas:
-
-* Debajo de daemon:
-  * `maxconn 3072`
-  
-* En la sección defaults:
-  * `option forwardfor`
-  * `option http-server-close`
-  
-* Y se crea una nueva sección añadiendo:
-  * `listen haproxy`<br>
-       `bind 0.0.0.0:443 ssl crt /etc/ssl/xip.io/xip.io.pem`<br>
-       `mode http`<br>
-       `stats enable`<br>
-       `stats uri /haproxy?stats`<br>
-       `balance roundrobin`<br>
-       `option http-server-close`<br>
-       `option forwardfor`<br>
-       `reqadd X-Forwarded-Proto:\ https`<br>
-       `reqadd X-Forwarded-Port:\ 443`<br>
-       `option forwardfor if-none`<br>
-       `option abortclose`<br>
-       `server nombre1 direccionIP:Puerto`<br>
-       `server nombre2 direccionIP:Puerto`<br>
-       `...`
-       
-HAProxy ofrece principalmente tres algoritmos de balanceo:
-  
-  * **Basado en Round Robin**: el balanceador selecciona a los distintos servidores por turnos
-    * `balance roundrobin`
-  * **Basado en el numero de conexiones**: el balanceador selecciona el servidor con menor número de conexiones, empleando Round Robin en aquellos empatados
-    * `balance leastconn`
-  * **Basado en la IP origen y/o destino**: el balanceador selecciona el servidor en función del seleccionado inicialmente a un usuario.
-    * `balance source`
-    
-Puesto que en esta aplicación web se realiza el uso de **tokens**, para eviar la pérdida de ellos, se empleará el algoritmo basado en la IP origen y/o destino, sustituyendo por tanto el `roundrobin` por `source`. 
-
-El archivo debería quedar como se observa en la imagen a continuación:
-
-<p align="center">
-  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
-</p>
-
-Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
-
-* `sudo service haproxy restart`
-
-### 6.- Inicio de HAProxy ###
-Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
-
-* `sudo service haproxy start`
-
-### 7.- Inicio de HAProxy en Navegador Web ###
-Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `192.168.42.133/haproxy?stats` para poder observar los datos del balanceador:
-
- ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
-
 ## Instalacion de Vagrant ##
 Para poder duplicar y separar los distintos servicios de la aplicación web (servicio web, servicio interno y bases de datos), fue necesaria la instalación de Vagrant. Para ello fue necesaria la descarga de [Vagrant](https://www.vagrantup.com/downloads.html), así como la descarga e instalación de [Virtual Box](https://www.virtualbox.org/wiki/Downloads), todo ello en el Sistema Operativo Host. Tras la ejecución del ejecutable .msi de la propia página de vagrant, se han de realizar los siguientes pasos:
 
@@ -569,7 +435,142 @@ A `none`:
 
 Y construir como en el anterior apartado el debido fichero .jar. Tras su construcción se copia y pega en el mismo directorio que el archvo `vagrantfile` de esta máquina virtual y se procede a su ejecución con el siguiente comando donde se detallan ciertas propiedades de la aplicación (recordemos que el usuario declarado en la base de datos fue `root` y su contraseña `gugus`, que la dirección IP de la máquina virtual de la base de datos fue `192.168.33.12`y que la base de datos creada se llama `gamesinfo_db`):
 
-* `java -jar prueba_servidor-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql://192.168.33.12:3306/gamesinfo_db?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="root" --spring.datasource.password="gugus" --spring.jpa.hibernate.dll-auto="update"`
+* `java -jar prueba_servidor-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql://192.168.33.12:3306/gamesinfo_db?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="root" --spring.datasource.password="gugus" --spring.jpa.hibernate.ddl-auto="update"`
+
+## Instrucciones para la instalacion de HAProxy ##
+
+### 1.- Instalacion PPA ###
+Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
+
+* `add-apt-repository ppa:vbernat/haproxy-1.5`
+
+### 2.- Actualizacion del sistema ###
+El siguiente paso es actualizar el sistema:
+
+* `apt-get update`
+* `apt-get dist-upgrade`
+
+### 3.- Instalacion de HAProxy ###
+Tras la correcta actualización, se instala HAProxy:
+
+* `apt-get install haproxy`
+
+### 4.- Generacion de Certificado SSL ###
+Debido a que nuestros servidores web emplean certificado y por tanto protocolo https, es necesario generar un certificado para que haproxy permita la redirección a dichos servidores. Para ello lo primero que se hará es crear un directorio donde guardar las claves y certificados:
+
+* `sudo mkdir /etc/ssl/xip.io`
+
+A continuación nos dirigimos a dicho directorio creado para ello realizamos esta serie de comandos:
+
+* `cd`
+* `cd /vagrant`
+* `cd /etc`
+* `cd ssl`
+* `cd xip.io`
+
+Y creamos el fichero que contiene la clave privada:
+
+* `sudo openssl genrsa -out xip.io.key 1024`
+
+Tras su creación, se crea el primer certificado con el siguiente comando:
+
+* `sudo openssl req -new -key xip.io.key \-out xip.io.csr`
+
+El cual nos mostrará un formulario que se completará como se ve a continuación:
+<br>
+`> Country Name (2 letter code) [AU]:US`<br>
+`> State or Province Name (full name) [Some-State]:Connecticut`<br>
+`> Locality Name (eg, city) []:New Haven`<br>
+`> Organization Name (eg, company) [Internet Widgits Pty Ltd]:SFH`<br>
+`> Organizational Unit Name (eg, section) []:`<br>
+`> Common Name (e.g. server FQDN or YOUR name) []:*.xip.io`<br>
+`> Email Address []:gamesinfourjc@gmail-com`<br>
+`> Please enter the following 'extra' attributes to be sent with your certificate request`<br>
+`> A challenge password []:gugus`<br>
+`> An optional company name []:URJC`<br>
+
+Tras ello, creamos el segundo certificado:
+
+* `sudo openssl x509 -req -days 365 -in xip.io.csr \-signkey xip.io.key \-out xip.io.crt`
+
+Tras su finalización se podrá comprobar mediante el comando 'dir' que se tienen los siguientes ficheros en el directorio:
+  * `xip.io.key`
+  * `xip.io.csr`
+  * `xip.io.crt`
+
+Finalmente se crea el certificado necesario para haproxy, creado a partir de `xip.io.key`y `xip.io.crt`, mediante el comando:
+
+* `sudo -s cat xip.io.crt xip.io.key \ | sudo tee xip.io.pem`
+
+Completando este último comando, se puede comprobar que además de contener los tres ficheros anteriores, ahora también se contiene a `xip.io.pem`.
+
+En el caso de que se haya perdido un paso, tiene más información en este [enlace](https://serversforhackers.com/c/using-ssl-certificates-with-haproxy) y en este [enlace](https://www.youtube.com/watch?v=PsZ6MOQXRGM).
+
+### 5.- Configuracion de HAProxy ###
+Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
+
+* `chmod +rwx haproxy.cfg`
+
+Y se procede a editarlo:
+
+* `sudo nano haproxy.cfg`
+
+En él se añaden las siguientes líneas:
+
+* Debajo de daemon:
+  * `maxconn 3072`
+  
+* En la sección defaults:
+  * `option forwardfor`
+  * `option http-server-close`
+  
+* Y se crea una nueva sección añadiendo:
+  * `listen haproxy`<br>
+       `bind 0.0.0.0:443 ssl crt /etc/ssl/xip.io/xip.io.pem`<br>
+       `mode http`<br>
+       `stats enable`<br>
+       `stats uri /haproxy?stats`<br>
+       `balance roundrobin`<br>
+       `option http-server-close`<br>
+       `option forwardfor`<br>
+       `reqadd X-Forwarded-Proto:\ https`<br>
+       `reqadd X-Forwarded-Port:\ 443`<br>
+       `option forwardfor if-none`<br>
+       `option abortclose`<br>
+       `server nombre1 direccionIP:Puerto`<br>
+       `server nombre2 direccionIP:Puerto`<br>
+       `...`
+       
+HAProxy ofrece principalmente tres algoritmos de balanceo:
+  
+  * **Basado en Round Robin**: el balanceador selecciona a los distintos servidores por turnos
+    * `balance roundrobin`
+  * **Basado en el numero de conexiones**: el balanceador selecciona el servidor con menor número de conexiones, empleando Round Robin en aquellos empatados
+    * `balance leastconn`
+  * **Basado en la IP origen y/o destino**: el balanceador selecciona el servidor en función del seleccionado inicialmente a un usuario.
+    * `balance source`
+    
+Puesto que en esta aplicación web se realiza el uso de **tokens**, para eviar la pérdida de ellos, se empleará el algoritmo basado en la IP origen y/o destino, sustituyendo por tanto el `roundrobin` por `source`. 
+
+El archivo debería quedar como se observa en la imagen a continuación:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
+</p>
+
+Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+
+* `sudo service haproxy restart`
+
+### 6.- Inicio de HAProxy ###
+Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+
+* `sudo service haproxy start`
+
+### 7.- Inicio de HAProxy en Navegador Web ###
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `https://192.168.33.16/haproxy?stats` para poder observar los datos del balanceador:
+
+ ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
