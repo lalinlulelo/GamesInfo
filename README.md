@@ -1,5 +1,5 @@
 # GamesInfo :cat:
-
+:smiley::gun:
 
 Indice
 =================
