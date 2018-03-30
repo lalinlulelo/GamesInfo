@@ -1,5 +1,5 @@
 # GamesInfo :cat:
-:smiley::gun:
+:blush::gun:
 
 Indice
 =================
@@ -301,7 +301,56 @@ Tras la correcta actualización, se instala HAProxy:
 
 * `apt-get install haproxy`
 
-### 4.- Configuracion de HAProxy ###
+### 4.- Generacion de Certificado SSL ###
+Debido a que nuestros servidores web emplean certificado y por tanto protocolo https, es necesario generar un certificado para que haproxy permita la redirección a dichos servidores. Para ello lo primero que se hará es crear un directorio donde guardar las claves y certificados:
+
+* `sudo mkdir /etc/ssl/xip.io`
+
+A continuación nos dirigimos a dicho directorio creado para ello realizamos esta serie de comandos:
+
+* `cd`
+* `cd /vagrant`
+* `cd /etc`
+* `cd ssl`
+* `cd xip.io`
+
+Y creamos el fichero que contiene la clave privada:
+
+* `sudo openssl genrsa -out xip.io.key 1024`
+
+Tras su creación, se crea el primer certificado con el siguiente comando:
+
+* `sudo openssl req -new -key xip.io.key \-out xip.io.csr`
+
+El cual nos mostrará un formulario que se completará como se ve a continuación:
+<br>
+`> Country Name (2 letter code) [AU]:US`<br>
+`> State or Province Name (full name) [Some-State]:Connecticut`<br>
+`> Locality Name (eg, city) []:New Haven`<br>
+`> Organization Name (eg, company) [Internet Widgits Pty Ltd]:SFH`<br>
+`> Organizational Unit Name (eg, section) []:`<br>
+`> Common Name (e.g. server FQDN or YOUR name) []:*.xip.io`<br>
+`> Email Address []:gamesinfourjc@gmail-com`<br>
+`> Please enter the following 'extra' attributes to be sent with your certificate request`<br>
+`> A challenge password []:gugus`<br>
+`> An optional company name []:URJC`<br>
+
+Tras ello, creamos el segundo certificado:
+
+* `sudo openssl x509 -req -days 365 -in xip.io.csr \-signkey xip.io.key \-out xip.io.crt`
+
+Tras su finalización se podrá comprobar mediante el comando 'dir' que se tienen los siguientes ficheros en el directorio:
+  * `xip.io.key`
+  * `xip.io.csr`
+  * `xip.io.crt`
+
+Finalmente se crea el certificado necesario para haproxy, creado a partir de `xip.io.key`y `xip.io.crt`, mediante el comando:
+
+* `sudo -s cat xip.io.crt xip.io.key \ | sudo tee xip.io.pem`
+
+Completando este último comando, se puede comprobar que además de contener los tres ficheros anteriores, ahora también se contiene a `xip.io.pem`.
+
+### 5.- Configuracion de HAProxy ###
 Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
 
 * `chmod +rwx haproxy.cfg`
@@ -320,23 +369,22 @@ En él se añaden las siguientes líneas:
   * `option http-server-close`
   
 * Y se crea una nueva sección añadiendo:
-  * `listen webfarm 0.0.0.0:80`<br>
+  * `listen haproxy`<br>
+       `bind 0.0.0.0:443 ssl crt /etc/ssl/xip.io/xip.io.pem`<br>
        `mode http`<br>
        `stats enable`<br>
        `stats uri /haproxy?stats`<br>
        `balance roundrobin`<br>
-       `option httpclose`<br>
+       `option http-server-close`<br>
        `option forwardfor`<br>
+       `reqadd X-Forwarded-Proto:\ https`<br>
+       `reqadd X-Forwarded-Port:\ 443`<br>
+       `option forwardfor if-none`<br>
+       `option abortclose`<br>
        `server nombre1 direccionIP:Puerto`<br>
        `server nombre2 direccionIP:Puerto`<br>
        `...`
        
-El archivo debería quedar como se observa en la imagen a continuación:
-
-<p align="center">
-  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
-</p>
-
 HAProxy ofrece principalmente tres algoritmos de balanceo:
   
   * **Basado en Round Robin**: el balanceador selecciona a los distintos servidores por turnos
@@ -348,16 +396,22 @@ HAProxy ofrece principalmente tres algoritmos de balanceo:
     
 Puesto que en esta aplicación web se realiza el uso de **tokens**, para eviar la pérdida de ellos, se empleará el algoritmo basado en la IP origen y/o destino, sustituyendo por tanto el `roundrobin` por `source`. 
 
+El archivo debería quedar como se observa en la imagen a continuación:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy.jpg?raw=true">
+</p>
+
 Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
 
 * `sudo service haproxy restart`
 
-### 5.- Inicio de HAProxy ###
+### 6.- Inicio de HAProxy ###
 Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 
 * `sudo service haproxy start`
 
-### 6.- Inicio de HAProxy en Navegador Web ###
+### 7.- Inicio de HAProxy en Navegador Web ###
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la direccion local seguida de `/haproxy?stats`  en nuestro caso sería `192.168.42.133/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
