@@ -93,8 +93,19 @@
 			<artifactId>spring-session</artifactId>
 	</dependency>
 	<dependency>
-		<groupId>com.hazelcast</groupId>
-		<artifactId>hazelcast</artifactId>
+    	<groupId>com.hazelcast</groupId>
+    	<artifactId>hazelcast</artifactId>
+	    <version>3.9.3</version>
 	</dependency>
+	<dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-spring</artifactId>
+        <version>${hazelcast.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.hazelcast</groupId>
+        <artifactId>hazelcast-wm</artifactId>
+        <version>${hazelcast.version}</version>
+    </dependency>
   </dependencies>
 </project>

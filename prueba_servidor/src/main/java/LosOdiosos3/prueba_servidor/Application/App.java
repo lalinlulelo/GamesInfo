@@ -26,28 +26,21 @@ import com.hazelcast.config.NetworkConfig;
 @SpringBootApplication
 @EnableHazelcastHttpSession
 public class App {
+	
     public static void main( String[] args ){    	
     	SpringApplication.run(App.class, args);
     }
-    
-    
-    @Value("${hazelcast.member}")
-	private String HAZELCAST_MEMBER;    
     private static final Log LOG = LogFactory.getLog(App.class);
     
     @Bean
     public Config config() {
-    	Config config = new Config();
-    	NetworkConfig network = config.getNetworkConfig();
-    	
-    	JoinConfig joinConfig = config.getNetworkConfig().getJoin();
-    	joinConfig.getMulticastConfig().setEnabled(false);
-    	joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList(HAZELCAST_MEMBER));
-    	network.getInterfaces().setEnabled(true).addInterface(HAZELCAST_MEMBER);
-    	
-    	return config;
+	    Config config = new Config();
+	    JoinConfig joinConfig = config.getNetworkConfig().getJoin();	    
+	    joinConfig.getMulticastConfig().setEnabled(false);
+	    joinConfig.getTcpIpConfig().addMember( "192.168.33.13" ).addMember( "168.192.33.10" )
+	    .setEnabled( true );
+	    return config;
     }
-    
     
     @Bean
     public CacheManager cacheManager() {

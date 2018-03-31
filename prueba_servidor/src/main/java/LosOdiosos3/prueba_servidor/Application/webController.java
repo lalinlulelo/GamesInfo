@@ -34,6 +34,7 @@ public class webController {
 	@RequestMapping("/")
 	public String inicio (Model model, HttpSession usuario, HttpServletRequest request) throws ParseException {
 		// en caso de no estar inicializada la variable, se inicializa
+		
 		if(usuario.getAttribute("registered") == null) {
 			usuario.setAttribute("registered", false);			
 		}
@@ -47,6 +48,7 @@ public class webController {
 		// condicionales para mostrar u ocultar contenido		
 		model.addAttribute("registered", usuario.getAttribute("registered"));		
 		boolean aux = !(Boolean) usuario.getAttribute("registered");	
+		//boolean aux = false;
 		if(aux == false) {
 			model.addAttribute("name", usuario.getAttribute("name"));
 			model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
@@ -59,8 +61,9 @@ public class webController {
 		model.addAttribute("admin", usuario.getAttribute("admin"));
 		
 		// deshabilitacion del comando alert que saluda al usuario		
-		usuario.setAttribute("alert", "  ");
+		usuario.setAttribute("alert", " "); 
 		model.addAttribute("alert", usuario.getAttribute("alert"));
+		//model.addAttribute("alert", " ");
 		model.addAttribute("hello", " ");
 		
 		// atributos del token
