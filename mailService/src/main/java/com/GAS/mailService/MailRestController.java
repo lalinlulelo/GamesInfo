@@ -46,7 +46,7 @@ public class MailRestController {
 			// Get a Properties object
 			Properties props = System.getProperties();
 			props.setProperty("mail.smtps.host", "smtp.gmail.com");
-			props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+			//props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
 			props.setProperty("mail.smtp.socketFactory.fallback", "false");
 			props.setProperty("mail.smtp.port", "465");
 			props.setProperty("mail.smtp.socketFactory.port", "465");
