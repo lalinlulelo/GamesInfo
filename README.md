@@ -592,36 +592,36 @@ Para poder emplear Hazelcast en nuestro proyecto de la aplicación web, es neces
     `    <groupId>com.fasterxml.jackson.core</groupId>`<br>
     `    <artifactId>jackson-databind</artifactId>`<br>
     `    <version>2.5.3</version>`<br>
-    `</dependency`<br>
+    `</dependency>`<br>
   * Jackson Datatype:<br>
     `<dependency>`<br>
     `    <groupId>com.fasterxml.jackson.datatype</groupId>`<br>
     `    <artifactId>jackson-datatype-jsr310</artifactId>`<br>
     `    <version>2.5.3</version>`<br>
-    `</dependency`<br>
+    `</dependency>`<br>
   * Springframework Session:<br>
     `<dependency>`<br>
     `    <groupId>org.springframework.session</groupId>`<br>
     `    <artifactId>spring-session</artifactId>`<br> 
-    `</dependency`<br>
+    `</dependency>`<br>
   * Hazelcast:<br>
     `<dependency>`<br>
     `    <groupId>com.hazelcast</groupId>`<br>
     `    <artifactId>hazelcast</artifactId>`<br>
     `    <version>3.9.3</version>`<br>
-    `</dependency`<br>
+    `</dependency>`<br>
   * Hazelcast Spring:<br>
     `<dependency>`<br>
     `    <groupId>com.hazelcast</groupId>`<br>
     `    <artifactId>hazelcast-spring</artifactId>`<br>
     `    <version>${hazelcast.version}</version>`<br>
-    `</dependency`<br>
+    `</dependency>`<br>
   * Hazelcast WM<br>
     `<dependency>`<br>
     `    <groupId>com.hazelcast</groupId>`<br>
     `    <artifactId>hazelcast-wm</artifactId>`<br>
     `    <version>${hazelcast.version}</version>`<br>
-    `</dependency`<br>
+    `</dependency>`<br>
 
 ### 2.- Implementacion de Hazelcast ###
 Para hacer funcional Hazelcast en nuestro proyecto, despues de haberlo actualizado mediante `Maven > Maven Update`, nos dirigimos a la clase principal del proyecto e insertamos el siguiente `@Bean`, donde las dos direcciones IP presentes son las de los dos servidores que portarán esta aplicación:
@@ -629,10 +629,9 @@ Para hacer funcional Hazelcast en nuestro proyecto, despues de haberlo actualiza
 `@Bean`<br>
 `public Config config() {`<br>
 `   Config config = new Config();`<br>
-`   JoinConfig joinConfig = config.getNetworkConfig().getJoin();`<br>   
+`   JoinConfig joinConfig = config.getNetworkConfig().getJoin();`  
 `   joinConfig.getMulticastConfig().setEnabled(false);`<br>
-`   joinConfig.getTcpIpConfig().addMember( "192.168.33.13" ).addMember( "168.192.33.10" )`<br>
-`   .setEnabled( true );`<br>
+`   joinConfig.getTcpIpConfig().addMember( "192.168.33.13" ).addMember( "168.192.33.10" ).setEnabled( true );`<br>
 `   return config;`<br>
 `}`<br>
 
