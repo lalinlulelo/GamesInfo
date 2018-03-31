@@ -55,7 +55,11 @@ Indice
     + [5.- Configuracion de HAProxy](#5--configuracion-de-haproxy)
     + [6.- Inicio de HAProxy](#6--inicio-de-haproxy)
     + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web)
+  * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
+    + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
+    + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
 - [Integrantes](#integrantes)
+
 
 
 
@@ -572,6 +576,65 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `https://192.168.33.16/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
+ 
+## Instalacion e Implementacion de Hazelcast ##
+Para evitar perder la sesión durante la caída de un servidor se emplea la replicación de sesión mediante Hazelcast, empleando una caché distribuida entre los servidores presentes en un balanceador:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Hazelcast%20Explanation.png?raw=true">
+</p>
+
+### 1.- Instalacion de Hazelcast ###
+Para poder emplear Hazelcast en nuestro proyecto de la aplicación web, es necesario insertar las siguientes dependencias en el fichero `pom.xml`:
+
+  * Jackson Core:
+     `<dependency>`<br>
+        `<groupId>com.fasterxml.jackson.core</groupId>`<br>
+        `<artifactId>jackson-databind</artifactId>`<br>
+        `<version>2.5.3</version>`<br>
+    `</dependency`<br>
+  * Jackson Datatype:
+    `<dependency>`<br>
+        `<groupId>com.fasterxml.jackson.datatype</groupId>`<br>
+        `<artifactId>jackson-datatype-jsr310</artifactId>`<br>
+        `<version>2.5.3</version>`<br>
+    `</dependency`<br>
+  * Springframework Session:
+    `<dependency>`<br>
+        `<groupId>org.springframework.session</groupId>`<br>
+        `<artifactId>spring-session</artifactId>`<br> 
+    `</dependency`<br>
+  * Hazelcast:
+    `<dependency>`<br>
+        `<groupId>com.hazelcast</groupId>`<br>
+        `<artifactId>hazelcast</artifactId>`<br>
+        `<version>3.9.3</version>`<br>
+    `</dependency`<br>
+  * Hazelcast Spring:
+    `<dependency>`<br>
+        `<groupId>com.hazelcast</groupId>`<br>
+        `<artifactId>hazelcast-spring</artifactId>`<br>
+        `<version>${hazelcast.version}</version>`<br>
+    `</dependency`<br>
+  * Hazelcast WM
+    `<dependency>`<br>
+        `<groupId>com.hazelcast</groupId>`<br>
+        `<artifactId>hazelcast-wm</artifactId>`<br>
+        `<version>${hazelcast.version}</version>`<br>
+    `</dependency`<br>
+
+### 2.- Implementacion de Hazelcast ###
+Para hacer funcional Hazelcast en nuestro proyecto, despues de haberlo actualizado mediante `Maven > Maven Update`, nos dirigimos a la clase principal del proyecto e insertamos el siguiente `@Bean`, donde las dos direcciones IP presentes son las de los dos servidores que portarán esta aplicación:
+<br>
+`@Bean`<br>
+`public Config config() {`<br>
+`   Config config = new Config();`<br>
+`   JoinConfig joinConfig = config.getNetworkConfig().getJoin();`<br>   
+`   joinConfig.getMulticastConfig().setEnabled(false);`<br>
+`   joinConfig.getTcpIpConfig().addMember( "192.168.33.13" ).addMember( "168.192.33.10" )`<br>
+`   .setEnabled( true );`<br>
+`   return config;`<br>
+`}`<br>
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
