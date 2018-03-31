@@ -587,40 +587,40 @@ Para evitar perder la sesión durante la caída de un servidor se emplea la repl
 ### 1.- Instalacion de Hazelcast ###
 Para poder emplear Hazelcast en nuestro proyecto de la aplicación web, es necesario insertar las siguientes dependencias en el fichero `pom.xml`:
 
-  * Jackson Core:
-     `<dependency>`<br>
-        `<groupId>com.fasterxml.jackson.core</groupId>`<br>
-        `<artifactId>jackson-databind</artifactId>`<br>
-        `<version>2.5.3</version>`<br>
-    `</dependency`<br>
-  * Jackson Datatype:
+  * Jackson Core:<br>
     `<dependency>`<br>
-        `<groupId>com.fasterxml.jackson.datatype</groupId>`<br>
-        `<artifactId>jackson-datatype-jsr310</artifactId>`<br>
-        `<version>2.5.3</version>`<br>
+    `    <groupId>com.fasterxml.jackson.core</groupId>`<br>
+    `    <artifactId>jackson-databind</artifactId>`<br>
+    `    <version>2.5.3</version>`<br>
     `</dependency`<br>
-  * Springframework Session:
+  * Jackson Datatype:<br>
     `<dependency>`<br>
-        `<groupId>org.springframework.session</groupId>`<br>
-        `<artifactId>spring-session</artifactId>`<br> 
+    `    <groupId>com.fasterxml.jackson.datatype</groupId>`<br>
+    `    <artifactId>jackson-datatype-jsr310</artifactId>`<br>
+    `    <version>2.5.3</version>`<br>
     `</dependency`<br>
-  * Hazelcast:
+  * Springframework Session:<br>
     `<dependency>`<br>
-        `<groupId>com.hazelcast</groupId>`<br>
-        `<artifactId>hazelcast</artifactId>`<br>
-        `<version>3.9.3</version>`<br>
+    `    <groupId>org.springframework.session</groupId>`<br>
+    `    <artifactId>spring-session</artifactId>`<br> 
     `</dependency`<br>
-  * Hazelcast Spring:
+  * Hazelcast:<br>
     `<dependency>`<br>
-        `<groupId>com.hazelcast</groupId>`<br>
-        `<artifactId>hazelcast-spring</artifactId>`<br>
-        `<version>${hazelcast.version}</version>`<br>
+    `    <groupId>com.hazelcast</groupId>`<br>
+    `    <artifactId>hazelcast</artifactId>`<br>
+    `    <version>3.9.3</version>`<br>
     `</dependency`<br>
-  * Hazelcast WM
+  * Hazelcast Spring:<br>
     `<dependency>`<br>
-        `<groupId>com.hazelcast</groupId>`<br>
-        `<artifactId>hazelcast-wm</artifactId>`<br>
-        `<version>${hazelcast.version}</version>`<br>
+    `    <groupId>com.hazelcast</groupId>`<br>
+    `    <artifactId>hazelcast-spring</artifactId>`<br>
+    `    <version>${hazelcast.version}</version>`<br>
+    `</dependency`<br>
+  * Hazelcast WM<br>
+    `<dependency>`<br>
+    `    <groupId>com.hazelcast</groupId>`<br>
+    `    <artifactId>hazelcast-wm</artifactId>`<br>
+    `    <version>${hazelcast.version}</version>`<br>
     `</dependency`<br>
 
 ### 2.- Implementacion de Hazelcast ###
