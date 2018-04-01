@@ -47,7 +47,7 @@ Indice
       - [4.1.- Maquina Virtual de Base de Datos](#41--maquina-virtual-de-base-de-datos)
       - [4.2.- Maquina Virtual de Servicio Interno](#42--maquina-virtual-de-servicio-interno)
       - [4.3.- Maquina Virtual de Servicio Web](#43--maquina-virtual-de-servicio-web)
-  * [Instrucciones para la instalacion de HAProxy](#instrucciones-para-la-instalacion-de-haproxy)
+  * [Instrucciones para la instalacion de HAProxy para Servicio Web](#instrucciones-para-la-instalacion-de-haproxy-para-servicio-web)
     + [1.- Instalacion PPA](#1--instalacion-ppa)
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema)
     + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy)
@@ -55,13 +55,17 @@ Indice
     + [5.- Configuracion de HAProxy](#5--configuracion-de-haproxy)
     + [6.- Inicio de HAProxy](#6--inicio-de-haproxy)
     + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web)
+  * [Instrucciones para la instalacion de HAProxy para Servicio Interno](#instrucciones-para-la-instalacion-de-haproxy-para-servicio-interno)
+    + [1.- Instalacion PPA](#1--instalacion-ppa-1)
+    + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-1)
+    + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-1)
+    + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
+    + [6.- Inicio de HAProxy](#6--inicio-de-haproxy-1)
+    + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web-1)
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
 - [Integrantes](#integrantes)
-
-
-
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -354,7 +358,9 @@ Para poder realizar la división de servicios en distintas máquinas virtuales, 
 
 * Base de Datos 2: `192.168.33.15`
 
-* Balanceador: `192.168.33.16`
+* Balanceador Servidor Web: `192.168.33.16`
+
+* Balanceador Servicio Interno: `192.168.33.17`
 
 Una vez creadas las tres máquinas virtuales, es necesario configurar ciertas funcionalidades en las distintas máquinas virtuales.
 
@@ -442,7 +448,7 @@ Y construir como en el anterior apartado el debido fichero .jar. Tras su constru
 
 * `java -jar prueba_servidor-0.0.1-SNAPSHOT.jar --spring.datasource.url="jdbc:mysql://192.168.33.12:3306/gamesinfo_db?verifyServerCertificate=false&useSSL=true" --spring.datasource.username="root" --spring.datasource.password="gugus" --spring.jpa.hibernate.ddl-auto="update"`
 
-## Instrucciones para la instalacion de HAProxy ##
+## Instrucciones para la instalacion de HAProxy para Servicio Web ##
 
 ### 1.- Instalacion PPA ###
 Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
@@ -576,7 +582,77 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `https://192.168.33.16/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
- 
+
+## Instrucciones para la instalacion de HAProxy para Servicio Interno ##
+
+### 1.- Instalacion PPA ###
+Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
+
+* `add-apt-repository ppa:vbernat/haproxy-1.5`
+
+### 2.- Actualizacion del sistema ###
+El siguiente paso es actualizar el sistema:
+
+* `apt-get update`
+* `apt-get dist-upgrade`
+
+### 3.- Instalacion de HAProxy ###
+Tras la correcta actualización, se instala HAProxy:
+
+* `apt-get install haproxy`
+
+### 4.- Configuracion de HAProxy ###
+Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
+
+* `chmod +rwx haproxy.cfg`
+
+Y se procede a editarlo:
+
+* `sudo nano haproxy.cfg`
+
+En él se añaden las siguientes líneas:
+
+* Debajo de daemon:
+  * `maxconn 3072`
+  
+* En la sección defaults:
+  * `option forwardfor`
+  * `option http-server-close`
+  
+* Y se crea una nueva sección añadiendo:
+  * `listen haproxy`<br>
+       `bind 0.0.0.0:80`<br>
+       `mode http`<br>
+       `stats enable`<br>
+       `stats uri /haproxy?stats`<br>
+       `balance source`<br>
+       `option httpclose`<br>
+       `option forwardfor`<br>
+       `server nombre1 direccionIP:Puerto`<br>
+       `server nombre2 direccionIP:Puerto`<br>
+       `...`<br>
+
+El archivo debería quedar como se observa en la imagen de a continuación:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy_2.jpg?raw=true">
+</p>
+
+Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+
+* `sudo service haproxy restart`
+
+### 6.- Inicio de HAProxy ###
+Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+
+* `sudo service haproxy start`
+
+### 7.- Inicio de HAProxy en Navegador Web ###
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `https://192.168.33.16/haproxy?stats` para poder observar los datos del balanceador:
+
+ ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
+
+
 ## Instalacion e Implementacion de Hazelcast ##
 Para evitar perder la sesión durante la caída de un servidor se emplea la replicación de sesión mediante Hazelcast, empleando una caché distribuida entre los servidores presentes en un balanceador:
 
