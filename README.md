@@ -344,7 +344,7 @@ A continuación, nos dispondremos a configurar el Sistema Operativo creado para 
   * `sudo apt-get install mysql-workbench`
   
 ### 4.- Division de Servicios ###
-Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso tres veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile` declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
+Para poder realizar la división de servicios en distintas máquinas virtuales, es necesario repetir el anterior proceso **ocho** veces, teniendo una máquina para cada servicio, y en el fichero `vagrantfile` declarando distintas direcciones IP, en nuestro caso se han declarado las siguientes direcciones:
 
 * Servicio Web 1: `192.168.33.10`
 
