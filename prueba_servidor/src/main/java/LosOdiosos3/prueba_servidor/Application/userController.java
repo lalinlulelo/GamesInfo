@@ -151,7 +151,7 @@ public class userController {
 
 	// ----------------------------- AJUSTES PERFIL -----------------------------------
 	@RequestMapping("/change/{field}")
-	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text, @RequestParam String text_1, @RequestParam String text_2, HttpServletRequest request) {		
+	public String change (Model model, HttpSession usuario, @PathVariable String field, @RequestParam String text, @RequestParam(defaultValue="1") String text_1, @RequestParam(defaultValue="1") String text_2, HttpServletRequest request) {		
 		List<User> usurs = userRepository.findByName((String)usuario.getAttribute("name"));		
 		User usur=null; 
 		if(usurs.size() > 0){
@@ -163,9 +163,9 @@ public class userController {
 					if(list.size() > 0){		
 						for(int i=0;i<list.size();i++) {					
 							if(list.get(i).getName().equals(text)) {
-								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el nombre introducido está asociado a otra cuenta');" +  "</script>");		
+								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, the name is used by another');" +  "</script>");		
 								
-								modelAttrChange(usur,usuario,model);	
+								modelAttrChange(usur,usuario,model,request);	
 								return "profile";
 							}					
 						}			
@@ -180,13 +180,13 @@ public class userController {
 					// se comprueba que la antigua contraseña coincida con su campo insertado
 					if(!new BCryptPasswordEncoder().matches(text, usur.getPassword())) {
 						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
-						modelAttrChange(usur,usuario,model);	
+						modelAttrChange(usur,usuario,model,request);	
 						return "profile";
 					}
 					// se comprueba la confirmación de la contraseña
 					if(!text_1.equals(text_2)) {
 						model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('one of the field was incorrect');" +  "</script>");		
-						modelAttrChange(usur,usuario,model);	
+						modelAttrChange(usur,usuario,model,request);	
 						return "profile";
 					}
 					// se encripta la contraseña y se guarda
@@ -210,9 +210,9 @@ public class userController {
 			        if(listus.size() > 0){		        		
 						for(int i=0;i<listus.size();i++) {					
 							if(listus.get(i).getEmail().equals(text)) {
-								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, el email introducido está asociado a otra cuenta');" +  "</script>");		
+								model.addAttribute("alert", "<script type=\"text/javascript\">" + "alert('Error, this mail is used by another account');" +  "</script>");		
 
-								modelAttrChange(usur,usuario,model);	
+								modelAttrChange(usur,usuario,model,request);	
 								return "profile";
 							}					
 						}					
@@ -223,15 +223,10 @@ public class userController {
 					}
 					break;
 			}		
-			modelAttrChange(usur, usuario, model);
 		}
-		model.addAttribute("alert","<script type=\"text/javascript\">" + "alert('Cambio realizado con éxito');" +  "</script>");	
+		model.addAttribute("alert","<script type=\"text/javascript\">" + "alert('Change completed');" +  "</script>");	
 		
-		modelAttrChange(usur,usuario,model);
-			
-		// atributos del token
-		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-		model.addAttribute("token", token.getToken());
+		modelAttrChange(usur,usuario,model,request);	
 		
 		return"profile";
 	}	
@@ -239,7 +234,7 @@ public class userController {
 	
 	// ---------------------------- METODOS AUXILIARES --------------------------------
 	//Metodo que añade los atributos a change
-	private void modelAttrChange(User usur, HttpSession usuario, Model model) {
+	private void modelAttrChange(User usur, HttpSession usuario, Model model, HttpServletRequest request) {
 		String name = (String) usur.getName();
 		String date = (String) usur.getDate();
 		String icon = (String) usur.getIcon();
@@ -259,7 +254,13 @@ public class userController {
 		model.addAttribute("name", usuario.getAttribute("name"));
 		model.addAttribute("profile_img",String.format("<img src=\"%s\" class=\"profile_img\">",(String) usuario.getAttribute("icon")));
 
+		//Para activar admin
+		model.addAttribute("admin", usuario.getAttribute("admin"));		
 		model.addAttribute("lists", " ");
+		
+		// atributos del token
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token", token.getToken());
 	}	
 	
 	public String articles () {
