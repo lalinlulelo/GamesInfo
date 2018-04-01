@@ -60,8 +60,8 @@ Indice
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-1)
     + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-1)
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
-    + [6.- Inicio de HAProxy](#6--inicio-de-haproxy-1)
-    + [7.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web-1)
+    + [5.- Inicio de HAProxy](#6--inicio-de-haproxy-1)
+    + [6.- Inicio de HAProxy en Navegador Web](#7--inicio-de-haproxy-en-navegador-web-1)
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
@@ -642,12 +642,12 @@ Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está segu
 
 * `sudo service haproxy restart`
 
-### 6.- Inicio de HAProxy ###
+### 5.- Inicio de HAProxy ###
 Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 
 * `sudo service haproxy start`
 
-### 7.- Inicio de HAProxy en Navegador Web ###
+### 6.- Inicio de HAProxy en Navegador Web ###
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `http://192.168.33.17/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
