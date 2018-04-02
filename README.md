@@ -65,6 +65,7 @@ Indice
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
+  * [Diagrama de la Infraestructura desplegada](#diagrama-de-la-infraestructura-desplegada)
 - [Integrantes](#integrantes)
 
 # Fase 1 #
