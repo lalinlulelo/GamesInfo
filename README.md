@@ -711,6 +711,13 @@ Para hacer funcional Hazelcast en nuestro proyecto, despues de haberlo actualiza
 `   return config;`<br>
 `}`<br>
 
+## Diagrama de la Infraestructura desplegada ##
+En el siguiente diagrama se puede visualizar la infraestructura desplegada de la Aplicación Web:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20Infraestructura.png?raw=true">
+</p>
+
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
