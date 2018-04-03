@@ -806,7 +806,7 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
     `-> MASTER_USER='root',`<br>
     `-> MASTER_PASSWORD='gugus',`<br>
     `-> MASTER_LOG_FILE='mysql-bin.000001',`<br>
-    `-> MASTER_LOG_POS=492,`<br>
+    `-> MASTER_LOG_POS=727,`<br>
     `-> MASTER_PORT=3306;`<br>
     
   En el comando anterior, debemos remarcar que en los campos **MASTER_LOG_FILE** y **MASTER_LOG_POS** se coloquen los dos datos 
