@@ -902,6 +902,7 @@ Para hacer funcional Hazelcast en nuestro proyecto, despues de haberlo actualiza
 ## Fichero Batch de Arranque ##
 Para facilitar la creación de las 9 ventanas de comando, y su debido arranque se ha elaborado un script `.bat` automatizando brevemente el arranque de las máquinas. Para ello, se crea un fichero .txt, al cual se le cambia la terminación a .bat en el Sistema Operativo Host, y se abre con un editor de texto (en nuestro caso `notepad++`). Y en él se escribe la siguiente secuencia de comandos:
   <br>
+  <br>
   `@echo off`<br>
   `title Initialization of GamesInfo Program`<br>
   `echo Welcome to GamesInfo! Don't be scared, we're gonna open some vm`<br>
