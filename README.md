@@ -62,6 +62,17 @@ Indice
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
     + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
+  * [Instrucciones para la instalacion de HAProxy para Servicio Interno](#instrucciones-para-la-instalacion-de-haproxy-para-servicio-interno-1)
+    + [1.- Instalacion PPA](#1--instalacion-ppa-2)
+    + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-2)
+    + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-2)
+    + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy-1)
+  * [5.- Configuracion de mysql](#5--configuracion-de-mysql)
+  * [6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#6--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
+- [6.1.- Servidor Maestro](#61--servidor-maestro)
+- [6.2.- Servidor Esclavo](#62--servidor-esclavo)
+    + [7.- Inicio de HAProxy](#7--inicio-de-haproxy)
+    + [8.- Inicio de HAProxy en Navegador Web](#8--inicio-de-haproxy-en-navegador-web)
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
@@ -681,32 +692,32 @@ Y se procede a editarlo:
 * `sudo nano haproxy.cfg`
 
 En él se debe borrar/comentar todo lo presente e insertar las siguiente líneas:
-
-* `global`
-  `log 127.0.0.1 local0 notice`
-  `user haproxy`
-  `group haproxy`
-
-  `defaults`
-  `log global`
-  `retries 2`
-  `timeout connect 3000`
-  `timeout server 5000`
-  `timeout client 5000`
-
-  `listen mysql-cluster`
-  `bind 192.168.33.18:3306`
-  `mode tcp`
-  `option mysql-check user haproxy_check`
-  `balance roundrobin`
-  `server host_name_1 192.168.33.12:3306 check`
-  `server host_name_2 192.168.33.15:3306 check`
-
-  `listen stats`
-  `bind 0.0.0.0:80`
-  `mode http`
-  `stats enable`
-  `stats uri /haproxy?stats`
+<br>
+* `global`<br>
+  `log 127.0.0.1 local0 notice`<br>
+  `user haproxy`<br>
+  `group haproxy`<br>
+<br>
+  `defaults`<br>
+  `log global`<br>
+  `retries 2`<br>
+  `timeout connect 3000`<br>
+  `timeout server 5000`<br>
+  `timeout client 5000`<br>
+<br>
+  `listen mysql-cluster`<br>
+  `bind 192.168.33.18:3306`<br>
+  `mode tcp`<br>
+  `option mysql-check user haproxy_check`<br>
+  `balance roundrobin`<br>
+  `server host_name_1 192.168.33.12:3306 check`<br>
+  `server host_name_2 192.168.33.15:3306 check`<br>
+<br>
+  `listen stats`<br>
+  `bind 0.0.0.0:80`<br>
+  `mode http`<br>
+  `stats enable`<br>
+  `stats uri /haproxy?stats`<br>
 
 El archivo debería quedar como se observa en la imagen de a continuación:
 
@@ -726,12 +737,103 @@ Una vez reiniciado el servicio de haproxy, nos dirigimos a la terminal de las do
  
 Con ello creamos un usuario con el que haproxy comprobará si las BBDD están operables y otro usuario con el que accederá a los datos.
 
-### 6.- Inicio de HAProxy ###
+## 6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo ##
+Para poder tener consistencia en ambas bases de datos, necesitamos que una de las bases escuche a la otra, teniendo la jerarquía de Maestro-Servidor. En nuestro caso el Maestro será la máquina virtual con dirección IP `192.168.33.12`, y el Esclavo será la máquina virtual con dirección IP `192.168.33.15`.
+
+  # 6.1.- Servidor Maestro #
+  Nos dirigimos al fichero `my.cfg` situado en `/vagrant/etc/mysql/` mediante el editor (`sudo nano my.cfg`) habiendo habilitado los   
+  permisos previamente (`chmod +rwx my.cfg`). En él descomentamos, modificamos o añadimos las siguientes instrucciones:
+  
+  * `server-id=1`<br>
+  * `log-bin=mysql-bin`<br>
+  * `sync_binlog=1`<br>
+  * `max-binlog-size=500M`<br>
+  * `expire_logs_days=4`<br>
+  * `innodb_flush_log_at_trx_commit=1`<br>
+  
+  Y una vez guardado el fichero (`Ctrl + X`), reiniciamos el servicio de mysql con:
+  
+  * `sudo service mysql restart`
+  
+  Tras ello, nos dirigimos inicialmente al directorio principal (`cd /vagrant`) y allí nos dirigimos a mysql (`mysql -u root -p`) y 
+  realizamos los siguiente comandos:
+  
+  * `CREATE USER root IDENTIFIED BY 'gugus';`
+  * `GRANT REPLICATION SLAVE ON *.* TO 'root'@'192.168.33.15' IDENTIFIED BY 'gugus';`
+  * `flush privileges;`
+  
+  Con ello creamos el usuario esclavo que pertenecerá al segundo servidor. Ahora toca realizar una copia de la base de datos, primero en 
+  mysql con:
+  
+  * `use gamesinfo_db;`
+  * `FLUSH TABLES;`
+  * `FLUSH TABLES WITH READ LOCK;`
+  * `SHOW MASTER STATUS;`
+  
+  Con esta última instrucción debería de salir algo simmilar a la siguiente imagen, por consola:
+  
+  <p align="center">
+    <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/mysql_master.jpg?raw=true">
+  </p>
+  
+  Nos debemos quedar con los dos valores impresos, para emplearlos más adelante. A continuación salimos de mysql, retornando al 
+  directorio vagrant (`/vagrant`). Allí realizamos el siguiente comando, mediante el cual nos aparecerá en la carpeta de la máquina 
+  virtual (en nuestro caso `C:/Users/guille-hp/Documents/vagrant/base_de_datos_1`) el fichero '.sql':
+  
+  * `mysqldump -u root -p gamesinfo_db >gamesinfo_db.sql`
+  
+  Dicho fichero '.sql' lo copiamos y pegamos en la carpeta de la segunda máquina con Base de Datos (en nuestro caso `C:/Users/guille-
+  hp/Documents/vagrant/base_de_datos_2`). Y nos trasladamos a la segunda máquina.
+  
+  # 6.2.- Servidor Esclavo #
+  Nos dirigimos al fichero `my.cfg` situado en `/vagrant/etc/mysql/` mediante el editor (`sudo nano my.cfg`) habiendo habilitado los   
+  permisos previamente (`chmod +rwx my.cfg`). En él descomentamos, modificamos o añadimos las siguientes instrucciones:
+  
+  * `server-id=2`<br>
+  * `relay-log=mysqld-relay-bin`<br>
+  * `max-relay-log-size=500M`<br>
+  * `relay_log_purge=1`<br>
+  
+   Y una vez guardado el fichero (`Ctrl + X`), reiniciamos el servicio de mysql con:
+  
+  * `sudo service mysql restart`
+  
+  Tras ello, nos dirigimos inicialmente al directorio principal (`cd /vagrant`) y allí nos dirigimos a mysql (`mysql -u root -p`) y 
+  realizamos los siguiente comandos:
+  
+  * `CHANGE MASTER TO MASTER_HOST='192.168.33.12',`<br>
+    `-> MASTER_USER='root',`<br>
+    `-> MASTER_PASSWORD='gugus',`<br>
+    `-> MASTER_LOG_FILE='mysql-bin.000001',`<br>
+    `-> MASTER_LOG_POS=492,`<br>
+    `-> MASTER_PORT=3306;`<br>
+    
+  En el comando anterior, debemos remarcar que en los campos **MASTER_LOG_FILE** y **MASTER_LOG_POS** se coloquen los dos datos 
+  observados en el apartado anterior, al realizar el comando `SHOW MASTER STATUS` sobre el terminal mysql de la primera máquina 
+  virtual. El comando quedaría semejante al de la siguiente imagen:
+
+  <p align="center">
+    <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/mysql%20slave.jpg?raw=true">
+  </p>
+
+  Y tras dicho comando ejecutamos:
+
+  * `START SLAVE;`
+  * `UNLOCK TABLES;`
+
+  Si se desea comprobar el correcto funcionamiento del esclavo, se emplea el siguiente comando en mysql (`mysql>`):
+
+  * `SHOW SLAVE STATUS\G`
+
+  El cual mostrará un listado de datos. Se puede mirar el valor “Seconds_Behind_Master” que indica qué “retraso” tiene el servidor 
+  esclavo respecto al maestro (si es NULL se trata de mal funcionamiento. Revisando el “Slave_IO_State” y “Last_Error”).    
+  
+### 7.- Inicio de HAProxy ###
 Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 
 * `sudo service haproxy start`
 
-### 7.- Inicio de HAProxy en Navegador Web ###
+### 8.- Inicio de HAProxy en Navegador Web ###
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `http://192.168.33.17/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
