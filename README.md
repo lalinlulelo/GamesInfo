@@ -653,6 +653,88 @@ Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
+## Instrucciones para la instalacion de HAProxy para Servicio Interno ##
+
+### 1.- Instalacion PPA ###
+Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
+
+* `add-apt-repository ppa:vbernat/haproxy-1.5`
+
+### 2.- Actualizacion del sistema ###
+El siguiente paso es actualizar el sistema:
+
+* `apt-get update`
+* `apt-get dist-upgrade`
+
+### 3.- Instalacion de HAProxy ###
+Tras la correcta actualización, se instala HAProxy:
+
+* `apt-get install haproxy`
+
+### 4.- Configuracion de HAProxy ###
+Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
+
+* `chmod +rwx haproxy.cfg`
+
+Y se procede a editarlo:
+
+* `sudo nano haproxy.cfg`
+
+En él se debe borrar/comentar todo lo presente e insertar las siguiente líneas:
+
+* `global`
+  `log 127.0.0.1 local0 notice`
+  `user haproxy`
+  `group haproxy`
+
+  `defaults`
+  `log global`
+  `retries 2`
+  `timeout connect 3000`
+  `timeout server 5000`
+  `timeout client 5000`
+
+  `listen mysql-cluster`
+  `bind 192.168.33.18:3306`
+  `mode tcp`
+  `option mysql-check user haproxy_check`
+  `balance roundrobin`
+  `server host_name_1 192.168.33.12:3306 check`
+  `server host_name_2 192.168.33.15:3306 check`
+
+  `listen stats`
+  `bind 0.0.0.0:80`
+  `mode http`
+  `stats enable`
+  `stats uri /haproxy?stats`
+
+El archivo debería quedar como se observa en la imagen de a continuación:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy_3.jpg?raw=true">
+</p>
+
+Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
+
+* `sudo service haproxy restart`
+
+## 5.- Configuracion de mysql ##
+Una vez reiniciado el servicio de haproxy, nos dirigimos a la terminal de las dos máquinas virtuales de las bases de datos y realizamos simultáneamente en las dos los siguientes comandos:
+
+  * `mysql -u root -p -e "INSERT INTO mysql.user (Host, User) values ('192.168.33.18','haproxy_test'); FLUSH PRIVILEGES;"`
+  * `mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'haproxy_root'@'192.168.0.50' IDENTIFIED BY 'haproxy' WITH GRANT OPTION; FLUSH PRIVILEGES;"`
+ 
+Con ello creamos un usuario con el que haproxy comprobará si las BBDD están operables y otro usuario con el que accederá a los datos.
+
+### 6.- Inicio de HAProxy ###
+Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
+
+* `sudo service haproxy start`
+
+### 7.- Inicio de HAProxy en Navegador Web ###
+Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `http://192.168.33.17/haproxy?stats` para poder observar los datos del balanceador:
+
+ ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
 ## Instalacion e Implementacion de Hazelcast ##
 Para evitar perder la sesión durante la caída de un servidor se emplea la replicación de sesión mediante Hazelcast, empleando una caché distribuida entre los servidores presentes en un balanceador:
