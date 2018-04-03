@@ -67,10 +67,10 @@ Indice
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-2)
     + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-2)
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy-1)
-  * [5.- Configuracion de mysql](#5--configuracion-de-mysql)
-  * [6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#6--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
-- [6.1.- Servidor Maestro](#61--servidor-maestro)
-- [6.2.- Servidor Esclavo](#62--servidor-esclavo)
+    + [5.- Configuracion de mysql](#5--configuracion-de-mysql)
+    + [6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#6--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
+      - [6.1.- Servidor Maestro](#61--servidor-maestro)
+      - [6.2.- Servidor Esclavo](#62--servidor-esclavo)
     + [7.- Inicio de HAProxy](#7--inicio-de-haproxy)
     + [8.- Inicio de HAProxy en Navegador Web](#8--inicio-de-haproxy-en-navegador-web)
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
@@ -78,6 +78,7 @@ Indice
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
   * [Diagrama de la Infraestructura desplegada](#diagrama-de-la-infraestructura-desplegada)
 - [Integrantes](#integrantes)
+
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -729,7 +730,7 @@ Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está segu
 
 * `sudo service haproxy restart`
 
-## 5.- Configuracion de mysql ##
+### 5.- Configuracion de mysql ###
 Una vez reiniciado el servicio de haproxy, nos dirigimos a la terminal de las dos máquinas virtuales de las bases de datos y realizamos simultáneamente en las dos los siguientes comandos:
 
   * `mysql -u root -p -e "INSERT INTO mysql.user (Host, User) values ('192.168.33.18','haproxy_test'); FLUSH PRIVILEGES;"`
@@ -737,10 +738,10 @@ Una vez reiniciado el servicio de haproxy, nos dirigimos a la terminal de las do
  
 Con ello creamos un usuario con el que haproxy comprobará si las BBDD están operables y otro usuario con el que accederá a los datos.
 
-## 6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo ##
+### 6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo ###
 Para poder tener consistencia en ambas bases de datos, necesitamos que una de las bases escuche a la otra, teniendo la jerarquía de Maestro-Servidor. En nuestro caso el Maestro será la máquina virtual con dirección IP `192.168.33.12`, y el Esclavo será la máquina virtual con dirección IP `192.168.33.15`.
 
-  # 6.1.- Servidor Maestro #
+  #### 6.1.- Servidor Maestro #####
   Nos dirigimos al fichero `my.cfg` situado en `/vagrant/etc/mysql/` mediante el editor (`sudo nano my.cfg`) habiendo habilitado los   
   permisos previamente (`chmod +rwx my.cfg`). En él descomentamos, modificamos o añadimos las siguientes instrucciones:
   
@@ -785,7 +786,7 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
   Dicho fichero '.sql' lo copiamos y pegamos en la carpeta de la segunda máquina con Base de Datos (en nuestro caso `C:/Users/guille-
   hp/Documents/vagrant/base_de_datos_2`). Y nos trasladamos a la segunda máquina.
   
-  # 6.2.- Servidor Esclavo #
+  #### 6.2.- Servidor Esclavo #####
   Nos dirigimos al fichero `my.cfg` situado en `/vagrant/etc/mysql/` mediante el editor (`sudo nano my.cfg`) habiendo habilitado los   
   permisos previamente (`chmod +rwx my.cfg`). En él descomentamos, modificamos o añadimos las siguientes instrucciones:
   
