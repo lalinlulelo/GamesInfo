@@ -76,9 +76,9 @@ Indice
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
+  * [Fichero Batch de Arranque](#fichero-batch-de-arranque)
   * [Diagrama de la Infraestructura desplegada](#diagrama-de-la-infraestructura-desplegada)
 - [Integrantes](#integrantes)
-
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -896,6 +896,43 @@ Para hacer funcional Hazelcast en nuestro proyecto, despues de haberlo actualiza
 `   joinConfig.getTcpIpConfig().addMember( "192.168.33.13" ).addMember( "168.192.33.10" ).setEnabled( true );`<br>
 `   return config;`<br>
 `}`<br>
+
+## Fichero Batch de Arranque ##
+Para facilitar la creación de las 9 ventanas de comando, y su debido arranque se ha elaborado un script `.bat` automatizando brevemente el arranque de las máquinas. Para ello, se crea un fichero .txt, al cual se le cambia la terminación a .bat en el Sistema Operativo Host, y se abre con un editor de texto (en nuestro caso `notepad++`). Y en él se escribe la siguiente secuencia de comandos:
+  <br>
+  `@echo off`<br>
+  `title Initialization of GamesInfo Program`<br>
+  `echo Welcome to GamesInfo! Don't be scared, we're gonna open some vm`<br>
+  <br>
+  `rem ----- haproxy`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\haproxy_1 & mode 56, 10 & vagrant up & vagrant ssh"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\haproxy_2 & mode 56, 10 & vagrant up & vagrant ssh"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\haproxy_3 & mode 56, 10 & vagrant up & vagrant ssh"`<br>
+  <br>
+  `rem ----- server`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\server_1 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\server_2 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
+  <br>
+  `rem ----- mail service`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\servicio_interno_1 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\servicio_interno_2 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
+  <br>
+  `rem ----- database`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_1 & mode 85, 10 & vagrant up"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_2 & mode 85, 10 & vagrant up"`<br>
+  <br>
+  `cls`<br>
+  `echo Now we're gonna open some information's windows.`<br>
+  `pause`<br>
+  `start "" https://192.168.33.16/haproxy?stats`<br>
+  `start "" http://192.168.33.17/haproxy?stats`<br>
+  `start "" http://192.168.33.18/haproxy?stats`<br>
+  `start "" https://192.168.33.16/`<br>
+  <br>
+  `cls`<br>
+  `echo Now wait until all the programs are ready, and put them 'vagrant ssh'`<br>
+  `pause`<br>
+  `exit `<br>
 
 ## Diagrama de la Infraestructura desplegada ##
 En el siguiente diagrama se puede visualizar la infraestructura desplegada de la Aplicación Web:
