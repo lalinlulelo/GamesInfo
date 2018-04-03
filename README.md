@@ -375,7 +375,9 @@ Para poder realizar la división de servicios en distintas máquinas virtuales, 
 
 * Balanceador Servicio Interno: `192.168.33.17`
 
-Una vez creadas las tres máquinas virtuales, es necesario configurar ciertas funcionalidades en las distintas máquinas virtuales.
+* Balanceador Servicio Base de Datos: `192.168.33.18`
+
+Una vez creadas las nueve máquinas virtuales, es necesario configurar ciertas funcionalidades en las distintas máquinas virtuales.
 
 #### 4.1.- Maquina Virtual de Base de Datos ####
 Debido a que se ha separado la base de datos de la aplicación web, se ha de configurarla para que sea accesible mediante su dirección IP privada, y permitiendo al servicio web acceder a ella. Para ello accedemos inicialmente al archivo `my.cnf` localizado en `/vagrant/etc/mysql/`permitiendo cualquier tipo de modificación en el fichero:
