@@ -5,10 +5,10 @@ Indice
 =================
 <details> 
 <summary>Fase 1</summary>
-- [Fase 1](#fase-1)
-  * [Descripcion de la web](#descripcion-de-la-web)
-  * [Entidades principales](#entidades-principales)
-  * [Servicio Interno](#servicio-interno)
+<li>[Fase 1](#fase-1)<li>
+  <li>[Descripcion de la web](#descripcion-de-la-web)<li>
+  <li>[Entidades principales](#entidades-principales)<li>
+  <li>[Servicio Interno](#servicio-interno)<li>
 </details>
 <details>
 <summary>Fase 2</summary>
