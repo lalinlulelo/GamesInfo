@@ -941,7 +941,7 @@ Para facilitar la creación de las 9 ventanas de comando, y su debido arranque s
 En el siguiente diagrama se puede visualizar la infraestructura desplegada de la Aplicación Web:
 
 <p align="center">
-  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20Infraestructura.png?raw=true">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20Infraestructura.png?raw=true" style="width: 50%; height: 50%">
 </p>
 
 # Integrantes
