@@ -3,11 +3,10 @@
 
 Indice
 =================
-- [Fase 1](#fase-1)<li>
-  * [Descripcion de la web](#descripcion-de-la-web)<li>
-  * [Entidades principales](#entidades-principales)<li>
-  * [Servicio Interno](#servicio-interno)<li>
-
+- [Fase 1](#fase-1)
+  * [Descripcion de la web](#descripcion-de-la-web)
+  * [Entidades principales](#entidades-principales)
+  * [Servicio Interno](#servicio-interno)
 - [Fase 2](#fase-2)
   * [Diagrama de Navegacion](#diagrama-de-navegacion)
       - [Pantalla de inicio sin usuario](#pantalla-de-inicio-sin-usuario)
@@ -29,7 +28,6 @@ Indice
   * [Diagrama de Entidad-Relacion](#diagrama-de-entidad-relacion)
   * [Diagrama UML de Entidades](#diagrama-uml-de-entidades)
   * [Diagrama de clases](#diagrama-de-clases)
-
 - [Fase 3](#fase-3)
   * [Instrucciones para desplegar la aplicacion](#instrucciones-para-desplegar-la-aplicacion)
     + [1.- Inicializacion de Ubuntu](#1--inicializacion-de-ubuntu)
@@ -40,7 +38,6 @@ Indice
       - [Pantalla de relleno de datos](#pantalla-de-relleno-de-datos)
       - [Pantalla de recibo de correo](#pantalla-de-recibo-de-correo)
       - [Pantalla de usuario previamente registrado](#pantalla-de-usuario-previamente-registrado)
-
 - [Fase 4](#fase-4)
   * [Instalacion de Vagrant](#instalacion-de-vagrant)
     + [1.- Instalacion de Ubuntu](#1--instalacion-de-ubuntu)
@@ -81,14 +78,12 @@ Indice
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
   * [Fichero Batch de Arranque](#fichero-batch-de-arranque)
   * [Diagrama de la Infraestructura desplegada](#diagrama-de-la-infraestructura-desplegada)
-
 - [Fase 5](#fase-5)
   * [1.- Creacion de una Maquina Virtual Vagrant](#1--creacion-de-una-maquina-virtual-vagrant)
   * [2.- Configuracion de Ansible](#2--configuracion-de-ansible)
   * [3.- Creacion de la clave privada](#3--creacion-de-la-clave-privada)
   * [4.- Comprobacion de conexion](#4--comprobacion-de-conexion)
   * [5.- Demostracion del Correcto Funcionamiento](#5--demostracion-del-correcto-funcionamiento)
-
 - [Integrantes](#integrantes)
 
 
