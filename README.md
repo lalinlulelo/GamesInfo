@@ -928,8 +928,8 @@ Para facilitar la creación de las 9 ventanas de comando, y su debido arranque s
   `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\servicio_interno_2 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
   <br>
   `rem ----- database`<br>
-  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_1 & mode 85, 10 & vagrant up"`<br>
-  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_2 & mode 85, 10 & vagrant up"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_1 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_2 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
   <br>
   `cls`<br>
   `echo Now we're gonna open some information's windows.`<br>
