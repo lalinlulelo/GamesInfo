@@ -78,7 +78,14 @@ Indice
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
   * [Fichero Batch de Arranque](#fichero-batch-de-arranque)
   * [Diagrama de la Infraestructura desplegada](#diagrama-de-la-infraestructura-desplegada)
+- [Fase 5](#fase-5)
+  * [1.- Creacion de una Maquina Virtual Vagrant](#1--creacion-de-una-maquina-virtual-vagrant)
+  * [2.- Configuracion de Ansible](#2--configuracion-de-ansible)
+  * [3.- Creacion de la clave privada](#3--creacion-de-la-clave-privada)
+  * [4.- Comprobacion de conexion](#4--comprobacion-de-conexion)
+  * [5.- Demostracion del Correcto Funcionamiento](#5--demostracion-del-correcto-funcionamiento)
 - [Integrantes](#integrantes)
+
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -943,6 +950,103 @@ En el siguiente diagrama se puede visualizar la infraestructura desplegada de la
 <p align="center">
   <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20Infraestructura.png?raw=true" style="width: 50%; height: 50%">
 </p>
+
+# Fase 5 #
+En esta fase se solicita automatizar el despliegue de la aplicación mediante el sistema de gestión de configuración Ansible. Para ello seguimos los siguientes pasos
+
+## 1.- Creacion de una Maquina Virtual Vagrant ##
+Para evitar provocar fallos en el resto de máquinas virtuales, las cuales se encuentran en correcto funcionamiento, se crea una nueva máquina virtual a la que se ha apodado su directorio `ansible`, y su dirección Ip ha sido ajustada a `192.168.33.19` (mediante la modificación del fichero `Vagrantfile`). En caso de no acordarse de los pasos para crear una máquina virtual e iniciarla con Java y MySQL dirigete a esta [seccion](#instalacion-de-vagrant).
+
+Una vez teniendo la máquina virtual instalada e inicializada (mediante `vagrant up`y `vagrant ssh`), procedemos a instalar Ansible. Para ello realizamos el siguiente comando:
+
+* `sudo apt-add-repository -y ppa:ansible/ansible`
+* `sudo apt-get update`
+* `sudo apt-get install -y ansible`
+
+## 2.- Configuracion de Ansible ##
+Finalizada su instalación, nos dirigimos al directorio `/etc/ansible` y accedemos al fichero `hosts` (`sudo nano hosts`), habiendo habilitado previamente los permisos (`chmod +rwx hosts`). En él añadimos los distintos servidores con las siguiente serie de  instrucciones:
+
+   `[webservers]`<br>
+   `192.168.33.10`<br>
+   `192.168.33.13`<br>
+   <br>
+   `[internalservers]`<br>
+   `192.168.33.11`<br>
+   `192.168.33.14`<br>
+   <br>
+   `[dbservers]`<br>
+   `192.168.33.12`<br>
+   `192.168.33.15`<br>
+   <br>
+   `[haproxyservers]`<br>
+   `192.168.33.16`<br>
+   `192.168.33.17`<br>
+   `192.168.33.18`<br>
+   <br>
+   `[global]`<br>
+   `192.168.33.19`<br>
+
+Tras ello guardamos el fichero (`Ctrl + X`). Y nos dirigimos al fichero `ansible.cfg` del mismo directorio (`sudo nano ansible.cfg`), habiendo habilitado previamente los permisos (`chmod +rwx hosts`). En él descomentamos la línea:
+
+  * `host_key_checking = False`
+  
+Y guardamos el fichero (`Ctrl + X`).
+
+## 3.- Creacion de la clave privada ##
+Para poder operar con ansible, es necesario generar una clave privada, para ello nos dirigimos al directorio principal (`cd /vagrant`) y comprobamos si tenemos el directorio `.ssh` en él (`ls -a`). En caso de no tenerlo, lo creamos con el comando:
+
+  * `sudo mkdir .ssh`
+  
+Y accedemos a él (`cd .ssh`). En él ejecutamos el siguiente comando:
+  
+  * `ssh-keygen`
+ 
+En él se nos solicitará un nombre para la clave el cual se pondrá **id_rsa**. Y posteriormente una contraseña con la encriptarlo, en nuestro caso se ha puesto 'gugus' en ambas solicitudes de contraseña. Una vez generadas las claves podemos comprobar su existencia mediante el comando `dir`.
+
+A continuación, nos dirigimos al Sistema Operativo Host (en nuestro caso `Windows`), y en él al directorio de la máquina (en nuestro caso `/Documents/vagrant/ansible` y en él, a la carpeta `.ssh` podiendo observar la presencia de las dos claves creadas (`id_rsa`y `id_rsa.pub`). 
+
+Copiamos la clave pública (`id_rsa.pub`) y la pegamos en los directorios del resto de máquinas virtuales (los 2 servidores web, los 2 servicios internos, las 2 bases de datos y los 3 balanceadores), sin necesidad de crear carpetas adicionales (junto al `VagrantFile` de la máquina determinada).
+
+## 4.- Comprobacion de conexion ##
+Para poder comprobar que las conexiones a los distintos servidores se encuentran operables, incialmente arrancamos los 9 servidores, **no** arrancando sus respectivos ficheros `-jar`. Y una vez inicializados, nos dirigimos a la máquina virtual de **ansible**, en ella al directorio `/vagrant/.ssh/` y ejecutamos el siguiente comando por cada servidor que tenemos:
+
+*  `ssh -i id_rsa direccionIPservidor_x `
+
+Por ejemplo en el caso de el servidor web 1:
+
+* `ssh -i id_rsa 192.168.33.10`
+
+Tras ello nos solicitará la contraseña de dicha máquina virtual, en el caso de que no se haya modificado la contraseña, se debería insertar la contraseña por defecto de dicha máquina virtual: `vagrant` (en nuestro caso se cambiaron todas las contraseñas de las máquinas virtuales mediante el comando `passwd`a la contraseña `password`). Obteniendo una imagen semejante a la siguiente como resultado:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ansible_terminal.jpg?raw=true">
+</p>
+ 
+## 5.- Demostracion del Correcto Funcionamiento ##
+Finalmente se pueden realizar comandos simples mediante el siguiente comando:
+
+* `ansible _conjunto -m shell -a "comando_a_ejecutar_las_mv" --private-key id_rsa --ask-pas --ask-sudo-pass`
+
+Por ejemplo, si deseamos que todas las máquinas virtuales impriman el mensaje 'hi', realizamos el siguiente comando:
+
+* `ansible all -m shell -a "/bin/echo hi" --private-key id_rsa --ask-pass --ask-sudo-pass`
+
+Mostrando el siguiente resultando:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ansible_hi.jpg?raw=true">
+</p>
+
+En el caso de que se qusiese realizar un comando a solo un grupo de máquinas (por ejemplo `webservers`) emplearíamos el siguiente comando: 
+
+* `ansible webservers -m shell -a "comando_a_ejecutar_las_mv" --private-key id_rsa --ask-pas --ask-sudo-pass`
+
+Y en el caso de que se quisiera realizar más de un comando se emplearía `"comando_1 & comando_2 & etc."`.
+
+<details> 
+  <summary>Q1: What is the best Language in the World? </summary>
+   A1: JavaScript 
+</details> 
 
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
