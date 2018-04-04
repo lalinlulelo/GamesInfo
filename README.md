@@ -1043,11 +1043,6 @@ En el caso de que se qusiese realizar un comando a solo un grupo de máquinas (p
 
 Y en el caso de que se quisiera realizar más de un comando se emplearía `"comando_1 & comando_2 & etc."`.
 
-<details> 
-  <summary>Q1: What is the best Language in the World? </summary>
-   A1: JavaScript 
-</details> 
-
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
