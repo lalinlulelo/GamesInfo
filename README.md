@@ -62,7 +62,7 @@ Indice
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
     + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
-  * [Instrucciones para la instalacion de HAProxy para Servicio Interno](#instrucciones-para-la-instalacion-de-haproxy-para-servicio-interno-1)
+  * [Instrucciones para la instalacion de HAProxy para Bases de datos](#instrucciones-para-la-instalacion-de-haproxy-para-bases-de-datos)
     + [1.- Instalacion PPA](#1--instalacion-ppa-2)
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-2)
     + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-2)
@@ -674,7 +674,7 @@ Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
-## Instrucciones para la instalacion de HAProxy para Servicio Interno ##
+## Instrucciones para la instalacion de HAProxy para Bases de datos ##
 
 ### 1.- Instalacion PPA ###
 Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
