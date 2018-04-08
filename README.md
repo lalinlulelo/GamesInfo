@@ -1048,10 +1048,10 @@ Una vez comprobado mediante varias pruebas, su correcto funcionamiento, toca cre
 
  ### 6.1 MySQL ###
  Para poder instalar mysql en una máquina, tendremos que dirigirnos a la página de mysql con más relevancia de Ansible Galaxy mediante 
- este [enlace](https://galaxy.ansible.com/bennojoy/mysql/). Ahí el creador nos indica entre otras cosas, que lo hemos de instalar en la 
+ este [enlace](https://galaxy.ansible.com/geerlingguy/mysql/). Ahí el creador nos indica entre otras cosas, que lo hemos de instalar en la 
  máquina virtual de ansible mediante el comando:
  
-  * `	$ ansible-galaxy install bennojoy.mysql`
+  * `	$ ansible-galaxy install geerlingguy.mysql`
       
  Tras terminar la instalación, nos indicará que ha creado un fichero en el directorio `./ansible/roles` nombrado `bennojoy.mysql`siendo 
  un directorio. Debido a que en la aplicación web se tiene una base de datos maestra y una base de datos esclava, vamos a tener que 
