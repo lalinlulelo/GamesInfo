@@ -1075,7 +1075,9 @@ Una vez comprobado mediante varias pruebas, su correcto funcionamiento, toca cre
     
    Nos dirigimos a la carpeta `defaults` y en ella, aportando los derechos de modificacion (`sudo chmod +rwx main.yml`) procedemos a 
    la modificación del único fichero en su interior `main.yml` (`sudo nano main.yml`). En él se nos muestra una configuración de 
-   ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/bennojoy/mysql/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
+   ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/geerlingguy/mysql/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
+   
+   
    
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
