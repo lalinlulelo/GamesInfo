@@ -1116,13 +1116,13 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
   **master.sql** (mediante el comando `cd`), podiendo observar mediante el comando `dir` la presencia de las siguientes carpetas en su
   interior:
    
-      * `defaults`
-      * `handlers`
-      * `meta`
-      * `README.yml`
-      * `tasks`
-      * `templates`
-      * `vars`
+   * `defaults`
+   * `handlers`
+   * `meta`
+   * `README.yml`
+   * `tasks`
+   * `templates`
+   * `vars`
     
    Nos dirigimos a la carpeta `defaults` y en ella, aportando los derechos de modificacion (`sudo chmod +rwx main.yml`) procedemos a 
    la modificación del único fichero en su interior `main.yml` (`sudo nano main.yml`). En él se nos muestra una configuración de 
