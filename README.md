@@ -1078,6 +1078,9 @@ Una vez comprobado mediante varias pruebas, su correcto funcionamiento, toca cre
    ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/geerlingguy/mysql/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
    
    
+   Se refresca el fichero de hosts de ansible:
+   
+   * `ssh-keygen -R ip_maquina_virtual`
    
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
