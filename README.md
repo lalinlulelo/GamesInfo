@@ -1058,8 +1058,8 @@ Una vez comprobado mediante varias pruebas, su correcto funcionamiento, toca cre
  modificar dos veces ese directorio, para ello creamos dos copias del directorio en el mismo lugar (`.ansible/roles`) mediante los 
  siguientes comandos.
    
-   * `cp -a bennojoy.sql/ ./master.sql`
-   * `cp -a bennojoy.sql/ ./slave.sql`
+   * `cp -a geerlingguy.mysql/ ./master.sql`
+   * `cp -a geerlingguy.mysql/ ./slave.sql`
       
   Tras comprobar mediante el comando `dir` que se han creado correctamente las dos copias del directorio, nos adentramos en 
   **master.sql** (mediante el comando `cd`), podiendo observar mediante el comando `dir` la presencia de las siguientes carpetas en su
