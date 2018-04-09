@@ -1141,21 +1141,21 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
    de los programas a instalar. Para ello seguiremos la siguiente estructura:
    <br>
    `---                                          `<br>
-  `- hosts: grupo 1                              `<br>
-  `  sudo: yes                                   `<br>
-  `  roles:                                      `<br>
-  `  - programa_1                                `<br>
-  `  - programa_2                                `<br>
-  `  - programa_3                                `<br>
-  `                                              `<br>
-  `- hosts: grupo 2                              `<br>
-  `  sudo: yes                                   `<br>
-  `  roles:                                      `<br>
-  `  - programa_1                                `<br>
-  `  - programa_2                                `<br>
-  `  - programa_3                                `<br>
-  `                                              `<br>
-  `etc                                           `<br>
+   `- hosts: grupo 1                              `<br>
+   `  sudo: yes                                   `<br>
+   `  roles:                                      `<br>
+   `  - programa_1                                `<br>
+   `  - programa_2                                `<br>
+   `  - programa_3                                `<br>
+   `                                              `<br>
+   `- hosts: grupo 2                              `<br>
+   `  sudo: yes                                   `<br>
+   `  roles:                                      `<br>
+   `  - programa_1                                `<br>
+   `  - programa_2                                `<br>
+   `  - programa_3                                `<br>
+   `                                              `<br>
+   `etc                                           `<br>
     
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
