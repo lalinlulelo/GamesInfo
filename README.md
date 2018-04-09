@@ -1082,18 +1082,18 @@ Nos dirigimos a la carpeta `defaults` y en ella, aportando los derechos de modif
 la modificación del único fichero en su interior `main.yml` (`sudo nano main.yml`). En él se nos muestra una configuración de 
 ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/kbrebanov/java/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
   <br>
-  `---`<br>
-  `# defaults file for java`<br>
-  ` `<br>
-  `java_implementation: openjdk`<br>
-  ` `<br>
-  `java_openjdk_version: 7`<br>
-  `java_openjdk_jre_only: false`<br>
-  `java_openjdk_headless: false`<br>
-  `java_openjdk_use_ppa: true`<br>
-  ` `<br>
-  `java_oracle_version: 7`<br>
-  `java_oracle_install_jce_policy: false`<br>
+  `---                                          `<br>
+  `# defaults file for java                     `<br>
+  `                                             `<br>
+  `java_implementation: openjdk                 `<br>
+  `                                             `<br>
+  `java_openjdk_version: 7                      `<br>
+  `java_openjdk_jre_only: false                 `<br>
+  `java_openjdk_headless: false                 `<br>
+  `java_openjdk_use_ppa: true                   `<br>
+  `                                             `<br>
+  `java_oracle_version: 7                       `<br>
+  `java_oracle_install_jce_policy: false        `<br>
   
  Tras ello guardamos el fichero mediante `Ctrl + X`.
   
@@ -1140,22 +1140,22 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
    comando `touch nombre_playbook.yml`). Y lo abrimos para editar (`sudo nano nombre_playbook`). Este será nuestro fichero de ejecución 
    de los programas a instalar. Para ello seguiremos la siguiente estructura:
    <br>
-   `---`<br>
-  `- hosts: grupo 1`<br>
-  `  sudo: yes`<br>
-  `  roles:`<br>
-  `  - programa_1`<br>
-  `  - programa_2`<br>
-  `  - programa_3`<br>
-  ` `<br>
-  `- hosts: grupo 2`<br>
-  `  sudo: yes`<br>
-  `  roles:`<br>
-  `  - programa_1`<br>
-  `  - programa_2`<br>
-  `  - programa_3`<br>
-  ` `<br>
-  `etc`<br>
+   `---                                          `<br>
+  `- hosts: grupo 1                              `<br>
+  `  sudo: yes                                   `<br>
+  `  roles:                                      `<br>
+  `  - programa_1                                `<br>
+  `  - programa_2                                `<br>
+  `  - programa_3                                `<br>
+  `                                              `<br>
+  `- hosts: grupo 2                              `<br>
+  `  sudo: yes                                   `<br>
+  `  roles:                                      `<br>
+  `  - programa_1                                `<br>
+  `  - programa_2                                `<br>
+  `  - programa_3                                `<br>
+  `                                              `<br>
+  `etc                                           `<br>
     
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
