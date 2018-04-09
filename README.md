@@ -1046,16 +1046,62 @@ Y en el caso de que se quisiera realizar más de un comando se emplearía `"coma
 ## 6.- Creacion de Playbooks ##
 Una vez comprobado mediante varias pruebas, su correcto funcionamiento, toca crear una seria de documentos llamados **playbooks** los cuales contienen una serie de instrucciones que inicializan una máquina virtual en caso de posible pérdida. Para ello inicialmente hemos de descargar una serie de paquetes provenientes de la página [Ansible Galaxy](https://galaxy.ansible.com/list#/roles?page=1&page_size=10) siendo una biblioteca con playbooks configurados para instalar programas. Los paquetes a descargar e instalar en la máquina virtual de ansible son los siguientes:
 
- ### 6.1 MySQL ###
- Para poder instalar mysql en una máquina, tendremos que dirigirnos a la página de mysql con más relevancia de Ansible Galaxy mediante 
- este [enlace](https://galaxy.ansible.com/geerlingguy/mysql/). Ahí el creador nos indica entre otras cosas, que lo hemos de instalar en la 
- máquina virtual de ansible mediante el comando:
+ ### 6.1 Java ###
+ Para poder instalar Java 7 y 8 en una máquina, tendremos que dirigirnos a la página de java con más relevancia de Ansible Galaxy 
+ mediante este [enlace](https://galaxy.ansible.com/kbrebanov/java/). Ahí el creador nos indica entre otras cosas, que lo hemos de 
+ instalar en la máquina virtual de ansible con el siguiente comando:
  
-  * `	$ ansible-galaxy install geerlingguy.mysql`
+ * `ansible-galaxy install kbrebanov.java`
+ 
+ Tras terminar la instalación, nos indicará que ha creado un fichero en el directorio `./ansible/roles` nombrado `kbrebanov.java` 
+ siendo un directorio. Debido a que en la aplicación web se tiene una base de datos maestra y una base de datos esclava, vamos a tener 
+ que modificar dos veces ese directorio, para ello creamos dos copias del directorio en el mismo lugar (`.ansible/roles`) mediante los 
+ siguientes comandos.
+ 
+  * `cp -a kbrebanov.java/ ./java_8.java`
+  * `cp -a kbrebanov.java/ ./java_7.java`
+
+ Tras comprobar mediante el comando `dir` que se han creado correctamente las dos copias del directorio, nos adentramos en 
+ **java_7.java** (mediante el comando `cd`), podiendo observar mediante el comando `dir` la presencia de las siguientes carpetas en su
+ interior:
+   
+  * `defaults`
+  * `meta`
+  * `README.md`
+  * `tests`
+  * `tasks`
+  * `vars`
+  * `LICENSE`
+
+Nos dirigimos a la carpeta `defaults` y en ella, aportando los derechos de modificacion (`sudo chmod +rwx main.yml`) procedemos a 
+la modificación del único fichero en su interior `main.yml` (`sudo nano main.yml`). En él se nos muestra una configuración de 
+ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/kbrebanov/java/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
+  <br>
+  `---`<br>
+  `# defaults file for java`<br>
+  <br>
+  `java_implementation: openjdk`<br>
+   <br>
+  `java_openjdk_version: 7`<br>
+  `java_openjdk_jre_only: false`<br>
+  `java_openjdk_headless: false`<br>
+  `java_openjdk_use_ppa: true`<br>
+  <br>
+  `java_oracle_version: 7`<br>
+  `java_oracle_install_jce_policy: false`<br>
+  
+ Tras ello guardamos el fichero mediante `Ctrl + X`.
+  
+ ### 6.2 MySQL ###
+ Para poder instalar mysql en una máquina, tendremos que dirigirnos a la página de mysql con más relevancia de Ansible Galaxy mediante 
+ este [enlace](https://galaxy.ansible.com/geerlingguy/mysql/). Ahí el creador nos indica entre otras cosas, que lo hemos de instalar en 
+ la máquina virtual de ansible mediante el comando:
+ 
+  * `ansible-galaxy install geerlingguy.mysql`
       
- Tras terminar la instalación, nos indicará que ha creado un fichero en el directorio `./ansible/roles` nombrado `bennojoy.mysql`siendo 
- un directorio. Debido a que en la aplicación web se tiene una base de datos maestra y una base de datos esclava, vamos a tener que 
- modificar dos veces ese directorio, para ello creamos dos copias del directorio en el mismo lugar (`.ansible/roles`) mediante los 
+ Tras terminar la instalación, nos indicará que ha creado un fichero en el directorio `./ansible/roles` nombrado `geerlingguy.mysql` 
+ siendo un directorio. Debido a que en la aplicación web se tiene una base de datos maestra y una base de datos esclava, vamos a tener 
+ que modificar dos veces ese directorio, para ello creamos dos copias del directorio en el mismo lugar (`.ansible/roles`) mediante los 
  siguientes comandos.
    
    * `cp -a geerlingguy.mysql/ ./master.sql`
