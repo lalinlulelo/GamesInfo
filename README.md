@@ -84,6 +84,11 @@ Indice
   * [3.- Creacion de la clave privada](#3--creacion-de-la-clave-privada)
   * [4.- Comprobacion de conexion](#4--comprobacion-de-conexion)
   * [5.- Demostracion del Correcto Funcionamiento](#5--demostracion-del-correcto-funcionamiento)
+  * [6.- Creacion de Playbooks](#6--creacion-de-playbooks)
+    + [6.1 Java](#61-java)
+    + [6.2 MySQL](#62-mysql)
+    + [6.3 HaProxy](#63-haproxy)
+    + [6.4 Playbook](#64-playbook)
 - [Integrantes](#integrantes)
 
 
@@ -1128,6 +1133,30 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
    
    * `ssh-keygen -R ip_maquina_virtual`
    
+   ### 6.3 HaProxy ###
+   
+   ### 6.4 Playbook ###
+   Regresamos al directorio `/vagrant/.ssh`(mediante el comando `cd`) y allí creamos el fichero nombre_playbook.yml (mediante el 
+   comando `touch nombre_playbook.yml`). Y lo abrimos para editar (`sudo nano nombre_playbook`). Este será nuestro fichero de ejecución 
+   de los programas a instalar. Para ello seguiremos la siguiente estructura:
+   <br>
+   `---`<br>
+  `- hosts: grupo 1`<br>
+  `  sudo: yes`<br>
+  `  roles:`<br>
+  `  - programa_1`<br>
+  `  - programa_2`<br>
+  `  - programa_3`<br>
+  <br>
+  `- hosts: grupo 2`<br>
+  `  sudo: yes`<br>
+  `  roles:`<br>
+  `  - programa_1`<br>
+  `  - programa_2`<br>
+  `  - programa_3`<br>
+  <br>
+  `etc`<br>
+    
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
