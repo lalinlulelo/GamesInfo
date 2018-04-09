@@ -1084,14 +1084,14 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
   <br>
   `---`<br>
   `# defaults file for java`<br>
-  <br>
+  ` `<br>
   `java_implementation: openjdk`<br>
-   <br>
+  ` `<br>
   `java_openjdk_version: 7`<br>
   `java_openjdk_jre_only: false`<br>
   `java_openjdk_headless: false`<br>
   `java_openjdk_use_ppa: true`<br>
-  <br>
+  ` `<br>
   `java_oracle_version: 7`<br>
   `java_oracle_install_jce_policy: false`<br>
   
@@ -1147,14 +1147,14 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
   `  - programa_1`<br>
   `  - programa_2`<br>
   `  - programa_3`<br>
-  <br>
+  ` `<br>
   `- hosts: grupo 2`<br>
   `  sudo: yes`<br>
   `  roles:`<br>
   `  - programa_1`<br>
   `  - programa_2`<br>
   `  - programa_3`<br>
-  <br>
+  ` `<br>
   `etc`<br>
     
 # Integrantes
