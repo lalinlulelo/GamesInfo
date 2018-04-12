@@ -188,11 +188,11 @@ public class adminController {
 				}
 			}							
 			
-			System.out.println("compania anadida fase 1");
+			System.out.println("Company added fase 1");
 			// se crea la compañía y se añade al repositorio
 			Company newCompany=new Company(name,country,description,Integer.parseInt(year),img,url);
 			companyRepository.save(newCompany);
-			System.out.println("compania anadida fase 2");
+			System.out.println("company added fase 2");
 			
 			// se rellena el navbar y se desactiva la alerta
 			usuario.setAttribute("alert"," ");		
@@ -280,7 +280,7 @@ public class adminController {
 					Game newGame=new Game(name,c,genre,description,Integer.parseInt(year),Double.parseDouble(score),img,info);
 					gameRepository.save(newGame);
 					
-					System.out.println("juego guardado");
+					System.out.println("Game added");
 					
 					usuario.setAttribute("alert"," ");
 					fillModel(model,usuario,request);
