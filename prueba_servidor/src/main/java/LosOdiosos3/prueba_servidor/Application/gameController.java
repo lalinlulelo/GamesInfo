@@ -45,6 +45,9 @@ public class gameController {
 		
 		// modo de ordenación de la lista de juegos
 		List<Game> list_games = null;
+		
+		list_games = gameRepository.findAll();
+		
 		switch(modo) {
 			case "n":
 				list_games = gameRepository.findAll();

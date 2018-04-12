@@ -99,6 +99,7 @@ public class companyController {
 		
 		// lista de todas las compañias disponibles
 		List<Company> list_company = null;
+		list_company=companyRepository.findAll();
 		switch(mode) {
 			case "n":
 				list_company=companyRepository.findAll();

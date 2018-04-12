@@ -34,10 +34,8 @@ public class Company {
     @OneToMany (mappedBy="company", cascade=CascadeType.REMOVE)
     @Column(nullable = true)
     @JsonIgnore
-    //@JsonIgnore
     private List<Game> games = new ArrayList<Game>();
-    
-    
+        
     // lista de comentarios que pertenecen a la compañía
     @OneToMany(mappedBy="company", cascade=CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<Comment>();
