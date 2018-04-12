@@ -14,6 +14,8 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 	@CacheEvict(allEntries=true)
 	Company save(Company company);
 	
+	@CacheEvict(allEntries=true)
+	void delete(Company company);
 	
 	// busqueda por nombre
 	@Cacheable
