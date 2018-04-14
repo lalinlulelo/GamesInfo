@@ -813,8 +813,11 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
   
   * `sudo service mysql restart`
   
-  Tras ello, nos dirigimos inicialmente al directorio principal (`cd /vagrant`) y allí nos dirigimos a mysql (`mysql -u root -p`) y 
-  realizamos los siguiente comandos:
+  Tras ello, nos dirigimos inicialmente al directorio principal (`cd /vagrant`) y allí realizamos el siguiente comando que importará la   base de datos:
+  
+  * `mysql -u root -p gamesinfo_db < gamesinfo_db.sql`
+  
+  Tras ello, nos dirigimos a mysql (`mysql -u root -p`) y realizamos los siguiente comandos:
   
   * `CHANGE MASTER TO MASTER_HOST='192.168.33.12',`<br>
     `-> MASTER_USER='root',`<br>
@@ -1098,64 +1101,40 @@ ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la informa
  Tras ello guardamos el fichero mediante `Ctrl + X`.
   
  ### 6.2 MySQL ###
- Para poder instalar mysql en una máquina, tendremos que dirigirnos a la página de mysql con más relevancia de Ansible Galaxy mediante 
- este [enlace](https://galaxy.ansible.com/geerlingguy/mysql/). Ahí el creador nos indica entre otras cosas, que lo hemos de instalar en 
- la máquina virtual de ansible mediante el comando:
- 
-  * `ansible-galaxy install geerlingguy.mysql`
-      
- Tras terminar la instalación, nos indicará que ha creado un fichero en el directorio `./ansible/roles` nombrado `geerlingguy.mysql` 
- siendo un directorio. Debido a que en la aplicación web se tiene una base de datos maestra y una base de datos esclava, vamos a tener 
- que modificar dos veces ese directorio, para ello creamos dos copias del directorio en el mismo lugar (`.ansible/roles`) mediante los 
- siguientes comandos.
+
+ ### 6.3 HaProxy ###
+
+ ### 6.4 Playbook ###
+ Regresamos al directorio `/vagrant/.ssh`(mediante el comando `cd`) y allí creamos el fichero nombre_playbook.yml (mediante el 
+ comando `touch nombre_playbook.yml`). Y lo abrimos para editar (`sudo nano nombre_playbook`). Este será nuestro fichero de ejecución 
+ de los programas a instalar. Para ello seguiremos la siguiente estructura:
+ <br>
+        `---                                          `<br>
+        `- hosts: grupo 1                              `<br>
+        `  sudo: yes                                   `<br>
+        `  roles:                                      `<br>
+        `  - programa_1                                `<br>
+        `  - programa_2                                `<br>
+        `  - programa_3                                `<br>
+        `                                              `<br>
+        `- hosts: grupo 2                              `<br>
+        `  sudo: yes                                   `<br>
+        `  roles:                                      `<br>
+        `  - programa_1                                `<br>
+        `  - programa_2                                `<br>
+        `  - programa_3                                `<br>
+        `                                              `<br>
+        `etc                                           `<br>
+        
+   Una vez tengamos realizado el playbook, lo guardamos (`Ctrl + X`) y ejecutamos el siguiente comando el propio directorio:
    
-   * `cp -a geerlingguy.mysql/ ./master.sql`
-   * `cp -a geerlingguy.mysql/ ./slave.sql`
-      
-  Tras comprobar mediante el comando `dir` que se han creado correctamente las dos copias del directorio, nos adentramos en 
-  **master.sql** (mediante el comando `cd`), podiendo observar mediante el comando `dir` la presencia de las siguientes carpetas en su
-  interior:
+   * `ansible-playbook nombre_playbook.yml --ask-pass --ask-sudo-pass`
    
-   * `defaults`
-   * `handlers`
-   * `meta`
-   * `README.yml`
-   * `tasks`
-   * `templates`
-   * `vars`
-    
-   Nos dirigimos a la carpeta `defaults` y en ella, aportando los derechos de modificacion (`sudo chmod +rwx main.yml`) procedemos a 
-   la modificación del único fichero en su interior `main.yml` (`sudo nano main.yml`). En él se nos muestra una configuración de 
-   ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/geerlingguy/mysql/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
-   
-   
-   Se refresca el fichero de hosts de ansible:
+   En caso de que de un error indicando que no fue posible conectar al puerto 22 de dicha IP, debemos ejecutar el siguiente comando:
    
    * `ssh-keygen -R ip_maquina_virtual`
    
-   ### 6.3 HaProxy ###
-   
-   ### 6.4 Playbook ###
-   Regresamos al directorio `/vagrant/.ssh`(mediante el comando `cd`) y allí creamos el fichero nombre_playbook.yml (mediante el 
-   comando `touch nombre_playbook.yml`). Y lo abrimos para editar (`sudo nano nombre_playbook`). Este será nuestro fichero de ejecución 
-   de los programas a instalar. Para ello seguiremos la siguiente estructura:
-   <br>
-          `---                                          `<br>
-          `- hosts: grupo 1                              `<br>
-          `  sudo: yes                                   `<br>
-          `  roles:                                      `<br>
-          `  - programa_1                                `<br>
-          `  - programa_2                                `<br>
-          `  - programa_3                                `<br>
-          `                                              `<br>
-          `- hosts: grupo 2                              `<br>
-          `  sudo: yes                                   `<br>
-          `  roles:                                      `<br>
-          `  - programa_1                                `<br>
-          `  - programa_2                                `<br>
-          `  - programa_3                                `<br>
-          `                                              `<br>
-          `etc                                           `<br>
+   Y volver a efectuar el comando para ejecutar el playbook.
     
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
