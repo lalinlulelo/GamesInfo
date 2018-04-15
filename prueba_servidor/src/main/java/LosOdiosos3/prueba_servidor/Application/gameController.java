@@ -44,7 +44,9 @@ public class gameController {
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + "      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
 		// modo de ordenación de la lista de juegos
-		List<Game> list_games = null;
+		//List<Game> list_games = null;		
+		List<Game> list_games = gameRepository.findAll();
+		
 		switch(modo) {
 			case "n":
 				list_games = gameRepository.findAll();
@@ -69,9 +71,9 @@ public class gameController {
 				break;
 			case "companies":
 				list_games = gameRepository.findByCompanyAsc();
-				break;
-			
+				break;			
 		}
+		
 		for(int i=0;i<list_games.size();i++) {
 			//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
 			String Url=list_games.get(i).getImage();

@@ -189,7 +189,8 @@
 		    <div id="content" class="clearfix">	
 		    	{{{alert}}}
 		    	<h1 style="text-align:center; color:#406DB5; font-family: "Andale Mono", monospace;">Admin Options</h1>
-		    	<br>	        		        
+		    	<br>	        
+		    			        
 		    	<button class="button_ch" type="button" id="myBtn" class="btn btn-info btn-lg" style=" margin:auto; margin-right: 5%; width:90%; height:60px;"data-toggle="modal" data-target="#modalGame">Add new game</button>
 		        <br><br><br><br>
 		        <div class="modal fade" id="modalGame" role="dialog">
@@ -204,8 +205,8 @@
 									<div>Company: <input name="company" type="text"></div>
 								    <div>Genre: <input name="genre" type="text"></div>
 								    <div>Description: <input name="description" type="text"></div>
-									<div>Score: <input name="score" type="text"></div>
-									<div>Publish date: <input name="date" type="text"></div>
+									<div>Score(Double): <input name="score" type="text"></div>
+									<div>Publish year(Int): <input name="year" type="text"></div>
 									<div>More info: <input name="info" type="text"></div>
 									<div>Url image: <input name="img" type="text"></div>
 									<input type="submit" value="Submit">	
@@ -229,7 +230,7 @@
 							    	<div>Name: <input name="name" type="text"></div>
 							     	<div>Country: <input name="country" type="text"></div>
 							     	<div>Description: <input name="description" type="text"></div>
-							     	<div>Date: <input name="date" type="text"></div>
+							     	<div>Foundation year(Int): <input name="year" type="text"></div>
 							     	<div>Url image: <input name="img" type="text"></div>
 							      	<div>Url: <input name="url" type="text"></div>							      	
 							     	<input type="submit" value="Submit">	
@@ -253,10 +254,10 @@
 									<div>Name: <input name="name" type="text"></div>
 								    <div>Place: <input name="place" type="text"></div>
 									<div>Description: <input name="description" type="text"></div>
-									<div>Fee: <input name="fee" type="text"></div>
-									<div>Day: <input name="day" type="text"></div>
-									<div>Month: <input name="month" type="text"></div>
-									<div>Year: <input name="year" type="text"></div>
+									<div>Fee(Double): <input name="fee" type="text"></div>
+									<div>Day(Int): <input name="day" type="text"></div>
+									<div>Month(Int): <input name="month" type="text"></div>
+									<div>Year(Int): <input name="year" type="text"></div>
 									<div>Url image: <input name="img" type="text"></div>
 									<input type="submit" value="Submit">	
 									<input type="hidden" name="_csrf" value="{{token}}"> 

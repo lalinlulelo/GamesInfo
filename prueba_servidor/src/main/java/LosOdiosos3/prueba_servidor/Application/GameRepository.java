@@ -15,6 +15,9 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 	@CacheEvict(allEntries=true)
 	Game save(Game game);
 	
+	@CacheEvict(allEntries=true)
+	void delete(Game game);
+	
 	// busqueda por nombre
 	@Cacheable
 	List<Game> findByName (String name);
@@ -40,7 +43,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
 	
 	// busqueda nombre en orden descendente
 	@Query("SELECT game FROM Game game ORDER BY game.name DESC")
-	List<Game> findByNameDesc();
+	List<Game> findByNameDesc(); 
 	
 	// busqueda anio en orden ascendente
 	@Query("SELECT game FROM Game game ORDER BY game.year ASC")

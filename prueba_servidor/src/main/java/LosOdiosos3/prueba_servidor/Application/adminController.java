@@ -167,9 +167,9 @@ public class adminController {
 	// función de añadir compañía
 	@RequestMapping("/addCompany")
 	public String addCompany (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String country,
-	@RequestParam String description,@RequestParam String date,@RequestParam String img ,@RequestParam String url, HttpServletRequest request){	
+	@RequestParam String description,@RequestParam String year,@RequestParam String img ,@RequestParam String url, HttpServletRequest request){	
 		// se comprueba que ningún campo se quede vacío, sino se notifica con un alert
-		if(name=="" || country=="" || description=="" || date=="" || img=="" || url=="") {
+		if(name=="" || country=="" || description=="" || year=="" || img=="" || url=="") {
 			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');"  + "</script>");		
         	fillModel(model,usuario,request);
         	return "admin";
@@ -188,9 +188,11 @@ public class adminController {
 				}
 			}							
 			
+			System.out.println("Company added fase 1");
 			// se crea la compañía y se añade al repositorio
-			Company newCompany=new Company(name,country,description,Integer.parseInt(date),img,url);
+			Company newCompany=new Company(name,country,description,Integer.parseInt(year),img,url);
 			companyRepository.save(newCompany);
+			System.out.println("company added fase 2");
 			
 			// se rellena el navbar y se desactiva la alerta
 			usuario.setAttribute("alert"," ");		
@@ -249,10 +251,10 @@ public class adminController {
 	
 	@RequestMapping("/addGame")
 	public String addGame (Model model, HttpSession usuario, @RequestParam String name,@RequestParam String company,
-	@RequestParam String description,@RequestParam String genre,@RequestParam String score,@RequestParam String date,
+	@RequestParam String description,@RequestParam String genre,@RequestParam String score,@RequestParam String year,
 	@RequestParam String info,@RequestParam String img , HttpServletRequest request) {
 		// se comprueba que ningún campo se quede vacío, sino se notifica con un alert
-		if(name=="" || company=="" || description=="" || genre=="" || score=="" || date=="" || info=="" || img=="") {
+		if(name=="" || company=="" || description=="" || genre=="" || score=="" || year=="" || info=="" || img=="") {
 			usuario.setAttribute("alert","<script type=\"text/javascript\">" + "alert('Operation fail: One of the gap is empty');" + "</script>");		
         	fillModel(model,usuario,request);        	
         	return "admin";
@@ -272,10 +274,14 @@ public class adminController {
 			
 			// se comprueba que la compañía del juego exista
 			List<Company> listc=companyRepository.findAll();
-			for(Company c:listc) {			
+			for(Company c:listc) {	
+				System.out.println("iterando bucle");
 				if(c.getName().equals(company)) {				
-					Game newGame=new Game(name,c,genre,description,Integer.parseInt(date),Double.parseDouble(score),img,info);
+					Game newGame=new Game(name,c,genre,description,Integer.parseInt(year),Double.parseDouble(score),img,info);
 					gameRepository.save(newGame);
+					
+					System.out.println("Game added");
+					
 					usuario.setAttribute("alert"," ");
 					fillModel(model,usuario,request);
 					return "admin";	

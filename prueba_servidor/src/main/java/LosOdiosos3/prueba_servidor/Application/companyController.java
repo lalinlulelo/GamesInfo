@@ -98,7 +98,8 @@ public class companyController {
 		String div="<div class=\"col-md-3\">\r\n" + "<div class=\"Game\">\r\n" + "<img src=\"%s\" class=\"imagen\">\r\n" + 	"      <a href=\"%s\" style=\"text-align:center;display:block; color:  rgb(33, 73, 138);\">%s</a>\r\n" + "     \r\n" + "    </div>\r\n" + "  </div>";
 		
 		// lista de todas las compañias disponibles
-		List<Company> list_company = null;
+		//List<Company> list_company = null;
+		List<Company> list_company=companyRepository.findAll();
 		switch(mode) {
 			case "n":
 				list_company=companyRepository.findAll();

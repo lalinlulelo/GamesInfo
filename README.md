@@ -62,7 +62,7 @@ Indice
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
     + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
-  * [Instrucciones para la instalacion de HAProxy para Servicio Interno](#instrucciones-para-la-instalacion-de-haproxy-para-servicio-interno-1)
+  * [Instrucciones para la instalacion de HAProxy para Bases de datos](#instrucciones-para-la-instalacion-de-haproxy-para-bases-de-datos)
     + [1.- Instalacion PPA](#1--instalacion-ppa-2)
     + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-2)
     + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-2)
@@ -78,7 +78,19 @@ Indice
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
   * [Fichero Batch de Arranque](#fichero-batch-de-arranque)
   * [Diagrama de la Infraestructura desplegada](#diagrama-de-la-infraestructura-desplegada)
+- [Fase 5](#fase-5)
+  * [1.- Creacion de una Maquina Virtual Vagrant](#1--creacion-de-una-maquina-virtual-vagrant)
+  * [2.- Configuracion de Ansible](#2--configuracion-de-ansible)
+  * [3.- Creacion de la clave privada](#3--creacion-de-la-clave-privada)
+  * [4.- Comprobacion de conexion](#4--comprobacion-de-conexion)
+  * [5.- Demostracion del Correcto Funcionamiento](#5--demostracion-del-correcto-funcionamiento)
+  * [6.- Creacion de Playbooks](#6--creacion-de-playbooks)
+    + [6.1 Java](#61-java)
+    + [6.2 MySQL](#62-mysql)
+    + [6.3 HaProxy](#63-haproxy)
+    + [6.4 Playbook](#64-playbook)
 - [Integrantes](#integrantes)
+
 
 # Fase 1 #
 ## Descripcion de la web ##
@@ -329,7 +341,7 @@ Creando el vagrantfile, siendo notificado por consola.
 ### 2.- Configuracion del vagrantfile ###
 Para declarar una IP privada, es necesario descomentar la línea del fichero vagrantfile, para ello nos dirigimos a la carpeta `vagrant` anteriormente creada y abrimos el fichero con un editor de texto como `notepad++`:
 
-* `# config.vm.network "private_network", ip: "192.168.33.10”`
+* `# config.vm.network "private_network", ip: "192.168.33.10`
 
 Tras guardar el fichero, se puede comprobar su correcto funcionamiento mediante el comando:
 
@@ -667,7 +679,7 @@ Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
-## Instrucciones para la instalacion de HAProxy para Servicio Interno ##
+## Instrucciones para la instalacion de HAProxy para Bases de datos ##
 
 ### 1.- Instalacion PPA ###
 Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
@@ -801,8 +813,11 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
   
   * `sudo service mysql restart`
   
-  Tras ello, nos dirigimos inicialmente al directorio principal (`cd /vagrant`) y allí nos dirigimos a mysql (`mysql -u root -p`) y 
-  realizamos los siguiente comandos:
+  Tras ello, nos dirigimos inicialmente al directorio principal (`cd /vagrant`) y allí realizamos el siguiente comando que importará la   base de datos:
+  
+  * `mysql -u root -p gamesinfo_db < gamesinfo_db.sql`
+  
+  Tras ello, nos dirigimos a mysql (`mysql -u root -p`) y realizamos los siguiente comandos:
   
   * `CHANGE MASTER TO MASTER_HOST='192.168.33.12',`<br>
     `-> MASTER_USER='root',`<br>
@@ -828,8 +843,8 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
 
   * `SHOW SLAVE STATUS\G`
 
-  El cual mostrará un listado de datos. Se puede mirar el valor “Seconds_Behind_Master” que indica qué “retraso” tiene el servidor 
-  esclavo respecto al maestro (si es NULL se trata de mal funcionamiento. Revisando el “Slave_IO_State” y “Last_Error”).    
+  El cual mostrará un listado de datos. Se puede mirar el valor Seconds_Behind_Master que indica qué retraso tiene el servidor 
+  esclavo respecto al maestro (si es NULL se trata de mal funcionamiento. Revisando el Slave_IO_State y Last_Error).    
   
 ### 7.- Inicio de HAProxy ###
 Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
@@ -921,8 +936,8 @@ Para facilitar la creación de las 9 ventanas de comando, y su debido arranque s
   `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\servicio_interno_2 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
   <br>
   `rem ----- database`<br>
-  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_1 & mode 85, 10 & vagrant up"`<br>
-  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_2 & mode 85, 10 & vagrant up"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_1 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
+  `start cmd /k "cd C:\Users\guille-hp\Documents\vagrant\base_de_datos_2 & mode 85, 10 & vagrant up & vagrant ssh"`<br>
   <br>
   `cls`<br>
   `echo Now we're gonna open some information's windows.`<br>
@@ -941,9 +956,186 @@ Para facilitar la creación de las 9 ventanas de comando, y su debido arranque s
 En el siguiente diagrama se puede visualizar la infraestructura desplegada de la Aplicación Web:
 
 <p align="center">
-  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20Infraestructura.png?raw=true">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20Infraestructura.png?raw=true" style="width: 50%; height: 50%">
 </p>
 
+# Fase 5 #
+En esta fase se solicita automatizar el despliegue de la aplicación mediante el sistema de gestión de configuración Ansible. Para ello seguimos los siguientes pasos
+
+## 1.- Creacion de una Maquina Virtual Vagrant ##
+Para evitar provocar fallos en el resto de máquinas virtuales, las cuales se encuentran en correcto funcionamiento, se crea una nueva máquina virtual a la que se ha apodado su directorio `ansible`, y su dirección Ip ha sido ajustada a `192.168.33.19` (mediante la modificación del fichero `Vagrantfile`). En caso de no acordarse de los pasos para crear una máquina virtual e iniciarla con Java y MySQL dirigete a esta [seccion](#instalacion-de-vagrant).
+
+Una vez teniendo la máquina virtual instalada e inicializada (mediante `vagrant up`y `vagrant ssh`), procedemos a instalar Ansible. Para ello realizamos el siguiente comando:
+
+* `sudo apt-add-repository -y ppa:ansible/ansible`
+* `sudo apt-get update`
+* `sudo apt-get install -y ansible`
+
+## 2.- Configuracion de Ansible ##
+Finalizada su instalación, nos dirigimos al directorio `/etc/ansible` y accedemos al fichero `hosts` (`sudo nano hosts`), habiendo habilitado previamente los permisos (`chmod +rwx hosts`). En él añadimos los distintos servidores con las siguiente serie de  instrucciones:
+
+   `[webservers]`<br>
+   `192.168.33.10`<br>
+   `192.168.33.13`<br>
+   <br>
+   `[internalservers]`<br>
+   `192.168.33.11`<br>
+   `192.168.33.14`<br>
+   <br>
+   `[dbservers]`<br>
+   `192.168.33.12`<br>
+   `192.168.33.15`<br>
+   <br>
+   `[haproxyservers]`<br>
+   `192.168.33.16`<br>
+   `192.168.33.17`<br>
+   `192.168.33.18`<br>
+   <br>
+   `[global]`<br>
+   `192.168.33.19`<br>
+
+Tras ello guardamos el fichero (`Ctrl + X`). Y nos dirigimos al fichero `ansible.cfg` del mismo directorio (`sudo nano ansible.cfg`), habiendo habilitado previamente los permisos (`chmod +rwx hosts`). En él descomentamos la línea:
+
+  * `host_key_checking = False`
+  
+Y guardamos el fichero (`Ctrl + X`).
+
+## 3.- Creacion de la clave privada ##
+Para poder operar con ansible, es necesario generar una clave privada, para ello nos dirigimos al directorio principal (`cd /vagrant`) y comprobamos si tenemos el directorio `.ssh` en él (`ls -a`). En caso de no tenerlo, lo creamos con el comando:
+
+  * `sudo mkdir .ssh`
+  
+Y accedemos a él (`cd .ssh`). En él ejecutamos el siguiente comando:
+  
+  * `ssh-keygen`
+ 
+En él se nos solicitará un nombre para la clave el cual se pondrá **id_rsa**. Y posteriormente una contraseña con la encriptarlo, en nuestro caso se ha puesto 'gugus' en ambas solicitudes de contraseña. Una vez generadas las claves podemos comprobar su existencia mediante el comando `dir`.
+
+A continuación, nos dirigimos al Sistema Operativo Host (en nuestro caso `Windows`), y en él al directorio de la máquina (en nuestro caso `/Documents/vagrant/ansible` y en él, a la carpeta `.ssh` podiendo observar la presencia de las dos claves creadas (`id_rsa`y `id_rsa.pub`). 
+
+Copiamos la clave pública (`id_rsa.pub`) y la pegamos en los directorios del resto de máquinas virtuales (los 2 servidores web, los 2 servicios internos, las 2 bases de datos y los 3 balanceadores), sin necesidad de crear carpetas adicionales (junto al `VagrantFile` de la máquina determinada).
+
+## 4.- Comprobacion de conexion ##
+Para poder comprobar que las conexiones a los distintos servidores se encuentran operables, incialmente arrancamos los 9 servidores, **no** arrancando sus respectivos ficheros `-jar`. Y una vez inicializados, nos dirigimos a la máquina virtual de **ansible**, en ella al directorio `/vagrant/.ssh/` y ejecutamos el siguiente comando por cada servidor que tenemos:
+
+*  `ssh -i id_rsa direccionIPservidor_x `
+
+Por ejemplo en el caso de el servidor web 1:
+
+* `ssh -i id_rsa 192.168.33.10`
+
+Tras ello nos solicitará la contraseña de dicha máquina virtual, en el caso de que no se haya modificado la contraseña, se debería insertar la contraseña por defecto de dicha máquina virtual: `vagrant` (en nuestro caso se cambiaron todas las contraseñas de las máquinas virtuales mediante el comando `passwd`a la contraseña `password`). Obteniendo una imagen semejante a la siguiente como resultado:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ansible_terminal.jpg?raw=true">
+</p>
+ 
+## 5.- Demostracion del Correcto Funcionamiento ##
+Finalmente se pueden realizar comandos simples mediante el siguiente comando:
+
+* `ansible _conjunto -m shell -a "comando_a_ejecutar_las_mv" --private-key id_rsa --ask-pas --ask-sudo-pass`
+
+Por ejemplo, si deseamos que todas las máquinas virtuales impriman el mensaje 'hi', realizamos el siguiente comando:
+
+* `ansible all -m shell -a "/bin/echo hi" --private-key id_rsa --ask-pass --ask-sudo-pass`
+
+Mostrando el siguiente resultando:
+
+<p align="center">
+  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/ansible_hi.jpg?raw=true">
+</p>
+
+En el caso de que se qusiese realizar un comando a solo un grupo de máquinas (por ejemplo `webservers`) emplearíamos el siguiente comando: 
+
+* `ansible webservers -m shell -a "comando_a_ejecutar_las_mv" --private-key id_rsa --ask-pas --ask-sudo-pass`
+
+Y en el caso de que se quisiera realizar más de un comando se emplearía `"comando_1 & comando_2 & etc."`.
+
+## 6.- Creacion de Playbooks ##
+Una vez comprobado mediante varias pruebas, su correcto funcionamiento, toca crear una seria de documentos llamados **playbooks** los cuales contienen una serie de instrucciones que inicializan una máquina virtual en caso de posible pérdida. Para ello inicialmente hemos de descargar una serie de paquetes provenientes de la página [Ansible Galaxy](https://galaxy.ansible.com/list#/roles?page=1&page_size=10) siendo una biblioteca con playbooks configurados para instalar programas. Los paquetes a descargar e instalar en la máquina virtual de ansible son los siguientes:
+
+ ### 6.1 Java ###
+ Para poder instalar Java 7 y 8 en una máquina, tendremos que dirigirnos a la página de java con más relevancia de Ansible Galaxy 
+ mediante este [enlace](https://galaxy.ansible.com/kbrebanov/java/). Ahí el creador nos indica entre otras cosas, que lo hemos de 
+ instalar en la máquina virtual de ansible con el siguiente comando:
+ 
+ * `ansible-galaxy install kbrebanov.java`
+ 
+ Tras terminar la instalación, nos indicará que ha creado un fichero en el directorio `./ansible/roles` nombrado `kbrebanov.java` 
+ siendo un directorio. Debido a que en la aplicación web se tiene una base de datos maestra y una base de datos esclava, vamos a tener 
+ que modificar dos veces ese directorio, para ello creamos dos copias del directorio en el mismo lugar (`.ansible/roles`) mediante los 
+ siguientes comandos.
+ 
+  * `cp -a kbrebanov.java/ ./java_8.java`
+  * `cp -a kbrebanov.java/ ./java_7.java`
+
+ Tras comprobar mediante el comando `dir` que se han creado correctamente las dos copias del directorio, nos adentramos en 
+ **java_7.java** (mediante el comando `cd`), podiendo observar mediante el comando `dir` la presencia de las siguientes carpetas en su
+ interior:
+   
+  * `defaults`
+  * `meta`
+  * `README.md`
+  * `tests`
+  * `tasks`
+  * `vars`
+  * `LICENSE`
+
+Nos dirigimos a la carpeta `defaults` y en ella, aportando los derechos de modificacion (`sudo chmod +rwx main.yml`) procedemos a 
+la modificación del único fichero en su interior `main.yml` (`sudo nano main.yml`). En él se nos muestra una configuración de 
+ejemplo que se tendrá que modificar a nuestro gusto, apoyándonos de la información descrita en la [página de su descarga](https://galaxy.ansible.com/kbrebanov/java/). En dicho fichero introducimos y modificamos, obteniendo la siguiente configuración:
+  <br>
+  `---                                          `<br>
+  `# defaults file for java                     `<br>
+  `                                             `<br>
+  `java_implementation: openjdk                 `<br>
+  `                                             `<br>
+  `java_openjdk_version: 7                      `<br>
+  `java_openjdk_jre_only: false                 `<br>
+  `java_openjdk_headless: false                 `<br>
+  `java_openjdk_use_ppa: true                   `<br>
+  `                                             `<br>
+  `java_oracle_version: 7                       `<br>
+  `java_oracle_install_jce_policy: false        `<br>
+  
+ Tras ello guardamos el fichero mediante `Ctrl + X`.
+  
+ ### 6.2 MySQL ###
+
+ ### 6.3 HaProxy ###
+
+ ### 6.4 Playbook ###
+ Regresamos al directorio `/vagrant/.ssh`(mediante el comando `cd`) y allí creamos el fichero nombre_playbook.yml (mediante el 
+ comando `touch nombre_playbook.yml`). Y lo abrimos para editar (`sudo nano nombre_playbook`). Este será nuestro fichero de ejecución 
+ de los programas a instalar. Para ello seguiremos la siguiente estructura:
+ <br>
+        `---                                          `<br>
+        `- hosts: grupo 1                              `<br>
+        `  sudo: yes                                   `<br>
+        `  roles:                                      `<br>
+        `  - programa_1                                `<br>
+        `  - programa_2                                `<br>
+        `  - programa_3                                `<br>
+        `                                              `<br>
+        `- hosts: grupo 2                              `<br>
+        `  sudo: yes                                   `<br>
+        `  roles:                                      `<br>
+        `  - programa_1                                `<br>
+        `  - programa_2                                `<br>
+        `  - programa_3                                `<br>
+        `                                              `<br>
+        `etc                                           `<br>
+        
+   Una vez tengamos realizado el playbook, lo guardamos (`Ctrl + X`) y ejecutamos el siguiente comando el propio directorio:
+   
+   * `ansible-playbook nombre_playbook.yml --ask-pass --ask-sudo-pass`
+   
+   En caso de que de un error indicando que no fue posible conectar al puerto 22 de dicha IP, debemos ejecutar el siguiente comando:
+   
+   * `ssh-keygen -R ip_maquina_virtual`
+   
+   Y volver a efectuar el comando para ejecutar el playbook.
+    
 # Integrantes
 Doble Grado Diseño y Desarrollo de Videojuegos e Ingeniería de Computadores.
 -  **Agustín López Arribas**: 
