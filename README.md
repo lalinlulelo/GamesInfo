@@ -678,6 +678,8 @@ Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `http://192.168.33.17/haproxy?stats` para poder observar los datos del balanceador:
 
  ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
+ 
+Debido a que ahora el mail service se accede desde el balanceador, en el código de la aplicación web en lugar de especificar la dirección IP del servicio interno determinado, especificamos la dirección IP de este balanceador.
 
 ## Instrucciones para la instalacion de HAProxy para Bases de datos ##
 
