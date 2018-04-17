@@ -224,6 +224,7 @@ Mediante ObjectAid UML Diagram,se ha adquirido un esquema inicial, que posterior
 
 ![#f4b183](https://github.com/lalinlulelo/GamesInfo/blob/master/images/claseHTML.png?raw=true) Clases HTML
 ![Diagrama de Clases](https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20clases.png?raw=true)
+![Diagrama de Clases2](https://github.com/lalinlulelo/GamesInfo/blob/master/images/Diagrama%20de%20clases2.png?raw=true)
 
 # Fase 3 #
 
