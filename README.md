@@ -723,12 +723,24 @@ En él se debe borrar/comentar todo lo presente e insertar las siguiente líneas
   `timeout server 5000`<br>
   `timeout client 5000`<br>
 <br>
-  `listen mysql-cluster`<br>
+  `listen master`<br>
   `bind 192.168.33.18:3306`<br>
   `mode tcp`<br>
+  `timeout client 10800s`<br>
+  `timeout server 10800s`<br>
+  `option tcpka`<br>
   `option mysql-check user haproxy_check`<br>
   `balance roundrobin`<br>
   `server host_name_1 192.168.33.12:3306 check`<br>
+<br>
+  `listen slave`<br>
+  `bind 192.168.33.18:3307`<br>
+  `mode tcp`<br>
+  `timeout client 10800s`<br>
+  `timeout server 10800s`<br>
+  `option tcpka`<br>
+  `option mysql-check user haproxy_check`<br>
+  `balance roundrobin`<br>
   `server host_name_2 192.168.33.15:3306 check`<br>
 <br>
   `listen stats`<br>
@@ -849,6 +861,12 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
   El cual mostrará un listado de datos. Se puede mirar el valor Seconds_Behind_Master que indica qué retraso tiene el servidor 
   esclavo respecto al maestro (si es NULL se trata de mal funcionamiento. Revisando el Slave_IO_State y Last_Error).    
   
+Tras ello nos dirigimos al fichero properties de la aplicación web, dónde cambiamos la url de database al siguiente formato:
+
+* `jdbc:mysql:replication://address=(protocol=tcp)(host=192.168.33.18)(port=3306)(type=master), address=(protocol=tcp)(host=192.168.33.18)(port=3307)(type=slave)/gamesinfo_db?verifyServerCertificate=false&useSSL=true`
+
+Haciendo que la aplicación escriba los nuevos elementos en el servidor maestro y que lea los datos desde el servidor esclavo.
+
 ### 7.- Inicio de HAProxy ###
 Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
 
