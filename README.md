@@ -63,9 +63,9 @@ Indice
     + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
   * [Instrucciones para la instalacion de Bases de datos](#instrucciones-para-la-instalacion-de-bases-de-datos)
-    + [1.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#6--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
-      - [1.1.- Servidor Maestro](#61--servidor-maestro)
-      - [1.2.- Servidor Esclavo](#62--servidor-esclavo)
+    + [1.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#1--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
+      - [1.1.- Servidor Maestro](#1--servidor-maestro)
+      - [1.2.- Servidor Esclavo](#2--servidor-esclavo)
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
@@ -768,8 +768,8 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
 
   * `SHOW SLAVE STATUS\G`
 
-  El cual mostrará un listado de datos. Se puede mirar el valor Seconds_Behind_Master que indica qué retraso tiene el servidor 
-  esclavo respecto al maestro (si es NULL se trata de mal funcionamiento. Revisando el Slave_IO_State y Last_Error).    
+  El cual mostrará un listado de datos. Se puede mirar el valor Seconds_Behind_Master que indica qué retraso tiene el servidor 
+  esclavo respecto al maestro (si es NULL se trata de mal funcionamiento. Revisando el Slave_IO_State y Last_Error).    
   
 Tras ello nos dirigimos al fichero properties de la aplicación web, dónde cambiamos la url de database al siguiente formato:
 
