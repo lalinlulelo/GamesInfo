@@ -3,6 +3,8 @@ package LosOdiosos3.prueba_servidor.Application;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,7 +16,8 @@ public class MyList {
 	private long id;
 	
 	// lista de juegos 
-	@ManyToMany(mappedBy="lists")
+	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER, mappedBy="lists")
+	@Fetch(FetchMode.SELECT)
 	@JsonIgnore
 	private List<Game> games = new ArrayList<Game>();
 	

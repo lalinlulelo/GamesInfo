@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,7 +26,8 @@ public class Game {
 	private Company company;
 	
 	// listas a las que pertenece el juego
-	@ManyToMany 
+	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JsonIgnore
 	private List<MyList> lists = new ArrayList<MyList>();
 	// comentarios publicados en el juego

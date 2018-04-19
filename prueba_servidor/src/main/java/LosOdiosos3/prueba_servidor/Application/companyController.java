@@ -38,31 +38,31 @@ public class companyController {
 		String image = companies.get(0).getImage();
 		String url = companies.get(0).getUrl();		
 				
-			// gestion de commentarios del juego
-			List<String> list=new ArrayList<String>();
-			String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
-			
-			// si hay comentarios en el juego
-			if(companies.get(0).getComment().size()>0) {
-				List<Comment> list_comments=companies.get(0).getComment();			
-					
-				for(int i=0;i<list_comments.size();i++) {
-					//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
-					String User=list_comments.get(i).getUser().getName();
-					String Text=list_comments.get(i).getText();
-					Date d=list_comments.get(i).getDate();	
-					String img=list_comments.get(i).getUser().getIcon();
-					//Copiamos el div que queremos poner en el documento html en una variable auxiliar
-					//Le damos formato a la variable auxiliar y la añadimos a la lista
-					String aux=String.format(div, img,User,d.toString(), Text);						
-					list.add(aux);				
-				}
-				// se muestra del más reciente al más antiguo
-				Collections.reverse(list);
-				model.addAttribute("comments", list);
-			}else {
-				model.addAttribute("comments"," ");
-			}		
+		// gestion de commentarios del juego
+		List<String> list=new ArrayList<String>();
+		String div="<div class=\"com\"><div class=\"commentsUser \"><img class=\"comment_img\" src=\"%s\"></img>%s</div><div class=\"Date\">%s</div></div>\r\n" +  "     <div class=\"comments \">%s</div>"	+ "</div><br>";
+		
+		// si hay comentarios en el juego
+		if(companies.get(0).getComment().size()>0) {
+			List<Comment> list_comments=companies.get(0).getComment();			
+				
+			for(int i=0;i<list_comments.size();i++) {
+				//Aqui accederiamos a la base de datos para cambiar en cada iteracion las variables
+				String User=list_comments.get(i).getUser().getName();
+				String Text=list_comments.get(i).getText();
+				Date d=list_comments.get(i).getDate();	
+				String img=list_comments.get(i).getUser().getIcon();
+				//Copiamos el div que queremos poner en el documento html en una variable auxiliar
+				//Le damos formato a la variable auxiliar y la añadimos a la lista
+				String aux=String.format(div, img,User,d.toString(), Text);						
+				list.add(aux);				
+			}
+			// se muestra del más reciente al más antiguo
+			Collections.reverse(list);
+			model.addAttribute("comments", list);
+		}else {
+			model.addAttribute("comments"," ");
+		}		
 		
 		// se transmiten los atributos a la plantilla
 		model.addAttribute("name_g", name);
