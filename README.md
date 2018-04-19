@@ -62,17 +62,10 @@ Indice
     + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy)
     + [5.- Inicio de HAProxy](#5--inicio-de-haproxy)
     + [6.- Inicio de HAProxy en Navegador Web](#6--inicio-de-haproxy-en-navegador-web)
-  * [Instrucciones para la instalacion de HAProxy para Bases de datos](#instrucciones-para-la-instalacion-de-haproxy-para-bases-de-datos)
-    + [1.- Instalacion PPA](#1--instalacion-ppa-2)
-    + [2.- Actualizacion del sistema](#2--actualizacion-del-sistema-2)
-    + [3.- Instalacion de HAProxy](#3--instalacion-de-haproxy-2)
-    + [4.- Configuracion de HAProxy](#4--configuracion-de-haproxy-1)
-    + [5.- Configuracion de mysql](#5--configuracion-de-mysql)
-    + [6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#6--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
-      - [6.1.- Servidor Maestro](#61--servidor-maestro)
-      - [6.2.- Servidor Esclavo](#62--servidor-esclavo)
-    + [7.- Inicio de HAProxy](#7--inicio-de-haproxy)
-    + [8.- Inicio de HAProxy en Navegador Web](#8--inicio-de-haproxy-en-navegador-web)
+  * [Instrucciones para la instalacion de Bases de datos](#instrucciones-para-la-instalacion-de-bases-de-datos)
+    + [1.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo](#6--estructuracion-de-servidores-de-bases-de-datos-en-maestro-esclavo)
+      - [1.1.- Servidor Maestro](#61--servidor-maestro)
+      - [1.2.- Servidor Esclavo](#62--servidor-esclavo)
   * [Instalacion e Implementacion de Hazelcast](#instalacion-e-implementacion-de-hazelcast)
     + [1.- Instalacion de Hazelcast](#1--instalacion-de-hazelcast)
     + [2.- Implementacion de Hazelcast](#2--implementacion-de-hazelcast)
@@ -682,95 +675,12 @@ Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y
  
 Debido a que ahora el mail service se accede desde el balanceador, en el código de la aplicación web en lugar de especificar la dirección IP del servicio interno determinado, especificamos la dirección IP de este balanceador.
 
-## Instrucciones para la instalacion de HAProxy para Bases de datos ##
+## Instrucciones para la instalacion de Bases de datos ##
 
-### 1.- Instalacion PPA ###
-Debido a que Ubuntu 14.04 no soporta la versión estable de HAProxy (v 1.5), se emplea una PPA (Personal Package Archives) para poder realizar la instalación con `apt-get`:
-
-* `add-apt-repository ppa:vbernat/haproxy-1.5`
-
-### 2.- Actualizacion del sistema ###
-El siguiente paso es actualizar el sistema:
-
-* `apt-get update`
-* `apt-get dist-upgrade`
-
-### 3.- Instalacion de HAProxy ###
-Tras la correcta actualización, se instala HAProxy:
-
-* `apt-get install haproxy`
-
-### 4.- Configuracion de HAProxy ###
-Una vez se ha notificado la correcta instalación, nos disponemos a configurar HAProxy. Para ello nos dirigimos a `/etc/haproxy` y allí, se aprueban los permisos del archivo `haproxy.cfg`:
-
-* `chmod +rwx haproxy.cfg`
-
-Y se procede a editarlo:
-
-* `sudo nano haproxy.cfg`
-
-En él se debe borrar/comentar todo lo presente e insertar las siguiente líneas:
-<br>
-* `global`<br>
-  `log 127.0.0.1 local0 notice`<br>
-  `user haproxy`<br>
-  `group haproxy`<br>
-<br>
-  `defaults`<br>
-  `log global`<br>
-  `retries 2`<br>
-  `timeout connect 3000`<br>
-  `timeout server 5000`<br>
-  `timeout client 5000`<br>
-<br>
-  `listen master`<br>
-  `bind 192.168.33.18:3306`<br>
-  `mode tcp`<br>
-  `timeout client 10800s`<br>
-  `timeout server 10800s`<br>
-  `option tcpka`<br>
-  `option mysql-check user haproxy_check`<br>
-  `balance roundrobin`<br>
-  `server host_name_1 192.168.33.12:3306 check`<br>
-<br>
-  `listen slave`<br>
-  `bind 192.168.33.18:3307`<br>
-  `mode tcp`<br>
-  `timeout client 10800s`<br>
-  `timeout server 10800s`<br>
-  `option tcpka`<br>
-  `option mysql-check user haproxy_check`<br>
-  `balance roundrobin`<br>
-  `server host_name_2 192.168.33.15:3306 check`<br>
-<br>
-  `listen stats`<br>
-  `bind 0.0.0.0:80`<br>
-  `mode http`<br>
-  `stats enable`<br>
-  `stats uri /haproxy?stats`<br>
-
-El archivo debería quedar como se observa en la imagen de a continuación:
-
-<p align="center">
-  <img src="https://github.com/lalinlulelo/GamesInfo/blob/master/images/terminal_haproxy_3.jpg?raw=true">
-</p>
-
-Finalmente se guarda el archivo mediante `Ctrl + X`, afirmando que se está seguro de guardar, y sobreescribiendo el archivo. Y se reinicia el servicio:
-
-* `sudo service haproxy restart`
-
-### 5.- Configuracion de mysql ###
-Una vez reiniciado el servicio de haproxy, nos dirigimos a la terminal de las dos máquinas virtuales de las bases de datos y realizamos simultáneamente en las dos los siguientes comandos:
-
-  * `mysql -u root -p -e "INSERT INTO mysql.user (Host, User) values ('192.168.33.18','haproxy_test'); FLUSH PRIVILEGES;"`
-  * `mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO 'haproxy_root'@'192.168.0.50' IDENTIFIED BY 'haproxy' WITH GRANT OPTION; FLUSH PRIVILEGES;"`
- 
-Con ello creamos un usuario con el que haproxy comprobará si las BBDD están operables y otro usuario con el que accederá a los datos.
-
-### 6.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo ###
+### 1.- Estructuracion de Servidores de Bases de Datos en Maestro-Esclavo ###
 Para poder tener consistencia en ambas bases de datos, necesitamos que una de las bases escuche a la otra, teniendo la jerarquía de Maestro-Servidor. En nuestro caso el Maestro será la máquina virtual con dirección IP `192.168.33.12`, y el Esclavo será la máquina virtual con dirección IP `192.168.33.15`.
 
-  #### 6.1.- Servidor Maestro #####
+  #### 1.1.- Servidor Maestro #####
   Nos dirigimos al fichero `my.cfg` situado en `/vagrant/etc/mysql/` mediante el editor (`sudo nano my.cfg`) habiendo habilitado los   
   permisos previamente (`chmod +rwx my.cfg`). En él descomentamos, modificamos o añadimos las siguientes instrucciones:
   
@@ -815,7 +725,7 @@ Para poder tener consistencia en ambas bases de datos, necesitamos que una de la
   Dicho fichero '.sql' lo copiamos y pegamos en la carpeta de la segunda máquina con Base de Datos (en nuestro caso `C:/Users/guille-
   hp/Documents/vagrant/base_de_datos_2`). Y nos trasladamos a la segunda máquina.
   
-  #### 6.2.- Servidor Esclavo #####
+  #### 1.2.- Servidor Esclavo #####
   Nos dirigimos al fichero `my.cfg` situado en `/vagrant/etc/mysql/` mediante el editor (`sudo nano my.cfg`) habiendo habilitado los   
   permisos previamente (`chmod +rwx my.cfg`). En él descomentamos, modificamos o añadimos las siguientes instrucciones:
   
@@ -866,16 +776,6 @@ Tras ello nos dirigimos al fichero properties de la aplicación web, dónde camb
 * `jdbc:mysql:replication://address=(protocol=tcp)(host=192.168.33.18)(port=3306)(type=master), address=(protocol=tcp)(host=192.168.33.18)(port=3307)(type=slave)/gamesinfo_db?verifyServerCertificate=false&useSSL=true`
 
 Haciendo que la aplicación escriba los nuevos elementos en el servidor maestro y que lea los datos desde el servidor esclavo.
-
-### 7.- Inicio de HAProxy ###
-Tras la notificación del correcto reinicio, se procede a arrancar HAProxy:
-
-* `sudo service haproxy start`
-
-### 8.- Inicio de HAProxy en Navegador Web ###
-Una vez el terminal notifica su inicio, ya se puede uno dirigir a un navegador y colocar la dirección local seguida de `/haproxy?stats`  en nuestro caso sería `http://192.168.33.17/haproxy?stats` para poder observar los datos del balanceador:
-
- ![Arranque de HAProxy Web](https://github.com/lalinlulelo/GamesInfo/blob/master/images/haproxy_web.png?raw=true)
 
 ## Instalacion e Implementacion de Hazelcast ##
 Para evitar perder la sesión durante la caída de un servidor se emplea la replicación de sesión mediante Hazelcast, empleando una caché distribuida entre los servidores presentes en un balanceador:
