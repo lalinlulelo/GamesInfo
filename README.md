@@ -84,6 +84,11 @@ Indice
     + [6.4 Playbook](#64-playbook)
 - [Integrantes](#integrantes)
 
+# Video Introductorio #
+<iframe width="420" height="315" align="center"
+ src="https://www.youtube.com/watch?time_continue=1&v=RpTWuhaJxx8">
+</iframe>
+
 
 # Fase 1 #
 ## Descripcion de la web ##
