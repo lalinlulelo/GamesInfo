@@ -1,8 +1,8 @@
-# GamesInfo :cat:
-:blush::gun:
+# GamesInfo 
 
 Indice
 =================
+- [Video Introductorio](#video-introductorio)
 - [Fase 1](#fase-1)
   * [Descripcion de la web](#descripcion-de-la-web)
   * [Entidades principales](#entidades-principales)
