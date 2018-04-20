@@ -85,8 +85,7 @@ Indice
 - [Integrantes](#integrantes)
 
 # Video Introductorio #
-<iframe width="420" height="315" align="center"
- src="https://www.youtube.com/watch?time_continue=1&v=RpTWuhaJxx8">
+<iframe width="420" height="315" src="https://www.youtube.com/watch?time_continue=1&v=RpTWuhaJxx8">
 </iframe>
 
 
