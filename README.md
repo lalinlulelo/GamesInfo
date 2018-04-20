@@ -85,7 +85,7 @@ Indice
 - [Integrantes](#integrantes)
 
 # Video Introductorio #
-[![Video](https://img.youtube.com/vi/v=RpTWuhaJxx8&t=6s/0.jpg)](https://www.youtube.com/watch?v=RpTWuhaJxx8&t=6s)
+[![Video](https://i.ytimg.com/vi/RpTWuhaJxx8/2.jpg?time=1524239492815)](https://www.youtube.com/watch?v=RpTWuhaJxx8&t=6s)
 
 # Fase 1 #
 ## Descripcion de la web ##
