@@ -1,5 +1,8 @@
 # GamesInfo 
 
+:point_right: We know you love our work, and we qre proud you use it as help, but please be good people and dont copy our font code :smirk: :point_left:
+
+
 Indice
 =================
 - [Video Introductorio](#video-introductorio)
