@@ -3,7 +3,7 @@
 :dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog:
 :cat::dog::cat::dog::cat::dog:
 
-We know you love our work, and we qre proud you use it as help, but please be good people and dont copy our font code 
+We know you love our work, and we are proud you use it as help, but please be good people and dont copy our font code 
 
 :dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog::cat::dog:
 :cat::dog::cat::dog::cat::dog:
