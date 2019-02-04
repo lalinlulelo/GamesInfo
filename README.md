@@ -6,7 +6,7 @@ We know you love our work, and we qre proud you use it as help, but please be go
 
 :cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat:
 
-See you, the Team:smirk:
+See you, the team :smirk:
 
 Indice
 =================
