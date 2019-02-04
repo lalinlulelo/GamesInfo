@@ -2,9 +2,11 @@
 
 :cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat:
 
-We know you love our work, and we qre proud you use it as help, but please be good people and dont copy our font code :smirk:
+We know you love our work, and we qre proud you use it as help, but please be good people and dont copy our font code 
 
 :cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat::cat:
+
+See you, the Team:smirk:
 
 Indice
 =================
